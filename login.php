@@ -4,10 +4,10 @@ session_start();
 
 include("config.php");
 
-// if(isset($_COOKIE["type"]))
-// {
-//  header("location:index.php");
-// }
+if(isset($_COOKIE["type"]))
+{
+ header("location:index.php");
+}
 
 $message = '';
 
@@ -100,11 +100,11 @@ if(isset($_POST["login"]))
 				<div class="box-wrapper">				
 					<div class="box box-border">
 						<div class="box-body">
-							<h4>Login</h4>
+							<h4>เข้าสู่ระบบ</h4>
 <form name="login" method="post" action="login.php">
 <span><?php echo $message; ?></span>
 								<div class="form-group">
-									<label>Username</label>
+									<label>email</label>
 									<input type="text"  name="user_email"  class="form-control">
 								</div>
 								<div class="form-group">

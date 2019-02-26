@@ -39,12 +39,28 @@
 							</ul>
 						</div> -->
 
-						<div class="col-md-3 col-sm-12 text-right">
+
+<?php 
+if(isset($_COOKIE["type"]))
+{
+ ?>
+	<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
-								<li><a href="profile.php"><div>ธีระยุทธ อินทร์จันทร์</div></a></li>
-								<li><a href="logout.php"><i class="ion-person"></i><div>Logout</div></a></li>
+								<li><a href="profile.php"><div><?php echo $user[s_name],' ', $user[l_name]; ?> </div></a></li>
+								<li><a href="logout.php"><i class="ion-log-out	"></i><div>Logout</div></a></li>
 							</ul>
 						</div>
+
+ <?php }else{ ?>
+
+	<div class="col-md-3 col-sm-12 text-right">
+							<ul class="nav-icons">
+								<li><a href="logout.php"><i class="ion-key"></i><div>Login</div></a></li>
+							</ul>
+						</div>
+
+ <?php } ?>
+					
 
 					</div>
 				</div>

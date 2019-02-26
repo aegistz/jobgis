@@ -41,7 +41,7 @@
 	  $password = $_POST['password'];
 
 
-	  $sql1 = "select * from user_job  where email = '$email' and password = '$password'   ; ";
+	  $sql1 = "select * from user_job  where email = '$email'   ; ";
 	  $query = pg_query($sql1);
 	  $num = pg_num_rows($query);
 	  if ($num < 1){

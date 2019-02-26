@@ -1,8 +1,11 @@
 <?php 
 session_start();
-    unset($_COOKIE["type"]);
-    unset($_COOKIE['pass']);
-   
+  
+
+setcookie("type", "", time()-86400  );
+setcookie("pass", "", time()-86400  );
+
+
     header('Location:login.php');
 
 
