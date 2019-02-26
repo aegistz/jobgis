@@ -42,7 +42,7 @@
 						<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
 								<li><a href="profile.php"><div>ธีระยุทธ อินทร์จันทร์</div></a></li>
-								<li><a href="login.php"><i class="ion-person"></i><div>Logout</div></a></li>
+								<li><a href="logout.php"><i class="ion-person"></i><div>Logout</div></a></li>
 							</ul>
 						</div>
 

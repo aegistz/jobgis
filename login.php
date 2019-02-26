@@ -1,4 +1,59 @@
 <!DOCTYPE html>
+<?php
+session_start();
+
+include("config.php");
+
+// if(isset($_COOKIE["type"]))
+// {
+//  header("location:index.php");
+// }
+
+$message = '';
+
+
+if(isset($_POST["login"]))
+{
+    $user_email = $_POST["user_email"];
+   if(empty($_POST["user_email"]) || empty($_POST["user_password"]))
+   {
+      $message = "<div class='alert alert-danger'>Both Fields are required</div>";
+   }
+   else
+   {
+      $query = "SELECT * FROM user_job WHERE email = '$user_email'  ; ";
+      $statement = pg_query($query);
+      $arr = pg_fetch_array($statement);
+
+      
+      $count = pg_num_rows($statement);
+
+      if($count > 0)
+      {
+
+          if(  $_POST["user_password"] ==  $arr["password"] )
+          {
+         
+               setcookie("type", $arr["email"] , time() + 3400);
+               setcookie("pass", $arr["password"] , time() + 3400);
+            //    header('Location:..'.$_SESSION['redirectURL']);
+               header('Location:./');
+               exit;
+
+          }
+          else
+          {
+           $message = '<div class="alert alert-danger">Wrong Password</div>';
+          }
+
+      }
+      else
+      {
+        $message = "<div class='alert alert-danger'>Wrong Email Address</div>";
+      }
+   }
+}
+?>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -46,28 +101,26 @@
 					<div class="box box-border">
 						<div class="box-body">
 							<h4>Login</h4>
-							<form>
+<form name="login" method="post" action="login.php">
+<span><?php echo $message; ?></span>
 								<div class="form-group">
 									<label>Username</label>
-									<input type="text" name="username" class="form-control">
+									<input type="text"  name="user_email"  class="form-control">
 								</div>
 								<div class="form-group">
 									<label class="fw">Password
 										<a href="forgot.html" class="pull-right">Forgot Password?</a>
 									</label>
-									<input type="password" name="password" class="form-control">
+									<input type="password" name="user_password" class="form-control">
 								</div>
 								<div class="form-group text-right">
-									<button class="btn btn-primary btn-block">Login</button>
+									<button class="btn btn-primary btn-block" type="submit" name="login">Login</button>
 								</div>
 								<div class="form-group text-center">
 									<span class="text-muted">Don't have an account?</span> <a href="register.php">Create one</a>
 								</div>
-								<div class="title-line">
-									or
-								</div>
-              	<a href="#" class="btn btn-social btn-block facebook"><i class="ion-social-facebook"></i> Login with Facebook</a>
-							</form>
+								
+</form>
 						</div>
 					</div>
 				</div>

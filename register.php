@@ -1,4 +1,117 @@
 <!DOCTYPE html>
+<?php 
+	include 'config.php';
+	session_start();
+
+  
+  date_default_timezone_set('Asia/Bangkok');
+
+  $date_time = date("d/m/Y H:i:s");
+  $date = date("d/m/Y");
+
+  $message = '';
+
+  if( isset($_POST["submit_form"]) ){
+
+	$y = date("Y");
+	$m = date("m");
+	$d = date("d");
+	$nowday =   "$y/$m/$d" ;
+
+	  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+		  if($check !== false) {
+			  $data = base64_encode(file_get_contents( $_FILES["fileToUpload"]["tmp_name"] ));
+			  $img  =  "data:".$check["mime"].";base64,".$data;
+		  }else{
+			$img = '';
+		  }   
+
+	  $title_name = $_POST['title_name'];
+	  $s_name = $_POST['s_name'];
+	  $l_name = $_POST['l_name'];
+	  $university = $_POST['university'];
+	  $success_degree = $_POST['success_degree'];
+	  $facutly = $_POST['facutly'];
+	  $major = $_POST['major'];
+	  $qualification = $_POST['qualification'];
+	  $year_start = $_POST['year_start'];
+	  $year_end = $_POST['year_end'];
+	  $phone_number = $_POST['phone_number'];
+	  $email = $_POST['email'];
+	  $password = $_POST['password'];
+
+
+	  $sql1 = "select * from user_job  where email = '$email' and password = '$password'   ; ";
+	  $query = pg_query($sql1);
+	  $num = pg_num_rows($query);
+	  if ($num < 1){
+	  $sql2 = "insert into user_job 
+	  ( 
+		title_name , 
+		s_name , 
+		l_name , 
+		university , 
+		success_degree , 
+		facutly , 
+		major , 
+		qualification , 
+		year_start , 
+		year_end , 
+		phone_number , 
+		email , 
+		password ,
+		date_access
+	  )
+	  values 
+	  (
+		'$title_name' ,
+		'$s_name' ,
+		'$l_name' ,
+		'$university' ,
+		'$success_degree' ,
+		'$facutly' ,
+		'$major' ,
+		'$qualification' ,
+		'$year_start' ,
+		'$year_end' ,
+		'$phone_number' ,
+		'$email' ,
+		'$password' ,
+		'$nowday'
+
+	  );"; 
+
+	  $result = pg_query($db,$sql2);
+
+		  if($result){ 
+
+
+		  $message = '<div class="alert alert-success alert-dismissible">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
+							  </div>';
+
+			header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
+				  exit;
+
+		  }else{
+
+			  $message = '<div class="alert alert-danger alert-dismissible">
+						  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						  <strong>Warning!</strong> ไม่สามา่รถบันทึกข้อมูลได้ กรุณาลองอีกครั้ง
+						 </div>';
+
+		  }
+
+	  }else{ 
+			 $message = '<div class="alert alert-danger alert-dismissible">
+										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+										<strong>Warning!</strong> Email นี้ถูกใช้แล้วภายในระบบ กรุณาตรวจสอบอีกครั้ง หรือเข้าสู่ระบบ <a href="login.php" title="">ที่นี่</a> 
+									  </div>';
+	  }
+}
+	
+?>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -46,29 +159,76 @@
 				<div class="box-wrapper">				
 					<div class="box box-border">
 						<div class="box-body">
-							<h4>Register</h4>
-							<form>
+							<h4>ลงทะเบียนเข้าใช้งาน</h4>
+							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
+							<hr>
+							<?php echo $sql2; ?>
+<form class="form-validate form-horizontal" id="feedback_form" method="post" action="register.php" enctype="multipart/form-data">
+
 								<div class="form-group">
-									<label>Name</label>
-									<input type="text" name="name" class="form-control">
+									<label>คำนำหน้า</label>
+									<input type="text" name="title_name" class="form-control">
 								</div>
 								<div class="form-group">
-									<label>Email</label>
-									<input type="email" name="email" class="form-control">
+									<label>ชื่อ</label>
+									<input type="text" name="s_name" class="form-control">
 								</div>
 								<div class="form-group">
-									<label>Username</label>
-									<input type="text" name="username" class="form-control">
+									<label>นามสกุล</label>
+									<input type="text" name="l_name" class="form-control">
 								</div>
 								<div class="form-group">
-									<label class="fw">Password</label>
+									<label>ชื่อมหาวิทยาลัย</label>
+									<input type="text" name="university" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>ระดับ</label>
+									<input type="text" name="success_degree" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>คณะ</label>
+									<input type="text" name="facutly" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>สาขา</label>
+									<input type="text" name="major" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>วุฒิที่สำเร็จการศึกษา</label>
+									<input type="text" name="qualification" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>ปีที่เริ่มเข้าศึกษา</label>
+									<input type="number" name="year_start" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>ปีที่จบการศึกษา</label>
+									<input type="number" name="year_end" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>เบอร์โทรศัพท์</label>
+									<input type="text" name="phone_number" class="form-control">
+								</div>
+
+								<hr>
+
+								<div class="form-group">
+									<label>Email  (*ใช้ในการเข้าสู่ระบบ)</label>
+									<input type="text" name="email" class="form-control">
+								</div>
+
+
+								<div class="form-group">
+									<label class="fw">Password (*ใช้ในการเข้าสู่ระบบ)</label>
 									<input type="password" name="password" class="form-control">
 								</div>
+
+
 								<div class="form-group text-right">
-									<button class="btn btn-primary btn-block">Register</button>
+									<button type="submit" name="submit_form" class="btn btn-primary btn-block">Register</button>
 								</div>
 								<div class="form-group text-center">
-									<span class="text-muted">Already have an account?</span> <a href="login.html">Login</a>
+									<span class="text-muted">Already have an account?</span> <a href="login.php">Login</a>
 								</div>
 							</form>
 						</div>
