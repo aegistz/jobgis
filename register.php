@@ -7,16 +7,11 @@
   date_default_timezone_set('Asia/Bangkok');
 
   $date_time = date("d/m/Y H:i:s");
-  $date = date("d/m/Y");
+  $date = date("Y/m/d");
 
   $message = '';
 
   if( isset($_POST["submit_form"]) ){
-
-	$y = date("Y");
-	$m = date("m");
-	$d = date("d");
-	$nowday =   "$y/$m/$d" ;
 
 	  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 		  if($check !== false) {
@@ -60,7 +55,8 @@
 		phone_number , 
 		email , 
 		password ,
-		date_access
+		date_access,
+		status_user
 	  )
 	  values 
 	  (
@@ -77,7 +73,8 @@
 		'$phone_number' ,
 		'$email' ,
 		'$password' ,
-		'$nowday'
+		'$date',
+		'รอการยืนยัน'
 
 	  );"; 
 
@@ -158,11 +155,14 @@
 			<div class="container">
 				<div class="box-wrapper">				
 					<div class="box box-border">
+					<?php echo $message; ?>
 						<div class="box-body">
 							<h4>ลงทะเบียนเข้าใช้งาน</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
 							<hr>
-							<?php echo $message; ?>
+						
+
+
 <form class="form-validate form-horizontal" id="feedback_form" method="post" action="register.php" enctype="multipart/form-data">
 
 								<div class="form-group">
@@ -230,7 +230,9 @@
 								<div class="form-group text-center">
 									<span class="text-muted">Already have an account?</span> <a href="login.php">Login</a>
 								</div>
-							</form>
+</form>
+
+
 						</div>
 					</div>
 				</div>
