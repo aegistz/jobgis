@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+session_start();
+
+include("config.php");
+
+if(!isset($_COOKIE["type"]))
+{
+ header("location:login.php");
+}
+?>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -240,8 +250,8 @@
 													<img src="images/img01.jpg" alt="Sample Article">
 												</figure>
 												<div class="featured-author-info">
-													<h2 class="name">ธีระยุทธ อินทร์จันทร์</h2>
-													<div class="desc">@Teerayooti</div>
+													<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>
+													<div class="desc"><?php echo $user[email]; ?> </div>
 												</div>
 											</div>
 										</div>

@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+include("config.php");
+?>
 <header class="primary">
 			<div class="firstbar">
 				<div class="container">
@@ -46,7 +51,7 @@ if(isset($_COOKIE["type"]))
  ?>
 	<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
-								<li><a href="profile.php"><div><?php echo $user[s_name],' ', $user[l_name]; ?> </div></a></li>
+								<li><a href="profile.php"><i class="ion-person"></i><div> <?php echo $user[s_name],' ', $user[l_name]; ?> </div></a></li>
 								<li><a href="logout.php"><i class="ion-log-out	"></i><div>Logout</div></a></li>
 							</ul>
 						</div>
@@ -55,7 +60,7 @@ if(isset($_COOKIE["type"]))
 
 	<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
-								<li><a href="logout.php"><i class="ion-key"></i><div>Login</div></a></li>
+								<li><a href="logout.php"><i class="ion-log-out"></i><div>Login</div></a></li>
 							</ul>
 						</div>
 
