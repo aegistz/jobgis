@@ -191,41 +191,7 @@
 
 
 
-<!-- 			<aside>
-												<h1 class="aside-title">ประสบการณ์ </h1>
-												<p>
-													<ul>
-														<li>asdf</li>
-														<li>wef</li>
-													</ul>
-												</p>
-											</aside>
-											<aside>
-												<h1 class="aside-title">การศึกษา </h1>
-												<p>
-													<ul>
-														<li>ปริญญาตรี คณะ วิทยาศาสตร์, สาขาวิชาเอก เทคโนโลยีสารสนเทศ 2558, <br> มหาวิทยาลัยนเรศวร,  ไทย, <br> GPA 2.49/4</li>
-													</ul>
-												</p>
-											</aside>
-											<aside>
-												<h1 class="aside-title">ความสำเร็จ </h1>
-												<p>
-													<ul>
-														<li>asdf</li>
-														<li>wef</li>
-													</ul>
-												</p>
-											</aside>
-											<aside>
-												<h1 class="aside-title">ความสนใจ </h1>
-												<p>
-													<ul>
-														<li>asdf</li>
-														<li>wef</li>
-													</ul>
-												</p>
-											</aside> -->
+
 
 
 

@@ -34,8 +34,8 @@ if(isset($_POST["login"]))
           if(  $_POST["user_password"] ==  $arr["password"] )
           {
          
-               setcookie("type", $arr["email"] , time() + 3400);
-               setcookie("pass", $arr["password"] , time() + 3400);
+               setcookie("type", $arr["email"] , time() + 86399);
+               setcookie("pass", $arr["password"] , time() + 86399);
             //    header('Location:..'.$_SESSION['redirectURL']);
                header('Location:./');
                exit;

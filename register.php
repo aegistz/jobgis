@@ -214,7 +214,7 @@
 
 								<div class="form-group">
 									<label>Email  (*ใช้ในการเข้าสู่ระบบ)</label>
-									<input type="text" name="email" class="form-control">
+									<input type="email" name="email" class="form-control">
 								</div>
 
 
