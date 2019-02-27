@@ -100,26 +100,16 @@ if(isset($_POST["login"]))
 				<div class="box-wrapper">				
 					<div class="box box-border">
 						<div class="box-body">
-							<h4>เข้าสู่ระบบ</h4>
+							<h4>ลืมรหัสผ่านเข้าระบบ</h4>
 <form name="login" method="post" action="login.php">
 <span><?php echo $message; ?></span>
 								<div class="form-group">
-									<label>email</label>
+									<label>กรอก email ที่ใช้สมัคร</label>
 									<input type="text"  name="user_email"  class="form-control">
 								</div>
-								<div class="form-group">
-									<label class="fw">Password
-										<a href="forgot.php" class="pull-right">Forgot Password?</a>
-									</label>
-									<input type="password" name="user_password" class="form-control">
-								</div>
 								<div class="form-group text-right">
-									<button class="btn btn-primary btn-block" type="submit" name="login">Login</button>
+									<button class="btn btn-primary btn-block" type="submit" name="login">กดรีเซ็ตรหัสผ่านใหม่</button>
 								</div>
-								<div class="form-group text-center">
-									<span class="text-muted">Don't have an account?</span> <a href="register.php">Create one</a>
-								</div>
-								
 </form>
 						</div>
 					</div>

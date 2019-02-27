@@ -90,8 +90,8 @@
 								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 								<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
 							  </div>';
-
-			header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
+			//header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
+			header('Location:./');
 				  exit;
 
 		  }else{
@@ -162,7 +162,7 @@
 							<h4>ลงทะเบียนเข้าใช้งาน</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
 							<hr>
-							<?php echo $sql2; ?>
+							<?php echo $message; ?>
 <form class="form-validate form-horizontal" id="feedback_form" method="post" action="register.php" enctype="multipart/form-data">
 
 								<div class="form-group">
