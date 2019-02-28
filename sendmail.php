@@ -24,7 +24,7 @@
 		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
 		$email_receiver = 'kajornkiet2@gmail.com'; // เมล์ผู้รับ ***
 
-		$subject = "รับเรื่องการแจ้งซ่อมอุปกรณ์"; // หัวข้อเมล์
+		$subject = "การเปลี่ยนรหัสผ่าน"; // หัวข้อเมล์
 
 
 		$mail->Username = $gmail_username;
@@ -38,13 +38,13 @@
 		  <html>
 		    <head>
 		      <meta charset=utf-8'/>
-		      <title>การกดยืนยันการสมัค</title>
+		      <title>การเปลี่ยนรหัสผ่าน</title>
 		    </head>
 		    <body>
 		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
 		        <img src='images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
-		           <p>กดที่ลิงค์ เพื่อยืนยันการสมัค</p><br>
+		           <p>กดที่ลิงค์ เพื่อแก้ไขรหัสผ่าน</p><br>
 		           <p>URL : ". $email_receiver  ."</p>
 		        </div>
 		      </div>
