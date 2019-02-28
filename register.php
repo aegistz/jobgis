@@ -248,7 +248,7 @@
 					<div class="box box-border">
 					<?php echo $message; ?>
 						<div class="box-body">
-							<h4>ลงทะเบียนเข้าใช้งานxx</h4>
+							<h4>ลงทะเบียนเข้าใช้งาน</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
 							<hr>
 						

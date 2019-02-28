@@ -244,10 +244,17 @@ if(!isset($_COOKIE["type"]))
 							<div class="aside-body">
 								<div class="featured-author">
 									<div class="featured-author-inner">
-										<div class="featured-author-cover" style="background-image: url('images/profile/tera9.png');">
+										<div class="featured-author-cover" style="background-image: url('images/news/news4.jpg');">
 											<div class="featured-author-center">
 												<figure class="featured-author-picture">
-													<img src="images/img01.jpg" alt="Sample Article">
+													<?php if($user[img] == ''){ ?>
+														<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
+													<?php } else { ?>
+														<img src="<?php echo $user[img]; ?>" alt="Sample Article">
+													<?php } ?>
+
+													
+
 												</figure>
 												<div class="featured-author-info">
 													<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>
