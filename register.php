@@ -121,7 +121,7 @@
 		        <img src='https://drive.google.com/open?id=1d2dbqiwRVm4W7JfLpdHx17PKVL4aY1PR' style='width: 120px;'>
 		        <div style='text-align:center'> 
 		           <p>กดที่ลิงค์ เพื่อเปลี่ยนพาสเวิร์ด</p><br>
-		           <p>URL : ". $email_receiver  ."</p>
+		           <p>URL : http://localhost:81/jobgis/checkmail.php?email=$email </p>
 		        </div>
 		      </div>
 		        <div>       
@@ -175,7 +175,7 @@
 								<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
 							  </div>';
 			//header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
-			header('Location:./');
+			header('Location: checkmail.php?email=$email&type=submit_mail');
 				  exit;
 
 		  }else{
@@ -248,7 +248,7 @@
 					<div class="box box-border">
 					<?php echo $message; ?>
 						<div class="box-body">
-							<h4>ลงทะเบียนเข้าใช้งานxx</h4>
+							<h4>ลงทะเบียนเข้าใช้งาน</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
 							<hr>
 						

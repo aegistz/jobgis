@@ -25,7 +25,6 @@ if(isset($_POST["forgot"]))
       $statement = pg_query($query);
       $arr = pg_fetch_array($statement);
 
-      
       $count = pg_num_rows($statement);
 
      
@@ -51,7 +50,7 @@ if(isset($_POST["forgot"]))
 
 		$sender = "gistnu"; // ชื่อผู้ส่ง
 		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
-		$email_receiver = 'kajornkiet2@gmail.com'; // เมล์ผู้รับ ***
+		$email_receiver = $user_email; // เมล์ผู้รับ ***
 
 		$subject = "การเปลี่ยนรหัสผ่าน"; // หัวข้อเมล์
 
