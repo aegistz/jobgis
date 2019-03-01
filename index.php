@@ -252,9 +252,6 @@ if(!isset($_COOKIE["type"]))
 													<?php } else { ?>
 														<img src="<?php echo $user[img]; ?>" alt="Sample Article">
 													<?php } ?>
-
-													
-
 												</figure>
 												<div class="featured-author-info">
 													<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>

@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+session_start();
+
+include("config.php");
+
+if(!isset($_COOKIE["type"]))
+{
+ header("location:login.php");
+}
+?>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -50,14 +60,18 @@
 							<div class="aside-body">
 								<div class="featured-author">
 									<div class="featured-author-inner">
-										<div class="featured-author-cover" style="background-image: url('images/profile/tera9.png');">
+										<div class="featured-author-cover" style="background-image: url('images/news/news4.jpg');">
 											<div class="featured-author-center">
 												<figure class="featured-author-picture">
-													<img src="images/img01.jpg" alt="Sample Article">
+												<?php if($user[img] == ''){ ?>
+														<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
+													<?php } else { ?>
+														<img src="<?php echo $user[img]; ?>" alt="Sample Article">
+													<?php } ?>
 												</figure>
 												<div class="featured-author-info">
-													<h2 class="name">ธีระยุทธ อินทร์จันทร์</h2>
-													<div class="desc">@Teerayooti</div>
+													<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>
+													<div class="desc"><?php echo $user[email]; ?> </div>
 												</div>
 											</div>
 										</div>
@@ -85,26 +99,39 @@
 												</div>
 											</div>
 											<div class="featured-author-quote">
-											   <b>สถานะ : </b>	  ต้องการหางานทางด้านพัฒนาระบบภูมิสารสนเทศ GIS ด่วน ๆ พร้อมเริ่มงาน
+												<b>สถานะ : </b>	  ต้องการหางานทางด้านพัฒนาระบบภูมิสารสนเทศ GIS ด่วน ๆ พร้อมเริ่มงาน
 											</div>
 											<div class="block">
 												<h2 class="block-title">Photos</h2>
 												<div class="block-body">
 													<ul class="item-list-round" data-magnific="gallery">
-														<li><a href="images/profile/tera1.jpg" style="background-image: url('images/profile/tera1.jpg');"></a></li>
-														<li><a href="images/profile/tera2.jpg" style="background-image: url('images/profile/tera2.jpg');"></a></li>
-														<li><a href="images/profile/tera3.jpg" style="background-image: url('images/profile/tera3.jpg');"></a></li>
-														<li><a href="images/profile/tera4.jpg" style="background-image: url('images/profile/tera4.jpg');"></a></li>
-														<li><a href="images/profile/tera5.jpg" style="background-image: url('images/profile/tera5.jpg');"></a></li>
-														<li><a href="images/profile/tera6.jpg" style="background-image: url('images/profile/tera6.jpg');"></a></li>
-														<li><a href="images/profile/tera7.jpg" style="background-image: url('images/profile/tera7.jpg');"></a></li>
+<?php 
+	$id = $user[id_no];
+	$query = pg_query("SELECT * from photo_user where id_user = '$id'  ;");
+	$num = pg_num_rows($query);
+
+	if( $num != 0 ) {
+		while( $arr = pg_fetch_array($query)  ){  
+?>
+						<li><a href="images/profile/tera1.jpg" style="background-image: url('images/profile/tera1.jpg');"></a></li>
+<?php }    }else{  ?>
+	 					<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
+<?php } ?>
+														<li><button class="btn btn-link"  data-toggle="collapse" data-target="#demo">+ เพิ่มรูปภาพ</button></li>
 													</ul>
+												
 												</div>
-											</div>
+											</div>	
+
+												<div id="demo" class="collapse">
+													<input type="file">
+												</div>
+													
 										</div>
 									</div>
 								</div>
 							</div>
+							
 						</aside>
 
 						<div class="row">

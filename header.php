@@ -10,7 +10,7 @@ include("config.php");
 						<div class="col-md-3 col-sm-12">
 							<div class="brand">
 								<a href="./">
-									<img src="images/gistda_logo.png" alt="Magz Logo">
+									<img src="images/6logo.png" alt=" Logo">
 								</a>
 							</div>						
 						</div>
@@ -76,7 +76,7 @@ if(isset($_COOKIE["type"]))
 				<div class="container">
 					<div class="brand">
 						<a href="#">
-							<img src="images/gistda_logo.png" alt="Magz Logo">
+							<img src="images/6logo.png" alt=" Logo">
 						</a>
 					</div>
 					<div class="mobile-toggle">
