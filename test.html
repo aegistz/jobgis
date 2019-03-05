@@ -1,0 +1,15 @@
+
+<script type="text/javascript">
+function prepHref(linkElement) {
+    var myDiv = document.getElementById('fullsized_image_holder');
+    var myImage = myDiv.children[0];
+    linkElement.href = myImage.src;
+}
+</script>
+
+
+
+<div id="fullsized_image_holder"  style="display: none;">
+	<img src="images/ads.png" onclick="prepHref(this)" download" style="margin-top: 0px;">  
+</div>
+<a href="#" onclick="prepHref(this)" download>Click here to download image</a>
