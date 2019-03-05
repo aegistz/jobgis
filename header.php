@@ -117,7 +117,7 @@ if(isset($_COOKIE["type"]))
 							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับฝึกงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
-										<div class="row">
+										<!-- <div class="row">
 											<div class="col-md-3">
 												<div class="row">
 													<div class="col-md-12">
@@ -189,14 +189,14 @@ if(isset($_COOKIE["type"]))
 													</article>
 												</div>
 											</div>
-										</div>								
+										</div> -->								
 									</div>
 								</div>
 							</li>
 							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">Resume GIS <i class="ion-ios-arrow-right"></i></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
-										<div class="row">
+										<!-- <div class="row">
 											<div class="col-md-3">
 												<h2 class="megamenu-title">Column 1</h2>
 												<ul class="vertical-menu">
@@ -237,7 +237,7 @@ if(isset($_COOKIE["type"]))
 													<li><a href="#">Example 20</a></li>
 												</ul>
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</li>

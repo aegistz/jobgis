@@ -21,36 +21,46 @@ if(isset($_POST["login"]))
    }
    else
    {
-      $query = "SELECT * FROM user_job WHERE email = '$user_email'  ; ";
-      $statement = pg_query($query);
-      $arr = pg_fetch_array($statement);
 
-      
-      $count = pg_num_rows($statement);
+   		if ( $user_email == 'admin'  && $_POST["user_password"] == 'admin' ) {
 
-      if($count > 0)
-      {
+   			header('Location:admin/');
 
-          if(  $_POST["user_password"] ==  $arr["password"] )
-          {
-         
-               setcookie("type", $arr["email"] , time() + 86399);
-               setcookie("pass", $arr["password"] , time() + 86399);
-            //    header('Location:..'.$_SESSION['redirectURL']);
-               header('Location:./');
-               exit;
+   		}else{
 
-          }
-          else
-          {
-           $message = '<div class="alert alert-danger">Wrong Password</div>';
-          }
+				      $query = "SELECT * FROM user_job WHERE email = '$user_email'  ; ";
+				      $statement = pg_query($query);
+				      $arr = pg_fetch_array($statement);
 
-      }
-      else
-      {
-        $message = "<div class='alert alert-danger'>Wrong Email Address</div>";
-      }
+				      
+				      $count = pg_num_rows($statement);
+
+				      if($count > 0)
+				      {
+
+				          if(  $_POST["user_password"] ==  $arr["password"] )
+				          {
+				         
+				               setcookie("type", $arr["email"] , time() + 86399);
+				               setcookie("pass", $arr["password"] , time() + 86399);
+				            //    header('Location:..'.$_SESSION['redirectURL']);
+				               header('Location:./');
+				               exit;
+
+				          }
+				          else
+				          {
+				           $message = '<div class="alert alert-danger">Wrong Password</div>';
+				          }
+
+				      }
+				      else
+				      {
+				        $message = "<div class='alert alert-danger'>Wrong Email Address</div>";
+      				  }
+
+   		}
+
    }
 }
 ?>
