@@ -34,30 +34,34 @@ if(isset($_POST["login"]))
 
 				      
 				      $count = pg_num_rows($statement);
+				      if ( $arr["status_user"] == 'รอการยืนยัน' ) {
+				      	$message = '<div class="alert alert-danger">ท่านยังไม่ได้ยืนยัน Email กรุณายืนยัน Email ก่อนเข้าใช้งาน </div>';
+				      }else{
+							      if($count > 0)
+							      {
 
-				      if($count > 0)
-				      {
+							          if(  $_POST["user_password"] ==  $arr["password"] )
+							          {
+							         
+							               setcookie("type", $arr["email"] , time() + 86399);
+							               setcookie("pass", $arr["password"] , time() + 86399);
+							            //    header('Location:..'.$_SESSION['redirectURL']);
+							               header('Location:./');
+							               exit;
 
-				          if(  $_POST["user_password"] ==  $arr["password"] )
-				          {
-				         
-				               setcookie("type", $arr["email"] , time() + 86399);
-				               setcookie("pass", $arr["password"] , time() + 86399);
-				            //    header('Location:..'.$_SESSION['redirectURL']);
-				               header('Location:./');
-				               exit;
+							          }
+							          else
+							          {
+							           $message = '<div class="alert alert-danger">Wrong Password</div>';
+							          }
 
-				          }
-				          else
-				          {
-				           $message = '<div class="alert alert-danger">Wrong Password</div>';
-				          }
-
+							      }
+							      else
+							      {
+							        $message = "<div class='alert alert-danger'>Wrong Email Address</div>";
+			      				  }
 				      }
-				      else
-				      {
-				        $message = "<div class='alert alert-danger'>Wrong Email Address</div>";
-      				  }
+
 
    		}
 

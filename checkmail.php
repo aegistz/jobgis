@@ -5,17 +5,36 @@ session_start();
 include("config.php");
 
 $email = $_GET[email];
+$message = '';
+
+
+if(!isset($_COOKIE["email"]))
+{
+ header("location:login.php");
+}
+
+
+
 
 if( $_GET[type] == 'submit_mail' )
 {
 	$email = $_GET[email];
 
-	$sql = "UPDATE user_job set status_user = 'ยืนยัน' where email = '$email';  ";
+	$sql = "UPDATE user_job set status_user = 'ยืนยัน' where email = '$_COOKIE[email]';  ";
 	$query = pg_query($sql);
-	header('location:login.php');
-}
 
-$message = '';
+	
+	$query2 = "SELECT * FROM user_job WHERE email = '$_COOKIE[email]'  ; ";
+	$statement2 = pg_query($query2);
+	$arr = pg_fetch_array($statement2);
+
+
+ 		setcookie("type", $arr["email"] , time() + 86399);
+		setcookie("pass", $arr["password"] , time() + 86399);
+		header('Location:./');
+		exit;
+
+}
 
 
 if(isset($_POST["forgot"]))
@@ -34,6 +53,91 @@ if(isset($_POST["forgot"]))
       
       $count = pg_num_rows($statement);
    }
+}
+
+
+
+if ( isset($_GET[type]) == 'resent' ) {
+	
+	  require 'scripts/phpmailer/PHPMailerAutoload.php';
+
+		header('Content-Type: text/html; charset=utf-8');
+
+		$mail = new PHPMailer;
+		$mail->CharSet = "utf-8";
+		$mail->isSMTP();
+		$mail->Host = 'smtp.gmail.com';
+		$mail->Port = 587;
+		$mail->SMTPSecure = 'tls';
+		$mail->SMTPAuth = true;
+
+
+		$gmail_username = "gistnu@gmail.com"; // gmail ที่ใช้ส่ง
+		$gmail_password = "gistnu2017nu"; // รหัสผ่าน gmail
+		// ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
+
+
+		$sender = "gistnu"; // ชื่อผู้ส่ง
+		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
+		$email_receiver = $_COOKIE[email]; // เมล์ผู้รับ ***
+
+		$subject = "การยืนยันการสมัคร JOBGIS"; // หัวข้อเมล์
+
+
+		$mail->Username = $gmail_username;
+		$mail->Password = $gmail_password;
+		$mail->setFrom($email_sender, $sender);
+		$mail->addAddress($email_receiver);
+		$mail->Subject = $subject;
+
+		$email_content = "
+			<!DOCTYPE html>
+		  <html>
+		    <head>
+		      <meta charset=utf-8'/>
+		      <title>การกดยืนยันการสมัค</title>
+		    </head>
+		    <body>
+		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
+		        <img src='http://localhost:8888/jobgis/images/6logo.png' style='width: 120px;'>
+		        <div style='text-align:center'> 
+		           <p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
+		           <p><a href='http://localhost:8888/jobgis/checkmail.php?email=$email&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
+		        </div>
+		      </div>
+		        <div>       
+		          
+		        </div>
+		        <div style='margin-top:30px;'>
+		          <hr>
+		          <address>
+		            <h4>ติดต่อสอบถาม</h4>
+		            <p>กองถ่ายทอดเทคโนโลยี  มหาวิทยาลัยนเรศวร
+		            ชั้น 4 ตึก A อาคารมหาธรรมราชา ตำบลท่าโพธิ์ 
+		            อำเภอเมือง จังหวัดพิษณุโลก 65000
+		            </p>
+		            <p>www.facebook.com/Gistlnnu/</p>
+		          </address>
+		        </div>
+		      </div>
+		      <div style='background: #214163;color: #a2abb7;padding:30px;'>
+		        <div style='text-align:center'> 
+		           © กองถ่ายการทอดเทคโนโลยี มหาวิทยาลัยนเรศวร
+		        </div>
+		      </div>
+		    </body>
+		  </html>
+		";
+
+		//  ถ้ามี email ผู้รับ
+		if($email_receiver){
+			$mail->msgHTML($email_content);
+			if (!$mail->send()) {  // สั่งให้ส่ง email
+			}else{
+			}	
+		}
+
+		header('Location:checkmail.php');
 }
 ?>
 <html>
@@ -82,11 +186,11 @@ if(isset($_POST["forgot"]))
 				<div class="box-wrapper">				
 					<div class="box box-border">
 						<div class="box-body">
-							<h7>เราได้ส่งการยืนยันไปยังอีเมลถึงคุณที่ <?php echo $user[email]; ?> โปรดตรวจสอบอีเมลของคุณ</h7>
+							<h7>เราได้ส่งการยืนยันไปยังอีเมลถึงคุณที่ <?php echo $_COOKIE[email]; ?> โปรดตรวจสอบอีเมลของคุณ</h7>
 <form method="post" action="checkmail.php">
 								<div class="form-group text-right">
-									<br><button class="btn btn-primary btn-block" type="submit" name="status_user" value="ดำเนินการต่อ">ดำเนินการต่อ</button>
-									<a href="" name="forgot">ส่งไปยังอีเมลอีกครั้ง</a>
+									<br><a href="login.php" class="btn btn-primary btn-block" type="submit" name="status_user" value="ดำเนินการต่อ">ดำเนินการต่อ</a>
+									<a href="checkmail.php?type=resent">ส่งไปยังอีเมลอีกครั้ง</a>
 								</div>
 </form>
 						</div>

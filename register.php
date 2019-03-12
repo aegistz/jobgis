@@ -34,6 +34,19 @@
 	  $phone_number = $_POST['phone_number'];
 	  $email = $_POST['email'];
 	  $password = $_POST['password'];
+	  $birth_year = $_POST['birth_year'];
+	  $id_student = $_POST['student'];
+	  $status_study = $_POST['status_study'];
+	  $place_now = $_POST['place_now'];
+	  $arcgis = $_POST['arcgis'];
+	  $envi = $_POST['envi'];
+	  $qgis = $_POST['qgis'];
+	  $grass = $_POST['grass'];
+	  $postgres = $_POST['postgres'];
+	  $mysql = $_POST['mysql'];
+	  $mapserver = $_POST['mapserver'];
+	  $openlayer = $_POST['openlayer'];
+	  $geoserver = $_POST['geoserver'];
 
 
 	  $sql1 = "select * from user_job  where email = '$email'   ; ";
@@ -56,7 +69,20 @@
 		email , 
 		password ,
 		date_access,
-		status_user
+		status_user,
+		birth_year,
+		id_student,
+		status_study,
+		place_now,
+		arcgis,
+		envi,
+		qgis,
+		grass,
+		postgres,
+		mysql,
+		mapserver,
+		openlayer,
+		geoserver
 	  )
 	  values 
 	  (
@@ -74,7 +100,20 @@
 		'$email' ,
 		'$password' ,
 		'$date',
-		'รอการยืนยัน'
+		'รอการยืนยัน',
+		'$birth_year',
+		'$id_student',
+		'$status_study',
+		'$place_now',
+		'$arcgis',
+		'$envi',
+		'$qgis',
+		'$grass',
+		'$postgres',
+		'$mysql',
+		'$mapserver',
+		'$openlayer',
+		'$geoserver'
 
 	  );"; 
 
@@ -100,7 +139,7 @@
 		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
 		$email_receiver = $email; // เมล์ผู้รับ ***
 
-		$subject = "การยืนยันการสมัค"; // หัวข้อเมล์
+		$subject = "การยืนยันการสมัคร JOBGIS"; // หัวข้อเมล์
 
 
 		$mail->Username = $gmail_username;
@@ -118,10 +157,10 @@
 		    </head>
 		    <body>
 		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
-		        <img src='https://drive.google.com/open?id=1d2dbqiwRVm4W7JfLpdHx17PKVL4aY1PR' style='width: 120px;'>
+		        <img src='http://localhost:8888/jobgis/images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
-		           <p>กดที่ลิงค์ เพื่อเปลี่ยนพาสเวิร์ด</p><br>
-		           <p>URL : http://localhost:81/jobgis/checkmail.php?email=$email </p>
+		           <p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
+		           <p><a href='http://localhost:8888/jobgis/checkmail.php?email=$email&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
 		        </div>
 		      </div>
 		        <div>       
@@ -131,8 +170,7 @@
 		          <hr>
 		          <address>
 		            <h4>ติดต่อสอบถาม</h4>
-		            <p>กองถ่ายทอดเทคโนโลยีและนวัตกรรม
-		            มหาวิทยาลัยนเรศวร
+		            <p>กองถ่ายทอดเทคโนโลยี  มหาวิทยาลัยนเรศวร
 		            ชั้น 4 ตึก A อาคารมหาธรรมราชา ตำบลท่าโพธิ์ 
 		            อำเภอเมือง จังหวัดพิษณุโลก 65000
 		            </p>
@@ -175,7 +213,10 @@
 								<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
 							  </div>';
 			//header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
-			header('Location: checkmail.php?email=$email&type=submit_mail');
+
+
+			setcookie("email", $email , time() + 3600);
+			header('Location: checkmail.php');
 				  exit;
 
 		  }else{
@@ -235,6 +276,7 @@
 
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
+
 	</head>
 
 	<body class="skin-blue">
@@ -246,7 +288,7 @@
 			<div class="container">
 				<div class="">				
 					<div class="">
-					<?php echo $message; ?>
+					<?php echo $sql2; ?>
 						<div class="box-body">
 							<h4>ลงทะเบียนเข้าใช้งาน</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
@@ -258,28 +300,28 @@
 		<div class="col-md-2">
 								<div class="form-group">
 									<label>เลขประจำตัวนักศึกษา</label>
-									<input type="text" name="id_student" class="form-control">
+									<input type="text" name="student" class="form-control" required="">
 								</div>
 			
 		</div>
 		<div class="col-md-2">
 								<div class="form-group">
 									<label>คำนำหน้า</label>
-									<input type="text" name="title_name" class="form-control">
+									<input type="text" name="title_name" class="form-control" required="">
 								</div>
 			
 		</div>
 		<div class="col-md-4">
 								<div class="form-group">
 									<label>ชื่อ</label>
-									<input type="text" name="s_name" class="form-control">
+									<input type="text" name="s_name" class="form-control" required="">
 								</div>
 			
 		</div>
 		<div class="col-md-4">
 								<div class="form-group">
 									<label>นามสกุล</label>
-									<input type="text" name="l_name" class="form-control">
+									<input type="text" name="l_name" class="form-control" required="">
 								</div>
 			
 		</div>
@@ -376,24 +418,324 @@
 		</div>
 		
 
-
 		<hr>
-		<div class="col-md-6">
+
+
+
+		<div class="">
+			<div class="col-md-6">
 								<div class="form-group">
 									<label>Email  (*ใช้ในการเข้าสู่ระบบ)</label>
 									<input type="email" name="email" class="form-control" required="">
 								</div>
 			
-		</div>
-		<div class="col-md-6">
 								<div class="form-group">
 									<label class="fw">Password (*ใช้ในการเข้าสู่ระบบ)</label>
-									<input type="password" name="password" class="form-control" required="">
+									<input type="password" name="password" id="password" class="form-control" required="">
 								</div>
+				
+			</div>
+			<div class="col-md-6">
+			<caption>ประสบการณ์การใช้งาน Software</caption>
+			<table class="table table-hover" style="text-align: center;   ">
+			  <thead>
+			    <tr>
+			      <th scope="col" width="40%"></th>
+			      <th scope="col">ไม่รู้จัก</th>
+			      <th scope="col">เคยได้ยิน แต่ไม่เคยใช้</th>
+			      <th scope="col">เคยใช้ แต่ไม่ชำนาญ</th>
+			      <th scope="col">เคยใช้อย่างชำนาญ</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr class="table-active">
+			      <th scope="row">ARCGIS</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="arcgis" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="arcgis" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="arcgis" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="arcgis" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			    <tr class="table-active">
+			      <th scope="row"> ENVI</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="envi" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="envi" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="envi" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="envi" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			    <tr class="table-active">
+			      <th scope="row">QGIS Desktop</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="qgis" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="qgis" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="qgis" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="qgis" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			    <tr class="table-active">
+			      <th scope="row">GRASS GIS</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="grass" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="grass" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="grass" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="grass" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			    <tr class="table-active">
+			      <th scope="row">PostgreSQL/PostGIS</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="postgres" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="postgres" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="postgres" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="postgres" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			    <tr class="table-active">
+			      <th scope="row">MySQL spatial extensions</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="mysql" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="mysql" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="mysql" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="mysql" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			    <tr class="table-active">
+			      <th scope="row">MapServer</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="mapserver" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="mapserver" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="mapserver" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="mapserver" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			    <tr class="table-active">
+			      <th scope="row">OpenLayers</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="openlayer" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="openlayer" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="openlayer" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="openlayer" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			    <tr class="table-active">
+			      <th scope="row">GeoServer</th>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="geoserver" value="ไม่รู้จัก">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="geoserver" value="เคยได้ยิน แต่ไม่เคยใช้">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="geoserver" value="เคยใช้ แต่ไม่ชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			      <td>
+				      <div class="form-check">
+				      <label class="form-check-label">
+				          <input type="radio" class="form-check-input" name="geoserver" value="เคยใช้อย่างชำนาญ">
+				        </label>
+				      </div>
+				  </td>
+			    </tr>
+			  </tbody>
+			</table>
+			</div>
 			
 		</div>
+
+
 								<div class="form-group text-right">
-									<button type="submit" name="submit_form" class="btn btn-primary btn-block">Register</button>
+									<button type="submit" name="submit_form" class="btn btn-primary btn-block">ลงทะเบียนเข้าใช้งาน</button>
 								</div>
 								<div class="form-group text-center">
 									<span class="text-muted">ถ้าท่านเคยลงทะเบียนแล้ว ?</span> <a href="login.php">เข้าระบบ</a>
@@ -431,5 +773,14 @@
 		<script src="scripts/toast/jquery.toast.min.js"></script>
 		<!-- <script src="js/demo.js"></script> -->
 		<script src="js/e-magz.js"></script>
+
+		<script type="text/javascript">
+			$('#password, #confirm_password').on('keyup', function () {
+			  if ($('#password').val() == $('#confirm_password').val()) {
+			    $('#message').html('Matching').css('color', 'green');
+			  } else 
+			    $('#message').html('Not Matching').css('color', 'red');
+			});
+		</script>
 	</body>
 </html>
