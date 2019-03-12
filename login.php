@@ -127,7 +127,7 @@ if(isset($_POST["login"]))
 									<button class="btn btn-primary btn-block" type="submit" name="login">Login</button>
 								</div>
 								<div class="form-group text-center">
-									<span class="text-muted">Don't have an account?</span> <a href="register.php">Create one</a>
+									<span class="text-muted">ถ้าท่านยังไม่มีรหัสผ่าน?</span> <a href="register.php">ลงทะเบียนที่นี่</a>
 								</div>
 								
 </form>

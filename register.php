@@ -244,83 +244,167 @@
 
 		<section class="login first grey">
 			<div class="container">
-				<div class="box-wrapper">				
-					<div class="box box-border">
+				<div class="">				
+					<div class="">
 					<?php echo $message; ?>
 						<div class="box-body">
 							<h4>ลงทะเบียนเข้าใช้งาน</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
-							<hr>
-						
+			<hr>
 
 
 <form class="form-validate form-horizontal" id="feedback_form" method="post" action="register.php" enctype="multipart/form-data">
-
+	<div class="">
+		<div class="col-md-2">
+								<div class="form-group">
+									<label>เลขประจำตัวนักศึกษา</label>
+									<input type="text" name="id_student" class="form-control">
+								</div>
+			
+		</div>
+		<div class="col-md-2">
 								<div class="form-group">
 									<label>คำนำหน้า</label>
 									<input type="text" name="title_name" class="form-control">
 								</div>
+			
+		</div>
+		<div class="col-md-4">
 								<div class="form-group">
 									<label>ชื่อ</label>
 									<input type="text" name="s_name" class="form-control">
 								</div>
+			
+		</div>
+		<div class="col-md-4">
 								<div class="form-group">
 									<label>นามสกุล</label>
 									<input type="text" name="l_name" class="form-control">
 								</div>
+			
+		</div>
+		
+	</div>
+
+
+
+	<div class="">
+		<div class="col-md-3">
 								<div class="form-group">
-									<label>ชื่อมหาวิทยาลัย</label>
-									<input type="text" name="university" class="form-control">
+									<label>ปีเกิด</label>
+									<input type="number" name="birth_year" class="form-control" required="">
 								</div>
-								<div class="form-group">
-									<label>ระดับ</label>
-									<input type="text" name="success_degree" class="form-control">
-								</div>
-								<div class="form-group">
-									<label>คณะ</label>
-									<input type="text" name="facutly" class="form-control">
-								</div>
-								<div class="form-group">
-									<label>สาขา</label>
-									<input type="text" name="major" class="form-control">
-								</div>
-								<div class="form-group">
-									<label>วุฒิที่สำเร็จการศึกษา</label>
-									<input type="text" name="qualification" class="form-control">
-								</div>
-								<div class="form-group">
-									<label>ปีที่เริ่มเข้าศึกษา</label>
-									<input type="number" name="year_start" class="form-control">
-								</div>
-								<div class="form-group">
-									<label>ปีที่จบการศึกษา</label>
-									<input type="number" name="year_end" class="form-control">
-								</div>
+		</div>
+		<div class="col-md-3">
 								<div class="form-group">
 									<label>เบอร์โทรศัพท์</label>
-									<input type="text" name="phone_number" class="form-control">
+									<input type="text" name="phone_number" class="form-control" required="">
 								</div>
+		</div>
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>สถานะภาพการทำงานปัจจุบัน</label>
+									<select name="status_study" class="form-control" required="">
+										<option value="">กรุณาเลือก</option>
+										<option value="อยู่ระหว่างการศึกษา">อยู่ระหว่างการศึกษา</option>
+										<option value="ยังไม่มีงานทำ">ยังไม่มีงานทำ</option>
+										<option value="ทำงานตรงสาย">ทำงานตรงสาย</option>
+										<option value="ทำงานไม่ตรงสาย">ทำงานไม่ตรงสาย</option>
+									</select>
+								</div>
+		</div>
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>จังหวัดที่อาศัพในปัจจุบัน</label>
+									<input type="text" name="place_now" class="form-control" required="">
+								</div>
+		</div>
+		
+	</div>
 
-								<hr>
 
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>ชื่อมหาวิทยาลัย</label>
+									<input type="text" name="university" class="form-control" required="">
+								</div>
+		</div>
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>ระดับ</label>
+									<input type="text" name="success_degree" class="form-control" required="">
+								</div>
+		</div>
+
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>คณะ</label>
+									<input type="text" name="facutly" class="form-control" required="">
+								</div>
+			
+		</div>
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>สาขา</label>
+									<input type="text" name="major" class="form-control" required="">
+								</div>
+			
+		</div>
+
+		<div class="col-md-4">
+								<div class="form-group">
+									<label>วุฒิที่สำเร็จการศึกษา</label>
+									<input type="text" name="qualification" class="form-control" required="">
+								</div>
+			
+		</div>
+
+		<div class="col-md-4">
+								<div class="form-group">
+									<label>ปีที่เริ่มเข้าศึกษา</label>
+									<input type="number" name="year_start" class="form-control" required="">
+								</div>
+			
+		</div>
+
+		<div class="col-md-4">
+								<div class="form-group">
+									<label>ปีที่จบการศึกษา</label>
+									<input type="number" name="year_end" class="form-control" required="">
+								</div>
+			
+		</div>
+		
+
+
+		<hr>
+		<div class="col-md-6">
 								<div class="form-group">
 									<label>Email  (*ใช้ในการเข้าสู่ระบบ)</label>
-									<input type="email" name="email" class="form-control">
+									<input type="email" name="email" class="form-control" required="">
 								</div>
-
-
+			
+		</div>
+		<div class="col-md-6">
 								<div class="form-group">
 									<label class="fw">Password (*ใช้ในการเข้าสู่ระบบ)</label>
-									<input type="password" name="password" class="form-control">
+									<input type="password" name="password" class="form-control" required="">
 								</div>
-
-
+			
+		</div>
 								<div class="form-group text-right">
 									<button type="submit" name="submit_form" class="btn btn-primary btn-block">Register</button>
 								</div>
 								<div class="form-group text-center">
-									<span class="text-muted">Already have an account?</span> <a href="login.php">Login</a>
+									<span class="text-muted">ถ้าท่านเคยลงทะเบียนแล้ว ?</span> <a href="login.php">เข้าระบบ</a>
 								</div>
+		
+
+								
+
+
+
+
 </form>
 
 
