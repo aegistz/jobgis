@@ -4,39 +4,41 @@ session_start();
 
 include("config.php");
 
-if(isset($_COOKIE["type"]))
-{
- header("location:index.php");
-}
 
 $message = '';
 
 
 if(isset($_POST["login"]))
 {
-    $user_email = $_POST["user_email"];
+	$user_email = $_POST["user_email"];
+	$password = $_POST["user_password"];
    if(empty($_POST["user_email"]) || empty($_POST["user_password"]))
    {
       $message = "<div class='alert alert-danger'>Both Fields are required</div>";
    }
    else
    {
+			$query = "SELECT * FROM all_admin WHERE username = '$user_email' and password = '$password' ; ";
+			$statement = pg_query($query);
+			$arr = pg_num_rows($statement);
 
-   		if ( $user_email == 'admin'  && $_POST["user_password"] == 'admin' ) {
 
+   		if (   $arr > 0 ) {
+			setcookie("type", $user_email , time() + 86399);
+			setcookie("pass", $password , time() + 86399);
+			setcookie("status", 'admin', time() + 86399);
    			header('Location:admin/');
-
    		}else{
 
-				      $query = "SELECT * FROM user_job WHERE email = '$user_email'  ; ";
+				      $query = "SELECT * FROM student WHERE email = '$user_email'  ; ";
 				      $statement = pg_query($query);
 				      $arr = pg_fetch_array($statement);
 
 				      
 				      $count = pg_num_rows($statement);
-				      if ( $arr["status_user"] == 'รอการยืนยัน' ) {
+				      if ( $arr["status_user"] == 'รอยืนยัน' ) {
 				      	$message = '<div class="alert alert-danger">ท่านยังไม่ได้ยืนยัน Email กรุณายืนยัน Email ก่อนเข้าใช้งาน </div>';
-				      }else{
+				      }else if( $arr["status_user"] == 'ยืนยัน' ){
 							      if($count > 0)
 							      {
 
@@ -45,6 +47,7 @@ if(isset($_POST["login"]))
 							         
 							               setcookie("type", $arr["email"] , time() + 86399);
 							               setcookie("pass", $arr["password"] , time() + 86399);
+										   setcookie("status", 'student', time() + 86399);
 							            //    header('Location:..'.$_SESSION['redirectURL']);
 							               header('Location:./');
 							               exit;
@@ -60,6 +63,8 @@ if(isset($_POST["login"]))
 							      {
 							        $message = "<div class='alert alert-danger'>Wrong Email Address</div>";
 			      				  }
+				      }else{
+				      	$message = '<div class="alert alert-danger">ไม่สามารถเข้าระบบได้ กรุณาลองอีกครั้ง หรือติดต่อเจ้าหน้าที่ดูแลระบบ</div>';
 				      }
 
 
@@ -73,15 +78,15 @@ if(isset($_POST["login"]))
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="description" content="JOBGIS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
+		<meta name="description" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
 		<meta name="author" content="GISTNU by Teerayoot injun Teerayoot5056@gmail.com">
-		<meta name="keyword" content="JOBGIS,GISTDA,GISTNU,JOB,GIST,GIS,GEOINFOMETIC">
+		<meta name="keyword" content="GEOJOBS,GISTDA,GISTNU,JOB,GIST,GIS,GEOINFOMETIC">
 		<!-- Shareable -->
-		<meta property="og:title" content="JOBGIS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
+		<meta property="og:title" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
 		<meta property="og:type" content="article" />
 		<meta property="og:url" content="http://github.com/nauvalazhar/Magz" />
 		<meta property="og:image" content="images/gistda_logo.png" />
-		<title>JOB GIS &mdash; GISTDA  </title>
+		<title>GEOJOBS &mdash; GISTDA  </title>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<!-- IonIcons -->

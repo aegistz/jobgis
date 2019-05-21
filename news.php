@@ -4,15 +4,15 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="description" content="JOBGIS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
+		<meta name="description" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
 		<meta name="author" content="GISTNU by Teerayoot injun Teerayoot5056@gmail.com">
-		<meta name="keyword" content="JOBGIS,GISTDA,GISTNU,JOB,GIST,GIS,GEOINFOMETIC">
+		<meta name="keyword" content="GEOJOBS,GISTDA,GISTNU,JOB,GIST,GIS,GEOINFOMETIC">
 		<!-- Shareable -->
-		<meta property="og:title" content="JOBGIS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
+		<meta property="og:title" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
 		<meta property="og:type" content="article" />
 		<meta property="og:url" content="http://github.com/nauvalazhar/Magz" />
 		<meta property="og:image" content="images/gistda_logo.png" />
-		<title>JOB GIS &mdash; GISTDA  </title>
+		<title> GEOJOBs &mdash; GISTDA  </title>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<!-- IonIcons -->

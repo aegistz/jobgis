@@ -20,11 +20,11 @@ if( $_GET[type] == 'submit_mail' )
 {
 	$email = $_GET[email];
 
-	$sql = "UPDATE user_job set status_user = 'ยืนยัน' where email = '$_COOKIE[email]';  ";
+	$sql = "UPDATE student set status_user = 'ยืนยัน' where email = '$email';  ";
 	$query = pg_query($sql);
 
 	
-	$query2 = "SELECT * FROM user_job WHERE email = '$_COOKIE[email]'  ; ";
+	$query2 = "SELECT * FROM student WHERE email = '$email'  ; ";
 	$statement2 = pg_query($query2);
 	$arr = pg_fetch_array($statement2);
 
@@ -37,27 +37,8 @@ if( $_GET[type] == 'submit_mail' )
 }
 
 
-if(isset($_POST["forgot"]))
+if ( isset($_GET[type]) == 'resent' ) 
 {
-    $user_email = $_POST["user_email"];
-   if(empty($_POST["user_email"]))
-   {
-      $message = "<div class='alert alert-danger'>Both Fields are required</div>";
-   }
-   else
-   {
-      $query = "SELECT * FROM user_job WHERE email = '$user_email'  ; ";
-      $statement = pg_query($query);
-      $arr = pg_fetch_array($statement);
-
-      
-      $count = pg_num_rows($statement);
-   }
-}
-
-
-
-if ( isset($_GET[type]) == 'resent' ) {
 	
 	  require 'scripts/phpmailer/PHPMailerAutoload.php';
 
@@ -81,7 +62,7 @@ if ( isset($_GET[type]) == 'resent' ) {
 		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
 		$email_receiver = $_COOKIE[email]; // เมล์ผู้รับ ***
 
-		$subject = "การยืนยันการสมัคร JOBGIS"; // หัวข้อเมล์
+		$subject = "การยืนยันการสมัคร GEOJOBS"; // หัวข้อเมล์
 
 
 		$mail->Username = $gmail_username;
@@ -99,10 +80,10 @@ if ( isset($_GET[type]) == 'resent' ) {
 		    </head>
 		    <body>
 		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
-		        <img src='http://localhost:8888/jobgis/images/6logo.png' style='width: 120px;'>
+		        <img src='http://localhost:8888/GEOJOBS/images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
 		           <p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
-		           <p><a href='http://localhost:8888/jobgis/checkmail.php?email=$email&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
+		           <p><a href='http://localhost:8888/GEOJOBS/checkmail.php?email=".$_COOKIE[email]."&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
 		        </div>
 		      </div>
 		        <div>       
@@ -145,15 +126,15 @@ if ( isset($_GET[type]) == 'resent' ) {
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="description" content="JOBGIS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
+		<meta name="description" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
 		<meta name="author" content="GISTNU by Teerayoot injun Teerayoot5056@gmail.com">
-		<meta name="keyword" content="JOBGIS,GISTDA,GISTNU,JOB,GIST,GIS,GEOINFOMETIC">
+		<meta name="keyword" content="GEOJOBS,GISTDA,GISTNU,JOB,GIST,GIS,GEOINFOMETIC">
 		<!-- Shareable -->
-		<meta property="og:title" content="JOBGIS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
+		<meta property="og:title" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
 		<meta property="og:type" content="article" />
 		<meta property="og:url" content="http://github.com/nauvalazhar/Magz" />
 		<meta property="og:image" content="images/gistda_logo.png" />
-		<title>JOB GIS &mdash; GISTDA  </title>
+		<title> GEOJOBs &mdash; GISTDA  </title>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<!-- IonIcons -->
@@ -189,7 +170,7 @@ if ( isset($_GET[type]) == 'resent' ) {
 							<h7>เราได้ส่งการยืนยันไปยังอีเมลถึงคุณที่ <?php echo $_COOKIE[email]; ?> โปรดตรวจสอบอีเมลของคุณ</h7>
 <form method="post" action="checkmail.php">
 								<div class="form-group text-right">
-									<br><a href="login.php" class="btn btn-primary btn-block" type="submit" name="status_user" value="ดำเนินการต่อ">ดำเนินการต่อ</a>
+									<br><a href="login.php" class="btn btn-primary btn-block" type="submit" name="status_user" value="ดำเนินการต่อ">กลับหน้า Login</a>
 									<a href="checkmail.php?type=resent">ส่งไปยังอีเมลอีกครั้ง</a>
 								</div>
 </form>

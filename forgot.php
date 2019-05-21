@@ -17,7 +17,7 @@ if(isset($_POST["forgot"]))
     $user_email = $_POST["user_email"];
    if(empty($_POST["user_email"]))
    {
-      $message = "<div class='alert alert-danger'>Both Fields are required</div>";
+      $message = "<div class='alert alert-danger'>กรุณากรอก Email</div>";
    }
    else
    {
@@ -68,12 +68,12 @@ if(isset($_POST["forgot"]))
 		      <meta charset=utf-8'/>
 		      <title>การเปลี่ยนรหัสผ่าน</title>
 		    </head>
-		    <body>
+		     <body>
 		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
 		        <img src='images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
 		           <p>กดที่ลิงค์ เพื่อแก้ไขรหัสผ่าน</p><br>
-		           <p>URL : ". $email_receiver  ."</p>
+		            <p><a href='http://localhost:8888/GEOJOBS/reset_password.php?email=".$user_email."&ss=reset_password' >กดที่นี่</a>   </p>
 		        </div>
 		      </div>
 		        <div>       
@@ -104,23 +104,27 @@ if(isset($_POST["forgot"]))
 		//  ถ้ามี email ผู้รับ
 		if($email_receiver){
 			$mail->msgHTML($email_content);
-			header('Location:login.php');
+
+			setcookie("reset_pass", '' , time() - 3600);
+			setcookie("email", $user_email , time() + 3600);
+
+			header('Location:reset_password.php');
 
 
 			if (!$mail->send()) {  // สั่งให้ส่ง email
 
 				// กรณีส่ง email ไม่สำเร็จ
-				echo "<h3 class='text-center'>ระบบมีปัญหา กรุณาลองใหม่อีกครั้ง</h3>";
+				$message =  "<h3 class='text-center'>ระบบมีปัญหา กรุณาลองใหม่อีกครั้ง</h3>";
 				//echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
 			}else{
 				// กรณีส่ง email สำเร็จ
-				echo "ระบบได้ส่งข้อความไปเรียบร้อย";
+				$message =  "ระบบได้ส่งข้อความไปเรียบร้อย";
 			}	
 		}
         
       }else {
 
-        $message = "<div class='alert alert-danger'>Wrong Email Address</div>";
+        $message = "<div class='alert alert-danger'>ไม่พบ Email นี้ภายในระบบ</div>";
 
       }
 
@@ -133,15 +137,15 @@ if(isset($_POST["forgot"]))
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="description" content="JOBGIS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
+		<meta name="description" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
 		<meta name="author" content="GISTNU by Teerayoot injun Teerayoot5056@gmail.com">
-		<meta name="keyword" content="JOBGIS,GISTDA,GISTNU,JOB,GIST,GIS,GEOINFOMETIC">
+		<meta name="keyword" content="GEOJOBS,GISTDA,GISTNU,JOB,GIST,GIS,GEOINFOMETIC">
 		<!-- Shareable -->
-		<meta property="og:title" content="JOBGIS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
+		<meta property="og:title" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
 		<meta property="og:type" content="article" />
 		<meta property="og:url" content="http://github.com/nauvalazhar/Magz" />
 		<meta property="og:image" content="images/gistda_logo.png" />
-		<title>JOB GIS &mdash; GISTDA  </title>
+		<title> GEOJOBs &mdash; GISTDA  </title>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<!-- IonIcons -->
