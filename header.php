@@ -190,21 +190,17 @@ if(isset($_COOKIE["type"]))
 									</div>
 								</div>
 							</li>
-							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">Resume GIS <i class="ion-ios-arrow-right"></i></a>
+							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="">Resume GIS <i class="ion-ios-arrow-right"></i></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
-										<!-- <div class="row">
+										 <div class="row">
 											<div class="col-md-3">
-												<h2 class="megamenu-title">Column 1</h2>
+												<h2 class="megamenu-title">กรอกแบบฟอร์ม</h2>
 												<ul class="vertical-menu">
-													<li><a href="#">Example 1</a></li>
-													<li><a href="#">Example 2</a></li>
-													<li><a href="#">Example 3</a></li>
-													<li><a href="#">Example 4</a></li>
-													<li><a href="#">Example 5</a></li>
+													<li><a href="resume.php">resume</a></li>
 												</ul>
 											</div>
-											<div class="col-md-3">
+											<!-- <div class="col-md-3">
 												<h2 class="megamenu-title">Column 2</h2>
 												<ul class="vertical-menu">
 													<li><a href="#">Example 6</a></li>

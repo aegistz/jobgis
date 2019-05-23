@@ -76,6 +76,10 @@
   $course_time = $_POST['course_time'];
   $profile = $_POST['profile'];
   $rank_com = $_POST['rank_com'];
+  $province = $_POST['province'];
+  $amphoe = $_POST['amphoe'];
+  $tambon = $_POST['tambon'];
+  $zip_code = $_POST['zip_code'];
 
   
    $sql1 = "select * from student  where email = '$email'   ; ";
@@ -83,7 +87,7 @@
 	  $num = pg_num_rows($query);
 	  if ($num < 1){
 
-  $sql = "INSERT INTO resume 
+  $sql2 = "INSERT INTO resume 
   		(
 	  		 title_name ,
 	  		 s_name ,
@@ -137,8 +141,12 @@
 	  		 department , 
 	  		 course , 
 	  		 course_time , 
-	  		 profile,
-	  		 rank_com
+	  		 profile ,
+	  		 rank_com ,
+	  		 province ,
+	  		 amphoe ,
+	  		 tambon ,
+	  		 zip_code
   		 ) 
           VALUES 
           (
@@ -194,13 +202,17 @@
           	'$department' , 
           	'$course' , 
           	'$course_time' , 
-          	'$img'
-          	'$rank_com'
+          	'$img' ,
+          	'$rank_com' ,
+          	'$province' ,
+          	'$amphoe' ,
+          	'$tambon' ,
+          	'$zip_code'
           ) ;";
 
-         $result = pg_query($sql);
+         $result2 = pg_query($sql2);
 
-          if($result){ 
+          if($result2){ 
 
 	            $message = '<div class="alert alert-success alert-dismissible">
 								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -216,7 +228,6 @@
 
             }
 		}
-
 }
 
 
@@ -473,48 +484,39 @@ button {
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>จังหวัด</label>
-									<select class="form-control" name="province" required="" >
-										<option value="">กรุณาเลือกจังหวัด</option>
-										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
-										while ($arr_prov = pg_fetch_array($sql_prov)) {
-										?>
-										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
-										<?php } ?>
-									</select>
+									<span id="province">
+		                            <select class="form-control m-bot15" class="form-control"  name="province" required="">
+		                                 <option value=''>- เลือกจังหวัด -</option>
+		                            </select>
+		                        </span>
 								</div>
 				
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>อำเภอ</label>
-									<select class="form-control" name="province" required="" >
-										<option value="">กรุณาเลือกอำเภอ</option>
-										<?php $sql_prov = pg_query("select ap_tn from tambon group by ap_tn order by ap_tn asc"); 
-										while ($arr_prov = pg_fetch_array($sql_prov)) {
-										?>
-										<option value="<?php echo $arr_prov[ap_tn]; ?>"><?php echo $arr_prov[ap_tn]; ?></option>
-										<?php } ?>
-									</select>
+									<span id="amphoe">
+		                            <select class="form-control m-bot15" class="form-control"  name="amphoe" required="">
+		                                 <option value=''>- เลือกอำเภอ -</option>
+		                            </select>
+		                        </span>
 								</div>
 				
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>ตำบล</label>
-									<select class="form-control" name="province" required="" >
-										<option value="">กรุณาเลือกตำบล</option>
-										<?php $sql_prov = pg_query("select tb_tn from tambon group by tb_tn order by tb_tn asc"); 
-										while ($arr_prov = pg_fetch_array($sql_prov)) {
-										?>
-										<option value="<?php echo $arr_prov[tb_tn]; ?>"><?php echo $arr_prov[tb_tn]; ?></option>
-										<?php } ?>
-									</select>
+									<span id="tambon">
+		                            <select class="form-control m-bot15" class="form-control"  name="tambon" required="">
+		                                 <option value=''>- เลือกตำบล -</option>
+		                            </select>
+		                        </span>
 								</div>
 				
 			</div><div class="col-md-2">
 								<div class="form-group">
 									<label>รหัสไปรษณืย์</label>
-									<input type="text" name="address" class="form-control" required="">
+									<input type="text" name="zip_code" class="form-control" required="">
 								</div>
 				
 			</div>
@@ -1160,5 +1162,31 @@ function fixStepIndicator(n) {
   x[n].className += " active";
 }
 </script>
+
+    <script language=Javascript>
+        function Inint_AJAX() {
+           try { return new ActiveXObject("Msxml2.XMLHTTP");  } catch(e) {} 
+           try { return new ActiveXObject("Microsoft.XMLHTTP"); } catch(e) {} 
+           try { return new XMLHttpRequest();          } catch(e) {}
+           alert("XMLHttpRequest not supported");
+           return null;
+        };
+
+        function dochange(src, val) {
+             var req = Inint_AJAX();
+             req.onreadystatechange = function () { 
+                  if (req.readyState==4) {
+                       if (req.status==200) {
+                            document.getElementById(src).innerHTML=req.responseText; 
+                       } 
+                  }
+             };
+             req.open("GET", "location.php?data="+src+"&val="+val); 
+             req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8"); 
+             req.send(null); 
+        }
+
+        window.onLoad=dochange('province', -1);  
+    </script>
 	</body>
 </html>
