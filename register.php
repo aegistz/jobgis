@@ -193,10 +193,10 @@
 		    </head>
 		    <body>
 		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
-		        <img src='http://localhost:8888/GEOJOBS/images/6logo.png' style='width: 120px;'>
+		        <img src='http://www3.cgistln.nu.ac.th/GEOJOBS/images/6logo.png' style='width: 120px;'>
 		        <div style='-align:center'> 
 		           <p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
-		           <p><a href='http://localhost:8888/GEOJOBS/checkmail.php?email=$email&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
+		           <p><a href='http://www3.cgistln.nu.ac.th/GEOJOBS/checkmail.php?email=$email&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
 		        </div>
 		      </div>
 		        <div>       
@@ -337,7 +337,7 @@
 			<div class="container">
 				<div class="">				
 					<div class="">
-					<?php echo $sql2; ?>
+					<?php echo $message; ?>
 						<div class="box-body">
 							<h4>ลงทะเบียนเข้าใช้งาน</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>

@@ -140,6 +140,11 @@ include("check_student.php")
 						</div>
 						
 						<div class="row">
+
+<?php 
+	$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com  ;  ");
+	while ( $arr = pg_fetch_array($sql) ) {
+?>
 							<article class="col-md-12 article-list">
 								<div class="inner">
 									<figure>
@@ -169,67 +174,10 @@ include("check_student.php")
 									</div>
 								</div>
 							</article>
-							<article class="col-md-12 article-list">
-								<div class="inner">
-									<div class="badge">
-										Sponsored
-									</div>
-									<figure>
-										<a href="news.php">
-											<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j27745.gif?v=13" alt="Sample Article">
-										</a>
-									</figure>
-									<div class="details">
-										<div class="detail">
-											<div class="category">
-												<a href="#">ข่าวรับสมัครงาน</a>
-											</div>
-											<div class="time">December 18, 2016</div>
-										</div>
-										<h1><a href="news.php">ผู้เชียวชาญบริการจัดการแมลง</a></h1>
-										<p>
-											บริษัท คิงส์ เซอร์วิส เซ็นเตอร์ จำกัด Pest Management Technician<br>
-										<small> <i><b>การรับ  : </b>    งานประจำ</i> </small> 
-										</p>
-										<footer>
-											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>4209</div></a>
-											<a class="btn btn-primary more" href="news.php">
-												<div>More</div>
-												<div><i class="ion-ios-arrow-thin-right"></i></div>
-											</a>
-										</footer>
-									</div>
-								</div>
-							</article>
-							<article class="col-md-12 article-list">
-								<div class="inner">
-									<figure>
-										<a href="news.php">
-											<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j6825.gif?v=32" alt="Sample Article">
-										</a>
-									</figure>
-									<div class="details">
-										<div class="detail">
-											<div class="category">
-											<a href="#">ข่าวรับสมัครงาน</a>
-											</div>
-											<div class="time">December 16, 2016</div>
-										</div>
-										<h1><a href="news.php">ผู้จัดการฝ่ายปฏิบัติการ</a></h1>
-										<p>
-											บริษัท เซเว่น ยูทิลิตี้ส์ แอนด์ พาวเวอร์ จำกัด (มหาชน)<br>
-										<small> <i><b>การรับ  : </b>    พนักงานชั่วคราว</i> </small> 
-										</p>
-										<footer>
-											<a href="#" class="love active"><i class="ion-android-favorite"></i> <div>302</div></a>
-											<a class="btn btn-primary more" href="news.php">
-												<div>More</div>
-												<div><i class="ion-ios-arrow-thin-right"></i></div>
-											</a>
-										</footer>
-									</div>
-								</div>
-							</article>
+<?php } ?> 
+
+
+
 						</div>
 					</div>
 
