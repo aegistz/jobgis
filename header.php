@@ -114,28 +114,25 @@ if(isset($_COOKIE["type"]))
 									<li><a href="category.php">ธรุกิจ</a></li>
 								</ul>
 							</li>
-							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับฝึกงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>
+							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับสมัครงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
-										<!-- <div class="row">
+										<div class="row">
 											<div class="col-md-3">
 												<div class="row">
 													<div class="col-md-12">
-														<h2 class="megamenu-title">Trending</h2>
+														<h2 class="megamenu-title">สำหรับสถานประกอบการ</h2>
 													</div>
 												</div>
 												<ul class="vertical-menu">
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> Mega menu is a new feature</a></li>
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> This is an example</a></li>
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> For a submenu item</a></li>
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> You can add</a></li>
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> Your own items</a></li>
+													<li><a href="reg-company.php"><i class="ion-ios-circle-outline"></i> ลงทะเบียนสถานประกอบการใหม่</a></li>
+													
 												</ul>
 											</div>
 											<div class="col-md-9">
 												<div class="row">
 													<div class="col-md-12">
-														<h2 class="megamenu-title">Featured Posts</h2>
+														<h2 class="megamenu-title">รายละเอียดสถานประกอบการ</h2>
 													</div>
 												</div>
 												<div class="row">
@@ -189,7 +186,7 @@ if(isset($_COOKIE["type"]))
 													</article>
 												</div>
 											</div>
-										</div> -->								
+										</div>								
 									</div>
 								</div>
 							</li>
