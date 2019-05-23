@@ -11,265 +11,212 @@
 
   $message = '';
 
-
-  if( isset($_POST["submit_form"]) ){
+	if ( isset($_POST["submit_resume"]) ) {
 
 	  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-		  if($check !== false) {
-			  $data = base64_encode(file_get_contents( $_FILES["fileToUpload"]["tmp_name"] ));
-			  $img  =  "data:".$check["mime"].";base64,".$data;
-		  }else{
-			$img = '';
-		  }   
-
-	  $title_name = $_POST['title_name'];
-	  $s_name = $_POST['s_name'];
-	  $l_name = $_POST['l_name'];
-	  $sex = $_POST['sex'];
-	  $year_birth = $_POST['year_birth'];
-	  $phone_number = $_POST['phone_number'];
-	  $province = $_POST['province'];
-	  $university = $_POST['university'];
-	  $facutly = $_POST['facutly'];
-	  $major = $_POST['major'];
-	  $level_degree = $_POST['level_degree'];
-	  $year_success = $_POST['year_success'];
-	  $status_work = $_POST['status_work'];
-	  $work_name = $_POST['work_name'];
-	  $work_company = $_POST['work_company'];
-	  $work_type = $_POST['work_type'];
-	  $work_type_detail = $_POST['work_type_detail'];
-	  $work_detail = $_POST['work_detail'];
-	  $work_join = $_POST['work_join'];
-	  $work_skill = $_POST['work_skill'];
-	  $work_skill_detail = $_POST['work_skill_detail'];
-	  $work_complace = $_POST['work_complace'];
-	  $work_complace_detail = $_POST['work_complace_detail'];
-	  $work_uncomplace = $_POST['work_uncomplace'];
-	  $work_uncomplace_detail = $_POST['work_uncomplace_detail'];
-	  $free_cause = $_POST['free_cause'];
-	  $free_issue = $_POST['free_issue'];
-	  $free_issue_detail = $_POST['free_issue_detail'];
-	  $free_important = $_POST['free_important'];
-	  $free_important_detail = $_POST['free_important_detail'];
-	  $free_work_need = $_POST['free_work_need'];
-	  $free_influence = $_POST['free_influence'];
-	  $study_major = $_POST['study_major'];
-	  $study_faculty = $_POST['study_faculty'];
-	  $study_university = $_POST['study_university'];
-	  $email = $_POST['email'];
-	  $password = $_POST['password'];
+	  if($check !== false) {
+		  $data = base64_encode(file_get_contents( $_FILES["fileToUpload"]["tmp_name"] ));
+		  $img  =  "data:".$check["mime"].";base64,".$data;
+	  }else{
+		$img = '';
+	  }  
 
 
-	  $sql1 = "select * from student  where email = '$email'   ; ";
+  $title_name = $_POST['title_name'];
+  $s_name = $_POST['s_name'];
+  $l_name = $_POST['l_name'];
+  $nationality = $_POST['nationality'];
+  $birthday = $_POST['birthday'];
+  $weight = $_POST['weight'];
+  $hight = $_POST['hight'];
+  $status = $_POST['status'];
+  $address = $_POST['address'];
+  $email = $_POST['email'];
+  $phone = $_POST['phone'];
+  $degree = $_POST['degree'];
+  $faculty = $_POST['faculty'];
+  $sector = $_POST['sector'];
+  $university = $_POST['university'];
+  $graduation = $_POST['graduation'];
+  $work_n = $_POST['work_n'];
+  $work_1 = $_POST['work_1'];
+  $work_2 = $_POST['work_2'];
+  $work_3 = $_POST['work_3'];
+  $area_1 = $_POST['area_1'];
+  $area_2 = $_POST['area_2'];
+  $salary = $_POST['salary'];
+  $th_s = $_POST['th_s'];
+  $th_r = $_POST['th_r'];
+  $th_w = $_POST['th_w'];
+  $en_s = $_POST['en_s'];
+  $en_r = $_POST['en_r'];
+  $en_w = $_POST['en_w'];
+  $cn_s = $_POST['cn_s'];
+  $cn_r = $_POST['cn_r'];
+  $cn_w = $_POST['cn_w'];
+  $word = $_POST['word'];
+  $excel = $_POST['excel'];
+  $ppt = $_POST['ppt'];
+  $ps = $_POST['ps'];
+  $ai = $_POST['ai'];
+  $pr = $_POST['pr'];
+  $lr = $_POST['lr'];
+  $arcgis = $_POST['arcgis'];
+  $erdas = $_POST['erdas'];
+  $envi = $_POST['envi'];
+  $qgis = $_POST['qgis'];
+  $company = $_POST['company'];
+  $address_com = $_POST['address_com'];
+  $date_start = $_POST['date_start'];
+  $date_end = $_POST['date_end'];
+  $role_com = $_POST['role_com'];
+  $salary_com = $_POST['salary_com'];
+  $department = $_POST['department'];
+  $course = $_POST['course'];
+  $course_time = $_POST['course_time'];
+  $profile = $_POST['profile'];
+  $rank_com = $_POST['rank_com'];
+
+  
+   $sql1 = "select * from student  where email = '$email'   ; ";
 	  $query = pg_query($sql1);
 	  $num = pg_num_rows($query);
 	  if ($num < 1){
-	  $sql2 = "insert into student 
-	  ( 
-			title_name ,
-			s_name ,
-			l_name ,
-			sex ,
-			year_birth ,
-			phone_number ,
-			province ,
-			university ,
-			fuculty ,
-			major ,
-			level_degree ,
-			year_success ,
-			status_work ,
-			work_name ,
-			work_company ,
-			work_type ,
-			work_type_detail ,
-			work_detail ,
-			work_join ,
-			work_skill ,
-			work_skill_detail ,
-			work_complace ,
-			work_uncomplace ,
-			work_uncomplace_detail ,
-			free_cause ,
-			free_cause_detail ,
-			free_issue ,
-			free_issue_detail ,
-			free_important ,
-			free_important_detail ,
-			free_work_need ,
-			free_influence ,
-			study_major ,
-			study_faculty ,
-			study_university ,
-			email ,
-			password ,
-			img ,
-			date_access ,
-			status_user
-	  )
-	  values 
-	  (
-		'$title_name' ,
-		'$s_name' ,
-		'$l_name' ,
-		'$sex' ,
-		'$year_birth' ,
-		'$phone_number' ,
-		'$province' ,
-		'$university' ,
-		'$facutly' ,
-		'$major' ,
-		'$level_degree' ,
-		'$year_success' ,
-		'$status_work' ,
-		'$work_name' ,
-		'$work_company' ,
-		'$work_type' ,
-		'$work_type_detail' ,
-		'$work_detail' ,
-		'$work_join' ,
-		'$work_skill' ,
-		'$work_skill_detail' ,
-		'$work_complace' ,
-		'$work_uncomplace' ,
-		'$work_uncomplace_detail' ,
-		'$free_cause' ,
-		'$free_cause_detail' ,
-		'$free_issue' ,
-		'$free_issue_detail' ,
-		'$free_important' ,
-		'$free_important_detail' ,
-		'$free_work_need' ,
-		'$free_influence' ,
-		'$study_major' ,
-		'$study_faculty' ,
-		'$study_university' ,
-		'$email' ,
-		'$password' ,
-		'user.png' ,
-		'$date' ,
-		'รอยืนยัน'
 
-	  );"; 
+  $sql = "INSERT INTO resume 
+  		(
+	  		 title_name ,
+	  		 s_name ,
+	  		 l_name ,
+	  		 nationality , 
+	  		 birthday , 
+	  		 weight , 
+	  		 hight , 
+	  		 status , 
+	  		 address , 
+	  		 email , 
+	  		 phone , 
+	  		 degree , 
+	  		 faculty , 
+	  		 sector , 
+	  		 university , 
+	  		 graduation , 
+	  		 work_n , 
+	  		 work_1 , 
+	  		 work_2 , 
+	  		 work_3 , 
+	  		 area_1 , 
+	  		 area_2 , 
+	  		 salary , 
+	  		 th_s , 
+	  		 th_r , 
+	  		 th_w , 
+	  		 th_s , 
+	  		 th_r , 
+	  		 th_w , 
+	  		 cn_s , 
+	  		 cn_r , 
+	  		 cn_w , 
+	  		 word , 
+	  		 excel , 
+	  		 ppt , 
+	  		 ps , 
+	  		 ai , 
+	  		 pr , 
+	  		 lr , 
+	  		 arcgis , 
+	  		 erdas , 
+	  		 envi , 
+	  		 qgis , 
+	  		 company , 
+	  		 address_com , 
+	  		 date_start , 
+	  		 date_end , 
+	  		 role_com , 
+	  		 salary_com , 
+	  		 department , 
+	  		 course , 
+	  		 course_time , 
+	  		 profile,
+	  		 rank_com
+  		 ) 
+          VALUES 
+          (
+          	'$title_name',
+          	'$s_name' ,
+          	'$l_name' , 
+          	'$nationality' , 
+          	'$birthday' , 
+          	'$weight' , 
+          	'$hight' , 
+          	'$status' , 
+          	'$address' , 
+          	'$email' , 
+          	'$phone' , 
+          	'$degree' , 
+          	'$faculty' , 
+          	'$sector' , 
+          	'$university' , 
+          	'$graduation' , 
+          	'$work_n' , 
+          	'$work_1' , 
+          	'$work_2' , 
+          	'$work_3' , 
+          	'$area_1' , 
+          	'$area_2' , 
+          	'$salary' , 
+          	'$th_s' , 
+          	'$th_r' , 
+          	'$th_w' , 
+          	'$th_s' , 
+          	'$th_r' ,
+          	'$th_w' , 
+          	'$cn_s' , 
+          	'$cn_r' , 
+          	'$cn_w' , 
+          	'$word' , 
+          	'$excel' , 
+          	'$ppt' , 
+          	'$ps' , 
+          	'$ai' , 
+          	'$pr' , 
+          	'$lr' , 
+          	'$arcgis' , 
+          	'$erdas' , 
+          	'$envi' , 
+          	'$qgis' , 
+          	'$company' , 
+          	'$address_com' , 
+          	'$date_start' , 
+          	'$date_end' , 
+          	'$role_com' , 
+          	'$salary_com' , 
+          	'$department' , 
+          	'$course' , 
+          	'$course_time' , 
+          	'$img'
+          	'$rank_com'
+          ) ;";
 
-	  require 'scripts/phpmailer/PHPMailerAutoload.php';
+         $result = pg_query($sql);
 
-		header('Content-Type: /html; charset=utf-8');
+          if($result){ 
 
-		$mail = new PHPMailer;
-		$mail->CharSet = "utf-8";
-		$mail->isSMTP();
-		$mail->Host = 'smtp.gmail.com';
-		$mail->Port = 587;
-		$mail->SMTPSecure = 'tls';
-		$mail->SMTPAuth = true;
+	            $message = '<div class="alert alert-success alert-dismissible">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<strong>Success!</strong> บันทึกข้อมูลเสร็จเรียบร้อยแล้วครับ
+							  </div>';
 
+            }else{
 
-		$gmail_username = "gistnu@gmail.com"; // gmail ที่ใช้ส่ง
-		$gmail_password = "gistnu2017nu"; // รหัสผ่าน gmail
-		// ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
+                $message = '<div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Warning!</strong> ไม่สามารถบันทึกข้อมูลได้ กรุณาลองอีกครั้ง
+                           </div>';
 
-
-		$sender = "gistnu"; // ชื่อผู้ส่ง
-		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
-		$email_receiver = $email; // เมล์ผู้รับ ***
-
-		$subject = "การยืนยันการสมัคร GEOJOBS"; // หัวข้อเมล์
-
-
-		$mail->Username = $gmail_username;
-		$mail->Password = $gmail_password;
-		$mail->setFrom($email_sender, $sender);
-		$mail->addAddress($email_receiver);
-		$mail->Subject = $subject;
-
-		$email_content = "
-			<!DOCTYPE html>
-		  <html>
-		    <head>
-		      <meta charset=utf-8'/>
-		      <title>การกดยืนยันการสมัค</title>
-		    </head>
-		    <body>
-		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
-		        <img src='http://localhost:8888/GEOJOBS/images/6logo.png' style='width: 120px;'>
-		        <div style='-align:center'> 
-		           <p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
-		           <p><a href='http://localhost:8888/GEOJOBS/checkmail.php?email=$email&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
-		        </div>
-		      </div>
-		        <div>       
-		          
-		        </div>
-		        <div style='margin-top:30px;'>
-		          <hr>
-		          <address>
-		            <h4>ติดต่อสอบถาม</h4>
-		            <p>กองถ่ายทอดเทคโนโลยี  มหาวิทยาลัยนเรศวร
-		            ชั้น 4 ตึก A อาคารมหาธรรมราชา ตำบลท่าโพธิ์ 
-		            อำเภอเมือง จังหวัดพิษณุโลก 65000
-		            </p>
-		            <p>www.facebook.com/Gistlnnu/</p>
-		          </address>
-		        </div>
-		      </div>
-		      <div style='background: #214163;color: #a2abb7;padding:30px;'>
-		        <div style='-align:center'> 
-		           © กองถ่ายการทอดเทคโนโลยี มหาวิทยาลัยนเรศวร
-		        </div>
-		      </div>
-		    </body>
-		  </html>
-		";
-
-		//  ถ้ามี email ผู้รับ
-		if($email_receiver){
-			$mail->msgHTML($email_content);
-
-
-			if (!$mail->send()) {  // สั่งให้ส่ง email
-
-				// กรณีส่ง email ไม่สำเร็จ
-				echo "<h3 class='-center'>ระบบมีปัญหา กรุณาลองใหม่อีกครั้ง</h3>";
-				//echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
-			}else{
-				// กรณีส่ง email สำเร็จ
-				echo "ระบบได้ส่งข้อความไปเรียบร้อย";
-			}	
+            }
 		}
 
-	  $result = pg_query($db,$sql2);
-
-		  if($result){ 
-
-
-		  $message = '<div class="alert alert-success alert-dismissible">
-								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-								<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
-							  </div>';
-			//header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
-
-
-			setcookie("email", $email , time() + 3600);
-			header('Location: checkmail.php');
-				  exit;
-
-		  }else{
-
-			  $message = '<div class="alert alert-danger alert-dismissible">
-						  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						  <strong>Warning!</strong> ไม่สามา่รถบันทึกข้อมูลได้ กรุณาลองอีกครั้ง
-						 </div>';
-
-		  }
-
-	  }else{ 
-			 $message = '<div class="alert alert-danger alert-dismissible">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-										<strong>Warning!</strong> Email นี้ถูกใช้แล้วภายในระบบ กรุณาตรวจสอบอีกครั้ง หรือเข้าสู่ระบบ <a href="login.php" title="">ที่นี่</a> 
-									  </div>';
-	  }
 }
 
 
@@ -324,6 +271,78 @@
  display: none
  }
   
+  * {
+  box-sizing: border-box;
+}
+
+
+#regForm {
+  background-color: #ffffff;
+  margin: 10px auto;
+  min-width: 300px;
+}
+
+input.invalid {
+  background-color: #b3ccff;
+}
+
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #000059;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#prevBtn {
+  background-color: #0000e6;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #0000e6;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #b3ccff;
+}
+.image-preview-input {
+    position: relative;
+	overflow: hidden;
+	margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
  </style>  
 
 	</head>
@@ -337,28 +356,54 @@
 			<div class="container">
 				<div class="">				
 					<div class="">
-					<?php echo $sql2; ?>
 						<div class="box-body">
-							<h4>ลงทะเบียนเข้าใช้งาน</h4>
+							<h4>resume GIS</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
 			<hr>
 
 
-<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="register.php" enctype="multipart/form-data">
+<form class="form-validate form-horizontal" id="regForm" method="post" action="resume.php" enctype="multipart/form-data">
+	<div class="tab">
 	<h6><p>ข้อมูลส่วนตัว</p></h6>
 	<hr>
 	<div class="col-md-12">
-		<div class="col-md-6">
+		<div class="col-md-3">
 								<div class="form-group">
-									<label>ชื่อ - นามสกุล</label>
+									<label>รูปถ่าย</label>
+									<figure class="featured-author-picture">
+											<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article" style="width: 100px ">
+									</figure>
+									<br>
+									<input type="file" name="" class="form-control" required="" >
+								</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-2">
+								<div class="form-group">
+									<label>คำนำหน้า</label>
 									<input type="text" name="title_name" class="form-control" required="">
 								</div>
 			
 		</div>
 		<div class="col-md-3">
 								<div class="form-group">
+									<label>ชื่อ</label>
+									<input type="text" name="s_name" class="form-control" required="">
+								</div>
+			
+		</div>
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>นามสกุล</label>
+									<input type="text" name="l_name" class="form-control" required="">
+								</div>
+			
+		</div>
+		<div class="col-md-2">
+								<div class="form-group">
 									<label>สัญชาติ</label>
-									<select name="" class="form-control" required="">
+									<select name="nationality" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ไทย">ไทย</option>
 										<option value=""></option>
@@ -366,10 +411,10 @@
 								</div>
 			
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 								<div class="form-group">
 									<label>ศาสนา</label>
-									<select name="" class="form-control" required="">
+									<select name="religion" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="พุทธ">พุทธ</option>
 										<option value="คลิสต์">คลิสต์</option>
@@ -381,43 +426,95 @@
 		
 	</div>
 
+
 	<div class="col-md-12">
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>วันเกิด</label>
-									<select name="" class="form-control" required="">
-											<option value="">กรุณาเลือก</option>
-									</select>
+									<input type="date" name="birthday" class="form-control" required="">
 								</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 								<div class="form-group">
 									<label>น้ำหนัก</label>
-									<input type="number" name="" class="form-control" required="">
+									<input type="number" name="weight" class="form-control" required="">
 								</div>
 				
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 								<div class="form-group">
 									<label>ส่วนสูง</label>
-									<input type="number" name="" class="form-control" required="">
+									<input type="number" name="hight" class="form-control" required="">
 								</div>
 				
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-5">
 								<div class="form-group">
 									<label>สถานภาพทางทหาร</label>
-									<input type="number" name="" class="form-control" required="">
+									<select name="status" class="form-control" required="">
+										<option value="">กรุณาเลือก</option>
+										<option value="ประจำ">ผ่านการเกณฑ์ทหาร</option>
+										<option value="รายวัน">ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)</option>
+										<option value="ประจำ">ยังไม่ผ่านการเกณฑ์ทหาร</option>
+									</select>
 								</div>
 				
 			</div>
 	</div>
 
 	<div class="col-md-12">
-			<div class="col-md-12">
+			<div class="col-md-4">
 								<div class="form-group">
 									<label>ที่อยู่</label>
-									<input type="text" name="" class="form-control" required="">
+									<input type="text" name="address" class="form-control" required="">
+								</div>
+				
+			</div>
+			<div class="col-md-2">
+								<div class="form-group">
+									<label>จังหวัด</label>
+									<select class="form-control" name="province" required="" >
+										<option value="">กรุณาเลือกจังหวัด</option>
+										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
+										<?php } ?>
+									</select>
+								</div>
+				
+			</div>
+			<div class="col-md-2">
+								<div class="form-group">
+									<label>อำเภอ</label>
+									<select class="form-control" name="province" required="" >
+										<option value="">กรุณาเลือกอำเภอ</option>
+										<?php $sql_prov = pg_query("select ap_tn from tambon group by ap_tn order by ap_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[ap_tn]; ?>"><?php echo $arr_prov[ap_tn]; ?></option>
+										<?php } ?>
+									</select>
+								</div>
+				
+			</div>
+			<div class="col-md-2">
+								<div class="form-group">
+									<label>ตำบล</label>
+									<select class="form-control" name="province" required="" >
+										<option value="">กรุณาเลือกตำบล</option>
+										<?php $sql_prov = pg_query("select tb_tn from tambon group by tb_tn order by tb_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[tb_tn]; ?>"><?php echo $arr_prov[tb_tn]; ?></option>
+										<?php } ?>
+									</select>
+								</div>
+				
+			</div><div class="col-md-2">
+								<div class="form-group">
+									<label>รหัสไปรษณืย์</label>
+									<input type="text" name="address" class="form-control" required="">
 								</div>
 				
 			</div>
@@ -427,38 +524,39 @@
 			<div class="col-md-6">
 								<div class="form-group">
 									<label>E-mail</label>
-									<input type="email" name="" class="form-control" required="">
+									<input type="email" name="email" class="form-control" required="">
 								</div>
 			</div>
 			<div class="col-md-6">
 								<div class="form-group">
 									<label>เบอร์โทร</label>
-									<input type="number" name="" class="form-control" required="">
+									<input type="number" name="phone" class="form-control" required="">
 								</div>
 				
 			</div>
 	</div>
-
+</div>
+<div class="tab">
 	<h6><p>การศึกษา</p></h6>
 	<hr>
 	<div class="col-md-12">
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>ชื่อมหาวิทยาลัย</label>
-									<input type="text" name="" class="form-control" required="">
+									<input type="text" name="university" class="form-control" required="">
 								</div>
 			</div>
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>คณะ</label>
-									<input type="text" name="" class="form-control" required="">
+									<input type="text" name="faculty" class="form-control" required="">
 								</div>
 				
 			</div>
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>สาขาวิชา</label>
-									<input type="text" name="" class="form-control" required="">
+									<input type="text" name="sector" class="form-control" required="">
 								</div>
 				
 			</div>			
@@ -468,7 +566,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>ระดับการศึกษา</label>
-									<input type="text" name="" class="form-control" required="">
+									<input type="text" name="degree" class="form-control" required="">
 								</div>
 			</div>
 			<div class="col-md-4">
@@ -480,20 +578,21 @@
 			</div>
 			<div class="col-md-4">
 								<div class="form-group">
-									<label>ปีที่สำเร็จการศึกาา</label>
-									<input type="text" name="" class="form-control" required="">
+									<label>ปีที่สำเร็จการศึกษา</label>
+									<input type="text" name="graduation" class="form-control" required="">
 								</div>
 				
 			</div>			
 	</div>
-
+</div>
+<div class="tab">
 	<h6><p>เป้าหมายในการทำงาน/สหิจศึกษา/ฝึกงาน</p></h6>
 	<hr>
 	<div class="col-md-12">
-			<div class="col-md-4">
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>ลักษณะงาน</label>
-									<select name="" class="form-control" required="">
+									<select name="work_n" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ประจำ">ประจำ</option>
 										<option value="รายวัน">รายวัน</option>
@@ -501,23 +600,60 @@
 										<option value="สหิจศึกษา/ฝึกงาน">สหกิจศึกษา/ฝึกงาน</option>
 									</select>
 								</div>
-			</div>
-			<div class="col-md-4">
-								<div class="form-group">
-									<label>วุฒการศึกษา</label>
-									<input type="text" name="" class="form-control" required="">
-								</div>
-				
-			</div>
-			<div class="col-md-4">
-								<div class="form-group">
-									<label>ปีที่สำเร็จการศึกาา</label>
-									<input type="text" name="" class="form-control" required="">
-								</div>
-				
-			</div>			
+			</div>		
 	</div>
 
+	<b><p>สายงานที่ต้องการ</p></b>
+	<div class="col-md-12">
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>1</label>
+									<input type="text" name="work_1" class="form-control" required="">
+								</div>
+				
+			</div>
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>2</label>
+									<input type="text" name="work_2" class="form-control" required="">
+								</div>
+				
+			</div>	
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>3</label>
+									<input type="text" name="work_3" class="form-control" required="">
+								</div>
+				
+			</div>		
+	</div>
+
+		<b><p>พื้นที่ ทำงาน/สหกิจศึกษา/ฝึกงาน ที่ต้องการ</p></b>
+	<div class="col-md-12">
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>1</label>
+									<input type="text" name="area_1" class="form-control" required="">
+								</div>
+				
+			</div>
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>2</label>
+									<input type="text" name="area_2" class="form-control" required="">
+								</div>
+				
+			</div>	
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>เงินเดือนที่ต้องการ</label>
+									<input type="text" name="salary" class="form-control" required="">
+								</div>
+				
+			</div>
+	</div>
+</div>
+<div class="tab">
 		<h6><p>ทักษะและภาษา</p></h6>
 		<hr>
 		<b><p>ภาษาไทย</p></b>
@@ -525,7 +661,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="" class="form-control" required="">
+									<select name="th_s" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -537,7 +673,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="" class="form-control" required="">
+									<select name="th_r" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -550,7 +686,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="" class="form-control" required="">
+									<select name="th_w" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -567,7 +703,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="" class="form-control" required="">
+									<select name="en_s" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -579,7 +715,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="" class="form-control" required="">
+									<select name="en_r" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -592,7 +728,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="" class="form-control" required="">
+									<select name="en_w" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -609,7 +745,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="" class="form-control" required="">
+									<select name="cn_s" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -621,7 +757,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="" class="form-control" required="">
+									<select name="cn_r" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -634,7 +770,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="" class="form-control" required="">
+									<select name="cn_w" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -645,6 +781,8 @@
 				
 			</div>			
 	</div>
+</div>
+<div class="tab"> 
 
 			<h6><p>ทักษะด้านคอมพิวเตอร์</p></h6>
 			<hr>
@@ -653,7 +791,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>Word</label>
-									<select name="" class="form-control" required="">
+									<select name="word" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -665,7 +803,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>Excel</label>
-									<select name="" class="form-control" required="">
+									<select name="excel" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -678,7 +816,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>powerpoint</label>
-									<select name="" class="form-control" required="">
+									<select name="ppt" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -695,7 +833,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>Photoshop</label>
-									<select name="" class="form-control" required="">
+									<select name="ps" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -707,7 +845,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>Illustrator</label>
-									<select name="" class="form-control" required="">
+									<select name="ai" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -720,7 +858,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>premiere pro</label>
-									<select name="" class="form-control" required="">
+									<select name="pr" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -733,7 +871,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>lightroom</label>
-									<select name="" class="form-control" required="">
+									<select name="lr" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -750,24 +888,22 @@
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>ArcGIS</label>
-									<select name="" class="form-control" required="">
+									<select name="arcgis" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
-										<option value="พอใช้">พอใช้</option>
 									</select>
 								</div>
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>ERDAS</label>
-									<select name="" class="form-control" required="">
+									<select name="erdas" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
-										<option value="พอใช้">พอใช้</option>
 									</select>
 								</div>
 				
@@ -775,12 +911,11 @@
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>ENVI</label>
-									<select name="" class="form-control" required="">
+									<select name="envi" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
-										<option value="พอใช้">พอใช้</option>
 									</select>
 								</div>
 				
@@ -788,12 +923,11 @@
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>QGIS</label>
-									<select name="" class="form-control" required="">
+									<select name="qgis" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
-										<option value="พอใช้">พอใช้</option>
 									</select>
 								</div>
 				
@@ -806,17 +940,111 @@
 				
 			</div>	
 	</div>
-
-
-
-		<div class="col-md-12">
-								<div class="form-group text-right">
-									<button type="submit" name="submit_form" class="btn btn-primary btn-block">ลงทะเบียนเข้าใช้งาน</button>
+</div>
+<div class="tab">
+				<b><p>การทำงาน/ฝึกงาน/สหกิจศึกษา</p></b>
+	<div class="col-md-12">
+			<div class="col-md-6">
+								<div class="form-group">
+									<label>ชื่อบริษัท</label>
+									<input type="text" name="company" class="form-control" required="">
 								</div>
-								<div class="form-group text-center">
-									<span class="text-muted">ถ้าท่านเคยลงทะเบียนแล้ว กรุณา</span><a href="login.php">เข้าระบบ</a>
+				
+			</div>	
+			<div class="col-md-3">
+								<div class="form-group">
+									<label>ตั้งแต่</label>
+									<input type="date" name="date_start" class="form-control" required="">
 								</div>
-		</div>
+				
+			</div>
+			<div class="col-md-3">
+								<div class="form-group">
+									<label>จนถึง</label>
+									<input type="date" name="date_end" class="form-control" required="">
+								</div>
+				
+			</div>
+	</div>
+
+	<div class="col-md-12">
+			<div class="col-md-12">
+								<div class="form-group">
+									<label>ที่อยู่ติดต่อ</label>
+									<input type="text" name="address_com" class="form-control" required="">
+								</div>
+				
+			</div>
+	</div>
+	<div class="col-md-12">
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>ตำแหน่ง</label>
+									<input type="text" name="rank_com" class="form-control" required="">
+								</div>
+				
+			</div>
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>เงินเดือน</label>
+									<input type="text" name="salary_com" class="form-control" required="">
+								</div>
+				
+			</div>
+			<div class="col-md-4">
+								<div class="form-group">
+									<label>หน้าที่รับผิดชอบ</label>
+									<input type="text" name="role_com" class="form-control" required="">
+								</div>
+				
+			</div>
+	</div>
+</div>
+<div class="tab">
+
+					<b><p>ประวัติการฝึกอบรม</p></b>
+	<div class="col-md-12">
+			<div class="col-md-6">
+								<div class="form-group">
+									<label>ชื่อหน่วยงานที่ฝึกอบรม</label>
+									<input type="text" name="department" class="form-control" required="">
+								</div>
+				
+			</div>	
+			<div class="col-md-3">
+								<div class="form-group">
+									<label>หลักสูตร</label>
+									<input type="text" name="course" class="form-control" required="">
+								</div>
+				
+			</div>
+			<div class="col-md-3">
+								<div class="form-group">
+									<label>ระระยะเวลาในการอบรมณ์</label>
+									<input type="date" name="" class="form-control" required="">
+								</div>
+				
+			</div>
+	</div>
+</div>
+	<div class="col-md-12">
+		<div style="overflow:auto;">
+	    <div style="float:right;">
+	      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+	      <button type="button" name="submit_resume" id="nextBtn" onclick="nextPrev(1)">Next</button>
+	    </div>
+	  </div>
+
+	  <div style="text-align:center;margin-top:40px;">
+	    <span class="step"></span>
+	    <span class="step"></span>
+	    <span class="step"></span>
+	    <span class="step"></span>
+	    <span class="step"></span>
+	    <span class="step"></span>
+	    <span class="step"></span>
+	  </div>
+	</div>
 
 		
 </form>
@@ -855,5 +1083,82 @@
 			    $('#message').html('Not Matching').css('color', 'red');
 			});
 		</script>
+		<script>
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+	console.log(n)
+	console.log(currentTab)
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+	console.log(x.length)
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 0 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+</script>
 	</body>
 </html>
