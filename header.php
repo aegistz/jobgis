@@ -114,7 +114,8 @@ if(isset($_COOKIE["type"]))
 									<li><a href="category.php">ธรุกิจ</a></li>
 								</ul>
 							</li>
-							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับสมัครงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>
+
+						<!-- 	<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับสมัครงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
 										<div class="row">
@@ -132,10 +133,11 @@ if(isset($_COOKIE["type"]))
 											<div class="col-md-9">
 												<div class="row">
 													<div class="col-md-12">
-														<h2 class="megamenu-title">รายละเอียดสถานประกอบการ</h2>
+														<h2 class="megamenu-title">งานของท่านที่เปิดรับอยู่</h2>
 													</div>
 												</div>
 												<div class="row">
+
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
@@ -152,44 +154,14 @@ if(isset($_COOKIE["type"]))
 															</div>
 														</div>
 													</article>
-													<article class="article col-md-4 mini">
-														<div class="inner">
-															<figure>
-																<a href="single.html">
-																	<img src="images/news/img11.jpg" alt="Sample Article">
-																</a>
-															</figure>
-															<div class="padding">
-																<div class="detail">
-																	<div class="time">December 13, 2016</div>
-																	<div class="category"><a href="category.php">Lifestyle</a></div>
-																</div>
-																<h2><a href="single.html">Duis aute irure dolor in reprehenderit in voluptate</a></h2>
-															</div>
-														</div>
-													</article>
-													<article class="article col-md-4 mini">
-														<div class="inner">
-															<figure>
-																<a href="single.html">
-																	<img src="images/news/img14.jpg" alt="Sample Article">
-																</a>
-															</figure>
-															<div class="padding">
-																<div class="detail">
-																	<div class="time">December 14, 2016</div>
-																	<div class="category"><a href="category.html">Travel</a></div>
-																</div>
-																<h2><a href="single.html">Duis aute irure dolor in reprehenderit in voluptate</a></h2>
-															</div>
-														</div>
-													</article>
+
 												</div>
 											</div>
 										</div>								
 									</div>
 								</div>
-							</li>
+							</li> -->
+
 							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">Resume GIS <i class="ion-ios-arrow-right"></i></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
@@ -238,6 +210,11 @@ if(isset($_COOKIE["type"]))
 									</div>
 								</div>
 							</li>
+
+<?php 
+if(isset($_COOKIE["type"]))
+{
+ ?>
 							<li class="dropdown magz-dropdown"><a href="#">ตั้งค่า <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="#"><i class="icon ion-person"></i> My Account</a></li>
@@ -249,6 +226,10 @@ if(isset($_COOKIE["type"]))
 									<li><a href="#"><i class="icon ion-log-out"></i> Logout</a></li>
 								</ul>
 							</li>
+<?php } ?>
+
+
+
 							<li><a href="contact.php">ติดต่อเรา</a></li>
 						</ul>
 					</div>

@@ -73,9 +73,9 @@ if( isset($_POST["submit_form"]) ){
 		$gmail_username = "gistnu@gmail.com"; // gmail ที่ใช้ส่ง
 		$gmail_password = "gistnu2017nu"; // รหัสผ่าน gmail
 		// ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
-		$sender = "gistnu"; // ชื่อผู้ส่ง
+		$sender = "GEOJOBS"; // ชื่อผู้ส่ง
 		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง
-		$email_receiver = $email; // เมล์ผู้รับ ***
+		$email_receiver = $_POST[email_com]; // เมล์ผู้รับ ***
 		$subject = "การยืนยันการสมัคร GEOJOBS"; // หัวข้อเมล์
 		$mail->Username = $gmail_username;
 		$mail->Password = $gmail_password;
@@ -138,9 +138,9 @@ if( isset($_POST["submit_form"]) ){
 								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 								<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
 							</div>';
-			//header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
-			// setcookie("email", $email , time() + 3600);
-			// header('Location: checkmail.php');
+			header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
+			setcookie("email", $email , time() + 3600);
+			header('Location: checkmail.php');
 				exit;
 		}else{
 			$message = '<div class="alert alert-danger alert-dismissible">
