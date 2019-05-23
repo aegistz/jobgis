@@ -123,7 +123,7 @@ if(isset($_POST["login"]))
 <form name="login" method="post" action="login.php">
 <span><?php echo $message; ?></span>
 								<div class="form-group">
-									<label>email</label>
+									<label>Username / Email</label>
 									<input type="text"  name="user_email"  class="form-control">
 								</div>
 								<div class="form-group">
@@ -138,6 +138,10 @@ if(isset($_POST["login"]))
 								<div class="form-group text-center">
 									<span class="text-muted">ถ้าท่านยังไม่มีรหัสผ่าน?</span> <a href="register.php">ลงทะเบียนที่นี่</a>
 								</div>
+								<div class="title-line">
+									or
+								</div>
+              	<a href="company/login.php" class="btn btn-social btn-block facebook">สำหรับสถานประกอบการ</a>
 								
 </form>
 						</div>

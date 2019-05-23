@@ -164,7 +164,7 @@
 		// ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
 
 
-		$sender = "gistnu"; // ชื่อผู้ส่ง
+		$sender = "GEOJOBS"; // ชื่อผู้ส่ง
 		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
 		$email_receiver = $email; // เมล์ผู้รับ ***
 

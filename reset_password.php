@@ -69,7 +69,7 @@ if ( isset($_GET[type]) == 'resent' )
 		// ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
 
 
-		$sender = "gistnu"; // ชื่อผู้ส่ง
+		$sender = "GEOJOBS"; // ชื่อผู้ส่ง
 		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
 		$email_receiver = $_COOKIE[email]; // เมล์ผู้รับ ***
 
@@ -91,7 +91,7 @@ if ( isset($_GET[type]) == 'resent' )
 		    </head>
 		    <body>
 		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
-		        <img src='images/6logo.png' style='width: 120px;'>
+		         <img src='http://www3.cgistln.nu.ac.th/GEOJOBS/images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
 		           <p>กดที่ลิงค์ เพื่อแก้ไขรหัสผ่าน</p><br>
 		            <p><a href='http://www3.cgistln.nu.ac.th/GEOJOBS/reset_password.php?email=".$_COOKIE[email]."&ss=reset_password' >กดที่นี่</a>   </p>
