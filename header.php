@@ -167,7 +167,6 @@ if(isset($_COOKIE["type"]))
 							</li> -->
 
 							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">Resume GIS <i class="ion-ios-arrow-right"></i></a>
->>>>>>> 72aa845d3ce887ecfa50e08caf70722ade37469d
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
 										 <div class="row">
@@ -175,6 +174,7 @@ if(isset($_COOKIE["type"]))
 												<h2 class="megamenu-title">กรอกแบบฟอร์ม</h2>
 												<ul class="vertical-menu">
 													<li><a href="resume.php">resume</a></li>
+													<li><a href="view_resume.php">ดูข้อมูล resume</a></li>
 												</ul>
 											</div>
 											<!-- <div class="col-md-3">

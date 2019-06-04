@@ -393,21 +393,21 @@ button {
 		<div class="col-md-2">
 								<div class="form-group">
 									<label>คำนำหน้า</label>
-									<input type="text" name="title_name" class="form-control" required="">
+									<input type="text" name="title_name" class="form-control" required="" value="<?php echo $user[title_name] ;?>">
 								</div>
 			
 		</div>
 		<div class="col-md-3">
 								<div class="form-group">
 									<label>ชื่อ</label>
-									<input type="text" name="s_name" class="form-control" required="">
+									<input type="text" name="s_name" class="form-control" required="" value="<?php echo $user[s_name] ;?>">
 								</div>
 			
 		</div>
 		<div class="col-md-3">
 								<div class="form-group">
 									<label>นามสกุล</label>
-									<input type="text" name="l_name" class="form-control" required="">
+									<input type="text" name="l_name" class="form-control" required="" value="<?php echo $user[l_name] ;?>">
 								</div>
 			
 		</div>
@@ -417,7 +417,7 @@ button {
 									<select name="nationality" class="form-control" required="">
 										<option value="">กรุณาเลือก</option>
 										<option value="ไทย">ไทย</option>
-										<option value=""></option>
+										<option value="อื่น ๆ">อื่น ๆ</option>
 									</select>
 								</div>
 			
@@ -526,13 +526,13 @@ button {
 			<div class="col-md-6">
 								<div class="form-group">
 									<label>E-mail</label>
-									<input type="email" name="email" class="form-control" required="">
+									<input type="email" name="email" class="form-control" required="" value="<?php echo $user[email] ;?>">
 								</div>
 			</div>
 			<div class="col-md-6">
 								<div class="form-group">
 									<label>เบอร์โทร</label>
-									<input type="number" name="phone" class="form-control" required="">
+									<input type="number" name="phone" class="form-control" required="" value="<?php echo $user[phone_number] ;?>">
 								</div>
 				
 			</div>
@@ -635,14 +635,28 @@ button {
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>1</label>
-									<input type="text" name="area_1" class="form-control" required="">
+									<select class="form-control" name="area_1" required="" >
+										<option value="">กรุณาเลือก</option>
+										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
+										<?php } ?>
+									</select>
 								</div>
 				
 			</div>
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>2</label>
-									<input type="text" name="area_2" class="form-control" required="">
+									<select class="form-control" name="area_2" required="" >
+										<option value="">กรุณาเลือก</option>
+										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
+										<?php } ?>
+									</select>
 								</div>
 				
 			</div>	
@@ -1022,8 +1036,8 @@ button {
 			</div>
 			<div class="col-md-3">
 								<div class="form-group">
-									<label>ระระยะเวลาในการอบรมณ์</label>
-									<input type="date" name="" class="form-control" required="">
+									<label>ระยะเวลาในการอบรม</label>
+									<input type="text" name="" class="form-control" required="">
 								</div>
 				
 			</div>
