@@ -52,7 +52,7 @@ if(isset($_COOKIE["type"]))
 	<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
 								<li><a href="profile.php"><i class="ion-person"></i><div> <?php echo $user[s_name],' ', $user[l_name]; ?> </div></a></li>
-								<li><a href="logout.php"><i class="ion-log-out	"></i><div>Logout</div></a></li>
+								<li><a href="../logout.php"><i class="ion-log-out	"></i><div>Logout</div></a></li>
 							</ul>
 						</div>
 
@@ -60,7 +60,7 @@ if(isset($_COOKIE["type"]))
 
 	<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
-								<li><a href="logout.php"><i class="ion-log-out"></i><div>Login</div></a></li>
+								<li><a href="../logout.php"><i class="ion-log-out"></i><div>Login</div></a></li>
 							</ul>
 						</div>
 
@@ -115,7 +115,7 @@ if(isset($_COOKIE["type"]))
 								</ul>
 							</li>
 
-						<!-- 	<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับสมัครงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>
+							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับสมัครงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>
 								<div class="dropdown-menu megamenu">
 									<div class="megamenu-inner">
 										<div class="row">
@@ -160,7 +160,7 @@ if(isset($_COOKIE["type"]))
 										</div>								
 									</div>
 								</div>
-							</li> -->
+							</li>
 
 							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">Resume GIS <i class="ion-ios-arrow-right"></i></a>
 								<div class="dropdown-menu megamenu">

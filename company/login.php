@@ -10,52 +10,45 @@ $message = '';
 
 if(isset($_POST["login"]))
 {
-	$username = $_POST["username"];
+	
+   	$user_name = $_POST["user_name"];
 	$password = $_POST["user_password"];
 
-   if(empty($_POST["username"]) || empty($_POST["user_password"]))
+   if(empty($_POST["user_name"]) || empty($_POST["user_password"]))
    {
       $message = "<div class='alert alert-danger'>Both Fields are required</div>";
    }
    else
    {
-				      $query = "SELECT * FROM company WHERE user_name = '$username'  ; ";
-				      $statement = pg_query($query);
-				      $arr = pg_fetch_array($statement);
 
-				      
-				      $count = pg_num_rows($statement);
-				      if ( $arr[status_company] == 'รอการยืนยัน' ) {
+			$sql = "SELECT * FROM company WHERE user_name = '$user_name'  ;";
+	      	$quer_com = pg_query($sql);
+	      	$arr = pg_fetch_array($quer_com);
+			$count = pg_num_rows($quer_com);
+
+
+			if ( $arr["status_company"] == 'รอการยืนยัน' ) {
 				      	$message = '<div class="alert alert-danger">ท่านยังไม่ได้ยืนยัน Email กรุณายืนยัน Email ก่อนเข้าใช้งาน </div>';
-				      }else if( $arr[status_company] == 'ยืนยัน' ){
-							      if($count > 0)
-							      {
+		      }	 else if( $arr["status_company"] == 'ยืนยัน' ){
+					      if($count > 0) {
 
-							          if(  $_POST["user_password"] ==  $arr["password"] )
-							          {
-							         
-							               setcookie("type", $arr["user_name"] , time() + 86399);
-							               setcookie("pass", $arr["password"] , time() + 86399);
-										   setcookie("status", 'company', time() + 86399);
-							            //    header('Location:..'.$_SESSION['redirectURL']);
-							               header('Location:./');
-							               exit;
+					          if(  $_POST["user_password"] ==  $arr["password"] ) {
+					               setcookie("type", $arr["user_name"] , time() + 86399);
+					               setcookie("pass", $arr["password"] , time() + 86399);
+								   setcookie("status", 'student', time() + 86399);
+					            //    header('Location:..'.$_SESSION['redirectURL']);
+					               header('Location:./');
+					               exit;
 
-							          }
-							          else
-							          {
-							           $message = '<div class="alert alert-danger">Wrong Password</div>';
-							          }
+					          } else {
+					           $message = '<div class="alert alert-danger">Wrong Password</div>';
+					          }
 
-							      }
-							      else
-							      {
-							        $message = "<div class='alert alert-danger'>Wrong Email Address</div>";
-			      				  }
-				      }else{
-				      	$message = '<div class="alert alert-danger">ไม่สามารถเข้าระบบได้ กรุณาลองอีกครั้ง หรือติดต่อเจ้าหน้าที่ดูแลระบบ</div>';
-				      }
-
+					      }
+					      else {
+					        $message = "<div class='alert alert-danger'>Wrong Username</div>";
+	      				  }
+		      }    
 
 
    }
@@ -109,10 +102,10 @@ if(isset($_POST["login"]))
 						<div class="box-body">
 							<h4>สำหรับสถานประกอบการ</h4>
 <form name="login" method="post" action="login.php">
-<span><?php echo $message; ?></span>
+							<span><?php echo $message; ?></span>
 								<div class="form-group">
 									<label>Username</label>
-									<input type="text"  name="username"  class="form-control">
+									<input type="text"  name="user_name"  class="form-control">
 								</div>
 								<div class="form-group">
 									<label class="fw">Password
@@ -124,7 +117,7 @@ if(isset($_POST["login"]))
 									<button class="btn btn-primary btn-block" type="submit" name="login">Login</button>
 								</div>
 								<div class="form-group text-center">
-									<span class="text-muted">ถ้าท่านยังไม่มีรหัสผ่าน?</span> <a href="register.php">ลงทะเบียนที่นี่</a>
+									<span class="text-muted"> สำหรับสถานประกอบการใหม่ </span> <a href="../reg-company.php">ลงทะเบียนที่นี่</a>
 								</div>
 							
 								

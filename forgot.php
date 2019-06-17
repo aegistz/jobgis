@@ -21,7 +21,7 @@ if(isset($_POST["forgot"]))
    }
    else
    {
-      $query = "SELECT * FROM user_job WHERE email = '$user_email'  ; ";
+      $query = "SELECT * FROM student WHERE email = '$user_email'  ; ";
       $statement = pg_query($query);
       $arr = pg_fetch_array($statement);
 

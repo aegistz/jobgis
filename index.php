@@ -234,19 +234,38 @@ include("check_student.php")
 												<h2 class="block-title">ภาพประสบการณ์</h2>
 												<div class="block-body">
 													<ul class="item-list-round" data-magnific="gallery">
-														<?php 
+<?php 
 	$id = $user[id_no];
-	$query = pg_query("SELECT * from photo_user where id_user = '$id' order by id_img desc limit 10 ;");
+	$query = pg_query("SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc limit 6 ;");
 	$num = pg_num_rows($query);
 
 	if( $num != 0 ) {
+
+
+		for ($i=0; $i < $num ; $i++) { 
+			
+
+		}
+
+
+
+
 		while( $arr = pg_fetch_array($query)  ){  
 ?>
 						<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
+
 <?php }    }else{  ?>
 	 					<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
 <?php } ?>
 
+
+
+
+														<li><a href="images/news/img12.jpg" style="background-image: url('images/news/img12.jpg');"><div class="more">+2</div></a></li>
+
+
+														<li class="hidden"><a href="images/news/img13.jpg" style="background-image: url('images/news/img13.jpg');"></a></li>
+														<li class="hidden"><a href="images/news/img14.jpg" style="background-image: url('images/news/img14.jpg');"></a></li>
 														
 
 													</ul>
