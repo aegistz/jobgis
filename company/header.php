@@ -46,12 +46,12 @@ include("config.php");
 
 
 <?php 
-if(isset($_COOKIE["type"]))
+if($_COOKIE["status"]  == 'company' )
 {
  ?>
 	<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
-								<li><a href="profile.php"><i class="ion-person"></i><div> <?php echo $user[s_name],' ', $user[l_name]; ?> </div></a></li>
+								<li><a href="profile.php"><i class="ion-person"></i><div> <?php echo $company[name_com]; ?> </div></a></li>
 								<li><a href="../logout.php"><i class="ion-log-out	"></i><div>Logout</div></a></li>
 							</ul>
 						</div>

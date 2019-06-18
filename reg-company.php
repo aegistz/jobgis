@@ -10,7 +10,12 @@ $message = '';
 
 
 
+
 if( isset($_POST["submit_form"]) ){
+
+
+	$salt = 'gistnu@geojobs'; 
+	$password = sha1($_POST[password].$salt);
 
 
 	$sql2 = "INSERT into company
@@ -53,7 +58,7 @@ if( isset($_POST["submit_form"]) ){
 		'0.0' ,
 		'$date' ,
 		'$_POST[user_name]' ,
-		'$_POST[password]' ,
+		'$password' ,
 		'รอการยืนยัน'  ,
 		'$_POST[logo_img]' 
 

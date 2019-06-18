@@ -12,7 +12,9 @@ if(isset($_POST["login"]))
 {
 	
    	$user_name = $_POST["user_name"];
-	$password = $_POST["user_password"];
+	
+	$salt = 'gistnu@geojobs'; 
+	$password = sha1($_POST[user_password].$salt);
 
    if(empty($_POST["user_name"]) || empty($_POST["user_password"]))
    {
@@ -32,10 +34,10 @@ if(isset($_POST["login"]))
 		      }	 else if( $arr["status_company"] == 'ยืนยัน' ){
 					      if($count > 0) {
 
-					          if(  $_POST["user_password"] ==  $arr["password"] ) {
+					          if(  $password ==  $arr["password"] ) {
 					               setcookie("type", $arr["user_name"] , time() + 86399);
 					               setcookie("pass", $arr["password"] , time() + 86399);
-								   setcookie("status", 'student', time() + 86399);
+								   setcookie("status", 'company', time() + 86399);
 					            //    header('Location:..'.$_SESSION['redirectURL']);
 					               header('Location:./');
 					               exit;
@@ -101,6 +103,9 @@ if(isset($_POST["login"]))
 					<div class="box box-border">
 						<div class="box-body">
 							<h4>สำหรับสถานประกอบการ</h4>
+
+
+
 <form name="login" method="post" action="login.php">
 							<span><?php echo $message; ?></span>
 								<div class="form-group">

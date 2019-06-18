@@ -138,48 +138,27 @@ include("check_student.php")
 											<div class="featured-author-count">
 												<div class="item">
 													<a href="#">
-														<div class="name">Posts</div>
-														<div class="value">208</div>														
+														<div class="name">ประกาศ</div>
+														<div class="value">4</div>														
 													</a>
 												</div>
 												<div class="item">
 													<a href="#">
-														<div class="name">View</div>
+														<div class="name">ผู้สมัคร</div>
 														<div class="value">3,729</div>														
 													</a>
 												</div>
 												<div class="item">
 													<a href="profile.php" title="">
 														<div class="icon">
-															<div>More</div>
+															<div>เพิ่มประกาศรับ</div>
 															<i class="ion-chevron-right"></i>
 														</div>	
 													</a>													
 												</div>
 											</div>
 										
-											<div class="block">
-												<h2 class="block-title">Photo</h2>
-												<div class="block-body">
-													<ul class="item-list-round" data-magnific="gallery">
-														<?php 
-	$id = $user[id_no];
-	$query = pg_query("SELECT * from photo_user where id_user = '$id' order by id_img desc limit 10 ;");
-	$num = pg_num_rows($query);
-
-	if( $num != 0 ) {
-		while( $arr = pg_fetch_array($query)  ){  
-?>
-						<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
-<?php }    }else{  ?>
-	 					<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
-<?php } ?>
-
-														
-
-													</ul>
-												</div>
-											</div>
+										
 										
 										</div>
 									</div>
@@ -187,28 +166,8 @@ include("check_student.php")
 							</div>
 						</aside>
 		        <aside>
-		          <h1 class="aside-title">Recent Post</h1>
+		          <h1 class="aside-title">ผู้สมัครงานล่าสุด</h1>
 		          <div class="aside-body">
-		            <article class="article-fw">
-		              <div class="inner">
-		                <figure>
-			                <a href="single.html">
-			                  <img src="../images/news/img12.jpg">
-			                </a>
-		                </figure>
-		                <div class="details">
-		                  <h1><a href="single.html">Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit</a></h1>
-		                  <p>
-		                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		                    tempor incididunt ut labore et dolore magna aliqua.
-		                  </p>
-		                  <div class="detail">
-		                    <div class="time">December 26, 2016</div>
-		                    <div class="category"><a href="category.html">Lifestyle</a></div>
-		                  </div>
-		                </div>
-		              </div>
-		            </article>
 		            <div class="line"></div>
 		            <article class="article-mini">
 		              <div class="inner">
