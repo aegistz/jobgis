@@ -76,7 +76,7 @@ if($_COOKIE["status"]  == 'company' )
 				<div class="container">
 					<div class="brand">
 						<a href="#">
-							<img src="images/6logo.png" alt=" Logo">
+							<img src="../images/6logo.png" alt=" Logo">
 						</a>
 					</div>
 					<div class="mobile-toggle">
@@ -211,10 +211,7 @@ if($_COOKIE["status"]  == 'company' )
 								</div>
 							</li>
 
-<?php 
-if(isset($_COOKIE["type"]))
-{
- ?>
+
 							<li class="dropdown magz-dropdown"><a href="#">ตั้งค่า <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="#"><i class="icon ion-person"></i> My Account</a></li>
@@ -226,9 +223,6 @@ if(isset($_COOKIE["type"]))
 									<li><a href="#"><i class="icon ion-log-out"></i> Logout</a></li>
 								</ul>
 							</li>
-<?php } ?>
-
-
 
 							<li><a href="contact.php">ติดต่อเรา</a></li>
 						</ul>

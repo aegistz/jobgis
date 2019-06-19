@@ -6,7 +6,7 @@
 							<h1 class="block-title">Company Info</h1>
 							<div class="block-body">
 								<figure class="foot-logo">
-									<img src="images/6logo.png" class="img-responsive" alt="Logo">
+									<img src="../images/6logo.png" class="img-responsive" alt="Logo">
 								</figure>
 							</div>
 						</div>

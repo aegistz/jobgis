@@ -243,7 +243,7 @@
 		<!-- Shareable -->
 		<meta property="og:title" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
 		<meta property="og:type" content="article" />
-		<meta property="og:url" content="http://github.com/nauvalazhar/Magz" />
+		<meta property="og:url" content="http://www.cgistln.nu.ac.th" />
 		<meta property="og:image" content="images/gistda_logo.png" />
 		<title> GEOJOBs &mdash; GISTDA  </title>
 		<!-- Bootstrap -->
