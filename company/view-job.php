@@ -4,7 +4,7 @@ session_start();
 include("config.php");
 include("check-company.php");
 
-	$sql = pg_query("SELECT * from job_company where id_job = '$_GET[q]' ;");
+	$sql = pg_query("SELECT * from job_company a inner join company b on a.id_com = b.id_com where id_job = '$_GET[q]' ;");
 	$result = pg_fetch_array($sql);
 ?>
 <html>
@@ -95,7 +95,7 @@ include("check-company.php");
 						</ol>
 						<article class="article main-article">
 							<header>
-								<img src="../images/img_job/<?php echo $result[img]; ?>" width="20%" alt="">
+								<img src="../images/img_job/<?php echo $result[logo_img]; ?>" width="20%" alt="">
 								<h2>Plant breeder เจ้าหน้าที่ปรับปรุงพันธุ์ข้าว</h2>
 								<ul class="details">
 									<li>Posted on 31 December, 2018</li>
