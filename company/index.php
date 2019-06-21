@@ -2,7 +2,7 @@
 <?php
 session_start();
 include("config.php");
-include("check_student.php")
+include("check-company.php")
 ?>
 <html>
 	<head>
@@ -59,27 +59,36 @@ include("check_student.php")
 						<div class="line"></div>
 						<div class="row">
 							
+
+<?php 
+	$sql = pg_query("SELECT * from job_company where id_com = '$id_com' ;");
+	$check = pg_num_rows($sql);
+	if ($check != 0 ) {
+	while( $job_com = pg_fetch_array($sql) ){
+		
+			
+?>							
 							<article class="col-md-12 article-list">
 								<div class="inner">
 									<figure>
-										<a href="single.html">
-											<img src="http://upic.me/i/jo/1image1.jpg">
+										<a href="view-job.php?q=<?php echo $job_com[id_job]; ?>">
+											<img src="../images/img_job/<?php echo $job_com[img]; ?>">
 										</a>
 									</figure>
 									<div class="details">
 										<div class="detail">
 											<div class="category">
-												<a href="category.html">รับสมัครงาน</a>
+												<a href="category.html"><?php echo $job_com[type_job]; ?></a>
 											</div>
-											<div class="time">2019-03-12</div>
+											<div class="time"><?php echo $job_com[date_job]; ?></div>
 										</div>
-										<h1><a href="single.html">รับนักภูมิสารสนเทศ 3 ตำแหน่ง</a></h1>
+										<h1><a href="view-job.php?q=<?php echo $job_com[id_job]; ?>"><?php echo $job_com[name_job]; ?></a></h1>
 										<p>
-											GISTNU เปิดรับสมัครผู้เข้าร่วมอุดมการณ์ ตำแหน่ง นักภูมิสารสนเทศ 3 ตำแหน่ง ตั้งแต่วันนี้ ถึง พรุ่งนี้
+											<?php echo $job_com[detail_job]; ?>
 										</p>
 										<footer>
 											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>198</div></a>
-											<a class="btn btn-primary more" href="single.html">
+											<a class="btn btn-primary more" href="view-job.php?q=<?php echo $job_com[id_job]; ?>">
 												<div>เพิ่มเติม</div>
 												<div><i class="ion-ios-arrow-thin-right"></i></div>
 											</a>
@@ -87,6 +96,40 @@ include("check_student.php")
 									</div>
 								</div>
 							</article>
+<?php } }  else { ?>
+			
+							<article class="col-md-12 article-list">
+								<div class="inner">
+									<figure>
+										<a href="">
+											<img src="https://patientnews.com/wp-content/uploads/2019/03/dummy.png">
+										</a>
+									</figure>
+									<div class="details">
+										<div class="detail">
+											<div class="category">
+												<a href="">Tag</a>
+											</div>
+											<div class="time">9999-99-9</div>
+										</div>
+										<h1><a href="">ท่านยังไม่เพิ่มข้อมูลตำแหน่งงานที่เปิดรับ</a></h1>
+										<p>
+											เพิ่มให้ได้บุคคลเข้าร่วมทำงานตามที่ท่านต้องการ 
+											สามารถกดเพิ่มข้อมูลการงานรับสมัครงาน / ฝึกงาน / สหกิจศึกษา ได้ ที่นี่
+										</p>
+										<footer>
+											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>999</div></a>
+											<a class="btn btn-primary more" href="add-job.php">
+												<div>เพิ่มข้อมูล</div>
+												<div><i class="ion-ios-arrow-thin-right"></i></div>
+											</a>
+										</footer>
+									</div>
+								</div>
+							</article>
+
+
+<?php }  ?>
 							<div class="col-md-12 text-center">
 								<ul class="pagination">
 									<li class="prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
@@ -123,7 +166,7 @@ include("check_student.php")
 												<div class="item">
 													<a href="#">
 														<div class="name">ประกาศ</div>
-														<div class="value">4</div>
+														<div class="value"><?php echo  number_format($check); ?></div>
 													</a>
 												</div>
 												<div class="item">

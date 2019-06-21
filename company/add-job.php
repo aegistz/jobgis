@@ -10,10 +10,8 @@ $message = '';
 
 
 
-if( isset($_POST["submit_form"]) ){
-
-	
-
+if( $_POST[submit_form] == 'true' ) 
+{
     // get uploaded file name
     $image = $_FILES["file"]["name"];
  
@@ -67,22 +65,18 @@ if( isset($_POST["submit_form"]) ){
  
             // rename our upload image file name, this to avoid conflict in previous upload images
             // to easily get our uploaded images name we added image size to the suffix
-            $rnd_name1 = 'photos_job_company_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
+            $rnd_name1 = 'photos_job_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
             
             // move it to uploads dir with full quality
-            imagejpeg( $dst1, '../images/student/'.$rnd_name1, 100 );
+            imagejpeg( $dst1, '../images/img_job/'.$rnd_name1, 100 );
  
             // I think that's it we're good to clear our created images
             imagedestroy( $source );
             imagedestroy( $dst1 );
 
-			$showpic = "../images/student/".$rnd_name1;
-
-			$date_now = date("Y/m/d");
 
 		
-
-			$sql2 = "INSERT into job_company
+          	$sql2 = "INSERT into job_company
 			(
 					id_com ,
 					name_job ,
@@ -95,7 +89,8 @@ if( isset($_POST["submit_form"]) ){
 					place_job ,
 					edu_job ,
 					date_job ,
-					tag_job 
+					tag_job ,
+					img
 			)
 			values
 			(
@@ -109,32 +104,24 @@ if( isset($_POST["submit_form"]) ){
 				'$_POST[exp_job]' ,
 				'$_POST[place_job]' ,
 				'$_POST[edu_job]' ,
-				'$date_now' ,
-				'$_POST[tag_job]' 
+				'$date' ,
+				'$_POST[tag_job]' ,
+				'$rnd_name1'
 
 			);";
-
-
 			$result = pg_query($sql2);
-				if($result){
-					$message = '<div class="alert alert-success alert-dismissible">
+            
+            if($result){ 
+				  $message = '<div class="alert alert-success alert-dismissible">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 										<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
-									</div>';
-					header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
-					setcookie("email", $email , time() + 3600);
-					header('Location: checkmail.php');
-						exit;
-				}else{
-					$message = '<div class="alert alert-danger alert-dismissible">
-								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-								<strong>Warning!</strong> ไม่สามา่รถบันทึกข้อมูลได้ กรุณาลองอีกครั้ง
-								</div>';
-				}
-
-
-
-            
+									  </div>';
+				  }else{
+					  $message = '<div class="alert alert-danger alert-dismissible">
+								  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								  <strong>Warning!</strong> ไม่สามา่รถบันทึกข้อมูลได้ กรุณาลองอีกครั้ง
+								 </div>';
+				  }
            
  
         }
@@ -144,6 +131,16 @@ if( isset($_POST["submit_form"]) ){
 
 
 
+function get_file_extension( $file )  {
+    if( empty( $file ) )
+        return;
+ 
+    // if goes here then good so all clear and good to go
+    $ext = end(explode( ".", $file ));
+ 
+    // return file extension
+    return $ext;
+}
 
 
 
@@ -208,8 +205,8 @@ if( isset($_POST["submit_form"]) ){
 		<div class="container">
 			<div class="">
 				<div class="">
-					<form class="form-validate form-horizontal"  method="post"   action="">
-						<?php echo $sql2; ?>
+					<form enctype="multipart/form-data" method="post">
+						<?php echo $message; ?>
 						<div class="box-body">
 							<h4>เพิ่มข้อมูลประกาศรับสมัครงาน</h4>
 							<small>* กรุณากรอกข้อมูลให้ครบถ้วน</small>
@@ -219,7 +216,8 @@ if( isset($_POST["submit_form"]) ){
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Poster หรือภาพประกอบ</label>
-											<input class="form-control " type="file" id="cname"  name="fileToUpload"  value="user.png"  onchange="readURL(this);">
+											<input class="form-control " type="file" id="cname" name="file" onchange="readURL(this);"  accept="image/png, image/jpeg, image/gif">
+
                                               <img id="blah" src="http://orcalcontabilidade.com.br/images/footer-shadow.png" style="width:100%; max-height:100%;margin-top:20px;" alt="your image" />
 										</div>
 										
@@ -236,7 +234,7 @@ if( isset($_POST["submit_form"]) ){
 									<div class="col-md-8">
 										<div class="form-group">
 											<label>รายละเอียดเพิ่มเติม </label>
-											<textarea name="" type="text" name="detail_job" class="form-control" ></textarea>
+											<textarea  type="text" name="detail_job" class="form-control" ></textarea>
 										</div>
 										
 									</div>
@@ -304,7 +302,7 @@ if( isset($_POST["submit_form"]) ){
 					
 						<div class="col-md-12">
 							<div class="form-group text-right">
-								<button type="submit" name="submit_form" class="btn btn-primary btn-block">บันทึกข้อมูล</button>
+								<button type="submit" name="submit_form" value="true" class="btn btn-primary btn-block">บันทึกข้อมูล</button>
 							</div>
 						</div>
 						
