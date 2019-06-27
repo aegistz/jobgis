@@ -68,58 +68,113 @@ include("check_student.php")
 						</div>
 						<div  id="featured">
 							<form>
-								<fieldset>
-									<legend>ค้นหางานและสมัครงาน : มีงานมากกว่า 12,400 ตำแหน่ง</legend>
-									<div class="form-group row">
-										<label for="staticEmail" class="col-sm-2 col-form-label">สายอาชีพ</label>
-										<div class="col-sm-10">
-											<select class="form-control" >
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
+										<legend>ค้นหางานและสมัครงาน : มีงานมากกว่า 12,400 ตำแหน่ง</legend>
+								<div class="col-md-6">
+									<fieldset>
+										<div class="form-group row">
+											<label for="staticEmail" class="col-sm-4 col-form-label">สายอาชีพ</label>
+											<div class="col-sm-8">
+												<select class="form-control" >
+												<option>- - กดเพื่อเลือก - -</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>
+											</div>
 										</div>
-									</div>
-									<div class="form-group row">
-										<label for="staticEmail" class="col-sm-2 col-form-label">พื้นที่ทำงาน</label>
-										<div class="col-sm-10">
-											<select class="form-control" >
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
+										<div class="form-group row">
+											<label for="staticEmail" class="col-sm-4 col-form-label">พื้นที่ทำงาน</label>
+											<div class="col-sm-8">
+												<select class="form-control" >
+												<option>- - กดเพื่อเลือก - -</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>
+											</div>
 										</div>
-									</div>
-									<div class="form-group row">
-										<label for="staticEmail" class="col-sm-2 col-form-label">วุฒิการศึกษา</label>
-										<div class="col-sm-10">
-											<select class="form-control" >
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
+										<div class="form-group row">
+											<label for="staticEmail" class="col-sm-4 col-form-label">วุฒิการศึกษา</label>
+											<div class="col-sm-8">
+												<select class="form-control" >
+												<option>- - กดเพื่อเลือก - -</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>
+											</div>
 										</div>
-									</div>
-									<div class="form-group row">
-										<label for="staticEmail" class="col-sm-2 col-form-label">เงินเดือน</label>
-										<div class="col-sm-10">
-											<select class="form-control" >
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
+										<div class="form-group row">
+											<label for="staticEmail" class="col-sm-4 col-form-label">เงินเดือน</label>
+											<div class="col-sm-8">
+												<select class="form-control" >
+												<option>- - กดเพื่อเลือก - -</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>
+											</div>
 										</div>
-									</div>
-									<button type="submit" class="btn btn-primary btn-block">ค้นหางาน</button>
-								</fieldset>
+									</fieldset>
+								</div>
+								<div class="col-md-6">
+									<fieldset>
+										<div class="form-group row">
+											<label for="staticEmail" class="col-sm-4 col-form-label">สายอาชีพ</label>
+											<div class="col-sm-8">
+												<select class="form-control" >
+												<option>- - กดเพื่อเลือก - -</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="staticEmail" class="col-sm-4 col-form-label">พื้นที่ทำงาน</label>
+											<div class="col-sm-8">
+												<select class="form-control" >
+												<option>- - กดเพื่อเลือก - -</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="staticEmail" class="col-sm-4 col-form-label">วุฒิการศึกษา</label>
+											<div class="col-sm-8">
+												<select class="form-control" >
+												<option>- - กดเพื่อเลือก - -</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="staticEmail" class="col-sm-4 col-form-label">เงินเดือน</label>
+											<div class="col-sm-8">
+												<select class="form-control" >
+												<option>- - กดเพื่อเลือก - -</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>
+											</div>
+										</div>
+									</fieldset>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block">ค้นหางาน</button>
+
 							</form>
 							
 						</div>
@@ -132,32 +187,34 @@ include("check_student.php")
 						</div>
 						
 						<div class="row">
+
+
 							<?php
-								$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com  ;  ");
+								$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 5 ;  ");
 								while ( $arr = pg_fetch_array($sql) ) {
 							?>
 							<article class="col-md-12 article-list">
 								<div class="inner">
 									<figure>
-										<a href="news.php">
-											<img src="images/news/j215544.png" alt="Sample Article">
+										<a href="news.php?q=<?php echo $arr[id_job]; ?>">
+											<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
 										</a>
 									</figure>
 									<div class="details">
 										<div class="detail">
 											<div class="category">
-												<a href="#">ข่าวรับสมัครงาน</a>
+												<a href="#"><?php echo $arr[type_job]; ?></a>
 											</div>
-											<div class="time">December 19, 2016</div>
+											<div class="time"><?php echo $arr[date_job]; ?></div>
 										</div>
-										<h1><a href="news.php">นักวิชาการเกษตร</a></h1>
+										<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 										<p>
-											บริษัท กรีนไลฟ์ อินเตอร์เนชั่นแนล จำกัด  Agricultural Research Officer <br>
-											<small> <i><b>การรับ  : </b>    เด็กฝึกงาน / สหกิจศึกษา / งานประจำ</i> </small>
+											<?php echo $arr[detail_job]; ?> <br>
+											<small> <i><b>การรับ  : </b>    <?php echo $arr[type_job]; ?></i> </small>
 										</p>
 										<footer>
 											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-											<a class="btn btn-primary more" href="news.php">
+											<a class="btn btn-primary more" href="news.php?q=<?php echo $arr[id_job]; ?>">
 												<div>More</div>
 												<div><i class="ion-ios-arrow-thin-right"></i></div>
 											</a>
@@ -166,35 +223,8 @@ include("check_student.php")
 								</div>
 							</article>
 							<?php } ?>
-							<article class="col-md-12 article-list">
-								<div class="inner">
-									<figure>
-										<a href="news.php">
-											<img src="images/news/j215544.png" alt="Sample Article">
-										</a>
-									</figure>
-									<div class="details">
-										<div class="detail">
-											<div class="category">
-												<a href="#">ข่าวรับสมัครงาน</a>
-											</div>
-											<div class="time">December 19, 2016</div>
-										</div>
-										<h1><a href="news.php">นักวิชาการเกษตร</a></h1>
-										<p>
-											บริษัท กรีนไลฟ์ อินเตอร์เนชั่นแนล จำกัด  Agricultural Research Officer <br>
-											<small> <i><b>การรับ  : </b>    เด็กฝึกงาน / สหกิจศึกษา / งานประจำ</i> </small>
-										</p>
-										<footer>
-											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-											<a class="btn btn-primary more" href="news.php">
-												<div>More</div>
-												<div><i class="ion-ios-arrow-thin-right"></i></div>
-											</a>
-										</footer>
-									</div>
-								</div>
-							</article>
+
+
 						</div>
 					</div>
 					<div class="col-xs-6 col-md-4 sidebar" id="sidebar">

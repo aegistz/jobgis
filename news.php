@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+session_start();
+include("config.php");
+include("check_student.php");
+
+	$sql = pg_query("SELECT * from job_company a inner join company b on a.id_com = b.id_com where id_job = '$_GET[q]' ;");
+	$result = pg_fetch_array($sql);
+?>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -40,79 +48,42 @@
 
 		<?php include 'header.php'; ?>
 
+		
 		<section class="single">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 sidebar" id="sidebar">
 						<aside>
-							<h1 class="aside-title">งานที่เกี่ยวข้อง <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
+							<h1 class="aside-title">งานอื่น ๆ ของคุณ <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
 							<div class="aside-body">
-								<article class="article-mini">
-									<div class="inner">
-										<figure>
-											<a href="news.php">
-												<img src="images/news/j215544.png" alt="Sample Article">
-											</a>
-										</figure>
-										<div class="padding">
-											<h1><a href="news.php">นักวิชาการเกษตร</a></h1>
-											<p>
-										บริษัท กรีนไลฟ์ อินเตอร์เนชั่นแนล จำกัด  Agricultural Research Officer ยินดีรับนักศึกษาจบใหม่
-										</p>
-										</div>
-									</div>
-								</article>
-								<article class="article-mini">
-									<div class="inner">
-										<figure>
-											<a href="news.php">
-												<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j27745.gif?v=13" alt="Sample Article">
-											</a>
-										</figure>
-										<div class="padding">
-											<h1><a href="news.php">ผู้เชียวชาญบริการจัดการแมลง</a></h1>
-											<p>
-											บริษัท คิงส์ เซอร์วิส เซ็นเตอร์ จำกัด Pest Management Technician
-										</p>
-										</div>
-									</div>
-								</article>
-								<article class="article-mini">
-									<div class="inner">
-										<figure>
-											<a href="news.php">
-												<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j6825.gif?v=32" alt="Sample Article">
-											</a>
-										</figure>
-										<div class="padding">
-											<h1><a href="news.php">ผู้จัดการฝ่ายปฏิบัติการ</a></h1>
-										<p>
-											บริษัท เซเว่น ยูทิลิตี้ส์ แอนด์ พาวเวอร์ จำกัด (มหาชน)
-										</p>
-										</div>
-									</div>
-								</article>
-							</div>
-						</aside>
-						<aside>
-							<div class="aside-body">
-								<form class="newsletter">
-									<div class="icon">
-										<i class="ion-ios-email-outline"></i>
-										<h1>Newsletter</h1>
-									</div>
-									<div class="input-group">
-										<input type="email" class="form-control email" placeholder="Your mail">
-										<div class="input-group-btn">
-											<button class="btn btn-primary"><i class="ion-paper-airplane"></i></button>
-										</div>
-									</div>
-									<p>By subscribing you will receive new articles in your email.</p>
-								</form>
-							</div>
-						</aside>
-					</div>
 
+<?php 
+	$sql = pg_query("SELECT * from job_company limit 5 ;");
+	$check = pg_num_rows($sql);
+	while( $job_com = pg_fetch_array($sql) ){
+		
+			
+?>										
+								<article class="article-mini">
+									<div class="inner">
+										<figure>
+											<a href="news.php?q=<?php echo $job_com[id_job]; ?>">
+												<img src="images/img_job/<?php echo $job_com[img]; ?>" >
+											</a>
+										</figure>
+										<div class="padding">
+											<h1><a href="news.php?q=<?php echo $job_com[id_job]; ?>"><?php echo $job_com[name_job]; ?></a></h1>
+											<p>
+										</p>
+										</div>
+									</div>
+								</article>
+<?php  } ?>
+
+							</div>
+						</aside>
+						
+					</div>
 
 
 
@@ -125,16 +96,16 @@
 						</ol>
 						<article class="article main-article">
 							<header>
-								<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j21844.gif?v=22" width="20%" alt="">
-								<h2>Plant breeder เจ้าหน้าที่ปรับปรุงพันธุ์ข้าว</h2>
+								<img src="images/img_job/<?php echo $result[logo_img]; ?>" width="20%" alt="">
+								<h2><?php echo $result[name_job]; ?></h2>
 								<ul class="details">
-									<li>Posted on 31 December, 2018</li>
-									<li><a>ข่าวรับสมัคร</a></li>
-									<li>By <a href="#">Jบริษัท เจริญโภคภัณฑ์วิศวกรรม จำกัด</a></li>
+									<li>Posted on <?php echo $result[date_job]; ?></li>
+									<li><a><?php echo $result[type_job]; ?></a></li>
+									<li>By <a href="#"><?php echo $result[name_com]; ?></a></li>
 								</ul>
 							</header>
 							<div class="main">
-								<p>
+								<p><?php echo $result[detail_job]; ?> <hr>
 								<b>หน้าที่และความรับผิดชอบ</b> <br>
 1.ปรับปรุงพันธุ์พืช (ข้าว) (conventional plant breeding และ biotechnology) <br>
 
@@ -152,20 +123,18 @@
 							</p>
 								<div class="featured">
 									<figure>
-										<img src="https://www.jobtopgun.com/content/filejobtopgun/picslide/21844_1516958634287.jpg?v=22">
+										<img src="images/img_job/<?php echo $result[img]; ?>">
 									</figure>
 								</div>
 
 								<p><b>คุณสมบัติพื้นฐาน</b> <br>
-<b>ประเภทของงาน</b> : งานประจำ <br>
-<b>จำนวน</b> : 1 อัตรา  <br>
-<b>เพศ</b> : ไม่ระบุ <br> 
-<b>เงินเดือน(บาท)</b> : 30,000 - 60,000 บาท/เดือน <br>
-<b>ประสบการณ์</b> : 2 - 10 ปี <br>
-<b>สถานที่</b>สถานที่ : กำแพงเพชร <br> 
-<b>การศึกษา</b>การศึกษา : ปริญญาโทหรือสูงกว่า  <br>
-<b>คณะ</b> : เกษตร <br>
-<b>สาขา</b> : การปรับปรุงพันธุ์พืช
+<b>ประเภทของงาน</b> : <?php echo $result[type_job]; ?> <br>
+<b>จำนวน</b> : <?php echo $result[num_job]; ?> อัตรา  <br>
+<b>เพศ</b> : <?php echo $result[sex_job]; ?> <br> 
+<b>เงินเดือน(บาท)</b> : <?php echo $result[budget_job]; ?> <br>
+<b>ประสบการณ์</b> : <?php echo $result[exp_job]; ?> ปี <br>
+<b>สถานที่</b>สถานที่ : <?php echo $result[place_job]; ?> <br> 
+<b>การศึกษา</b>การศึกษา : <?php echo $result[edu_job]; ?> 
 </p>
 							</div>
 
@@ -219,7 +188,7 @@
 							</figure>
 							<div class="details">
 								<div class="job">สถานประกอบการ</div>
-								<h3 class="name">บริษัท เจริญโภคภัณฑ์วิศวกรรม จำกัด</h3>
+								<h3 class="name"><?php echo $result[name_com]; ?></h3>
 								<p>พนักงานประจำ/นักศึกษาฝึกงาน/สหกิจศึกษา</p>
 								<ul class="social trp sm">
 									<li>
