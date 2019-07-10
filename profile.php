@@ -261,7 +261,7 @@ function get_file_extension( $file )  {
 							<div class="aside-body">
 								<div class="featured-author">
 									<div class="featured-author-inner">
-										<div class="featured-author-cover" style="background-image: url('images/news/news4.jpg');">
+										<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
 											<div class="featured-author-center">
 												<figure class="featured-author-picture">
 												<?php if($user[img] == ''){ ?>
@@ -275,13 +275,35 @@ function get_file_extension( $file )  {
 													<div class="desc"><?php echo $user[email]; ?> </div>
 												</div>
 											</div>
+											 <div class="btn btn-group">
+                                                            <button type="button"   class="btn btn-primary btn-sm" style="display: none;" data-toggle="modal" data-target="#bg-img">
+                                                                แก้ไขภาพหน้าปก
+                                                            </button>
+                                                             <button type="button" style="display: none;" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#profile-img">
+                                                               แก้ไขรูปประจำตัว
+                                                             </button>
+                                            </div>
+
+
 										</div>
+
+                                                       
+
+
+
+
 										<div class="featured-author-body">
 											<div class="featured-author-count">
 												<div class="item">
 													<a href="#">
 														<div class="name">Posts</div>
-														<div class="value">3</div>														
+														<div class="value">
+														<?php 
+														$sql_post_num = pg_query("SELECT * from  story where id_user = '$user[id_no]';"); 
+														$num_post = pg_num_rows($sql_post_num);
+														echo number_format($num_post) ;
+														?>
+														</div>														
 													</a>
 												</div>
 												<div class="item">
@@ -401,7 +423,7 @@ function get_file_extension( $file )  {
 
 <?php 
 	$id = $user[id_no];
-	$query = pg_query("SELECT * from story where id_user = '$id' ;");
+	$query = pg_query("SELECT * from story where id_user = '$id' order by id_story desc ;");
 	$num = pg_num_rows($query);
 
 	if( $num != 0 ) {
@@ -622,5 +644,56 @@ $(function() {
         reader.readAsDataURL(file);
     });  
 });</script>
+
+<script>
+	$(document).ready(function () {
+                $(document).on('mouseenter', '.divbutton', function () {
+                    $(this).find(":button").show();
+                }).on('mouseleave', '.divbutton', function () {
+                    $(this).find(":button").hide();
+                });
+            });
+</script>
+
+<script>
+ function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+ function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah2')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+ function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah3')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
 	</body>
 </html>

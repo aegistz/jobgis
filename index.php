@@ -66,9 +66,15 @@ include("check_student.php")
 								</div>
 							</div>
 						</div>
-						<div  id="featured">
+						<div class="col-md-12">
 							<form>
-										<legend>ค้นหางานและสมัครงาน : มีงานมากกว่า 12,400 ตำแหน่ง</legend>
+								<legend>ค้นหางานและสมัครงาน : มีงานมากกว่า 
+									<?php 
+										$sql = pg_query("SELECT * from job_company ;"); 
+										$num = pg_num_rows($sql);
+										echo $num;
+										?>	
+								 ตำแหน่ง</legend>
 								<div class="col-md-6">
 									<fieldset>
 										<div class="form-group row">
@@ -97,18 +103,6 @@ include("check_student.php")
 										</div>
 										<div class="form-group row">
 											<label for="staticEmail" class="col-sm-4 col-form-label">วุฒิการศึกษา</label>
-											<div class="col-sm-8">
-												<select class="form-control" >
-												<option>- - กดเพื่อเลือก - -</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-											</select>
-											</div>
-										</div>
-										<div class="form-group row">
-											<label for="staticEmail" class="col-sm-4 col-form-label">เงินเดือน</label>
 											<div class="col-sm-8">
 												<select class="form-control" >
 												<option>- - กดเพื่อเลือก - -</option>
@@ -149,18 +143,6 @@ include("check_student.php")
 										</div>
 										<div class="form-group row">
 											<label for="staticEmail" class="col-sm-4 col-form-label">วุฒิการศึกษา</label>
-											<div class="col-sm-8">
-												<select class="form-control" >
-												<option>- - กดเพื่อเลือก - -</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-											</select>
-											</div>
-										</div>
-										<div class="form-group row">
-											<label for="staticEmail" class="col-sm-4 col-form-label">เงินเดือน</label>
 											<div class="col-sm-8">
 												<select class="form-control" >
 												<option>- - กดเพื่อเลือก - -</option>
@@ -233,8 +215,8 @@ include("check_student.php")
 							<div class="aside-body">
 								<div class="featured-author">
 									<div class="featured-author-inner">
-										<div class="featured-author-cover" style="background-image: url('images/news/news4.jpg');">
-											<div class="featured-author-center">
+										<div class="featured-author-cover" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
+											<div class="featured-author-center divbutton">
 												<figure class="featured-author-picture">
 													<?php if($user[img] == ''){ ?>
 													<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
@@ -246,14 +228,22 @@ include("check_student.php")
 													<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>
 													<div class="desc"><?php echo $user[email]; ?> </div>
 												</div>
+
 											</div>
+
+
 										</div>
 										<div class="featured-author-body">
 											<div class="featured-author-count">
 												<div class="item">
 													<a href="#">
 														<div class="name">Posts</div>
-														<div class="value">208</div>
+														<div class="value">
+														<?php 
+														$sql_post_num = pg_query("SELECT * from  story where id_user = '$user[id_no]';"); 
+														$num_post = pg_num_rows($sql_post_num);
+														echo number_format($num_post) ;
+														?></div>
 													</a>
 												</div>
 												<div class="item">
@@ -280,21 +270,34 @@ include("check_student.php")
 													<ul class="item-list-round" data-magnific="gallery">
 														<?php
 															$id = $user[id_no];
-															$query = pg_query("SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc limit 6 ;");
+															$query = pg_query("with ss as (
+SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
+) SELECT * from ss where row between 1 and 6");
 															$num = pg_num_rows($query);
 															if( $num != 0 ) {
-																for ($i=0; $i < $num ; $i++) {
-																	
-																}
 																while( $arr = pg_fetch_array($query)  ){
 														?>
 														<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
-														<?php }    }else{  ?>
+														<?php }  
+
+															$sql2 = pg_query("with ss as (
+SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '3' order by id_img desc
+) SELECT * from ss where row >= 7");
+															$num2 = pg_num_rows($sql2);
+															$arr2 = pg_fetch_array($sql2);
+
+														?> 
+														<li><a href="images/student/<?php echo $arr2[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr2[name_img]; ?>');"><div class="more"> +<?php echo $num2; ?> </div></a></li>
+															<?php 
+																while ( $arr3 = pg_fetch_array($sql2) ) {
+															?>
+														<li class="hidden"><a href="images/student/<?php echo $arr3[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr3[name_img]; ?>');"></a></li>
+														<?php } }else{  ?>
+
 														<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
 														<?php } ?>
-														<li><a href="images/news/img12.jpg" style="background-image: url('images/news/img12.jpg');"><div class="more">+2</div></a></li>
-														<li class="hidden"><a href="images/news/img13.jpg" style="background-image: url('images/news/img13.jpg');"></a></li>
-														<li class="hidden"><a href="images/news/img14.jpg" style="background-image: url('images/news/img14.jpg');"></a></li>
+
+
 														
 													</ul>
 												</div>
@@ -505,5 +508,6 @@ include("check_student.php")
 		<script src="scripts/toast/jquery.toast.min.js"></script>
 		<!-- <script src="js/demo.js"></script> -->
 		<script src="js/e-magz.js"></script>
+
 	</body>
 </html>

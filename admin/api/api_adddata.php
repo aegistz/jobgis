@@ -134,7 +134,7 @@
 
 			  $message = '<div class="alert alert-danger alert-dismissible">
 						  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						  <strong>Warning!</strong> ไม่สามา่รถบันทึกข้อมูลได้ กรุณาลองอีกครั้ง
+						  <strong>Warning!</strong> ไม่สามารถบันทึกข้อมูลได้ กรุณาลองอีกครั้ง
 						 </div>';
 
 		  }
@@ -214,10 +214,11 @@ if (isset($_POST["insert_data_csv"])) {
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 										<strong>Success!</strong> นำเข้าข้อมูล เรียบร้อยแล้ว
 									  </div>';
+    							header('location:add_data.php#data_view');
 			            }else{
 			            	$message = '<div class="alert alert-danger alert-dismissible">
 								  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-								  <strong>Warning!</strong> ไม่สามา่รถบันทึกข้อมูลได้ กรุณาตรวจสอบไฟล์ก่อนนำเข้าอีกครั้ง
+								  <strong>Warning!</strong> ไม่สามารถบันทึกข้อมูลได้ กรุณาตรวจสอบไฟล์ก่อนนำเข้าอีกครั้ง
 								 </div>';
 
 
@@ -233,7 +234,7 @@ if (isset($_POST["insert_data_csv"])) {
 		}else{
  			$message = '<div class="alert alert-danger alert-dismissible">
 						  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						  <strong>Warning!</strong> ไม่สามา่รถบันทึกข้อมูลได้ กรุณาตรวจสอบไฟล์ก่อนนำเข้าอีกครั้ง
+						  <strong>Warning!</strong> ไม่สามารถบันทึกข้อมูลได้ กรุณาตรวจสอบไฟล์ก่อนนำเข้าอีกครั้ง
 						 </div>';
 
 

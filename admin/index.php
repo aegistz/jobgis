@@ -181,7 +181,7 @@ Highcharts.chart('container', {
             "colorByPoint": true,
             "data": [
 <?php 
-	$sql = pg_query("SELECT university,count(*) from user_job group by university;");
+	$sql = pg_query("SELECT university,count(*) from user_job  where owner_input = '$admin[id_admin]'    group by university;");
 	while ($arr = pg_fetch_array($sql)) {
 		
 ?>	
@@ -261,7 +261,6 @@ Highcharts.chart('container', {
 
     $sql = "select place_now,geom,gid,count(*) ,ST_AsGeoJSON(geom) AS geojson from prov a 
 inner join user_job b on a.pv_tn = b.place_now
- where owner_input = '$admin[id_admin]'  
 group by place_now,geom,gid ; ";
     
    // Perform database query

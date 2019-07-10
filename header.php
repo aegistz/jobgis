@@ -199,4 +199,66 @@ if(isset($_COOKIE["type"]))
 				</div>
 			</nav>
 			<!-- End nav -->
+
+<!-- Modal -->
+<div id="bg-img" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขภาพหน้าปก</h4>
+      </div>
+      <div class="modal-body">
+<form class="form-validate form-horizontal" id="feedback_form" method="post" action="profile.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <input class="form-control " type="file" id="cname"  name="fileToUpload"  value="user.png"  onchange="readURL(this);">
+                <center>
+                    <img id="blah" src="images/student/<?php echo $user[bg_img]; ?>" style=" max-width:100%; height:200px;margin-top:20px;" alt="your image" />
+                </center>
+                
+            </div>
+            <button type="submit" class="btn btn-default btn-primary btn-block btn-sm" name="bg_img">SAVE</button>
+</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div id="profile-img" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขรูปประจำตัว</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-validate form-horizontal" id="feedback_form" method="post" action="profile.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <input class="form-control " type="file" id="cname"  name="fileToUpload"  value="user.png"  onchange="readURL2(this);">
+                <center>
+                    <img id="blah2" src="images/student/<?php echo $user[img]; ?>" style=" max-width:100%; height:200px;margin-top:20px;" alt="your image" />
+                </center>
+                
+            </div>
+            <button type="submit" class="btn btn-default btn-primary btn-block btn-sm" name="profile_img">SAVE</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
 		</header>

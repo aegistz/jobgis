@@ -91,41 +91,65 @@ include("check_admin.php");
 		<section class="home">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<table id="example" class="display nowrap" style="width:100%">
+					<div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
+						<table id="example" class=" table table-striped  display nowrap" style="width:100%">
 						        <thead>
 						             <tr>
+						                <th>เลขประจำตัวนักศึกษา</th>
 						                <th>ชื่อ - นามสกุล</th>
+						                <th>ปีเกิด</th>
+						                <th>เบอร์โทรศัพท์</th>
+						                <th>สถานะภาพการทำงานปัจจุบัน</th>
+						                <th>จังหวัดที่อาศัยปัจจุบัน</th>
 						                <th>มหาวิทยาลัย</th>
 						                <th>ระดับ</th>
 						                <th>คณะ</th>
 						                <th>สาขา</th>
+						                <th>วุฒิที่สำเร็จการศึกษา</th>
+						                <th>ปีที่เริ่มเข้าศึกษา</th>
+						                <th>ปีที่จบการศึกษา</th>
 						                <th>อีเมล</th>
 						            </tr>
 						        </thead>
 						        <tbody>
 <?php 
-	$sql = pg_query("SELECT * from user_job ;");
+	$sql = pg_query("SELECT * from user_job where owner_input = '$admin[id_admin]'   ;");
 	while ($arr = pg_fetch_array($sql)) {
 		
 ?>						        	
 						            <tr>
+						                <td><?php echo $arr[id_student]; ?> </td>
 						                <td><?php echo  $arr[title_name],$arr[s_name],' ',$arr[l_name]  ; ?> </td>
+						                <td><?php echo $arr[birth_year]; ?> </td>
+						                <td><?php echo $arr[phone_number]; ?> </td>
+						                <td><?php echo $arr[status_study]; ?> </td>
+						                <td><?php echo $arr[place_now]; ?> </td>
 						                <td><?php echo $arr[university]; ?> </td>
-						                <td><?php echo $arr[success_degree]; ?></td>
-						                <td><?php echo $arr[facutly]; ?></td>
-						                <td><?php echo $arr[major]; ?></td>
-						                <td><?php echo $arr[email]; ?></td>
+						                <td><?php echo $arr[success_degree]; ?> </td>
+						                <td><?php echo $arr[facutly]; ?> </td>
+						                <td><?php echo $arr[major]; ?> </td>
+						                <td><?php echo $arr[qualification]; ?> </td>
+						                <td><?php echo $arr[year_start]; ?> </td>
+						                <td><?php echo $arr[year_end]; ?> </td>
+						                <td><?php echo $arr[email]; ?> </td>
 						            </tr>
 <?php } ?>  
 						        </tbody>
 						        <tfoot>
 						             <tr>
+						                <th>เลขประจำตัวนักศึกษา</th>
 						                <th>ชื่อ - นามสกุล</th>
+						                <th>ปีเกิด</th>
+						                <th>เบอร์โทรศัพท์</th>
+						                <th>สถานะภาพการทำงานปัจจุบัน</th>
+						                <th>จังหวัดที่อาศัยปัจจุบัน</th>
 						                <th>มหาวิทยาลัย</th>
 						                <th>ระดับ</th>
 						                <th>คณะ</th>
 						                <th>สาขา</th>
+						                <th>วุฒิที่สำเร็จการศึกษา</th>
+						                <th>ปีที่เริ่มเข้าศึกษา</th>
+						                <th>ปีที่จบการศึกษา</th>
 						                <th>อีเมล</th>
 						            </tr>
 						        </tfoot>
@@ -174,7 +198,7 @@ include("check_admin.php");
     $('#example').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'copy',  'excel', 'pdf', 'print'
+            'copy',  'excel', 'print'
         ]
     } );
 } );

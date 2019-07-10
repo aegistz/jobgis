@@ -108,131 +108,23 @@ include("check_admin.php");
 				<div class="row">
 
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<ul class="nav nav-pills">
-						  <li class="active"><a class="btn btn-primary btn-lg" data-toggle="pill" href="#menu1">นำเข้าจากหน้าระบบ</a></li>
-						  <li><a  class="btn btn-primary btn-lg" data-toggle="pill" href="#home">นำเข้าไฟล์แบบ Google Drive</a></li>
-						  <li><a class="btn btn-primary btn-lg" data-toggle="pill" href="#menu2">รายชื่อที่นำเข้าแล้ว</a></li>
+						<ul class="nav nav-tabs">
+						  <li class="active"><a class="btn btn-primary btn-lg" data-toggle="tab" href="#input_web">นำเข้าจากหน้าระบบ</a></li>
+						  <li><a  class="btn btn-primary btn-lg" data-toggle="tab" href="#input_csv">นำเข้าไฟล์แบบ Google Drive</a></li>
+						  <li><a class="btn btn-primary btn-lg" data-toggle="tab" href="#data_view">รายชื่อที่นำเข้าแล้ว</a></li>
 						</ul>
 
 						<?php echo $message ; ?>
 
 						<div class="tab-content">
 
-						  <div id="home" class="tab-pane fade">
-						    	<div class="jumbotron">
-								  <p class="lead">
-
-<?php 
-	if ( $admin[password] == "gistdacmu" ) {
-		echo ' <a class="btn btn-primary btn-lg" 
-								    	href="https://docs.google.com/spreadsheets/d/1zTlkKquRv4Mx7X8ZKERx_c86o_LCaZU1Ol30Y_y9a_8/edit?usp=sharing" 
-								    	role="button" target="_blank">
-								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
-									</a>';
-	}else if( $admin[password] == "gistdakku" ){
-		echo ' <a class="btn btn-primary btn-lg" 
-								    	href="https://docs.google.com/spreadsheets/d/1tzjTc_CUaBLF7culZDwNEyLd856hSuSXg09x4CrtaJM/edit?usp=sharing" 
-								    	role="button" target="_blank">
-								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
-									</a>';
-	}else if( $admin[password] == "gistdapsu" ){
-		echo ' <a class="btn btn-primary btn-lg" 
-								    	href="https://docs.google.com/spreadsheets/d/1wD3hsZjV0dgYrtEeDwPzJ37gr3w-ke-CBE2HvrvIWFg/edit?usp=sharing" 
-								    	role="button" target="_blank">
-								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
-									</a>';
-	}else if( $admin[password] == "gistdabuu" ){
-		echo ' <a class="btn btn-primary btn-lg" 
-								    	href="https://docs.google.com/spreadsheets/d/1_flVF8eA4s8kL1wd4cCeTWb1ngI81k--aAYNjumCJZE/edit?usp=sharing" 
-								    	role="button" target="_blank">
-								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
-									</a>';
-	}else if( $admin[password] == "gistdanu" ){
-		echo ' <a class="btn btn-primary btn-lg" 
-								    	href="https://docs.google.com/spreadsheets/d/1LAXin_n_UOGJrXa7o21uHNB73wULnv7QeygJDwA1Eho/edit?usp=sharing" 
-								    	role="button" target="_blank">
-								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
-									</a>';
-	}else if( $admin[password] == "gistdaadmin" ){
-		echo ' <a class="btn btn-primary btn-lg" 
-								    	href="https://docs.google.com/spreadsheets/d/1LAXin_n_UOGJrXa7o21uHNB73wULnv7QeygJDwA1Eho/edit?usp=sharing" 
-								    	role="button" target="_blank">
-								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
-									</a>';
-	}
 
 
-
-?>
-								   
-
-
-
-
-								  </p>
-
-								  <ul class="nav nav-tabs">
-									  <li class="active"><a data-toggle="tab" href="#ex1">ตัวอย่างรูปแบบการกรอกข้อมูลลงใน Google Drive</a></li>
-									  <li><a data-toggle="tab" href="#ex2">ตัวอย่างการดาวน์โหลดข้อมูลเป็น csv เพื่อนำเข้าระบบ</a></li>
-									</ul>
-
-									<div class="tab-content">
-									  <div id="ex1" class="tab-pane fade in active">
-									  	<a href="../images/template_excel.jpg" target="_blank" title="">
-										    <img src="../images/template_excel.jpg" alt="" width="100%">
-									  	</a>
-										    * กดที่รูปเพื่อดูภาพขนาดใหญ่ <br>
-										    ** ชื่อจังหวัดไม่ต้องใส่คำนำหน้า เช่น จ. หรือ จังหวัด 
-									  </div>
-									  <div id="ex2" class="tab-pane fade">
-									  	<div class="row">
-											  	<div class="col-md-6">
-												  	<a href="../images/download_to_csv.png" target="_blank" title="">
-													    <img src="../images/download_to_csv.png" alt="" width="100%">
-												  	</a>
-											  	</div>
-											  	<div class="col-md-6">
-											  		<p>ขั้นตอนการดาวน์โหลด</p>
-											  		<ul>
-											  			<li> กรอกข้อมูลให้ครบทุกช่องตามแบบฟอร์มที่กำหนดให้</li>
-											  			<li> กดที่เมนู ไฟล์</li>
-											  			<li> เลือก ดาวน์โหลดเป็น</li>
-											  			<li> เลือก ค่าที่คั้นด้วยเครื่องหมายจุลภาค (.csv,แผ่นงานปัจจุบัน)</li>
-											  		</ul>
-											  		<br>
-											  		* กดที่รูปเพื่อดูภาพขนาดใหญ่ 
-												    
-											  	</div>
-									  	</div>
-									  	
-
-									  </div>
-									</div>
-
-								  <hr>
-<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
-	
-								  <div class="form-group">
-								  	<p>ลากไฟล์ที่ดาวน์โหลดจาก Google Drive ด้วยนามสกุล .CSV ไว้ที่นี่เพื่อนำเข้าระบบ</p>
-									  <div class="form-group files">
-									       <input type="file" class="form-control" name="csv"  id="csv" >
-						              </div>
-								      <p id="fileHelp" class="form-text text-muted">* กรุณาตรวจสอบข้อมูลก่อนนำเข้าทุกครั้ง</p>
-								    </div>	
-
-									<div class="form-group text-left">
-										<button type="submit" name="insert_data_csv" class="btn btn-primary">นำเข้าข้อมูล</button>
-									</div>
-</form>
-								</div>
-
-						  </div>
-
-						  <div id="menu1" class="tab-pane fade in active">
+						  <div id="input_web" class="tab-pane active">
 							<div class="jumbotron">
 						    	<h5>กรุณากรอกข้อมูลให้ครบถ้วน</h5>
 
-<form class="form-validate form-horizontal" id="feedback_form" method="post" action="add_data.php" enctype="multipart/form-data">
+<form class="form-validate form-horizontal" id="feedback_form" method="post" action="add_data.php#input_web" enctype="multipart/form-data">
 	<div class="">
 		<div class="col-md-2">
 								<div class="form-group">
@@ -703,7 +595,124 @@ include("check_admin.php");
 					
 						  </div>
 
-						  <div id="menu2" class="tab-pane fade">
+
+						  <div id="input_csv" class="tab-pane fade">
+						    	<div class="jumbotron">
+								  <p class="lead">
+
+<?php 
+	if ( $admin[password] == "gistdacmu" ) {
+		echo ' <a class="btn btn-primary btn-lg" 
+								    	href="https://docs.google.com/spreadsheets/d/1zTlkKquRv4Mx7X8ZKERx_c86o_LCaZU1Ol30Y_y9a_8/edit?usp=sharing" 
+								    	role="button" target="_blank">
+								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
+									</a>';
+	}else if( $admin[password] == "gistdakku" ){
+		echo ' <a class="btn btn-primary btn-lg" 
+								    	href="https://docs.google.com/spreadsheets/d/1tzjTc_CUaBLF7culZDwNEyLd856hSuSXg09x4CrtaJM/edit?usp=sharing" 
+								    	role="button" target="_blank">
+								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
+									</a>';
+	}else if( $admin[password] == "gistdapsu" ){
+		echo ' <a class="btn btn-primary btn-lg" 
+								    	href="https://docs.google.com/spreadsheets/d/1wD3hsZjV0dgYrtEeDwPzJ37gr3w-ke-CBE2HvrvIWFg/edit?usp=sharing" 
+								    	role="button" target="_blank">
+								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
+									</a>';
+	}else if( $admin[password] == "gistdabuu" ){
+		echo ' <a class="btn btn-primary btn-lg" 
+								    	href="https://docs.google.com/spreadsheets/d/1_flVF8eA4s8kL1wd4cCeTWb1ngI81k--aAYNjumCJZE/edit?usp=sharing" 
+								    	role="button" target="_blank">
+								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
+									</a>';
+	}else if( $admin[password] == "gistdanu" ){
+		echo ' <a class="btn btn-primary btn-lg" 
+								    	href="https://docs.google.com/spreadsheets/d/1LAXin_n_UOGJrXa7o21uHNB73wULnv7QeygJDwA1Eho/edit?usp=sharing" 
+								    	role="button" target="_blank">
+								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
+									</a>';
+	}else if( $admin[password] == "gistdaadmin" ){
+		echo ' <a class="btn btn-primary btn-lg" 
+								    	href="https://docs.google.com/spreadsheets/d/1LAXin_n_UOGJrXa7o21uHNB73wULnv7QeygJDwA1Eho/edit?usp=sharing" 
+								    	role="button" target="_blank">
+								   	 กดเข้า Google Drive เพื่อบันทึกข้อมูลก่อนนำมา Upload เข้าระบบ
+									</a>';
+	}
+
+
+
+?>
+								   
+
+
+
+
+								  </p>
+
+								  <ul class="nav nav-tabs">
+									  <li class="active"><a data-toggle="tab" href="#ex1">ตัวอย่างรูปแบบการกรอกข้อมูลลงใน Google Drive</a></li>
+									  <li><a data-toggle="tab" href="#ex2">ตัวอย่างการดาวน์โหลดข้อมูลเป็น csv เพื่อนำเข้าระบบ</a></li>
+									</ul>
+
+									<div class="tab-content">
+									  <div id="ex1" class="tab-pane fade in active">
+									  	<a href="../images/template_excel.jpg" target="_blank" title="">
+										    <img src="../images/template_excel.jpg" alt="" width="100%">
+									  	</a>
+										    * กดที่รูปเพื่อดูภาพขนาดใหญ่ <br>
+										    ** ชื่อจังหวัดไม่ต้องใส่คำนำหน้า เช่น จ. หรือ จังหวัด 
+									  </div>
+									  <div id="ex2" class="tab-pane fade">
+									  	<div class="row">
+											  	<div class="col-md-6">
+												  	<a href="../images/download_to_csv.png" target="_blank" title="">
+													    <img src="../images/download_to_csv.png" alt="" width="100%">
+												  	</a>
+											  	</div>
+											  	<div class="col-md-6">
+											  		<p>ขั้นตอนการดาวน์โหลด</p>
+											  		<ul>
+											  			<li> กรอกข้อมูลให้ครบทุกช่องตามแบบฟอร์มที่กำหนดให้</li>
+											  			<li> กดที่เมนู ไฟล์</li>
+											  			<li> เลือก ดาวน์โหลดเป็น</li>
+											  			<li> เลือก ค่าที่คั้นด้วยเครื่องหมายจุลภาค (.csv,แผ่นงานปัจจุบัน)</li>
+											  		</ul>
+											  		<br>
+											  		* กดที่รูปเพื่อดูภาพขนาดใหญ่ 
+												    
+											  	</div>
+									  	</div>
+									  	
+
+									  </div>
+									</div>
+
+								  <hr>
+<form action="add_data.php#input_csv" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
+	
+								  <div class="form-group">
+								  	<p>ลากไฟล์ที่ดาวน์โหลดจาก Google Drive ด้วยนามสกุล .CSV ไว้ที่นี่เพื่อนำเข้าระบบ</p>
+									  <div class="form-group files">
+									       <input type="file" class="form-control" name="csv"  id="csv" >
+						              </div>
+								      <p id="fileHelp" class="form-text text-muted">* กรุณาตรวจสอบข้อมูลก่อนนำเข้าทุกครั้ง</p>
+								    </div>	
+
+									<div class="form-group text-left">
+										<button type="submit" name="insert_data_csv" class="btn btn-primary">นำเข้าข้อมูล</button>
+									</div>
+</form>
+								</div>
+
+						  </div>
+
+
+
+
+
+
+
+						  <div id="data_view" class="tab-pane fade">
 						  	<div class="jumbotron">
 						    <table id="example" class="display" style="width:100%">
 						        <thead>
@@ -733,15 +742,10 @@ include("check_admin.php");
 						                <td><?php echo $arr[major]; ?></td>
 						                <td><?php echo $arr[email]; ?></td>
 						                <td>
-<form  method="post" action="add_data.php" enctype="multipart/form-data">
-				<a  data-toggle="modal" data-target="#myModal<?php echo $arr[id_no]; ?>" class="btn btn-info btn-sm"  >
+				<a href="update_student.php?q=<?php echo $arr[id_no]; ?>"  class="btn btn-info btn-sm" >
 					<i class="fa fa-search"></i>
 				</a>
-				<button type="submit" name="delete" value="<?php echo $arr[id_no]; ?>" class="btn btn-danger btn-sm"  onclick="return confirm('คุณต้องการลบข้อมูลของ <?php echo  $arr[title_name],$arr[s_name],' ',$arr[l_name]  ; ?> จริงๆหรือไม่ ถ้าลบข้อมูลแล้วจะไม่สามารถย้อนกลับได้ ?')">
-					<i class="fa fa-close"></i>
-				</button>
-</form>
-														</td>
+										</td>
 						            </tr>
 <?php } ?>  
 						        </tbody>
@@ -799,14 +803,33 @@ include("check_admin.php");
 		<script src="../js/e-magz.js"></script>
 		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-
 		<script type="text/javascript">
 			$(document).ready(function() {
 				    $('#example').DataTable();
 				} );
 
 
+				function myFunction(e) {
+				    console.log(e)
+				}
+
 		</script>
-		
+	
+<script>
+    $(function(){
+  var hash = window.location.hash;
+  hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+  $('.nav-tabs a').click(function (e) {
+    $(this).tab('show');
+    var scrollmem = $('body').scrollTop();
+    window.location.hash = this.hash;
+    $('html,body').scrollTop(scrollmem);
+  });
+});
+</script>
+
+	
+     
 	</body>
 </html>
