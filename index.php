@@ -261,9 +261,9 @@ include("check_student.php")
 													</a>
 												</div>
 											</div>
-											<div class="featured-author-quote">
+											<!-- <div class="featured-author-quote">
 												<b>สถานะ : </b>	  ต้องการหางานทางด้านพัฒนาระบบภูมิสารสนเทศ GIS ด่วน ๆ พร้อมเริ่มงาน
-											</div>
+											</div> -->
 											<div class="block">
 												<h2 class="block-title">ภาพประสบการณ์</h2>
 												<div class="block-body">
@@ -336,51 +336,27 @@ SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where i
 						<aside>
 							<h1 class="aside-title">Popular <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
 							<div class="aside-body">
+
+<?php
+								$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 5 ;  ");
+								while ( $arr = pg_fetch_array($sql) ) {
+?>
 								<article class="article-mini">
 									<div class="inner">
 										<figure>
 											<a href="news.php">
-												<img src="images/news/j215544.png" alt="Sample Article">
+												<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="news.php">นักวิชาการเกษตร</a></h1>
+											<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
 											<p>
-												บริษัท กรีนไลฟ์ อินเตอร์เนชั่นแนล จำกัด  Agricultural Research Officer ยินดีรับนักศึกษาจบใหม่
+												<?php echo $arr[detail_job]; ?> 
 											</p>
 										</div>
 									</div>
 								</article>
-								<article class="article-mini">
-									<div class="inner">
-										<figure>
-											<a href="news.php">
-												<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j27745.gif?v=13" alt="Sample Article">
-											</a>
-										</figure>
-										<div class="padding">
-											<h1><a href="news.php">ผู้เชียวชาญบริการจัดการแมลง</a></h1>
-											<p>
-												บริษัท คิงส์ เซอร์วิส เซ็นเตอร์ จำกัด Pest Management Technician
-											</p>
-										</div>
-									</div>
-								</article>
-								<article class="article-mini">
-									<div class="inner">
-										<figure>
-											<a href="news.php">
-												<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j6825.gif?v=32" alt="Sample Article">
-											</a>
-										</figure>
-										<div class="padding">
-											<h1><a href="news.php">ผู้จัดการฝ่ายปฏิบัติการ</a></h1>
-											<p>
-												บริษัท เซเว่น ยูทิลิตี้ส์ แอนด์ พาวเวอร์ จำกัด (มหาชน)
-											</p>
-										</div>
-									</div>
-								</article>
+<?php } ?>
 							</div>
 						</aside>
 						
@@ -402,93 +378,30 @@ SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where i
 				</div>
 				</h1>
 				<div class="owl-carousel owl-theme carousel-1">
+
+
+<?php
+								$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 5 ;  ");
+								while ( $arr = pg_fetch_array($sql) ) {
+?>
 					<article class="article">
 						<div class="inner">
 							<figure>
-								<a href="news.php">
-									<img src="https://www.jobtopgun.com/content/filejobtopgun/picslide/21844_1516958634287.jpg?v=16" alt="Sample Article">
+								<a  href="news.php?q=<?php echo $arr[id_job]; ?>">
+									<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
 								</a>
 							</figure>
 							<div class="padding">
 								<div class="detail">
-									<div class="time">December 09, 2016</div>
-									<div class="category"><a href="category.html">ข่าวรับสมัครงาน</a></div>
+									<div class="time"><?php echo $arr[date_job]; ?></div>
+									<div class="category"><a href=""><?php echo $arr[type_job]; ?></a></div>
 								</div>
-								<h2><a href="news.php">Plant breeder เจ้าหน้าที่ปรับปรุงพันธุ์ข้าว</a></h2>
-								<p>บริษัท เจริญโภคภัณฑ์วิศวกรรม จำกัด</p>
+								<h2><a href="news.php"><?php echo $arr[name_job]; ?></a></h2>
+								<p><?php echo $arr[detail_job]; ?></p>
 							</div>
 						</div>
 					</article>
-					<article class="article">
-						<div class="inner">
-							<figure>
-								<a href="news.php">
-									<img src="https://www.jobtopgun.com/content/filejobtopgun/picslide/3600_1507796903037.jpg?v=38" alt="Sample Article">
-								</a>
-							</figure>
-							<div class="padding">
-								<div class="detail">
-									<div class="time">December 09, 2016</div>
-									<div class="category"><a href="category.html">Sport</a></div>
-								</div>
-								<h2><a href="news.php">พนักงานสุ่มตัวอย่าง Sampler Officer</a></h2>
-								<p>บริษัท เจียไต๋ จำกัด</p>
-							</div>
-						</div>
-					</article>
-					<article class="article">
-						<div class="inner">
-							<figure>
-								<a href="news.php">
-									<img src="https://www.jobtopgun.com/content/filejobtopgun/picslide/21045_1401871544747.jpg?v=6" alt="Sample Article">
-								</a>
-							</figure>
-							<div class="padding">
-								<div class="detail">
-									<div class="time">December 26, 2016</div>
-									<div class="category"><a href="category.html">Lifestyle</a></div>
-								</div>
-								<h2><a href="news.php">Plant Operation Technician (Packing Export & Processing Sweet corn)</a></h2>
-								<p>บริษัท มอนซานโต้ ไทยแลนด์ จำกัด</p>
-							</div>
-						</div>
-					</article>
-					<article class="article">
-						<div class="inner">
-							<figure>
-								<a href="news.php">
-									<img src="https://www.jobtopgun.com/content/filejobtopgun/picslide/3600_1507796903074.jpg?v=43" alt="Sample Article">
-								</a>
-							</figure>
-							<div class="padding">
-								<div class="detail">
-									<div class="time">December 26, 2016</div>
-									<div class="category"><a href="category.html">Travel</a></div>
-								</div>
-								<h2><a href="news.php">พนักงานขาย (Cash Sale)
-								Sale Representative (Cash Sale)</a></h2>
-								<p>บริษัท เจียไต๋ จำกัด</p>
-							</div>
-						</div>
-					</article>
-					<article class="article">
-						<div class="inner">
-							<figure>
-								<a href="news.php">
-									<img src="https://www.jobtopgun.com/content/filejobtopgun/picslide/3600_1507796903014.jpg?v=47" alt="Sample Article">
-								</a>
-							</figure>
-							<div class="padding">
-								<div class="detail">
-									<div class="time">December 26, 2016</div>
-									<div class="category"><a href="category.html">Travel</a></div>
-								</div>
-								<h2><a href="news.php">พนักงานเทคโนโลยีสารสนเทศ
-								Information Technology Officer</a></h2>
-								<p>บริษัท เจียไต๋ จำกัด</p>
-							</div>
-						</div>
-					</article>
+<?php } ?>					
 				</div>
 			</div>
 		</section>

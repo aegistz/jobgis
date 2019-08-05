@@ -91,6 +91,7 @@ if(isset($_COOKIE["type"]))
 							<li class="for-tablet"><a href="login.html">Login</a></li>
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="./">หน้าแรก</a></li>
+							<li><a href="story.php">เรื่องราว</a></li>
 							<li class="dropdown magz-dropdown">
 								<a href="category.html">ค้นหางาน <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
@@ -209,15 +210,15 @@ if(isset($_COOKIE["type"]))
         <h4 class="modal-title">แก้ไขภาพหน้าปก</h4>
       </div>
       <div class="modal-body">
-<form class="form-validate form-horizontal" id="feedback_form" method="post" action="profile.php" enctype="multipart/form-data">
+<form enctype="multipart/form-data" method="post">
             <div class="form-group">
-                <input class="form-control " type="file" id="cname"  name="fileToUpload"  value="user.png"  onchange="readURL(this);">
+                <input class="form-control " type="file" id="cname"  name="file"  value="user.png"  onchange="readURL(this);">
                 <center>
                     <img id="blah" src="images/student/<?php echo $user[bg_img]; ?>" style=" max-width:100%; height:200px;margin-top:20px;" alt="your image" />
                 </center>
                 
             </div>
-            <button type="submit" class="btn btn-default btn-primary btn-block btn-sm" name="bg_img">SAVE</button>
+            <button type="submit" class="btn btn-default btn-primary btn-block btn-sm" name="upload_img_bg_profile" value="true">SAVE</button>
 </form>
 
       </div>
@@ -240,15 +241,15 @@ if(isset($_COOKIE["type"]))
         <h4 class="modal-title">แก้ไขรูปประจำตัว</h4>
       </div>
       <div class="modal-body">
-        <form class="form-validate form-horizontal" id="feedback_form" method="post" action="profile.php" enctype="multipart/form-data">
+<form enctype="multipart/form-data" method="post">
             <div class="form-group">
-                <input class="form-control " type="file" id="cname"  name="fileToUpload"  value="user.png"  onchange="readURL2(this);">
+                <input class="form-control " type="file" id="cname"  name="file"  value="user.png"  onchange="readURL2(this);">
                 <center>
                     <img id="blah2" src="images/student/<?php echo $user[img]; ?>" style=" max-width:100%; height:200px;margin-top:20px;" alt="your image" />
                 </center>
                 
             </div>
-            <button type="submit" class="btn btn-default btn-primary btn-block btn-sm" name="profile_img">SAVE</button>
+            <button type="submit" class="btn btn-default btn-primary btn-block btn-sm" name="upload_img_profile" value="true">SAVE</button>
         </form>
       </div>
       <div class="modal-footer">

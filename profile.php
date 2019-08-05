@@ -4,186 +4,7 @@ session_start();
 
 include("config.php");
 include("check_student.php");
-
-
-$error = '';
-$success = '';
- 
-if( $_POST[upload_img] == 'true' ) 
-{
-    // get uploaded file name
-    $image = $_FILES["file"]["name"];
- 
-    if( empty( $image ) ) {
-        $error = 'File is empty, please select image to upload.';
-    } else if($_FILES["file"]["type"] == "application/msword") {
-        $error = 'Invalid image type, use (e.g. png, jpg, gif).';
-    } else if( $_FILES["file"]["error"] > 0 ) {
-        $error = 'Oops sorry, seems there is an error uploading your image, please try again later.';
-    } else {
-    
-        // strip file slashes in uploaded file, although it will not happen but just in case ;)
-        $filename = stripslashes( $_FILES['file']['name'] );
-        $ext = get_file_extension( $filename );
-        $ext = strtolower( $ext );
-        
-        if(( $ext != "jpg" ) && ( $ext != "jpeg" ) && ( $ext != "png" ) && ( $ext != "gif" ) ) {
-            $error = 'Unknown Image extension.';
-            return false;
-        } else {
-            // get uploaded file size
-            $size = filesize( $_FILES['file']['tmp_name'] );
-            
-            // get php ini settings for max uploaded file size
-            $max_upload = ini_get( 'upload_max_filesize' );
- 
-            // check if we're able to upload lessthan the max size
-            if( $size > $max_upload )
-                $error = 'You have exceeded the upload file size.';
- 
-            // check uploaded file extension if it is jpg or jpeg, otherwise png and if not then it goes to gif image conversion
-            $uploaded_file = $_FILES['file']['tmp_name'];
-            if( $ext == "jpg" || $ext == "jpeg" )
-                $source = imagecreatefromjpeg( $uploaded_file );
-            else if( $ext == "png" )
-                $source = imagecreatefrompng( $uploaded_file );
-            else
-                $source = imagecreatefromgif( $uploaded_file );
- 
-            // getimagesize() function simply get the size of an image
-            list( $width, $height) = getimagesize ( $uploaded_file );
-            $ratio = $height / $width;
- 
- 
-            // new width 100 in pixel format too
-            $nw1 = 450;
-            $nh1 = ceil( $ratio * $nw1 );
-            $dst1 = imagecreatetruecolor( $nw1, $nh1 );
- 
-            imagecopyresampled( $dst1, $source, 0, 0, 0, 0, $nw1, $nh1, $width, $height );
- 
-            // rename our upload image file name, this to avoid conflict in previous upload images
-            // to easily get our uploaded images name we added image size to the suffix
-            $rnd_name1 = 'photos_student_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
-            
-            // move it to uploads dir with full quality
-            imagejpeg( $dst1, 'images/student/'.$rnd_name1, 100 );
- 
-            // I think that's it we're good to clear our created images
-            imagedestroy( $source );
-            imagedestroy( $dst1 );
-
-			$showpic = "images/student/".$rnd_name1;
-
-			$date_now = date("Y/m/d");
-
-		
-           $is_uploaded = pg_query( "  INSERT INTO photo_user (name_img , id_user ,  date_img ) values ( '$rnd_name1','$user[id_no]','$date_now'  )   ;" );
-            
-           
- 
-        }
- 
-    }
-}
-
-
-
-if( $_POST[upload_story] == 'true' ) 
-{
-    // get uploaded file name
-    $image = $_FILES["file"]["name"];
- 
-    if( empty( $image ) ) {
-        $error = 'File is empty, please select image to upload.';
-    } else if($_FILES["file"]["type"] == "application/msword") {
-        $error = 'Invalid image type, use (e.g. png, jpg, gif).';
-    } else if( $_FILES["file"]["error"] > 0 ) {
-        $error = 'Oops sorry, seems there is an error uploading your image, please try again later.';
-    } else {
-    
-        // strip file slashes in uploaded file, although it will not happen but just in case ;)
-        $filename = stripslashes( $_FILES['file']['name'] );
-        $ext = get_file_extension( $filename );
-        $ext = strtolower( $ext );
-        
-        if(( $ext != "jpg" ) && ( $ext != "jpeg" ) && ( $ext != "png" ) && ( $ext != "gif" ) ) {
-            $error = 'Unknown Image extension.';
-            return false;
-        } else {
-            // get uploaded file size
-            $size = filesize( $_FILES['file']['tmp_name'] );
-            
-            // get php ini settings for max uploaded file size
-            $max_upload = ini_get( 'upload_max_filesize' );
- 
-            // check if we're able to upload lessthan the max size
-            if( $size > $max_upload )
-                $error = 'You have exceeded the upload file size.';
- 
-            // check uploaded file extension if it is jpg or jpeg, otherwise png and if not then it goes to gif image conversion
-            $uploaded_file = $_FILES['file']['tmp_name'];
-            if( $ext == "jpg" || $ext == "jpeg" )
-                $source = imagecreatefromjpeg( $uploaded_file );
-            else if( $ext == "png" )
-                $source = imagecreatefrompng( $uploaded_file );
-            else
-                $source = imagecreatefromgif( $uploaded_file );
- 
-            // getimagesize() function simply get the size of an image
-            list( $width, $height) = getimagesize ( $uploaded_file );
-            $ratio = $height / $width;
- 
- 
-            // new width 100 in pixel format too
-            $nw1 = 450;
-            $nh1 = ceil( $ratio * $nw1 );
-            $dst1 = imagecreatetruecolor( $nw1, $nh1 );
- 
-            imagecopyresampled( $dst1, $source, 0, 0, 0, 0, $nw1, $nh1, $width, $height );
- 
-            // rename our upload image file name, this to avoid conflict in previous upload images
-            // to easily get our uploaded images name we added image size to the suffix
-            $rnd_name1 = 'photos_story_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
-            
-            // move it to uploads dir with full quality
-            imagejpeg( $dst1, 'images/story/'.$rnd_name1, 100 );
- 
-            // I think that's it we're good to clear our created images
-            imagedestroy( $source );
-            imagedestroy( $dst1 );
-
-			$showpic = "images/story/".$rnd_name1;
-
-			$date_now = date("Y/m/d");
-			$title_story = $_POST[title];
-			$detail_story = $_POST[detail];
-
-		
-           $is_uploaded = pg_query( "  INSERT INTO story (title_story , detail_story ,  img_story, tag_story, date_story ,id_user) 
-           	values ( '$title_story' ,'$detail_story','$rnd_name1','ประสบการณ์' ,'$date_now' ,'$user[id_no]'  )   ;" );
-            
-           
- 
-        }
- 
-    }
-}
-
-
-
-function get_file_extension( $file )  {
-    if( empty( $file ) )
-        return;
- 
-    // if goes here then good so all clear and good to go
-    $ext = end(explode( ".", $file ));
- 
-    // return file extension
-    return $ext;
-}
-
-
+include("api_service/profile_api.php")
 
 
 ?>
@@ -315,15 +136,25 @@ function get_file_extension( $file )  {
 												<div class="item">
 													<a href="#">
 														<div class="icon">
-															<div>More</div>
+															<div>Resume GIS</div>
 															<i class="ion-chevron-right"></i>
 														</div>														
 													</a>
 												</div>
 											</div>
-											<div class="featured-author-quote">
-												<b>สถานะ : </b>	 ต้องการหางานทางด้านพัฒนาระบบภูมิสารสนเทศ GIS ด่วน ๆ พร้อมเริ่มงาน
-											</div>
+											<!-- <div class="featured-author-quote divbutton">
+												<div class="form-group row">
+											      <label for="staticEmail" class="col-sm-2 col-form-label">สถานะ : </label>
+											      <div class="col-sm-8">
+											       <input type="text" name="" class="form-control" value="<?php echo $_COOKIE[type]; ?>">	
+											      </div>
+											      <div class="col-sm-2"> 
+											      	<button type="button"  class="btn btn-primary btn-sm" style="display: none;" >
+                                                        แก้ไขสถานะ
+                                                    </button>	
+											      </div>
+											    </div>
+											</div> -->
 											<div class="block">
 												<h2 class="block-title">Photos ของคุณ</h2>
 												<div class="block-body">
@@ -422,7 +253,7 @@ function get_file_extension( $file )  {
 
 
 <?php 
-	$id = $user[id_no];
+	
 	$query = pg_query("SELECT * from story where id_user = '$id' order by id_story desc ;");
 	$num = pg_num_rows($query);
 
@@ -505,51 +336,26 @@ function get_file_extension( $file )  {
 								<aside>
 									<h1 class="aside-title">งานที่เกี่ยวข้อง </h1>
 									<div class="aside-body">
-										<article class="article-mini">
-											<div class="inner">
-												<figure>
-													<a href="single.html">
-														<img src="images/news/j215544.png" alt="Sample Article">
-													</a>
-												</figure>
-												<div class="padding">
-													<h1><a href="single.html">นักวิชาการเกษตร</a></h1>
-													<p>
-												บริษัท กรีนไลฟ์ อินเตอร์เนชั่นแนล จำกัด  Agricultural Research Officer ยินดีรับนักศึกษาจบใหม่
-												</p>
-												</div>
-											</div>
-										</article>
-										<article class="article-mini">
-											<div class="inner">
-												<figure>
-													<a href="single.html">
-														<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j27745.gif?v=13" alt="Sample Article">
-													</a>
-												</figure>
-												<div class="padding">
-													<h1><a href="single.html">ผู้เชียวชาญบริการจัดการแมลง</a></h1>
-													<p>
-													บริษัท คิงส์ เซอร์วิส เซ็นเตอร์ จำกัด Pest Management Technician
-												</p>
-												</div>
-											</div>
-										</article>
-										<article class="article-mini">
-											<div class="inner">
-												<figure>
-													<a href="single.html">
-														<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j6825.gif?v=32" alt="Sample Article">
-													</a>
-												</figure>
-												<div class="padding">
-													<h1><a href="single.html">ผู้จัดการฝ่ายปฏิบัติการ</a></h1>
-												<p>
-													บริษัท เซเว่น ยูทิลิตี้ส์ แอนด์ พาวเวอร์ จำกัด (มหาชน)
-												</p>
-												</div>
-											</div>
-										</article>
+										<?php
+								$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 5 ;  ");
+								while ( $arr = pg_fetch_array($sql) ) {
+?>
+								<article class="article-mini">
+									<div class="inner">
+										<figure>
+											<a href="news.php">
+												<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+											</a>
+										</figure>
+										<div class="padding">
+											<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
+											<p>
+												<?php echo $arr[detail_job]; ?> 
+											</p>
+										</div>
+									</div>
+								</article>
+<?php } ?>
 									</div>
 
 								</aside>
@@ -585,6 +391,15 @@ function get_file_extension( $file )  {
 		<script src="scripts/toast/jquery.toast.min.js"></script>
 		<!-- <script src="js/demo.js"></script> -->
 		<script src="js/e-magz.js"></script>
+
+	<script>
+		function myFunction() {
+		  document.getElementById("status").innerHTML = "<input type='text'>";
+		}
+
+
+	</script>
+
 		<script>
 		$(document).on('click', '#close-preview', function(){ 
     $('.image-preview').popover('hide');
