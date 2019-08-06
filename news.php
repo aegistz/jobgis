@@ -107,18 +107,25 @@ include("check_student.php");
 							<div class="main">
 								<p><?php echo $result[detail_job]; ?> <hr>
 								<b>หน้าที่และความรับผิดชอบ</b> <br>
-1.ปรับปรุงพันธุ์พืช (ข้าว) (conventional plant breeding และ biotechnology) <br>
+<?php 
+	$sql2 = pg_query("SELECT ROW_NUMBER () OVER (ORDER BY id_respon) as row,* from respon_job where id_job =  '$result[id_job]' ORDER BY id_respon;");
+	while ( $arr2 = pg_fetch_array($sql2)) {
+		echo $arr2[row].'. '.$arr2[detail_respon].'<br>';
+	}
+?>
 
-2.ทดสอบพันธุ์ <br>
-3.พัฒนาเครื่องหมายโมเลกุลสำหรับงานวิจัยและปรับปรุงพันธุ์ข้าวและพืชอื่นๆ <br>
-4.เก็บข้อมูลวิจัยด้านพืช <br> <br>
+<br>
 
 <b>คุณสมบัติ</b> <br>
-1.ปริญญาโท/ปริญญาเอก สาขา ปรับปรุงพันธุ์พืช (Plant breeding) <br>
-2.มีความรู้ด้านการปรับปรุงพันธุ์พืช (ข้าว) (conventional plant breeding และ biotechnology)  <br>
-3.มีความรู้ด้านพัฒนาเครื่องหมายโมเลกุลสำหรับงานวิจัยและปรับปรุงพันธุ์ข้าวและพืชอื่นๆ  <br>
-4.มีความรู้ด้านสถิติเพื่องานวิจัย การเก็บข้อมูลวิจัยด้านพืช  <br>
-5.ทำงานวิจัย หรือวิทยานิพนธ์ ด้านปรับปรุงพันธุ์ข้าว หรือพืชอื่นๆ
+<?php 
+	$sql2 = pg_query("SELECT ROW_NUMBER () OVER (ORDER BY id_property) as row,* from property_job where id_job =  '$result[id_job]' ORDER BY id_property;");
+	while ( $arr2 = pg_fetch_array($sql2)) {
+		echo $arr2[row].'. '.$arr2[detail_property].'<br>';
+	}
+?>
+
+
+
 
 							</p>
 								<div class="featured">
@@ -138,12 +145,12 @@ include("check_student.php");
 </p>
 							</div>
 
-<button class="btn btn-success">กดส่ง Resume ไปยังตำแหน่งงานนี้</button>
+<button class="btn btn-primary btn-block">กดส่ง Resume ไปยังตำแหน่งงานนี้</button>
 						</article>
 
 							
 <hr>
-						<div class="sharing">
+						<!-- <div class="sharing">
 						<div class="title"><i class="ion-android-share-alt"></i> Sharing is caring</div>
 							<ul class="social">
 								<li>
@@ -176,7 +183,7 @@ include("check_student.php");
 									<div>Shares</div>
 								</li>
 							</ul>
-						</div>
+						</div> -->
 
 						<div class="line">
 							<div>สถานประกอบการ</div>
@@ -184,13 +191,13 @@ include("check_student.php");
 
 						<div class="author">
 							<figure>
-								<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j21844.gif?v=22">
+								<img src="images/img_job/<?php echo $result[logo_img]; ?>">
 							</figure>
 							<div class="details">
 								<div class="job">สถานประกอบการ</div>
-								<h3 class="name"><?php echo $result[name_com]; ?></h3>
+								<h5 class="name"><?php echo $result[name_com]; ?></h5>
 								<p>พนักงานประจำ/นักศึกษาฝึกงาน/สหกิจศึกษา</p>
-								<ul class="social trp sm">
+								<!-- <ul class="social trp sm">
 									<li>
 										<a href="#" class="facebook">
 											<svg><rect/></svg>
@@ -215,7 +222,7 @@ include("check_student.php");
 											<i class="ion-social-googleplus"></i>
 										</a>
 									</li>
-								</ul>
+								</ul> -->
 							</div>
 						</div>
 

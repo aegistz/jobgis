@@ -134,10 +134,9 @@ include("api_service/profile_api.php")
 													</a>
 												</div>
 												<div class="item">
-													<a href="#">
+													<a href="view_resume.php">
 														<div class="icon">
 															<div>Resume GIS</div>
-															<i class="ion-chevron-right"></i>
 														</div>														
 													</a>
 												</div>

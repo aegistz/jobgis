@@ -112,6 +112,31 @@ if( $_POST[submit_form] == 'true' )
 			$result = pg_query($sql2);
             
             if($result){ 
+
+            		$sql_search = pg_query("SELECT * from   job_company  where  id_com = '$company[id_com]' order by id_job desc limit 1 ;");
+            		$arr_search = pg_fetch_array($sql_search);
+
+
+				$detail_property = $_POST['detail_property'];
+				for( $i = 0 ; $i < count($detail_property) ; $i++ )
+				 {
+				  	$inser_report = pg_query("
+				  		INSERT into property_job (id_job,detail_property,date_property) 
+				  		values ('$arr_search[id_job]', '$detail_property[$i]',  '$date');
+				  	 ;");
+				 }
+				 
+				$detail_respon = $_POST['detail_respon'];
+				for( $i = 0 ; $i < count($detail_respon) ; $i++ )
+				 {
+				  	$inser_report = pg_query("
+				  		INSERT into respon_job (id_job,detail_respon,date_respon) 
+				  		values ('$arr_search[id_job]', '$detail_respon[$i]',  '$date');
+				  	 ;");
+				 }
+
+
+
 				  $message = '<div class="alert alert-success alert-dismissible">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 										<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
@@ -127,6 +152,13 @@ if( $_POST[submit_form] == 'true' )
         }
  
     }
+
+
+
+
+
+
+
 }
 
 
@@ -297,6 +329,50 @@ function get_file_extension( $file )  {
 									</div>
 								</div>
 							</div>
+
+							<div class="col-md-6">
+								<hr>
+								<h4>คุณสมบัติ</h4>
+								<table class="table"  id="employee_table3">
+	                                <thead>
+	                                  <tr>
+	                                    <th width="12%">ข้อที่</th>
+	                                    <th>กรอกคุณสมบัติที่ต้องการ</th>
+	                                    <th width="8%"></th>
+	                                  </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr id="row1">  
+	                                        <td><input type="text" name="a1[]" value="1"  class="form-control" /></td>  
+	                                        <td><input type="text" name="detail_property[]" required class="form-control" /></td>
+	                                        <td><button type="button" onclick="add_row3();" value="ADD ROW" class="btn btn-sm btn-success">เพิ่มข้อมูลอีก</button></td>  
+	                                    </tr> 
+	                                </tbody>
+                              </table>
+							</div>
+
+
+							<div class="col-md-6">
+								<hr>
+								<h4>หน้าที่และความรับผิดชอบ </h4>
+								<table class="table"  id="employee_table2">
+	                                <thead>
+	                                  <tr>
+	                                    <th width="12%">ข้อที่</th>
+	                                    <th>กรอกหน้าที่และความรับผิดชอบ ต้องการ</th>
+	                                    <th width="8%"></th>
+	                                  </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr id="row1">  
+	                                        <td><input type="text" name="b1[]" value="1"  class="form-control" /></td>  
+	                                        <td><input type="text" name="detail_respon[]" required class="form-control" /></td>
+	                                        <td><button type="button" onclick="add_row2();" value="ADD ROW" class="btn btn-sm btn-success">เพิ่มข้อมูลอีก</button></td>  
+	                                    </tr> 
+	                                </tbody>
+                              </table>
+							</div>
+							</div>
 							
 						</div>
 					
@@ -353,5 +429,41 @@ function get_file_extension( $file )  {
             }
         }
 	</script>
+	 <script type="text/javascript">
+			function add_row3()
+			{
+			 $rowno=$("#employee_table3 tr").length;
+			 $rowno=$rowno;
+			 $("#employee_table3 tr:last").after(
+			            "<tr id='row"+$rowno+"'>\
+			            <td><input type='text' name='a1[]'  value='"+$rowno+"'  class='form-control'></td>\
+			            <td><input type='text' name='detail_property[]' required class='form-control'></td>\
+			            <td><input type='button' value='ลบ' class='btn btn-danger  btn-sm btn_remove' onclick=delete_row3('row"+$rowno+"')></td>\
+			            </tr>");
+			}
+			function delete_row3(rowno)
+			{
+				console.log(rowno)
+			 $('#'+rowno).remove();
+			}
+</script>    
+	 <script type="text/javascript">
+			function add_row2()
+			{
+			 $rowno=$("#employee_table2 tr").length;
+			 $rowno=$rowno;
+			 $("#employee_table2 tr:last").after(
+			            "<tr id='row2"+$rowno+"'>\
+			            <td><input type='text' name='b1[]'  value='"+$rowno+"'  class='form-control'></td>\
+			            <td><input type='text' name='detail_respon[]' required class='form-control'></td>\
+			            <td><input type='button' value='ลบ' class='btn btn-danger  btn-sm btn_remove' onclick=delete_row2('row2"+$rowno+"')></td>\
+			            </tr>");
+			}
+			function delete_row2(rowno)
+			{
+				console.log(rowno)
+			 $('#'+rowno).remove();
+			}
+</script>    
 </body>
 </html>

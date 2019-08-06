@@ -23,7 +23,7 @@ if(isset($_POST["login"]))
    else
    {
 
-			$sql = "SELECT * FROM company WHERE user_name = '$user_name'  ;";
+			$sql = "SELECT * FROM company WHERE email_com = '$user_name'  ;";
 	      	$quer_com = pg_query($sql);
 	      	$arr = pg_fetch_array($quer_com);
 			$count = pg_num_rows($quer_com);

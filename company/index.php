@@ -151,7 +151,7 @@ include("check-company.php")
 							<div class="aside-body">
 								<figure class="ads">
 									<a href="single.html">
-										<img src="http://www3.cgistln.nu.ac.th/training/img/logo.png">
+										<img src="../images/img_job/<?php echo $company[logo_img]; ?>">
 									</a>
 								</figure>
 							</div>
