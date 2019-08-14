@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
+<?php 
+	session_start();
+	include 'config.php';
+
+       $sql = "select * FROM resume WHERE email = '$email'; ";
+	   $query = pg_query($sql);
+	   $user = pg_fetch_array($query)
+?>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
@@ -51,7 +59,7 @@
 										<div class="col-md-7">
 											<div class="form-group">
 										<p>
-											นาย ขจรเกียรติ เจริญสุข<br>
+											ชื่อ <?php echo $user[title_name] ;?>&nbsp;<?php echo $user[s_name] ;?>&nbsp;<?php echo $user[l_name] ;?><br>
 											โทรศัพท์มือถือ : 085-XXXXXXX<br>
 											E-mail : gistnu@gmail.com<br>
 											ที่อยู่ : สถานภูมิภาคเทคโนโลยีอวกาศและภูมิสารสนเทศภาคเหนือตอนล่าง มหาวิทยาลัยนเรศวร (GISTNU)
