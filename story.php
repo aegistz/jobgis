@@ -101,7 +101,20 @@ include("check_student.php")
 
 							<?php } ?>
 
-
+ <div class="col-md-12 text-center">
+		            <ul class="pagination">
+		              <li class="prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
+		              <li class="active"><a href="#">1</a></li>
+		              <li><a href="#">2</a></li>
+		              <li><a href="#">3</a></li>
+		              <li><a href="#">...</a></li>
+		              <li><a href="#">97</a></li>
+		              <li class="next"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
+		            </ul>
+		            <div class="pagination-help-text">
+		            	Showing 8 results of 776 &mdash; Page 1
+		            </div>
+		          </div>
 						</div>
 					</div>
 					
@@ -156,8 +169,12 @@ include("check_student.php")
 									</div>
 								</article>
 <?php } ?>
+
+
+
 							</div>
 						</aside>
+
 					</div>
 				</div>
 			</div>

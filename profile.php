@@ -332,6 +332,43 @@ include("api_service/profile_api.php")
 
 
 							<div class="col-xs-12 col-md-4">
+
+								<aside>
+									<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
+									<div class="aside-body">
+<?php
+$sql = pg_query("SELECT * from user_request a  
+	inner join job_company b on a.id_job = b.id_job 
+	inner join company c on c.id_com = b.id_com where email_user = '$user[email]' ;  ");
+								while ( $arr = pg_fetch_array($sql) ) {
+?>
+								<article class="article-mini">
+									<div class="inner">
+										<figure>
+											<a href="news.php">
+												<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+											</a>
+
+										</figure>
+										<div class="padding">
+											<p><button  class="btn btn-warning btn-sm btn-block" >สถานะ : <?php echo $arr[request]; ?></button></p>
+											<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
+											<p>
+												โดย : <?php echo $arr[name_com]; ?> 
+											</p>
+											
+										</div>
+									</div>
+								</article>
+								<hr>
+<?php } ?>
+									</div>
+
+								</aside>
+
+								<hr>
+
+
 								<aside>
 									<h1 class="aside-title">งานที่เกี่ยวข้อง </h1>
 									<div class="aside-body">

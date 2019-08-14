@@ -145,7 +145,9 @@ include("check_student.php");
 </p>
 							</div>
 
-<button class="btn btn-primary btn-block">กดส่ง Resume ไปยังตำแหน่งงานนี้</button>
+<a class="btn btn-primary btn-block" href="send_request.php?q=<?php echo $_GET[q]; ?>">กดส่ง Resume ไปยังตำแหน่งงานนี้</a>
+
+
 						</article>
 
 							

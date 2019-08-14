@@ -92,16 +92,8 @@ if(isset($_COOKIE["type"]))
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="./">หน้าแรก</a></li>
 							<li><a href="story.php">เรื่องราว</a></li>
-							<li class="dropdown magz-dropdown">
-								<a href="category.html">ค้นหางาน <i class="ion-ios-arrow-right"></i></a>
-								<ul class="dropdown-menu">
-									<li><a href="search.php">หางานภาคกลาง</a></li>
-									<li><a href="search.php">หางานภาคเหนือ</a></li>
-									<li><a href="search.php">หางานภาคอีสาน</a></li>
-									<li><a href="search.php">หางานภาพตะวันตก</a></li>
-									<li><a href="search.php">หางานภาคใต้</a></li>
-								</ul>
-							</li>
+							<li><a href="search.php">ค้นหางาน</a></li>
+							
 							<li class="dropdown magz-dropdown"><a href="#">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="category.php">ทั่วไป</a></li>

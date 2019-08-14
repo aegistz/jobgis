@@ -309,22 +309,37 @@ SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where i
 							</div>
 						</aside>
 						<aside>
-							<div class="aside-body">
-								<form class="newsletter">
-									<div class="icon">
-										<i class="ion-ios-email-outline"></i>
-										<h1>Newsletter</h1>
-									</div>
-									<div class="input-group">
-										<input type="email" class="form-control email" placeholder="Your mail">
-										<div class="input-group-btn">
-											<button class="btn btn-primary"><i class="ion-paper-airplane"></i></button>
+									<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
+									<div class="aside-body">
+<?php
+$sql = pg_query("SELECT * from user_request a  
+	inner join job_company b on a.id_job = b.id_job 
+	inner join company c on c.id_com = b.id_com where email_user = '$user[email]' ;  ");
+								while ( $arr = pg_fetch_array($sql) ) {
+?>
+								<article class="article-mini">
+									<div class="inner">
+										<figure>
+											<a href="news.php">
+												<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+											</a>
+
+										</figure>
+										<div class="padding">
+											<p><button  class="btn btn-warning btn-sm btn-block" >สถานะ : <?php echo $arr[request]; ?></button></p>
+											<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
+											<p>
+												โดย : <?php echo $arr[name_com]; ?> 
+											</p>
+											
 										</div>
 									</div>
-									<p>By subscribing you will receive new articles in your email.</p>
-								</form>
-							</div>
-						</aside>
+								</article>
+								<hr>
+<?php } ?>
+									</div>
+
+								</aside>
 						<aside>
 							<div class="aside-body">
 								<figure class="ads">
