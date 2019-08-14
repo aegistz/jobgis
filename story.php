@@ -73,12 +73,12 @@ include("check_student.php")
 								                <div class="detail">
 								                	<div class="row">
 								                		<div class="col-md-2">
-								                		<img src="images/student/<?php echo $user[img]; ?>" alt="" width="100%">
+								                		<img src="images/student/<?php echo $arr[img]; ?>" alt="" width="100%">
 								                		</div>
 
 								                		<div class="col-md-10">
 									                		<div class="category">
-											                   <h6 >  <?php echo $user[s_name],' ', $user[l_name]; ?> </h6>
+											                   <h6 >  <?php echo $arr[s_name],' ', $arr[l_name]; ?> </h6>
 											                  โพสเมื่อ : <?php echo $arr[date_story]; ?>
 										                  </div>
 								                		</div>
@@ -90,7 +90,11 @@ include("check_student.php")
 								                </div>
 								                <h1><a href="single.html"><?php echo $arr[title_story]; ?></a></h1>
 								                <p>
-								                  <?php echo $arr[detail_story]; ?>
+								                 <?php 
+								                 echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="" title="">เพิ่มเติม</a>');
+								                 ?> 
+								                
+
 								                </p>
 								                <footer>
 								                  <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
@@ -196,6 +200,8 @@ include("check_student.php")
 		<script src="scripts/toast/jquery.toast.min.js"></script>
 		<!-- <script src="js/demo.js"></script> -->
 		<script src="js/e-magz.js"></script>
+
+		
 
 	</body>
 </html>

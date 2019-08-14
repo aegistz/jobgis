@@ -11,15 +11,30 @@ include("check_student.php");
 
 if ($_POST[send_request] == 'true') {
 
-	$sql = pg_query("INSERT INTO user_request (id_job , email_user , date_access , request) 
+
+	$sql_check = pg_query("SELECT * from user_request where email_user = '$user[email]'  and id_job = '$result[id_job]' ;");
+	$num = pg_num_rows($sql_check);
+
+	if ($num == 0) {
+		$sql = pg_query("INSERT INTO user_request (id_job , email_user , date_access , request) 
 		values ( '$result[id_job]', '$user[email]' , '$date' , 'รอการยืนยัน');");
 
 
 		if ($sql) {
 			$mes = 'yessss';
 		}else{
-			$mes = 'no';
+			$mes = '<div class="alert alert-dismissible alert-danger">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  <strong>Warning!</strong> ไม่สามารถส่งข้อมูลได้ กรุณาลองอีกครั้ง
+					</div>';
 		}
+	}else{
+		$mes = '<div class="alert alert-dismissible alert-danger">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  <strong>Warning!</strong> ท่านเคยส่งใบสมัครไปยังสถานประกอบการนี้แล้ว  <a href="" title="">ตรวจสอบที่นี่</a>
+					</div>';
+
+	}
 
 }
 
