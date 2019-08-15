@@ -81,6 +81,8 @@
 		  $tambon = $_POST['tambon'];
 		  $zip_code = $_POST['zip_code'];
 		  $religion = $_POST['religion'];
+		  $gpa = $_POST['gpa'];
+		  $edu_back = $_POST['edu_back'];
 
 
         $sql = "select * from resume  where email = '$email' ";
@@ -147,7 +149,9 @@
 			  		 province ,
 			  		 amphoe ,
 			  		 tambon ,
-			  		 zip_code
+			  		 zip_code ,
+			  		 gpa ,
+			  		 edu_back
 			  		 ) 
         			VALUES ( 
 		        	'$title_name',
@@ -208,7 +212,9 @@
 		          	'$province' ,
 		          	'$amphoe' ,
 		          	'$tambon' ,
-		          	'$zip_code' )  ;";
+		          	'$zip_code' ,
+		          	'$gpa' ,
+		          	'$edu_back')  ;";
 
         	$result = pg_query($sql);
 
@@ -458,9 +464,9 @@
 									<label>สถานภาพทางทหาร</label>
 									<select name="status" class="form-control" >
 										<option value="">กรุณาเลือก</option>
-										<option value="ประจำ">ผ่านการเกณฑ์ทหาร</option>
-										<option value="รายวัน">ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)</option>
-										<option value="ประจำ">ยังไม่ผ่านการเกณฑ์ทหาร</option>
+										<option value="ผ่านการเกณฑ์ทหาร">ผ่านการเกณฑ์ทหาร</option>
+										<option value="ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)">ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)</option>
+										<option value="ยังไม่ผ่านการเกณฑ์ทหาร">ยังไม่ผ่านการเกณฑ์ทหาร</option>
 									</select>
 								</div>
 				
@@ -559,26 +565,33 @@
 		</div>
 
 		<div class="col-md-12">
-			<div class="col-md-4">
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>ระดับการศึกษา</label>
 									<input type="text" name="degree" class="form-control">
 								</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>วุฒการศึกษา</label>
-									<input type="text" name="" class="form-control">
+									<input type="text" name="edu_back" class="form-control">
 								</div>
 				
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
+								<div class="form-group">
+									<label>GPA</label>
+									<input type="text" name="gpa" class="form-control">
+								</div>
+				
+			</div>	
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>ปีที่สำเร็จการศึกษา</label>
 									<input type="text" name="graduation" class="form-control">
 								</div>
 				
-			</div>			
+			</div>		
 		</div>
 	</div>
 	<div class="tab">
@@ -894,7 +907,7 @@
 
 				<b><p>โปรแกรมทางด้าน GIS</p></b>
 	<div class="col-md-12">
-			<div class="col-md-2">
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>ArcGIS</label>
 									<select name="arcgis" class="form-control">
@@ -905,7 +918,7 @@
 									</select>
 								</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>ERDAS</label>
 									<select name="erdas" class="form-control">
@@ -917,7 +930,7 @@
 								</div>
 				
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>ENVI</label>
 									<select name="envi" class="form-control">
@@ -929,7 +942,7 @@
 								</div>
 				
 			</div>	
-			<div class="col-md-2">
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>QGIS</label>
 									<select name="qgis" class="form-control">
@@ -941,13 +954,13 @@
 								</div>
 				
 			</div>	
-			<div class="col-md-4">
+<!-- 			<div class="col-md-4">
 								<div class="form-group">
 									<label>โปรแกรมอื่น ๆ</label>
 									<input type="text" name="" class="form-control">
 								</div>
 				
-			</div>	
+			</div>	 -->
 	</div>
 	</div>
 		<div class="tab">
