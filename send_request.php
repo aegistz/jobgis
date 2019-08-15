@@ -3,6 +3,8 @@
 session_start();
 include("config.php");
 include("check_student.php");
+	
+	$email = $user['email'];
 
 	$sql = pg_query("SELECT * from job_company a inner join company b on a.id_com = b.id_com where id_job = '$_GET[q]' ;");
 	$result = pg_fetch_array($sql);
@@ -37,6 +39,10 @@ if ($_POST[send_request] == 'true') {
 	}
 
 }
+	   $sql = "SELECT * FROM resume WHERE email = '$email'; ";
+	   $query = pg_query($sql);
+	   $resume = pg_fetch_array($query)
+?>
 
 
 ?>
@@ -181,47 +187,50 @@ if ($_POST[send_request] == 'true') {
 									<div class="col-md-6 col-sm-6">
 										<div class="col-md-7">
 											<div class="form-group">
-										<p>
-											นาย ขจรเกียรติ เจริญสุข<br>
-											โทรศัพท์มือถือ : 085-XXXXXXX<br>
-											E-mail : gistnu@gmail.com<br>
-											ที่อยู่ : สถานภูมิภาคเทคโนโลยีอวกาศและภูมิสารสนเทศภาคเหนือตอนล่าง มหาวิทยาลัยนเรศวร (GISTNU)
-												  ชั้น 3 อาคารเอกาทศรถ ต.ท่าโพธิ์ อ.​เมือง จ.พิษณุโลก​ 65000
+												<p>
+													ชื่อ <?php echo $resume[title_name] ;?>&nbsp;<?php echo $resume[s_name] ;?>&nbsp;<?php echo $resume[l_name] ;?><br>
+													โทรศัพท์มือถือ : <?php echo $resume[phone] ;?><br>
+													E-mail : <?php echo $resume[email] ;?><br>
+													ที่อยู่ : <?php echo $resume[address] ;?> ต.<?php echo $resume[tambon] ;?> อ.​<?php echo $resume[amphoe] ;?> จ.<?php echo $resume[province] ;?> <?php echo $resume[zip_code] ;?>
 
-										</p>
-										<p>
-											<h5>การศึกษา</h5>
-											มหาวิทยาลัย : ฟาร์อีสเทอร์น <br>
-											วุฒิการศึกษา : วท.บ <br>
-											ระดับการศึกษา : ปริญญาตรี <br>
-											คณะ : วิทยาศาสตร์และเทคโนโลยี <br>
-											สาขา : ภูมิสารสนเทศ <br>
-											GPA : 2.88 <br>
-										</p>
-										<p>
-											<h5>การทำงาน/การฝึกงาน</h5>
-											ชื่อบริษัท : GISTNU <br>
-											ที่อยู่ติดต่อ : มหาวิทยาลัยนเรศวร <br>
-											ตำแหน่ง : เจ้าหน้าที่/นักศึกษาฝึกงาน <br>
-											หน้าที่รับผิดชอบ : ฝ่ายประสานงาน <br>
-										</p>
-										<p>
-											<h5>ประวัติการฝึกอบรม</h5>
-											หน่วยงานที่ฝึกอบรม : GISTNU<br>
-											หลักสูตร : แผนที่แม่บท<br>
-											ระยะเวลาที่ฝึกอบรม : 5 วัน <br>
+												</p>
+												<p>
+													<h5>การศึกษา</h5>
+													มหาวิทยาลัย : <?php echo $resume[university] ;?> <br>
+													วุฒิการศึกษา : <?php echo $resume[edu_back] ;?> <br>
+													ระดับการศึกษา : <?php echo $resume[degree] ;?> <br>
+													คณะ : <?php echo $resume[faculty] ;?> <br>
+													สาขา : <?php echo $resume[sector] ;?> <br>
+													GPA : <?php echo $resume[gpa] ;?> <br>
+												</p>
+												<p>
+													<h5>การทำงาน/การฝึกงาน</h5>
+													ชื่อบริษัท : <?php echo $resume[company] ;?> <br>
+													ที่อยู่ติดต่อ : <?php echo $resume[address_com] ;?> <br>
+													ตำแหน่ง : <?php echo $resume[rank_com] ;?> <br>
+													หน้าที่รับผิดชอบ : <?php echo $resume[role_com] ;?> <br>
+													เงินเดือน : <?php echo $resume[salary_com] ;?> <br>
+													ตั้งแต่วันที่ : <?php echo $resume[date_start] ;?> <br>
+													จนถึงวันที่ : <?php echo $resume[date_end] ;?><br>
+												</p>
+												<p>
+													<h5>ประวัติการฝึกอบรม</h5>
+													หน่วยงานที่ฝึกอบรม : <?php echo $resume[department] ;?><br>
+													หลักสูตร : <?php echo $resume[course] ;?><br>
+													ระยะเวลาที่ฝึกอบรม : <?php echo $resume[course_time] ;?> <br>
 
-										</p>
-										<p>
-											หน่วยงานที่ฝึกอบรม : GISTNU<br>
-											หลักสูตร : WEBGIS<br>
-											ระยะเวลาที่ฝึกอบรม : 4 วัน <br>
-										</p>
-										<p>
-											หน่วยงานที่ฝึกอบรม : GISTNU<br>
-											หลักสูตร : QGIS รุ่น 2<br>
-											ระยะเวลาที่ฝึกอบรม : 3 วัน <br>
-										</p>
+												</p>
+												<p>
+													<h5>เป้าหมายในการทำงาน/ฝึกงาน</h5>
+													ลักษณะงานที่ต้องการ : <?php echo $resume[work_n] ;?> <br>
+													สายงานที่ต้องการ <br>
+													1. <?php echo $resume[work_1] ;?><br>
+													2. <?php echo $resume[work_2] ;?><br>
+													3. <?php echo $resume[work_3] ;?><br>
+													พื้นที่ฝึกงานที่ต้องการ <br>
+													1. <?php echo $resume[area_1] ;?><br>
+													2. <?php echo $resume[area_2] ;?><br>
+												</p>
 											</div>
 										</div>
 									</div>
@@ -229,43 +238,42 @@ if ($_POST[send_request] == 'true') {
 											<div class="col-md-7">
 												<div class="form-group">
 													<h4>ข้อมูลส่วนตัว</h4>
-													<p>สัญชาติ : ไทย<br>
-													ศาสนา : พุทธ<br>
-													ส่วนสูง : 160<br>
-													วันเกิด : 30/04/2538<br>
-													สถานภาพทางทหาร : ยังไม่ผ่านการเกณฑ์ทหาร</p>
 													<p>
-														<h5>เป้าหมายในการทำงาน</h5>
-														ลักษณะงานที่ต้องการ : ฝึกงาน <br>
-														สายงานที่ต้องการ <br>
-														1. ภูมิสารสนเทศ<br>
-														2. โปรแกรมเมอร์<br>
-														3. กราฟิกดีไซน์<br>
-														พื้นที่ฝึกงานที่ต้องการ <br>
-														1. กรุงเทพ<br>
-														2. พิษณุโลก<br>
+														สัญชาติ : <?php echo $resume[nationality] ;?><br>
+														ศาสนา : <?php echo $resume[religion] ;?><br>
+														ส่วนสูง : <?php echo $resume[hight] ;?><br>
+														วันเกิด : <?php echo $resume[birthday] ;?><br>
+														สถานภาพทางทหาร : <?php echo $resume[status] ;?>
 													</p>
 													<p>
-														<h5>ความสามารถ</h5>
 														<b>ทักษะทางภาษา</b> <br>
-														ภาษาไทย : พูด  อ่าน  เขียน <br>
-														ภาษาอังกฤษ : พูด  อ่าน  เขียน <br>
-														ภาษาจีน : พูด  อ่าน  เขียน <br>
+														ภาษาไทย <br>
+														 	พูด : <?php echo $resume[th_s] ;?> <br>
+														 	อ่าน : <?php echo $resume[th_r] ;?><br>
+														 	เขียน : <?php echo $resume[th_w] ;?><br>
+														ภาษาอังกฤษ <br>
+														 	พูด : <?php echo $resume[en_s] ;?><br>
+														 	อ่าน : <?php echo $resume[en_r] ;?><br>
+														 	เขียน : <?php echo $resume[en_w] ;?><br>
+														ภาษาจีน <br>
+															พูด : <?php echo $resume[cn_s] ;?><br>
+															อ่าน : <?php echo $resume[cn_r] ;?><br>
+															เขียน : <?php echo $resume[cn_w] ;?><br>
 														<b>ทักษะทางคอมพิวเตอร์ </b><br>
 														Microsoft office <br>
-														word : ดีมาก<br>
-														excel : ดี<br>
-														powerpoint : ดี<br>
+														word : <?php echo $resume[word] ;?><br>
+														excel : <?php echo $resume[excel] ;?><br>
+														powerpoint : <?php echo $resume[ppt] ;?><br>
 														<b>Adobe</b> <br>
-														photoshop : ปานกลาง<br>
-														Illustrator : ปานกลาง<br>
-														Premiere pro : พอใช้<br>
-														Lightroom : ปานกลาง<br>
+														photoshop : <?php echo $resume[ps] ;?><br>
+														Illustrator : <?php echo $resume[ai] ;?><br>
+														Premiere pro : <?php echo $resume[pr] ;?><br>
+														Lightroom : <?php echo $resume[lr] ;?><br>
 														<b>ทักษะทาง GIS</b><br>
-														Arcgis : ดี<br>
-														Erdes : ปานกลาง<br>
-														Envi : ปานกลาง<br>
-														QGIS : ดี<br>
+														Arcgis : <?php echo $resume[arcgis] ;?><br>
+														Erdes : <?php echo $resume[erdas] ;?><br>
+														Envi : <?php echo $resume[envi] ;?><br>
+														QGIS : <?php echo $resume[qgis] ;?><br>
 
 
 													</p>

@@ -4,11 +4,13 @@
 	session_start();
 	include 'config.php';
 
-	   $email = $_POST['email'];
+	   $email = $user['email'];
 
-       $sql = "SELECT * FROM resume ; ";
+       $sql = "SELECT * FROM resume WHERE email = '$email'; ";
 	   $query = pg_query($sql);
 	   $resume = pg_fetch_array($query)
+
+
 ?>
 	<head>
 		<meta charset="utf-8">
@@ -60,103 +62,55 @@
 					</div>
 						<h3><label>Resume</label></h3>
 						<hr>
-						<!-- <div class="line thin"></div> -->
 						<div class="page-description">
 							<div class="row">
-									<div class="col-md-6 col-sm-6">
-										<div class="col-md-7">
-											<div class="form-group">
-												<p>
-													ชื่อ <?php echo $resume[title_name] ;?>&nbsp;<?php echo $resume[s_name] ;?>&nbsp;<?php echo $resume[l_name] ;?><br>
-													โทรศัพท์มือถือ : <?php echo $resume[phone] ;?><br>
-													E-mail : <?php echo $resume[email] ;?><br>
-													ที่อยู่ : <?php echo $resume[address] ;?> ต.<?php echo $resume[tambon] ;?> อ.​<?php echo $resume[amphoe] ;?> จ.<?php echo $resume[province] ;?> <?php echo $resume[zip_code] ;?>
-
-												</p>
-												<p>
-													<h5>การศึกษา</h5>
-													มหาวิทยาลัย : <?php echo $resume[university] ;?> <br>
-													วุฒิการศึกษา : <?php echo $resume[edu_back] ;?> <br>
-													ระดับการศึกษา : <?php echo $resume[degree] ;?> <br>
-													คณะ : <?php echo $resume[faculty] ;?> <br>
-													สาขา : <?php echo $resume[sector] ;?> <br>
-													GPA : <?php echo $resume[gpa] ;?> <br>
-												</p>
-												<p>
-													<h5>การทำงาน/การฝึกงาน</h5>
-													ชื่อบริษัท : <?php echo $resume[company] ;?> <br>
-													ที่อยู่ติดต่อ : <?php echo $resume[address_com] ;?> <br>
-													ตำแหน่ง : <?php echo $resume[rank_com] ;?> <br>
-													หน้าที่รับผิดชอบ : <?php echo $resume[role_com] ;?> <br>
-													เงินเดือน : <?php echo $resume[salary_com] ;?> <br>
-													ตั้งแต่วันที่ : <?php echo $resume[date_start] ;?> <br>
-													จนถึงวันที่ : <?php echo $resume[date_end] ;?><br>
-												</p>
-												<p>
-													<h5>ประวัติการฝึกอบรม</h5>
-													หน่วยงานที่ฝึกอบรม : <?php echo $resume[department] ;?><br>
-													หลักสูตร : <?php echo $resume[course] ;?><br>
-													ระยะเวลาที่ฝึกอบรม : <?php echo $resume[course_time] ;?> <br>
-
-												</p>
-												<p>
-													<h5>เป้าหมายในการทำงาน/ฝึกงาน</h5>
-													ลักษณะงานที่ต้องการ : <?php echo $resume[work_n] ;?> <br>
-													สายงานที่ต้องการ <br>
-													1. <?php echo $resume[work_1] ;?><br>
-													2. <?php echo $resume[work_2] ;?><br>
-													3. <?php echo $resume[work_3] ;?><br>
-													พื้นที่ฝึกงานที่ต้องการ <br>
-													1. <?php echo $resume[area_1] ;?><br>
-													2. <?php echo $resume[area_2] ;?><br>
-												</p>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6">
-											<div class="col-md-7">
-												<div class="form-group">
-													
-													<p>สัญชาติ : <?php echo $resume[nationality] ;?><br>
-													ศาสนา : <?php echo $resume[religion] ;?><br>
-													ส่วนสูง : <?php echo $resume[hight] ;?><br>
-													วันเกิด : <?php echo $resume[birthday] ;?><br>
-													สถานภาพทางทหาร : <?php echo $resume[status] ;?></p>
-													<p>
-														<b>ทักษะทางภาษา</b> <br>
-														ภาษาไทย <br>
-														 	พูด : <?php echo $resume[th_s] ;?> <br>
-														 	อ่าน : <?php echo $resume[th_r] ;?><br>
-														 	เขียน : <?php echo $resume[th_w] ;?><br>
-														ภาษาอังกฤษ <br>
-														 	พูด : <?php echo $resume[en_s] ;?><br>
-														 	อ่าน : <?php echo $resume[en_r] ;?><br>
-														 	เขียน : <?php echo $resume[en_w] ;?><br>
-														ภาษาจีน <br>
-															พูด : <?php echo $resume[cn_s] ;?><br>
-															อ่าน : <?php echo $resume[cn_r] ;?><br>
-															เขียน : <?php echo $resume[cn_w] ;?><br>
-														<b>ทักษะทางคอมพิวเตอร์ </b><br>
-														Microsoft office <br>
-														word : <?php echo $resume[word] ;?><br>
-														excel : <?php echo $resume[excel] ;?><br>
-														powerpoint : <?php echo $resume[ppt] ;?><br>
-														<b>Adobe</b> <br>
-														photoshop : <?php echo $resume[ps] ;?><br>
-														Illustrator : <?php echo $resume[ai] ;?><br>
-														Premiere pro : <?php echo $resume[pr] ;?><br>
-														Lightroom : <?php echo $resume[lr] ;?><br>
-														<b>ทักษะทาง GIS</b><br>
-														Arcgis : <?php echo $resume[arcgis] ;?><br>
-														Erdes : <?php echo $resume[erdas] ;?><br>
-														Envi : <?php echo $resume[envi] ;?><br>
-														QGIS : <?php echo $resume[qgis] ;?><br>
-
-
-													</p>
-												</div>
-											</div>
-									</div>
+									<div class="col-md-12">
+		<div class="col-md-2">
+								<div class="form-group">
+									<label>คำนำหน้า</label>
+									<input type="text" name="title_name" class="form-control" value="<?php echo $user[title_name] ;?>" >
+								</div>
+			
+		</div>
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>ชื่อ</label>
+									<input type="text" name="s_name" class="form-control"  value="<?php echo $user[s_name] ;?>">
+								</div>
+			
+		</div>
+		<div class="col-md-3">
+								<div class="form-group">
+									<label>นามสกุล</label>
+									<input type="text" name="l_name" class="form-control"  value="<?php echo $user[l_name] ;?>">
+									<a href="">แก้ไข</a>
+								</div>
+			
+		</div>
+		<div class="col-md-2">
+								<div class="form-group">
+									<label>สัญชาติ</label>
+									<select name="nationality" class="form-control" >
+										<option value="">กรุณาเลือก</option>
+										<option value="ไทย">ไทย</option>
+										<option value="อื่น ๆ">อื่น ๆ</option>
+									</select>
+								</div>
+			
+		</div>
+		<div class="col-md-2">
+								<div class="form-group">
+									<label>ศาสนา</label>
+									<select name="religion" class="form-control" >
+										<option value="">กรุณาเลือก</option>
+										<option value="พุทธ">พุทธ</option>
+										<option value="คลิสต์">คลิสต์</option>
+										<option value="อิสลาม">อิสลาม</option>
+									</select>
+								</div>
+			
+		</div>
+	</div>
 							</div>
 						</div>
 					</div>

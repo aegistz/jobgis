@@ -117,11 +117,13 @@
 											<div class="col-md-7">
 												<div class="form-group">
 													
-													<p>สัญชาติ : <?php echo $resume[nationality] ;?><br>
-													ศาสนา : <?php echo $resume[religion] ;?><br>
-													ส่วนสูง : <?php echo $resume[hight] ;?><br>
-													วันเกิด : <?php echo $resume[birthday] ;?><br>
-													สถานภาพทางทหาร : <?php echo $resume[status] ;?></p>
+													<p>
+														สัญชาติ : <?php echo $resume[nationality] ;?><br>
+														ศาสนา : <?php echo $resume[religion] ;?><br>
+														ส่วนสูง : <?php echo $resume[hight] ;?><br>
+														วันเกิด : <?php echo $resume[birthday] ;?><br>
+														สถานภาพทางทหาร : <?php echo $resume[status] ;?>
+													</p>
 													<p>
 														<b>ทักษะทางภาษา</b> <br>
 														ภาษาไทย <br>
