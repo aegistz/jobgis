@@ -4,9 +4,9 @@
 	session_start();
 	include 'config.php';
 
-	   $email = $user['email'];
+	   $email = $_POST['email'];
 
-       $sql = "SELECT * FROM resume WHERE email = '$email'; ";
+       $sql = "SELECT * FROM resume ; ";
 	   $query = pg_query($sql);
 	   $resume = pg_fetch_array($query)
 ?>
