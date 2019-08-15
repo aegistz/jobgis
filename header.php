@@ -96,23 +96,37 @@ if(isset($_COOKIE["type"]))
 							
 							<li class="dropdown magz-dropdown"><a href="#">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="category.php">ทั่วไป</a></li>
-									<li class="dropdown magz-dropdown"><a href="category.php">ข่าวสาร <i class="ion-ios-arrow-right"></i></a>
+									<li><a href="">ทั่วไป</a></li>
+									<li class="dropdown magz-dropdown"><a href="">ข่าวสาร <i class="ion-ios-arrow-right"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="category.php">เกษตร</a></li>
-											<li><a href="category.php">เทคโนโลยี</a></li>
-											<li><a href="category.php">ชาวบ้าน</a>
+											<li><a href="">เกษตร</a></li>
+											<li><a href="">เทคโนโลยี</a></li>
+											<li><a href="">ชาวบ้าน</a>
 										</ul>
 									</li>
-									<li><a href="category.php">ธรุกิจ</a></li>
+									<li><a href="">ธรุกิจ</a></li>
 								</ul>
 							</li>
-							<li class="dropdown magz-dropdown">
-								<a href="category.html">Resume GIS <i class="ion-ios-arrow-right"></i></a>
+							<li>
+<?php 
+$sql = pg_query("SELECT * from resume where email = '$user[email]';");
+$num = pg_num_rows($sql);
+ if ( $num == 0 ) { ?>
+								<a href="resume.php">
+									Resume GIS 
+									<div class="badge ">คุณยังไม่ได้เพิ่ม</div>
+								</a>
+
+<?php } else { ?>
+								<a href="view_resume.php">
+									Resume GIS  
+								</a>
+<?php } ?>
+<!-- 
 								<ul class="dropdown-menu">
 									<li><a href="resume.php">resume</a></li>
 									<li><a href="view_resume.php">ดูข้อมูล resume</a></li>
-								</ul>
+								</ul> -->
 							</li>
 
 						<!-- 	<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับสมัครงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>

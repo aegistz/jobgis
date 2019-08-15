@@ -4,8 +4,12 @@ session_start();
 
 include("config.php");
 include("check_student.php");
-include("api_service/profile_api.php")
+include("api_service/profile_api.php");
 
+
+$eid = $_GET[eid];
+$sql_profile = pg_query("SELECT * from student  where id_no = '$eid';");
+$arr_profile = pg_fetch_array($sql_profile);
 
 ?>
 <html>
@@ -76,12 +80,18 @@ include("api_service/profile_api.php")
 			<div class="container">
 				<div class="row">
 
+
+<?php  if ( !isset($eid) || $user[id_no] == $eid  ) { ?>
+
 					<div class="col-md-12">
 						<div class="sidebar-title for-tablet">Sidebar</div>
 						<aside>
 							<div class="aside-body">
 								<div class="featured-author">
 									<div class="featured-author-inner">
+
+
+
 										<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
 											<div class="featured-author-center">
 												<figure class="featured-author-picture">
@@ -104,8 +114,6 @@ include("api_service/profile_api.php")
                                                                แก้ไขรูปประจำตัว
                                                              </button>
                                             </div>
-
-
 										</div>
 
                                                        
@@ -397,12 +405,213 @@ $sql = pg_query("SELECT * from user_request a
 								</aside>
 							</div>
 						</div>
-
-
-
-						
-						
 					</div>
+
+<?php 	} // if case show profile  
+else {    ?> 
+
+
+
+
+<div class="col-md-12">
+						<div class="sidebar-title for-tablet">Sidebar</div>
+						<aside>
+							<div class="aside-body">
+								<div class="featured-author">
+									<div class="featured-author-inner">
+
+										<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $arr_profile[bg_img]; ?>');">
+											<div class="featured-author-center">
+												<figure class="featured-author-picture">
+												<?php if($arr_profile[img] == ''){ ?>
+														<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
+													<?php } else { ?>
+														<img src="images/student/<?php echo $arr_profile[img]; ?>" alt="Sample Article">
+													<?php } ?>
+												</figure>
+												<div class="featured-author-info">
+													<h2 class="name"><?php echo $arr_profile[s_name],' ', $arr_profile[l_name]; ?> </h2>
+													<div class="desc"><?php echo $arr_profile[email]; ?> </div>
+												</div>
+											</div>
+											
+										</div>
+
+
+										<div class="featured-author-body">
+											<div class="featured-author-count">
+												<div class="item">
+													<a href="#">
+														<div class="name">Posts</div>
+														<div class="value">
+														<?php 
+														$sql_post_num = pg_query("SELECT * from  story where id_user = '$arr_profile[id_no]';"); 
+														$num_post = pg_num_rows($sql_post_num);
+														echo number_format($num_post) ;
+														?>
+														</div>														
+													</a>
+												</div>
+												<div class="item">
+													<a href="#">
+														<div class="name">View</div>
+														<div class="value">3,729</div>														
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</aside>
+
+						<div class="row">
+							<div class="col-xs-12 col-md-8">
+								<aside>
+
+
+
+<?php 
+	
+	$query = pg_query("SELECT * from story where id_user = '$eid' order by id_story desc ;");
+	$num = pg_num_rows($query);
+
+	if( $num != 0 ) {
+		while( $arr = pg_fetch_array($query)  ){  
+?>
+						 <article class="col-md-12 article-list">
+								            <div class="inner">
+								              <figure>
+									              <a href="single.html">
+									                <img src="images/story/<?php echo $arr[img_story]; ?>">
+								                </a>
+								              </figure>
+								              <div class="details">
+								                <div class="detail">
+								                  <div class="category">
+								                   <a href=""><?php echo $arr[tag_story]; ?></a>
+								                  </div>
+								                  <div class="time"><?php echo $arr[date_story]; ?></div>
+								                </div>
+								                <h1><a href="single.html"><?php echo $arr[title_story]; ?></a></h1>
+								                <p>
+
+												 <?php 
+								                 echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="" title="">เพิ่มเติม</a>');
+								                 ?> 
+
+
+								                </p>
+								                <footer>
+								                  <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
+								                </footer>
+								              </div>
+								            </div>
+								          </article>
+
+<?php }    }else{  ?>
+	 					 <article class="col-md-12 article-list">
+								            <div class="inner">
+								              <figure>
+									              <a href="">
+									                <img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
+								                </a>
+								              </figure>
+								              <div class="details">
+								                <div class="detail">
+								                  <div class="category">
+								                   <a href="category.html">ประสบการณ์</a>
+								                  </div>
+								                  <div class="time">December 26, 2016</div>
+								                </div>
+								                <h1><a href="single.html">..............</a></h1>
+								                <p>
+								                  ..............
+								                </p>
+								                <footer>
+								                  <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
+								                </footer>
+								              </div>
+								            </div>
+								          </article>
+
+<?php } ?>
+
+								         
+
+
+
+								      
+								 
+								</aside>
+
+
+
+							</div>
+
+
+
+
+
+
+
+
+							<div class="col-xs-12 col-md-4">
+
+								<aside>
+									<h1 class="aside-title">ภาพประสบการณ์ </h1>
+								<div class="block">
+												<div class="block-body">
+													<ul class="item-list-round" data-magnific="gallery">
+														<?php
+															$id = $_GET[eid];
+															$query = pg_query("with ss as (
+SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
+) SELECT * from ss where row between 1 and 6");
+															$num = pg_num_rows($query);
+															if( $num != 0 ) {
+																while( $arr = pg_fetch_array($query)  ){
+														?>
+														<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
+														<?php }  
+
+															$sql2 = pg_query("with ss as (
+SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
+) SELECT * from ss where row >= 7");
+															$num2 = pg_num_rows($sql2);
+															$arr2 = pg_fetch_array($sql2);
+
+														?> 
+														<li><a href="images/student/<?php echo $arr2[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr2[name_img]; ?>');"><div class="more"> +<?php echo $num2; ?> </div></a></li>
+															<?php 
+																while ( $arr3 = pg_fetch_array($sql2) ) {
+															?>
+														<li class="hidden"><a href="images/student/<?php echo $arr3[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr3[name_img]; ?>');"></a></li>
+														<?php } }else{  ?>
+
+														<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
+														<?php } ?>
+
+
+														
+													</ul>
+												</div>
+											</div>
+								</aside>
+
+
+								
+							</div>
+						</div>
+					</div>
+
+
+
+
+<?php } ?>
+
+
 
 
 

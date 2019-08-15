@@ -3,6 +3,7 @@
 session_start();
 include("config.php");
 include("check_student.php")
+
 ?>
 <html>
 	<head>
@@ -36,6 +37,7 @@ include("check_student.php")
 		<link rel="stylesheet" href="css/demo.css">
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 	</head>
 	<body class="skin-blue">
 		<?php include 'header.php'; ?>
@@ -55,13 +57,21 @@ include("check_student.php")
 						
 						<div class="row">
 
-
-							<?php
+<table id="example" class="" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+<?php
 								$query = pg_query("SELECT * from story  a
 									inner join student b on a.id_user = b.id_no
 									order by a.date_story desc ;");
 								while ( $arr = pg_fetch_array($query) ) {
 							?>
+            <tr>
+                <td>
 							<article class="col-md-12 article-list">
 								            <div class="inner">
 								              <figure>
@@ -78,7 +88,11 @@ include("check_student.php")
 
 								                		<div class="col-md-10">
 									                		<div class="category">
-											                   <h6 >  <?php echo $arr[s_name],' ', $arr[l_name]; ?> </h6>
+											                   <h6 >
+											                   		<a href="profile.php?eid=<?php echo $arr[id_no] ?>" title="">
+											                   			<?php echo $arr[s_name],' ', $arr[l_name]; ?>
+											                   		</a>   
+											                   </h6>
 											                  โพสเมื่อ : <?php echo $arr[date_story]; ?>
 										                  </div>
 								                		</div>
@@ -102,23 +116,16 @@ include("check_student.php")
 								              </div>
 								            </div>
 								          </article>
+                </td>
+            </tr>
 
-							<?php } ?>
+							<?php } ?> 
+        </tbody>
+      
+    </table>
 
- <div class="col-md-12 text-center">
-		            <ul class="pagination">
-		              <li class="prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
-		              <li class="active"><a href="#">1</a></li>
-		              <li><a href="#">2</a></li>
-		              <li><a href="#">3</a></li>
-		              <li><a href="#">...</a></li>
-		              <li><a href="#">97</a></li>
-		              <li class="next"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
-		            </ul>
-		            <div class="pagination-help-text">
-		            	Showing 8 results of 776 &mdash; Page 1
-		            </div>
-		          </div>
+							
+
 						</div>
 					</div>
 					
@@ -200,6 +207,17 @@ include("check_student.php")
 		<script src="scripts/toast/jquery.toast.min.js"></script>
 		<!-- <script src="js/demo.js"></script> -->
 		<script src="js/e-magz.js"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"  ></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js" ></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			    $('#example').DataTable({
+			    	 "searching": false,
+			    	  "aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
+			    });
+
+			} );
+		</script>
 
 		
 
