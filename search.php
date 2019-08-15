@@ -25,11 +25,14 @@
 		<!-- Magnific Popup -->
 		<link rel="stylesheet" href="scripts/magnific-popup/dist/magnific-popup.css">
 		<link rel="stylesheet" href="scripts/sweetalert/dist/sweetalert.css">
+		<!-- iCheck -->
+		<link rel="stylesheet" href="scripts/icheck/skins/all.css">
 		<!-- Custom style -->
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/skins/blue.css">
 		<link rel="stylesheet" href="css/demo.css">
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 
 
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
@@ -46,13 +49,12 @@
 				<div class="row">
 					<div class="col-md-3">
 						<aside>
-							<h2 class="aside-title">Search</h2>
+							<h2 class="aside-title">ค้นหางาน</h2>
 							<div class="aside-body">
-								<p>Search with other keywords or use filters for more accurate results.</p>
 								<form>
 									<div class="form-group">
 										<div class="input-group">
-											<input type="text" name="q" class="form-control" placeholder="Type something ..." value="hello">
+											<input type="text" name="q" class="form-control" placeholder="ค้นหาจากชื่อตำแหน่งงาน..." >
 											<div class="input-group-btn">
 												<button class="btn btn-primary">
 													<i class="ion-search"></i>
@@ -62,46 +64,44 @@
 									</div>
 								</form>
 							</div>
-						</aside>
-						<aside>
-							<h2 class="aside-title">Filter</h2>
 							<div class="aside-body">
 								<form class="checkbox-group">
-									<div class="group-title">Date</div>
+									<div class="group-title">ช่วงเวลา</div>
 									<div class="form-group">
-										<label><input type="radio" name="date" checked> Anytime</label>
+										<label><input type="radio" name="date" checked> ทุกเวลา</label>
 									</div>
 									<div class="form-group">
-										<label><input type="radio" name="date"> Today</label>
+										<label><input type="radio" name="date"> วันนี้</label>
 									</div>
 									<div class="form-group">
-										<label><input type="radio" name="date"> Last Week</label>
+										<label><input type="radio" name="date"> สัปดาห์นี้</label>
 									</div>
 									<div class="form-group">
-										<label><input type="radio" name="date"> Last Month</label>
+										<label><input type="radio" name="date"> เดือนนี้</label>
 									</div>
 									<br>
-									<div class="group-title">Categories</div>
+									<div class="group-title">ประเภท</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category" checked> All Categories</label>
+										<label><input type="checkbox" name="category" checked> ทุกประเภท</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> Lifestyle</label>
+										<label><input type="checkbox" name="category"> งานประจำ</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> Travel</label>
+										<label><input type="checkbox" name="category"> งานรายวัน</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> Computer</label>
+										<label><input type="checkbox" name="category"> ฝึกงาน</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> Film</label>
+										<label><input type="checkbox" name="category"> สหกิจศึกษา</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> Sport</label>
+										<label><input type="checkbox" name="category"> อื่น ๆ</label>
 									</div>
 								</form>
 							</div>
+
 						</aside>
 					</div>
 					<div class="col-md-9">
@@ -113,41 +113,46 @@
 								<li><a href="#">Trending</a></li>
 								<li><a href="#">Videos</a></li>
 							</ul>
-							<div class="nav-tabs-right">
-								<select class="form-control">
-									<option>Limit</option>
-									<option>10</option>
-									<option>20</option>
-									<option>50</option>
-									<option>100</option>
-								</select>
-							</div>
 						</div>
-						<div class="search-result">
-							Search results for keyword "ค้นหางาน" found in 3 posts.
-						</div>
+						
 						<div class="row">
-							<article class="col-md-12 article-list">
+
+
+							<table id="example" class="" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+<?php
+	$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 100 ;  ");
+	while ( $arr = pg_fetch_array($sql) ) {
+?>
+            <tr>
+                <td>
+                	<article class="col-md-12 article-list">
 								<div class="inner">
 									<figure>
-										<a href="news.php">
-											<img src="images/news/j215544.png">
+										<a href="news.php?q=<?php echo $arr[id_job]; ?>">
+											<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
 										</a>
 									</figure>
 									<div class="details">
 										<div class="detail">
 											<div class="category">
-												<a href="#">รับสมัครงาน</a>
+												<a href="#"><?php echo $arr[type_job]; ?></a>
 											</div>
-											<time>December 19, 2016</time>
+											<div class="time"><?php echo $arr[date_job]; ?></div>
 										</div>
-										<h1><a href="news.php">นักวิชาการเกษตร</a></h1>
+										<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 										<p>
-											บริษัท กรีนไลฟ์ อินเตอร์เนชั่นแนล จำกัด  Agricultural Research Officer ยินดีรับนักศึกษาจบใหม่
+											<?php echo $arr[detail_job]; ?> <br>
+											<small> <i><b>การรับ  : </b>    <?php echo $arr[type_job]; ?></i> </small>
 										</p>
 										<footer>
 											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-											<a class="btn btn-primary more" href="news.php">
+											<a class="btn btn-primary more" href="news.php?q=<?php echo $arr[id_job]; ?>">
 												<div>More</div>
 												<div><i class="ion-ios-arrow-thin-right"></i></div>
 											</a>
@@ -155,79 +160,16 @@
 									</div>
 								</div>
 							</article>
-							<article class="col-md-12 article-list">
-								<div class="inner">
-									<div class="badge">
-										Sponsored
-									</div>
-									<figure>
-										<a href="news.php">
-											<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j27745.gif?v=13">
-										</a>
-									</figure>
-									<div class="details">
-										<div class="detail">
-											<div class="category">
-												<a href="#">รับสมัครงาน</a>
-											</div>
-											<time>December 18, 2016</time>
-										</div>
-										<h1><a href="news.php">ผู้เชียวชาญบริการจัดการแมลง</a></h1>
-										<p>
-											บริษัท คิงส์ เซอร์วิส เซ็นเตอร์ จำกัด Pest Management Technician
-										</p>
-										<footer>
-											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>4209</div></a>
-											<a class="btn btn-primary more" href="news.php">
-												<div>More</div>
-												<div><i class="ion-ios-arrow-thin-right"></i></div>
-											</a>
-										</footer>
-									</div>
-								</div>
-							</article>
-							<article class="col-md-12 article-list">
-								<div class="inner">
-									<figure>
-										<a href="news.php">
-											<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j6825.gif?v=32">
-										</a>
-									</figure>
-									<div class="details">
-										<div class="detail">
-											<div class="category">
-											<a href="#">รับสมัครงาน</a>
-											</div>
-											<time>December 16, 2016</time>
-										</div>
-										<h1><a href="news.php">ผู้จัดการฝ่ายปฏิบัติการ</a></h1>
-										<p>
-											บริษัท เซเว่น ยูทิลิตี้ส์ แอนด์ พาวเวอร์ จำกัด (มหาชน)
-										</p>
-										<footer>
-											<a href="#" class="love active"><i class="ion-android-favorite"></i> <div>302</div></a>
-											<a class="btn btn-primary more" href="news.php">
-												<div>More</div>
-												<div><i class="ion-ios-arrow-thin-right"></i></div>
-											</a>
-										</footer>
-									</div>
-								</div>
-							</article>
-		          <div class="col-md-12 text-center">
-		            <ul class="pagination">
-		              <li class="prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
-		              <li class="active"><a href="#">1</a></li>
-		              <li><a href="#">2</a></li>
-		              <li><a href="#">3</a></li>
-		              <li><a href="#">...</a></li>
-		              <li><a href="#">97</a></li>
-		              <li class="next"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
-		            </ul>
-		            <div class="pagination-help-text">
-		            	Showing 8 results of 776 &mdash; Page 1
-		            </div>
-		          </div>
+							<hr>
+                </td>
+            </tr>
+        <?php } ?>    
+        </tbody>
+      
+    </table>
+
+							
+
 						</div>
 					</div>
 				</div>
@@ -251,8 +193,26 @@
 		<script src="scripts/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 		<script src="scripts/easescroll/jquery.easeScroll.js"></script>
 		<script src="scripts/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="scripts/icheck/icheck.min.js"></script>
 		<script src="scripts/toast/jquery.toast.min.js"></script>
-		<!-- <script src="js/demo.js"></script> -->
+		<script>
+			$("input").iCheck({
+		      checkboxClass: 'icheckbox_square-blue',
+		      radioClass: 'iradio_square-blue',
+		      cursor: true
+			});
+		</script>
 		<script src="js/e-magz.js"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"  ></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js" ></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			    $('#example').DataTable({
+			    	 "searching": false,
+			    	  "aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
+			    });
+
+			} );
+		</script>
 	</body>
 </html>

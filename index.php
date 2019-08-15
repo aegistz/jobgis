@@ -36,6 +36,26 @@ include("check_student.php")
 		<link rel="stylesheet" href="css/demo.css">
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+		<style>
+			.row.content {
+  height: 620px
+}
+
+
+
+.anyClass {
+  height: 450px;
+  overflow-y: scroll;
+}
+
+.largeWidth {
+  width: 100%;
+  height: 620px;
+}
+
+		</style>
 	</head>
 	<body class="skin-blue">
 		<?php include 'header.php'; ?>
@@ -118,7 +138,7 @@ include("check_student.php")
 								<div class="col-md-6">
 									<fieldset>
 										<div class="form-group row">
-											<label for="staticEmail" class="col-sm-4 col-form-label">สายอาชีพ</label>
+											<label for="staticEmail" class="col-sm-4 col-form-label">ช่วงเงินเดือน</label>
 											<div class="col-sm-8">
 												<select class="form-control" >
 												<option>- - กดเพื่อเลือก - -</option>
@@ -130,7 +150,7 @@ include("check_student.php")
 											</div>
 										</div>
 										<div class="form-group row">
-											<label for="staticEmail" class="col-sm-4 col-form-label">พื้นที่ทำงาน</label>
+											<label for="staticEmail" class="col-sm-4 col-form-label">ประเภทงาน</label>
 											<div class="col-sm-8">
 												<select class="form-control" >
 												<option>- - กดเพื่อเลือก - -</option>
@@ -142,7 +162,7 @@ include("check_student.php")
 											</div>
 										</div>
 										<div class="form-group row">
-											<label for="staticEmail" class="col-sm-4 col-form-label">วุฒิการศึกษา</label>
+											<label for="staticEmail" class="col-sm-4 col-form-label">เพศ</label>
 											<div class="col-sm-8">
 												<select class="form-control" >
 												<option>- - กดเพื่อเลือก - -</option>
@@ -169,13 +189,20 @@ include("check_student.php")
 						</div>
 						
 						<div class="row">
-
-
-							<?php
-								$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 5 ;  ");
-								while ( $arr = pg_fetch_array($sql) ) {
-							?>
-							<article class="col-md-12 article-list">
+<table id="example" class="" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+<?php
+	$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 100 ;  ");
+	while ( $arr = pg_fetch_array($sql) ) {
+?>
+            <tr>
+                <td>
+                	<article class="col-md-12 article-list">
 								<div class="inner">
 									<figure>
 										<a href="news.php?q=<?php echo $arr[id_job]; ?>">
@@ -204,7 +231,15 @@ include("check_student.php")
 									</div>
 								</div>
 							</article>
-							<?php } ?>
+							<hr>
+                </td>
+            </tr>
+        <?php } ?>    
+        </tbody>
+      
+    </table>
+
+
 
 
 						</div>
@@ -281,7 +316,7 @@ SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where i
 														<?php }  
 
 															$sql2 = pg_query("with ss as (
-SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '3' order by id_img desc
+SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
 ) SELECT * from ss where row >= 7");
 															$num2 = pg_num_rows($sql2);
 															$arr2 = pg_fetch_array($sql2);
@@ -311,7 +346,11 @@ SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where i
 						<aside>
 									<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
 									<div class="aside-body">
-<?php
+
+
+  		<ul class="nav nav-pills nav-stacked anyClass">
+
+           <?php
 $sql = pg_query("SELECT * from user_request a  
 	inner join job_company b on a.id_job = b.id_job 
 	inner join company c on c.id_com = b.id_com where email_user = '$user[email]' ;  ");
@@ -337,6 +376,10 @@ $sql = pg_query("SELECT * from user_request a
 								</article>
 								<hr>
 <?php } ?>
+
+        </ul>
+
+
 									</div>
 
 								</aside>
@@ -436,6 +479,17 @@ $sql = pg_query("SELECT * from user_request a
 		<script src="scripts/toast/jquery.toast.min.js"></script>
 		<!-- <script src="js/demo.js"></script> -->
 		<script src="js/e-magz.js"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"  ></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js" ></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			    $('#example').DataTable({
+			    	 "searching": false,
+			    	  "aLengthMenu": [[5, 25, 50, 100], [5, 25, 50, 100, "All"]]
+			    });
+
+			} );
+		</script>
 
 	</body>
 </html>

@@ -10,7 +10,7 @@ include("config.php");
 						<div class="col-md-3 col-sm-12">
 							<div class="brand">
 								<a href="./">
-									<img src="images/6logo.png" alt=" Logo">
+									<img src="images/6logo.png" alt=" Logo" >
 								</a>
 							</div>						
 						</div>
