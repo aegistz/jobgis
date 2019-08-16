@@ -392,6 +392,14 @@
 								</div>
 		</div>
 	</div> -->
+		<div class="col-md-12">
+			<div class="col-md-12">
+								<div class="form-group">
+									<label>E-mail</label>
+									<input type="email" name="email" class="form-control" value="<?php echo $user[email] ;?>" readonly="readonly">
+								</div>
+			</div>
+	</div>
 	<div class="col-md-12">
 		<div class="col-md-2">
 								<div class="form-group">
@@ -442,20 +450,20 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>วันเกิด</label>
-									<input type="date" name="birthday" class="form-control" >
+									<input type="date" name="birthday" class="form-control" value="<?php echo $user[birthday] ;?>">
 								</div>
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>น้ำหนัก</label>
-									<input type="number" name="weight" class="form-control" >
+									<input type="number" name="weight" class="form-control" value="<?php echo $user[weight] ;?>">
 								</div>
 				
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>ส่วนสูง</label>
-									<input type="number" name="hight" class="form-control" >
+									<input type="number" name="hight" class="form-control" value="<?php echo $user[hight] ;?>">
 								</div>
 				
 			</div>
@@ -523,13 +531,7 @@
 			</div>
 	</div>
 		<div class="col-md-12">
-			<div class="col-md-6">
-								<div class="form-group">
-									<label>E-mail</label>
-									<input type="email" name="email" class="form-control" value="<?php echo $user[email] ;?>" readonly="readonly">
-								</div>
-			</div>
-			<div class="col-md-6">
+			<div class="col-md-3">
 								<div class="form-group">
 									<label>เบอร์โทร</label>
 									<input type="number" name="phone" class="form-control" value="<?php echo $user[phone_number] ;?>">
@@ -617,21 +619,45 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>1</label>
-									<input type="text" name="work_1" class="form-control">
+									<select name="work_1" class="form-control">
+										<option value="">กรุณาเลือก</option>
+										<option value="ภูมิศาสตร์">ภูมิศาสตร์</option>
+										<option value="ภูมิสารสนเทศ">ภูมิสารสนเทศ</option>
+										<option value="ผังเมือง">ผังเมือง</option>
+										<option value="แผนที่">แผนที่</option>
+										<option value="วิจัย">วิจัย</option>
+										<option value="กราฟฟิค">กราฟฟิค</option>
+									</select>
 								</div>
 				
 			</div>
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>2</label>
-									<input type="text" name="work_2" class="form-control">
+									<select name="work_2" class="form-control">
+										<option value="">กรุณาเลือก</option>
+										<option value="ภูมิศาสตร์">ภูมิศาสตร์</option>
+										<option value="ภูมิสารสนเทศ">ภูมิสารสนเทศ</option>
+										<option value="ผังเมือง">ผังเมือง</option>
+										<option value="แผนที่">แผนที่</option>
+										<option value="วิจัย">วิจัย</option>
+										<option value="กราฟฟิค">กราฟฟิค</option>
+									</select>
 								</div>
 				
 			</div>	
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>3</label>
-									<input type="text" name="work_3" class="form-control">
+									<select name="work_3" class="form-control">
+										<option value="">กรุณาเลือก</option>
+										<option value="ภูมิศาสตร์">ภูมิศาสตร์</option>
+										<option value="ภูมิสารสนเทศ">ภูมิสารสนเทศ</option>
+										<option value="ผังเมือง">ผังเมือง</option>
+										<option value="แผนที่">แผนที่</option>
+										<option value="วิจัย">วิจัย</option>
+										<option value="กราฟฟิค">กราฟฟิค</option>
+									</select>
 								</div>
 				
 			</div>		
@@ -644,11 +670,12 @@
 									<label>1</label>
 									<select class="form-control" name="area_1">
 										<option value="">กรุณาเลือก</option>
-										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
-										while ($arr_prov = pg_fetch_array($sql_prov)) {
-										?>
-										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
-										<?php } ?>
+										<option value="กรุงเทพและปริมณฑล">กรุงเทพและปริมณฑล</option>
+										<option value="ภาคเหนือ">ภาคเหนือ</option>
+										<option value="ภาคกลาง">ภาคกลาง</option>
+										<option value="ภาคอีสาน">ภาคอีสาน</option>
+										<option value="ภาคตะวันออก">ภาคตะวันออก</option>
+										<option value="ภาคใต้">ภาคใต้</option>
 									</select>
 								</div>
 				
@@ -658,11 +685,12 @@
 									<label>2</label>
 									<select class="form-control" name="area_2">
 										<option value="">กรุณาเลือก</option>
-										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
-										while ($arr_prov = pg_fetch_array($sql_prov)) {
-										?>
-										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
-										<?php } ?>
+										<option value="กรุงเทพและปริมณฑล">กรุงเทพและปริมณฑล</option>
+										<option value="ภาคเหนือ">ภาคเหนือ</option>
+										<option value="ภาคกลาง">ภาคกลาง</option>
+										<option value="ภาคอีสาน">ภาคอีสาน</option>
+										<option value="ภาคตะวันออก">ภาคตะวันออก</option>
+										<option value="ภาคใต้">ภาคใต้</option>
 									</select>
 								</div>
 				
@@ -670,7 +698,22 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>เงินเดือนที่ต้องการ</label>
-									<input type="text" name="salary" class="form-control">
+									<select name="salary" class="form-control">
+										<option value="">กรุณาเลือก</option>
+										<option value="5,000">5,000</option>
+										<option value="10,000">10,000</option>
+										<option value="15,000">15,000</option>
+										<option value="25,000">25,000</option>
+										<option value="30,000">30,000</option>
+										<option value="40,000">40,000</option>
+										<option value="50,000">50,000</option>
+										<option value="60,000">60,000</option>
+										<option value="80,000">80,000</option>
+										<option value="100,000">100,000</option>
+										<option value="120,000">120,000</option>
+										<option value="150,000">150,000</option>
+										<option value="150,000+">150,000+</option>
+									</select>
 								</div>
 				
 			</div>
