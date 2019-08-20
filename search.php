@@ -125,8 +125,10 @@
             </tr>
         </thead>
         <tbody>
+
+
 <?php
-	$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 100 ;  ");
+	$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com ;  ");
 	while ( $arr = pg_fetch_array($sql) ) {
 ?>
             <tr>
@@ -163,7 +165,10 @@
 							<hr>
                 </td>
             </tr>
-        <?php } ?>    
+        <?php } ?> 
+
+
+
         </tbody>
       
     </table>

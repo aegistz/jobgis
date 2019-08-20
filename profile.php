@@ -142,11 +142,28 @@ $arr_profile = pg_fetch_array($sql_profile);
 													</a>
 												</div>
 												<div class="item">
-													<a href="view_resume.php">
+<?php 
+$sql = pg_query("SELECT * from resume where email = '$user[email]';");
+$num = pg_num_rows($sql);
+ if ( $num == 0 ) { ?>
+								<a href="resume.php">
 														<div class="icon">
-															<div>Resume GIS</div>
+															<div>Resume GIS </div>
+															<div class="badge "> คุณยังไม่ได้เพิ่ม</div>
 														</div>														
 													</a>
+
+<?php } else { ?>
+								
+								<a href="view_resume.php">
+														<div class="icon">
+															<div>Resume GIS </div>
+														</div>														
+													</a>
+<?php } ?>
+
+													
+
 												</div>
 											</div>
 											<!-- <div class="featured-author-quote divbutton">

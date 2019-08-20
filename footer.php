@@ -24,7 +24,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="line"></div>
+						<!-- <div class="line"></div>
 						<div class="block">
 							<h1 class="block-title">Newsletter</h1>
 							<div class="block-body">
@@ -39,21 +39,21 @@
 									<button class="btn btn-primary btn-block white">Subscribe</button>
 								</form>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="col-md-4 col-xs-12 col-sm-6">
 						<div class="block">
 							<h1 class="block-title">Follow Us</h1>
 							<div class="block-body">
-								<p>Follow us and stay in touch to get the latest news</p>
+								<p>ติดตามข่าวสารต่าง ๆ ได้ที่นี่</p>
 								<ul class="social trp">
 									<li>
-										<a href="#" class="facebook">
+										<a href="https://www.facebook.com/gistda/" class="facebook">
 											<svg><rect width="0" height="0"/></svg>
 											<i class="ion-social-facebook"></i>
 										</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a href="#" class="twitter">
 											<svg><rect width="0" height="0"/></svg>
 											<i class="ion-social-twitter-outline"></i>
@@ -106,11 +106,11 @@
 											<svg><rect width="0" height="0"/></svg>
 											<i class="ion-social-rss"></i>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>
-						<div class="line"></div>
+						<!-- <div class="line"></div>
 						<div class="block">
 							<div class="block-body no-margin">
 								<ul class="footer-nav-horizontal">
@@ -120,7 +120,7 @@
 									<li><a href="page.html">About</a></li>
 								</ul>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<div class="row">

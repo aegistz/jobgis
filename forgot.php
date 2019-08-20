@@ -73,7 +73,7 @@ if(isset($_POST["forgot"]))
 		        <img src='images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
 		           <p>กดที่ลิงค์ เพื่อแก้ไขรหัสผ่าน</p><br>
-		            <p><a href='http://localhost:8888/GEOJOBS/reset_password.php?email=".$user_email."&ss=reset_password' >กดที่นี่</a>   </p>
+		            <p><a href='http://www.geojobs.nu.ac.th/reset_password.php?email=".$user_email."&ss=reset_password' >กดที่นี่</a>   </p>
 		        </div>
 		      </div>
 		        <div>       
