@@ -88,6 +88,14 @@
 	<div class="col-md-12">
 		<div class="col-md-2">
 								<div class="form-group">
+									<!-- <label>คำนำหน้า</label> -->
+									<!-- <input type="text" name="title_name" class="form-control" required="" value="<?php echo $resume[title_name] ;?>"> -->
+									<br><button type="button" class="btn btn-primary">ข้อมูลส่วนตัว</button>
+								</div>
+			
+		</div>
+		<div class="col-md-2">
+								<div class="form-group">
 									<label>คำนำหน้า</label>
 									<input type="text" name="title_name" class="form-control" required="" value="<?php echo $resume[title_name] ;?>">
 								</div>
@@ -109,11 +117,19 @@
 		</div>
 	</div>
 	<div class="col-md-12">
-			<div class="col-md-3">
+			<div class="col-md-2">
 									<div class="form-group">
-										<label>ที่อยู่</label>
-										<input type="text" name="address" class="form-control" required="" value="<?php echo $resume[address] ;?>">
+										<!-- <label>ที่อยู่</label>
+										<input type="text" name="address" class="form-control" required="" value="<?php echo $resume[address] ;?>"> -->
+										<br><button type="button" class="btn btn-primary">การศึกษา</button>
 								</div>
+			</div>
+			<div class="col-md-2">
+								<div class="form-group">
+									<label>ที่อยู่</label>
+									<input type="text" name="address" class="form-control" required="" value="<?php echo $resume[address] ;?>"> 
+								</div>
+				
 			</div>
 			<div class="col-md-3">
 								<div class="form-group">
@@ -148,7 +164,7 @@
 								</div>
 				
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 								<div class="form-group">
 									<label>รหัสไปรษณืย์</label>
 									<input type="text" name="zip_code" class="form-control"  value="<?php echo $resume[zip_code] ;?>">
@@ -159,11 +175,22 @@
 	<div class="col-md-12">
 					<div class="col-md-2">
 								<div class="form-group">
+									<!-- <label>สัญชาติ</label>
+									<select name="nationality" class="form-control">
+										<option value="ไทย"<?php if($resume[nationality]=='ไทย'){echo 'selected';} ?>>ไทย</option>
+										<option value="อื่น ๆ"<?php if($resume[nationality]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ</option>
+									</select> -->
+									<br><button type="button" class="btn btn-primary">ทักษะ</button>
+								</div>
+			
+					</div>
+					<div class="col-md-2">
+								<div class="form-group">
 									<label>สัญชาติ</label>
 									<select name="nationality" class="form-control">
 										<option value="ไทย"<?php if($resume[nationality]=='ไทย'){echo 'selected';} ?>>ไทย</option>
 										<option value="อื่น ๆ"<?php if($resume[nationality]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ</option>
-									</select>
+									</select> 
 								</div>
 			
 					</div>
@@ -200,10 +227,11 @@
 
 		</div>
 		<div class="col-md-12">
-			<div class="col-md-4">
+			<div class="col-md-2">
 									<div class="form-group">
-										<label>เบอร์โทรศัพท์</label>
-										<input type="text" name="l_name" class="form-control" required="" value="<?php echo $resume[phone] ;?>">
+										<br><button type="button" class="btn btn-primary">ประวัติการทำงาน/<br>ฝึกงาน</button>
+										<!-- <label>เบอร์โทรศัพท์</label>
+										<input type="text" name="l_name" class="form-control" required="" value="<?php echo $resume[phone] ;?>"> -->
 								</div>
 			</div>
 				<div class="col-md-4">
