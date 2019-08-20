@@ -193,15 +193,23 @@ include("check-company.php")
 						<aside>
 							<h1 class="aside-title">ผู้สมัครงานล่าสุด</h1>
 							<div class="aside-body">
+
+<?php 
+	$sql = pg_query("SELECT *,b.img as profile_stu from user_request a 
+inner join student b on a.email_user = b.email
+inner join job_company c on a.id_job = c.id_job
+where id_com = $id_com;");
+	while ($arr = pg_fetch_array($sql)) {
+?>
 								<article class="article-mini">
 									<div class="inner">
 										<figure>
 											<a href="single.html">
-												<img src="https://mawaleinfotech.com/images/about-man-img.jpg">
+												<img src="../images/student/<?php echo $arr[profile_stu]; ?>">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="single.html">นาย ธีระยุทธ อินทร์จันทร์</a></h1>
+											<h1><a href="single.html"><?php echo $arr[s_name],' ',$arr[l_name] ; ?></a></h1>
 											<div class="detail">
 												<div class="category"><a href="category.html">รับสมัครงาน</a></div>
 												<div class="time">2019-22-11</div>
@@ -210,6 +218,7 @@ include("check-company.php")
 										</div>
 									</div>
 								</article>
+<?php } ?>
 								
 							</div>
 						</aside>

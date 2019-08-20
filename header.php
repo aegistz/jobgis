@@ -88,9 +88,14 @@ if(isset($_COOKIE["type"]))
 					<div id="menu-list">
 						<ul class="nav-list">
 							<li class="for-tablet nav-title"><a>Menu</a></li>
-							<li class="for-tablet"><a href="login.html">Login</a></li>
-							<li class="for-tablet"><a href="register.html">Register</a></li>
+							<li class="for-tablet"><a href="login.php">Login</a></li>
+							<li class="for-tablet"><a href="register.php">Register</a></li>
 							<li><a href="./">หน้าแรก</a></li>
+					
+<?php 
+$sql = pg_query("SELECT * from resume where email = '$user[email]';");
+$num = pg_num_rows($sql);
+ if (  isset($_COOKIE["type"]) ) { ?>							
 							<li><a href="story.php">เรื่องราว</a></li>
 							<li><a href="search.php">ค้นหางาน</a></li>
 							
@@ -107,84 +112,23 @@ if(isset($_COOKIE["type"]))
 									<li><a href="">ธรุกิจ</a></li>
 								</ul>
 							</li>
+<?php if ($num == 0) { ?>
+
 							<li>
-<?php 
-$sql = pg_query("SELECT * from resume where email = '$user[email]';");
-$num = pg_num_rows($sql);
- if ( $num == 0 ) { ?>
 								<a href="resume.php">
 									Resume GIS 
 									<div class="badge ">คุณยังไม่ได้เพิ่ม</div>
 								</a>
+							</li>
+<?php } else{  ?>
 
-<?php } else { ?>
+							<li>
 								<a href="view_resume.php">
-									Resume GIS  
+									Resume GIS 
 								</a>
+							</li>
+
 <?php } ?>
-<!-- 
-								<ul class="dropdown-menu">
-									<li><a href="resume.php">resume</a></li>
-									<li><a href="view_resume.php">ดูข้อมูล resume</a></li>
-								</ul> -->
-							</li>
-
-						<!-- 	<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="#">ประกาศรับสมัครงาน <i class="ion-ios-arrow-right"></i> <div class="badge">Hot</div></a>
-								<div class="dropdown-menu megamenu">
-									<div class="megamenu-inner">
-										<div class="row">
-											<div class="col-md-3">
-												<div class="row">
-													<div class="col-md-12">
-														<h2 class="megamenu-title">สำหรับสถานประกอบการ</h2>
-													</div>
-												</div>
-												<ul class="vertical-menu">
-													<li><a href="reg-company.php"><i class="ion-ios-circle-outline"></i> ลงทะเบียนสถานประกอบการใหม่</a></li>
-													
-												</ul>
-											</div>
-											<div class="col-md-9">
-												<div class="row">
-													<div class="col-md-12">
-														<h2 class="megamenu-title">งานของท่านที่เปิดรับอยู่</h2>
-													</div>
-												</div>
-												<div class="row">
-
-													<article class="article col-md-4 mini">
-														<div class="inner">
-															<figure>
-																<a href="single.html">
-																	<img src="images/news/img10.jpg" alt="Sample Article">
-																</a>
-															</figure>
-															<div class="padding">
-																<div class="detail">
-																	<div class="time">December 10, 2016</div>
-																	<div class="category"><a href="category.html">Healthy</a></div>
-																</div>
-																<h2><a href="single.html">Duis aute irure dolor in reprehenderit in voluptate</a></h2>
-															</div>
-														</div>
-													</article>
-
-												</div>
-											</div>
-										</div>								
-									</div>
-								</div>
-<<<<<<< HEAD
-							</li>
-							<li class="dropdown magz-dropdown magz-dropdown-megamenu"><a href="">Resume GIS <i class="ion-ios-arrow-right"></i></a>
-=======
-							</li> -->
-
-
-<?php 
-if(isset($_COOKIE["type"]))
-{
- ?>
 							<li class="dropdown magz-dropdown"><a href="#">ตั้งค่า <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="#"><i class="icon ion-person"></i> My Account</a></li>

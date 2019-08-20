@@ -80,10 +80,10 @@ if ( isset($_GET[type]) == 'resent' )
 		    </head>
 		    <body>
 		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
-		        <img src='http://localhost:8888/GEOJOBS/images/6logo.png' style='width: 120px;'>
+		        <img src='http://www.geojobs.nu.ac.th/images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
 		           <p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
-		           <p><a href='http://localhost:8888/GEOJOBS/checkmail.php?email=".$_COOKIE[email]."&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
+		           <p><a href='http://www.geojobs.nu.ac.th/checkmail.php?email=".$_COOKIE[email]."&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
 		        </div>
 		      </div>
 		        <div>       

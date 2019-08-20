@@ -91,10 +91,10 @@ if ( isset($_GET[type]) == 'resent' )
 		    </head>
 		    <body>
 		      <div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
-		         <img src='http://www3.cgistln.nu.ac.th/GEOJOBS/images/6logo.png' style='width: 120px;'>
+		         <img src='http://www.geojobs.nu.ac.th/images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
 		           <p>กดที่ลิงค์ เพื่อแก้ไขรหัสผ่าน</p><br>
-		            <p><a href='http://www3.cgistln.nu.ac.th/GEOJOBS/reset_password.php?email=".$_COOKIE[email]."&ss=reset_password' >กดที่นี่</a>   </p>
+		            <p><a href='http://www.geojobs.nu.ac.th/reset_password.php?email=".$_COOKIE[email]."&ss=reset_password' >กดที่นี่</a>   </p>
 		        </div>
 		      </div>
 		        <div>       

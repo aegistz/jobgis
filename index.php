@@ -161,18 +161,6 @@ include("check_student.php")
 											</select>
 											</div>
 										</div>
-										<div class="form-group row">
-											<label for="staticEmail" class="col-sm-4 col-form-label">เพศ</label>
-											<div class="col-sm-8">
-												<select class="form-control" >
-												<option>- - กดเพื่อเลือก - -</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-											</select>
-											</div>
-										</div>
 									</fieldset>
 								</div>
 								<button type="submit" class="btn btn-primary btn-block">ค้นหางาน</button>
@@ -290,7 +278,7 @@ include("check_student.php")
 												<div class="item">
 													<a href="profile.php" title="">
 														<div class="icon">
-															<div>More</div>
+															<div>ดูข้อมูล</div>
 															<i class="ion-chevron-right"></i>
 														</div>
 													</a>

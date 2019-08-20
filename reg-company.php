@@ -170,10 +170,10 @@ if( $_POST[submit_form] == 'true' )
 												</head>
 												<body>
 														<div style='background: #214163;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >
-																<img src='http://www3.cgistln.nu.ac.th/GEOJOBS/images/6logo.png' style='width: 120px;'>
+																<img src='http://www.geojobs.nu.ac.th/images/6logo.png' style='width: 120px;'>
 																<div style='-align:center'>
 																		<p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
-																		<p><a href='http://http://localhost:8888/jobgis/checkcompany.php?email=".$_POST[email_com]."&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
+																		<p><a href='http://www.geojobs.nu.ac.th/checkcompany.php?email=".$_POST[email_com]."&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
 																</div>
 														</div>
 														<div>
