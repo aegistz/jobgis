@@ -102,10 +102,14 @@ include("check_student.php")
 								                	
 
 								                </div>
-								                <h1><a href="single.html"><?php echo $arr[title_story]; ?></a></h1>
+								                <h1><a href="single.html">
+								                	<?php 
+								                 echo mb_strimwidth($arr[title_story], 0, 70, '...');
+								                	?>
+								                	</a></h1>
 								                <p>
 								                 <?php 
-								                 echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="" title="">เพิ่มเติม</a>');
+								                 echo mb_strimwidth($arr[detail_story], 0, 150, '....<a href="" title="">เพิ่มเติม</a>');
 								                 ?> 
 								                
 
@@ -116,6 +120,7 @@ include("check_student.php")
 								              </div>
 								            </div>
 								          </article>
+								          <hr>
                 </td>
             </tr>
 

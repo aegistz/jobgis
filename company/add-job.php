@@ -303,7 +303,7 @@ function get_file_extension( $file )  {
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>เงินเดือน</label>
-										<input type="text" name="budget_job" class="form-control" >
+										<input type="number" name="budget_job" class="form-control" >
 									</div>
 								</div>
 							</div>

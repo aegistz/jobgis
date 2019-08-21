@@ -92,7 +92,13 @@ $arr_profile = pg_fetch_array($sql_profile);
 
 
 
+										<?php if($user[bg_img] != ''){ ?>
 										<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
+										<?php }else{ ?>
+										<div class="featured-author-cover divbutton" style="background-image: url('http://www3.cgistln.nu.ac.th/dronephoto/images/full_img/chanonk_photos_135cc7cfce7e4ce_1556598734_.jpg');">
+										<?php } ?>
+
+											
 											<div class="featured-author-center">
 												<figure class="featured-author-picture">
 												<?php if($user[img] == ''){ ?>

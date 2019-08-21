@@ -58,7 +58,11 @@
 								<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article" style="width: 150px ">
 						</figure>
 					</div>
-						<h3><label>Resume</label></h3>
+						<h3>
+							<label>
+								Resume <a href="edit-resume.php" class="btn btn-primary"><i class="icon ion-settings"></i>  แก้ไข</a>
+							</label>
+						</h3>
 						<hr>
 						<!-- <div class="line thin"></div> -->
 						<div class="page-description">
