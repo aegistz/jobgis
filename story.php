@@ -75,7 +75,7 @@ include("check_student.php")
 							<article class="col-md-12 article-list">
 								            <div class="inner">
 								              <figure>
-									              <a href="single.html">
+									              <a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
 									                <img src="images/story/<?php echo $arr[img_story]; ?>">
 								                </a>
 								              </figure>
@@ -102,7 +102,7 @@ include("check_student.php")
 								                	
 
 								                </div>
-								                <h1><a href="single.html">
+								                <h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
 								                	<?php 
 								                 echo mb_strimwidth($arr[title_story], 0, 70, '...');
 								                	?>

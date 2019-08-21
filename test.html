@@ -1,72 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Taxi pickups | CARTO</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
-  <script src="https://libs.cartocdn.com/carto-vl/v1.3.1/carto-vl.min.js"></script>
-  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
-  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css" rel="stylesheet" />
-  <link href="https://carto.com/developers/carto-vl/v1.3.1/examples/maps/style.css" rel="stylesheet">
-</head>
-<body>
-  <div id="map"></div>
-  <aside class="toolbox">
-    <div class="box">
-      <header>
-        <h1>Taxi pickups</h1>
-      </header>
-      <section>
-        <p class="description open-sans">Multi-scale animation with color interpolation through time of day and sized by trip distance</p>
-      </section>
-      <footer class="js-footer"></footer>
-    </div>
-  </aside>
-  <div id="loader">
-    <div class="CDB-LoaderIcon CDB-LoaderIcon--big">
-      <svg class="CDB-LoaderIcon-spinner" viewBox="0 0 50 50">
-        <circle class="CDB-LoaderIcon-path" cx="25" cy="25" r="20" fill="none"></circle>
-      </svg>
-    </div>
-  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+                                          <div class="col-lg-10">
+                                              <input class="form-control " type="file" id="cname"  name="fileToUpload"  value="user.png"  onchange="readURL(this);">
+                                              <img id="blah" src="http://secondary5.go.th/main/html/icon/user-nopic2.png" style=" max-width:100px; height:100px;margin-top:20px;" alt="your image" />
+
+                                          </div>
+
+
+ 
   <script>
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: carto.basemaps.darkmatter,
-      center: [-74.0032059, 40.7482066],
-      zoom: 12,
-      scrollZoom: false
-    });
 
-    const nav = new mapboxgl.NavigationControl({
-      showCompass: false
-    });
-    map.addControl(nav, 'top-left');
-    map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+ function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-    // Define user
-    carto.setDefaultAuth({
-      username: 'cartovl',
-      apiKey: 'default_public'
-    });
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
 
-    // Define layer
-    const source = new carto.source.Dataset('taxi_50k');
-    const viz = new carto.Viz(`
-      width: ($fare_amount/15000)*scaled(1)
-      filter: animation($tpep_pickup_datetime,10,fade(0.2,0.2))
-      color: rgba(255,255,255,0.2)
-      strokeColor: ramp(linear($tpep_pickup_datetime,time('2016-05-01T00:08:39Z'),time('2016-05-06T10:29:11Z')),[#CF1C90,#F8CA00,#9BBD4D,#07A5AB,#B100EB])
-      strokeWidth: ($trip_distance/30000)*scaled(1)
-    `);
-    const layer = new carto.Layer('layer', source, viz);
-
-    layer.addTo(map, 'watername_ocean');
-    layer.on('loaded', hideLoader);
-
-    function hideLoader() {
-      document.getElementById('loader').style.opacity = '0';
-    }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
   </script>
-</body>
-</html>
+
