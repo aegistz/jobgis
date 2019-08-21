@@ -14,11 +14,21 @@ include("config.php");
 								</a>
 							</div>						
 						</div>
+
+
+				
 						<div class="col-md-6 col-sm-12">
-							<form class="search" autocomplete="off">
+<?php 
+if(isset($_COOKIE["type"]))
+{
+ ?>		
+							<form class="search" action="search.php" autocomplete="on">
+<?php } else{
+	echo '<form class="search" action="#" autocomplete="on">';
+}?>	
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" name="q" class="form-control" placeholder="ค้นหางานที่นี่ ....">									
+										<input type="text" name="eqc" class="form-control" placeholder="ค้นหา งาน / ผู้คน / สถานประกอบการ  ...." value="<?php echo $_GET[eqc]; ?>">									
 										<div class="input-group-btn">
 											<button class="btn btn-primary"><i class="ion-search"></i></button>
 										</div>
@@ -34,8 +44,10 @@ include("config.php");
 										<li><a href="#">งานพัฒนาระบบ</a></li>
 									</ul>
 								</div>
-							</form>								
+							</form>		
+						
 						</div>
+					
 <!-- 
 						<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">

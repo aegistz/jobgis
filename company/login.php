@@ -35,7 +35,7 @@ if(isset($_POST["login"]))
 					      if($count > 0) {
 
 					          if(  $password ==  $arr["password"] ) {
-					               setcookie("type", $arr["user_name"] , time() + 86399);
+					               setcookie("type", $user_name , time() + 86399);
 					               setcookie("pass", $arr["password"] , time() + 86399);
 								   setcookie("status", 'company', time() + 86399);
 					            //    header('Location:..'.$_SESSION['redirectURL']);
