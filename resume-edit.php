@@ -559,8 +559,8 @@
 								<div class="form-group">
 									<label>ลักษณะงาน</label>
 									<select name="work_n" class="form-control" required>
-										<option value="ประจำ" <?php if($resume[work_n]=='ประจำ'){echo 'selected';} ?>>ประจำ</option>
-										<option value="รายวัน" <?php if($resume[work_n]=='รายวัน'){echo 'selected';} ?>>รายวัน</option>
+										<option value="งานประจำ" <?php if($resume[work_n]=='งานประจำ'){echo 'selected';} ?>>งานประจำ</option>
+										<option value="งานรายวัน" <?php if($resume[work_n]=='งานรายวัน'){echo 'selected';} ?>>งานรายวัน</option>
 										<option value="สหิจศึกษา" <?php if($resume[work_n]=='สหิจศึกษา'){echo 'selected';} ?>>สหิจศึกษา</option>
 										<option value="ฝึกงาน" <?php if($resume[work_n]=='ฝึกงาน'){echo 'selected';} ?>>ฝึกงาน</option>
 									</select>
@@ -681,6 +681,7 @@
 										<option value="ดี" <?php if($resume[th_s]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[th_s]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[th_s]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="พูดไม่ได้" <?php if($resume[th_s]=='พูดไม่ได้'){echo 'selected';} ?>>พูดไม่ได้</option>
 									</select>
 								</div>
 							</div>
@@ -692,6 +693,7 @@
 										<option value="ดี" <?php if($resume[th_r]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[th_r]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[th_r]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="อ่านไม่ได้" <?php if($resume[th_r]=='อ่านไม่ได้'){echo 'selected';} ?>>อ่านไม่ได้</option>
 									</select>
 								</div>
 							</div>
@@ -703,6 +705,7 @@
 										<option value="ดี" <?php if($resume[th_w]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[th_w]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[th_w]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="เขียนไม่ได้" <?php if($resume[th_w]=='เขียนไม่ได้'){echo 'selected';} ?>>เขียนไม่ได้</option>
 									</select>
 								</div>
 							</div>			
@@ -717,6 +720,7 @@
 										<option value="ดี" <?php if($resume[en_s]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[en_s]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[en_s]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="พูดไม่ได้" <?php if($resume[en_s]=='พูดไม่ได้'){echo 'selected';} ?>>พูดไม่ได้</option>
 									</select>
 								</div>
 							</div>
@@ -728,6 +732,7 @@
 										<option value="ดี" <?php if($resume[en_r]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[en_r]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[en_r]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="อ่านไม่ได้" <?php if($resume[en_r]=='อ่านไม่ได้'){echo 'selected';} ?>>อ่านไม่ได้</option>
 									</select>
 								</div>
 							</div>
@@ -739,6 +744,7 @@
 										<option value="ดี" <?php if($resume[en_w]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[en_w]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[en_w]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="เขียนไม่ได้" <?php if($resume[en_w]=='เขียนไม่ได้'){echo 'selected';} ?>>เขียนไม่ได้</option>
 									</select>
 								</div>
 							</div>			
@@ -753,6 +759,7 @@
 										<option value="ดี" <?php if($resume[cn_s]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[cn_s]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[cn_s]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="พูดไม่ได้" <?php if($resume[cn_s]=='พูดไม่ได้'){echo 'selected';} ?>>พูดไม่ได้</option>
 									</select>
 								</div>
 							</div>
@@ -764,6 +771,7 @@
 										<option value="ดี" <?php if($resume[cn_r]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[cn_r]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[cn_r]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="อ่านไม่ได้" <?php if($resume[cn_r]=='อ่านไม่ได้'){echo 'selected';} ?>>อ่านไม่ได้</option>
 									</select>
 								</div>
 							</div>
@@ -775,6 +783,7 @@
 										<option value="ดี" <?php if($resume[cn_w]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[cn_w]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[cn_w]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="เขียนไม่ได้" <?php if($resume[cn_w]=='เขียนไม่ได้'){echo 'selected';} ?>>เขียนไม่ได้</option>
 									</select>
 								</div>
 							</div>			
@@ -790,6 +799,7 @@
 										<option value="ดี" <?php if($resume[word]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[word]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[word]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[word]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
@@ -801,6 +811,7 @@
 										<option value="ดี" <?php if($resume[excel]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[excel]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[excel]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[excel]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
@@ -812,6 +823,7 @@
 										<option value="ดี" <?php if($resume[ppt]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[ppt]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[ppt]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[ppt]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>			
@@ -826,6 +838,7 @@
 										<option value="ดี" <?php if($resume[ps]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[ps]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[ps]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[ps]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
@@ -837,6 +850,7 @@
 										<option value="ดี" <?php if($resume[ai]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[ai]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[ai]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[ai]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
@@ -848,6 +862,7 @@
 										<option value="ดี" <?php if($resume[pr]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[pr]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[pr]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[pr]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>	
@@ -859,6 +874,7 @@
 										<option value="ดี" <?php if($resume[lr]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[lr]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[lr]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[lr]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>		
@@ -872,6 +888,8 @@
 										<option value="ดีมาก" <?php if($resume[arcgis]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[arcgis]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[arcgis]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+										<option value="พอใช้" <?php if($resume[arcgis]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[arcgis]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
@@ -882,6 +900,8 @@
 										<option value="ดีมาก" <?php if($resume[erdas]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[erdas]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[erdas]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+										<option value="พอใช้" <?php if($resume[erdas]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[erdas]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
@@ -892,6 +912,8 @@
 										<option value="ดีมาก" <?php if($resume[envi]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[envi]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[envi]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+										<option value="พอใช้" <?php if($resume[envi]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[envi]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>	
@@ -902,6 +924,8 @@
 										<option value="ดีมาก" <?php if($resume[qgis]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[qgis]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[qgis]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+										<option value="พอใช้" <?php if($resume[qgis]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[qgis]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>		
