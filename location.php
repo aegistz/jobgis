@@ -12,6 +12,7 @@ include('config.php');
 
 	 $data = $_GET['data'];
     $val = $_GET['val'];
+    $province = $_GET['province'];
 
 
            if ($data=='province') { 
@@ -29,6 +30,33 @@ include('config.php');
                    echo "<option value='$row[ap_tn]' >$row[ap_tn]</option>" ;
               }
             }else if ( $data=='tambon' ){ 
+              echo "<select name='tambon' class='form-control'> ";
+              echo "<option value='0'>เลือกตำบล</option>\n";
+              $result = pg_query("SELECT tb_tn from tambon where ap_tn = '$val' group by ap_tn ,  pv_tn ,tb_tn order by tb_tn asc");
+              while($row = pg_fetch_array($result)){
+                   echo "<option value='$row[tb_tn]' >$row[tb_tn]</option>" ;
+              }
+            }
+
+             if ($data=='province_edit') { 
+              echo "<select name='province' class='form-control' onChange=\"dochange('amphoe_edit', this.value)\">";
+              echo "<option value=''>เลือกจังหวัด</option>\n";
+              $result = pg_query("SELECT pv_tn from tambon group by pv_tn order by pv_tn asc");
+              while($row = pg_fetch_array($result)){
+                   echo "<option value='$row[pv_tn]' " ;
+                    if ($row[pv_tn] ==$province ) {
+                    echo 'selected';
+                   } ;
+                  echo " >$row[pv_tn]</option>" ;
+              }
+            }else if ( $data=='amphoe_edit' ){
+              echo "<select name='amphoe' class='form-control' onChange=\"dochange('tambon_edit', this.value)\">";
+              echo "<option value='0'>เลือกอำเภอ</option>\n";
+              $result = pg_query("SELECT ap_tn from tambon where pv_tn = '$val' group by ap_tn ,  pv_tn order by ap_tn asc");
+              while($row = pg_fetch_array($result)){
+                   echo "<option value='$row[ap_tn]' >$row[ap_tn]</option>" ;
+              }
+            }else if ( $data=='tambon_edit' ){ 
               echo "<select name='tambon' class='form-control'> ";
               echo "<option value='0'>เลือกตำบล</option>\n";
               $result = pg_query("SELECT tb_tn from tambon where ap_tn = '$val' group by ap_tn ,  pv_tn ,tb_tn order by tb_tn asc");
