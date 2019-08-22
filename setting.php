@@ -177,7 +177,11 @@ include("config.php");
 										<select name="year_birth" class="form-control" required="">
 												<option value="">กรุณาเลือก</option>
 											<?php for ($i=0; $i < 100; $i++) {  ?>
+<<<<<<< HEAD
 												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i ==$user[year_birth]){echo 'selected';} ?>><?php echo 2562- $i ; ?></option>
+=======
+												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i == $user[year_birth]){ echo 'selected';} ?> ><?php echo 2562- $i ; ?></option>
+>>>>>>> 631c3ed4dbe3711c50236256f56eb29f62c2153a
 											<?php } ?>
 										</select>
 									</div>
@@ -191,8 +195,9 @@ include("config.php");
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>จังหวัดที่อาศัยใมนปัจจุบัน</label>
+										<label>จังหวัดที่อาศัยในปัจจุบัน</label>
 										<select class="form-control" name="province" required="" >
+<<<<<<< HEAD
 											<option value="">กรุณาเลือก</option>
 											<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
 											while ($arr_prov = pg_fetch_array($sql_prov)) {
@@ -201,6 +206,15 @@ include("config.php");
 											<?php } ?>
 										</select>
 									</div>
+=======
+										<option value="">กรุณาเลือก</option>
+										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>" <?php if($arr_prov[pv_tn] == $user[province]){ echo 'selected';} ?> ><?php echo $arr_prov[pv_tn]; ?></option>
+										<?php } ?>
+									</select>
+>>>>>>> 631c3ed4dbe3711c50236256f56eb29f62c2153a
 								</div>
 							</div>
 
@@ -229,19 +243,32 @@ include("config.php");
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>ระดับการศึกษา</label>
+<<<<<<< HEAD
 										<select name="level_degree" class="form-control" required="">
 											<option value="ปริญญาตรี" <?php if($user[level_degree]=='ปริญญาตรี'){echo 'selected';} ?>>ปริญญาตรี</option>
 											<option value="ปริญญาโท" <?php if($user[level_degree]=='ปริญญาโท'){echo 'selected';} ?>>ปริญญาโท</option>
 											<option value="ปริญญาเอก" <?php if($user[level_degree]=='ปริญญาเอก'){echo 'selected';} ?>>ปริญญาเอก</option>
 										</select>
 									</div>
+=======
+									<select name="level_degree" class="form-control" required="">
+										<option value="">กรุณาเลือก</option>
+										<option value="ปริญญาตรี" <?php if($user[level_degree] == 'ปริญญาตรี'){ echo 'selected';} ?>>ปริญญาตรี</option>
+										<option value="ปริญญาโท" <?php if($user[level_degree] =='ปริญญาโท'){ echo 'selected';} ?>>ปริญญาโท</option>
+										<option value="ปริญญาเอก" <?php if($user[level_degree] == 'ปริญญาเอก'){ echo 'selected';} ?>>ปริญญาเอก</option>
+									</select>
+>>>>>>> 631c3ed4dbe3711c50236256f56eb29f62c2153a
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>ปีที่สำเร็จการศึกษา</label>
 										<select name="year_success" class="form-control">
 											<?php for ($i=0; $i < 30; $i++) {  ?>
+<<<<<<< HEAD
 												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i ==$user[year_success]){echo 'selected';} ?>><?php echo 2562- $i ; ?></option>
+=======
+												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i == $user[year_success]){ echo 'selected';} ?>><?php echo 2562- $i ; ?></option>
+>>>>>>> 631c3ed4dbe3711c50236256f56eb29f62c2153a
 											<?php } ?>
 										</select>
 									</div>

@@ -187,7 +187,7 @@ if ($_POST[send_request] == 'true') {
 						<p><?php echo $mes ; ?></p>
 						<div class="row">
 						<h3><label>ตรวจสอบ Resume ของคุณ 
-							<a href="resume.php" class="btn btn-primary btn-sm " title=""><i class="icon ion-settings"></i>  แก้ไข</a>
+							<a href="resume-edit.php" class="btn btn-primary btn-sm " title=""><i class="icon ion-settings"></i>  แก้ไข</a>
 							
 						</label></h3>
 						<div class="page-description">

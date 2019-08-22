@@ -402,7 +402,7 @@
 			</div>
 			<div class="col-md-4">
 									<div class="form-group">
-										<label>จังหวัดที่อาศัยใมนปัจจุบัน</label>
+										<label>จังหวัดที่อาศัยในปัจจุบัน</label>
 										<select class="form-control" name="province" required="" >
 										<option value="">กรุณาเลือก</option>
 										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
