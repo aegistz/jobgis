@@ -81,6 +81,15 @@ if ($_POST[send_request] == 'true') {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+		<style>
+			.circle{
+	    height: auto;
+	    width: auto;
+	    border: 3px solid #fff; 
+	    border-radius: 50%; 
+	    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+		}
+		</style>
 
 	</head>
 
@@ -179,7 +188,7 @@ if ($_POST[send_request] == 'true') {
 						<p><?php echo $mes ; ?></p>
 						<div class="row">
 						<h3><label>Resume ของคุณ 
-							<a href="resume.php" class="btn btn-primary btn-sm " title=""><i class="icon ion-settings"></i>  แก้ไข</a>
+							<a href="resume-edit.php" class="btn btn-primary btn-sm " title=""><i class="icon ion-settings"></i>  แก้ไข</a>
 							
 						</label></h3>
 						<div class="page-description">
@@ -282,7 +291,11 @@ if ($_POST[send_request] == 'true') {
 											<div class="col-md-5">
 												<div class="form-group">
 													<figure class="featured-author-picture">
-															<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article" style="width: 150px ">
+														<?php if($user[img] == ''){ ?>
+														<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article" style="width: 150px ">
+														<?php } else { ?>
+														<img class="circle"  src="images/student/<?php echo $user[img]; ?>" alt="Sample Article" style="width: 150px ">
+														<?php } ?>
 													</figure>
 												</div>
 											</div>

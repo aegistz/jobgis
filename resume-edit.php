@@ -87,7 +87,7 @@
         		religion = '$religion'
         		where email = '$email';";       
            		$query1 = pg_query($sql1);
-           		header('location:resume-edit.php') ; 
+           		header('location:resume-edit.php#personal') ; 
 		}
 		if ( isset($_POST[edu]) ) {
        	$sql2 = "UPDATE resume set  
@@ -100,7 +100,7 @@
         		gpa = '$gpa'
         		where email = '$email' ;";
            		$query2 = pg_query($sql2);
-           		header('location:resume-edit.php') ; 
+           		header('location:resume-edit.php#edu') ; 
 		}
 		if ( isset($_POST[work]) ) {
        	$sql3 = "UPDATE resume set  
@@ -113,7 +113,7 @@
        			role_com = '$role_com'
         		where email = '$email' ;";
            		$query3 = pg_query($sql3);
-           		header('location:resume-edit.php') ; 
+           		header('location:resume-edit.php#work') ; 
 		}
 		if ( isset($_POST[Train]) ) {
        	$sql4 = "UPDATE resume set  
@@ -122,7 +122,7 @@
        			course_time = '$course_time'
         		where email = '$email' ;";
            		$query4 = pg_query($sql4);
-           		header('location:resume-edit.php') ; 
+           		header('location:resume-edit.php#Train') ; 
 		}
 		if ( isset($_POST[objective]) ) {
        	$sql5 = "UPDATE resume set  
@@ -135,7 +135,7 @@
        			salary = '$salary'
         		where email = '$email' ;";
            		$query5 = pg_query($sql5);
-           		header('location:resume-edit.php') ; 
+           		header('location:resume-edit.php#objective') ; 
 		}
 		if ( isset($_POST[skills]) ) {
        	$sql6 = "UPDATE resume set  
@@ -161,7 +161,7 @@
        			qgis = '$qgis'
         		where email = '$email' ;";
            		$query6 = pg_query($sql6);
-           		header('location:resume-edit.php') ; 
+           		header('location:resume-edit.php#skills') ; 
 		}
 
 
@@ -266,6 +266,7 @@
 				<div class="tab-content">
 				 	<div id="personal" class="container tab-pane active">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>ข้อมูลส่วนตัว</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -398,6 +399,7 @@
 					</div>
 					<div id="edu" class="container tab-pane fade">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>การศึกษา</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -462,6 +464,7 @@
 					</div>
 					<div id="work" class="container tab-pane fade">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>การทำงาน/ฝึกงาน</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -519,6 +522,7 @@
 					</div>
 					<div id="Train" class="container tab-pane fade">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>ประวัติการฝึกอบรม</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-3">
 								<div class="form-group">
@@ -535,7 +539,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>ระยะเวลาในการอบรม</label>
-									<input type="date" name="course_time" class="form-control" required="" value="<?php echo $resume[course_time] ;?>">
+									<input type="text" name="course_time" class="form-control" required="" value="<?php echo $resume[course_time] ;?>">
 								</div>
 							</div>
 						</div>
@@ -550,6 +554,7 @@
 					</div>
 					<div id="objective" class="container tab-pane fade">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>เป้าหมายในการทำงาน/ฝึกงาน</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -615,7 +620,7 @@
 										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
 										while ($arr_prov = pg_fetch_array($sql_prov)) {
 										?>
-										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"<?php if($arr_prov[pv_tn]==$resume[area_1]){echo 'selected';} ?>><?php echo $arr_prov[pv_tn]; ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -628,7 +633,7 @@
 										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
 										while ($arr_prov = pg_fetch_array($sql_prov)) {
 										?>
-										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"<?php if($arr_prov[pv_tn]==$resume[area_2]){echo 'selected';} ?>><?php echo $arr_prov[pv_tn]; ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -980,6 +985,16 @@
 		    $(this).tab('show');
 		  });
 		});
+			$(function(){
+			var hash = window.location.hash;
+			hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+			$('.nav-tabs a').click(function (e) {
+			$(this).tab('show');
+			var scrollmem = $('body').scrollTop();
+			window.location.hash = this.hash;
+			$('html,body').scrollTop(scrollmem);
+			});
+			});
 	</script>
 	</body>
 	</body>
