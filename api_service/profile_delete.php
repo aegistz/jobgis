@@ -12,4 +12,12 @@ if ($_GET[type] == 'delete_story') {
 
 }
 
+
+
+if ($_GET[type] =='delete_img_post') {
+	$imgid = $_GET[imgid];
+	$sql_delete = pg_query("DELETE from photo_user where id_img = '$imgid' and id_user = '$id'  ;");
+	header('location:profile.php');
+}
+
 ?>

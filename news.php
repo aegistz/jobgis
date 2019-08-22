@@ -38,6 +38,7 @@ include("check_student.php");
 		<link rel="stylesheet" href="css/skins/blue.css">
 		<link rel="stylesheet" href="css/demo.css">
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
@@ -54,11 +55,11 @@ include("check_student.php");
 				<div class="row">
 					<div class="col-md-4 sidebar" id="sidebar">
 						<aside>
-							<h1 class="aside-title">งานอื่น ๆ ของคุณ <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
+							<h1 class="aside-title">งานอื่น ๆ ที่น่าสนใจ</h1>
 							<div class="aside-body">
 
 <?php 
-	$sql = pg_query("SELECT * from job_company limit 5 ;");
+	$sql = pg_query("SELECT * from job_company ORDER BY RANDOM() limit 5 ;");
 	$check = pg_num_rows($sql);
 	while( $job_com = pg_fetch_array($sql) ){
 		
@@ -95,7 +96,9 @@ include("check_student.php");
 						  <li class="active">News</li>
 						</ol>
 						<article class="article main-article">
-							<header>
+							<div class="row">
+								<div class="col-md-9">
+								<header>
 								<img src="images/img_job/<?php echo $result[logo_img]; ?>" width="20%" alt="">
 								<h2><?php echo $result[name_job]; ?></h2>
 								<ul class="details">
@@ -104,6 +107,61 @@ include("check_student.php");
 									<li>By <a href="#"><?php echo $result[name_com]; ?></a></li>
 								</ul>
 							</header>
+							</div>
+							<div class="col-md-3">
+
+<?php 
+	$sql_check = pg_query("SELECT * from user_request where id_job = '$result[id_job]' and email_user = '$user[email]' ;");
+	$num = pg_num_rows($sql_check);
+	$arr = pg_fetch_array($sql_check);
+	if ($num == 0) {
+?>
+								<a class="btn btn-primary btn-block" href="send_request.php?q=<?php echo $_GET[q]; ?>"><i class="fa fa-share" aria-hidden="true"></i> กดสมัคร <br> ตำแหน่งงานนี้</a>
+<?php }else { ?>
+<small>*สมัครตำแหน่งงานนี้แล้ว</small>
+	<?php if ($arr[request] == 'รอการยืนยัน') { ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-warning btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														  <ul class="dropdown-menu" role="menu">
+														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr[id_no] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
+														  </ul>
+														</div>
+<?php } else if($arr[request] == 'ยืนยันการสมัครแล้ว'){ ?> 
+														<div class="btn-group">
+														  <button type="button" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+
+<?php } else if($arr[request] == 'ไม่ผ่านการสมัคร'){  ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														  <ul class="dropdown-menu" role="menu">
+														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr[id_no] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
+														  </ul>
+														</div>
+
+<?php } else if($arr[request] == 'ผ่านการสมัคร รอการติดต่อกลับ'){   ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+
+<?php } ?>
+
+<?php } ?>
+
+
+							</div>
+							</div>
+							
+							
+
 							<div class="main">
 								<p><?php echo $result[detail_job]; ?> <hr>
 								<b>หน้าที่และความรับผิดชอบ</b> <br>
@@ -145,7 +203,16 @@ include("check_student.php");
 </p>
 							</div>
 
-<a class="btn btn-primary btn-block" href="send_request.php?q=<?php echo $_GET[q]; ?>">กดส่ง Resume ไปยังตำแหน่งงานนี้</a>
+<?php 
+	$sql_check = pg_query("SELECT * from user_request where id_job = '$result[id_job]' and email_user = '$user[email]' ;");
+	$num = pg_num_rows($sql_check);
+	$arr = pg_fetch_array($sql_check);
+	if ($num == 0) {
+?>
+								<a class="btn btn-primary btn-block" href="send_request.php?q=<?php echo $_GET[q]; ?>"><i class="fa fa-share" aria-hidden="true"></i> กดสมัคร <br> ตำแหน่งงานนี้</a>
+<?php }  ?>
+
+
 
 
 						</article>
