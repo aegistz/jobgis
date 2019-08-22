@@ -404,28 +404,28 @@
 		<div class="col-md-2">
 								<div class="form-group">
 									<label>คำนำหน้า</label>
-									<input type="text" name="title_name" class="form-control" value="<?php echo $user[title_name] ;?>" >
+									<input type="text" name="title_name" class="form-control" value="<?php echo $user[title_name] ;?>" required >
 								</div>
 			
 		</div>
 		<div class="col-md-3">
 								<div class="form-group">
 									<label>ชื่อ</label>
-									<input type="text" name="s_name" class="form-control"  value="<?php echo $user[s_name] ;?>">
+									<input type="text" name="s_name" class="form-control"  value="<?php echo $user[s_name] ;?>" required>
 								</div>
 			
 		</div>
 		<div class="col-md-3">
 								<div class="form-group">
 									<label>นามสกุล</label>
-									<input type="text" name="l_name" class="form-control"  value="<?php echo $user[l_name] ;?>">
+									<input type="text" name="l_name" class="form-control"  value="<?php echo $user[l_name] ;?>" required>
 								</div>
 			
 		</div>
 		<div class="col-md-2">
 								<div class="form-group">
 									<label>สัญชาติ</label>
-									<select name="nationality" class="form-control" >
+									<select name="nationality" class="form-control" required >
 										<option value="">กรุณาเลือก</option>
 										<option value="ไทย">ไทย</option>
 										<option value="อื่น ๆ">อื่น ๆ</option>
@@ -436,7 +436,7 @@
 		<div class="col-md-2">
 								<div class="form-group">
 									<label>ศาสนา</label>
-									<select name="religion" class="form-control" >
+									<select name="religion" class="form-control"required >
 										<option value="">กรุณาเลือก</option>
 										<option value="พุทธ">พุทธ</option>
 										<option value="คลิสต์">คลิสต์</option>
@@ -450,27 +450,27 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>วันเกิด</label>
-									<input type="date" name="birthday" class="form-control" value="<?php echo $user[birthday] ;?>">
+									<input type="date" name="birthday" class="form-control" value="<?php echo $user[birthday] ;?>" required>
 								</div>
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>น้ำหนัก</label>
-									<input type="number" name="weight" class="form-control" value="<?php echo $user[weight] ;?>">
+									<input type="number" name="weight" class="form-control" value="<?php echo $user[weight] ;?>" required>
 								</div>
 				
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>ส่วนสูง</label>
-									<input type="number" name="hight" class="form-control" value="<?php echo $user[hight] ;?>">
+									<input type="number" name="hight" class="form-control" value="<?php echo $user[hight] ;?>" required>
 								</div>
 				
 			</div>
 			<div class="col-md-5">
 								<div class="form-group">
 									<label>สถานภาพทางทหาร</label>
-									<select name="status" class="form-control" >
+									<select name="status" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ผ่านการเกณฑ์ทหาร">ผ่านการเกณฑ์ทหาร</option>
 										<option value="ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)">ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)</option>
@@ -485,7 +485,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>ที่อยู่</label>
-									<input type="text" name="address" class="form-control" >
+									<input type="text" name="address" class="form-control" required >
 								</div>
 				
 			</div>
@@ -493,7 +493,7 @@
 								<div class="form-group">
 									<label>จังหวัด</label>
 									<span id="province">
-		                            <select class="form-control m-bot15" class="form-control"  name="province">
+		                            <select class="form-control m-bot15" class="form-control"  name="province" required>
 		                                 <option value=''>เลือกจังหวัด</option>
 		                            </select>
 		                        </span>
@@ -504,7 +504,7 @@
 								<div class="form-group">
 									<label>อำเภอ</label>
 									<span id="amphoe">
-		                            <select class="form-control m-bot15" class="form-control"  name="amphoe" >
+		                            <select class="form-control m-bot15" class="form-control"  name="amphoe" required>
 		                                 <option value=''>เลือกอำเภอ</option>
 		                            </select>
 		                        </span>
@@ -515,7 +515,7 @@
 								<div class="form-group">
 									<label>ตำบล</label>
 									<span id="tambon">
-		                            <select class="form-control m-bot15" class="form-control"  name="tambon" >
+		                            <select class="form-control m-bot15" class="form-control"  name="tambon" required>
 		                                 <option value=''>เลือกตำบล</option>
 		                            </select>
 		                        </span>
@@ -525,7 +525,7 @@
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>รหัสไปรษณืย์</label>
-									<input type="text" name="zip_code" class="form-control" >
+									<input type="text" name="zip_code" class="form-control" required>
 								</div>
 				
 			</div>
@@ -547,20 +547,20 @@
 				<div class="col-md-4">
 								<div class="form-group">
 									<label>ชื่อมหาวิทยาลัย</label>
-									<input type="text" name="university" class="form-control">
+									<input type="text" name="university" class="form-control" required>
 								</div>
 				</div>
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>คณะ</label>
-									<input type="text" name="faculty" class="form-control">
+									<input type="text" name="faculty" class="form-control" required>
 								</div>
 				
 			</div>
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>สาขาวิชา</label>
-									<input type="text" name="sector" class="form-control">
+									<input type="text" name="sector" class="form-control" required>
 								</div>
 				
 			</div>			
@@ -570,13 +570,20 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>ระดับการศึกษา</label>
-									<input type="text" name="degree" class="form-control">
+									<select name="degree" class="form-control" required>
+										<option value="ปวช." <?php if($resume[degree]=='ปวช.'){echo 'selected';} ?>>ปวช.</option>
+										<option value="ปวส." <?php if($resume[degree]=='ปวส.'){echo 'selected';} ?>>ปวส.</option>
+										<option value="อนุปริญญา" <?php if($resume[degree]=='อนุปริญญา'){echo 'selected';} ?>>อนุปริญญา</option>
+										<option value="ปริญญาตรี" <?php if($resume[degree]=='ปริญญาตรี'){echo 'selected';} ?>>ปริญญาตรี</option>
+										<option value="ปริญญาโท" <?php if($resume[degree]=='ปริญญาโท'){echo 'selected';} ?>>ปริญญาโท</option>
+										<option value="ปริญญาเอก" <?php if($resume[degree]=='ปริญญาเอก'){echo 'selected';} ?>>ปริญญาเอก</option>
+									</select>
 								</div>
 			</div>
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>วุฒการศึกษา</label>
-									<input type="text" name="edu_back" class="form-control">
+									<input type="text" name="edu_back" class="form-control" required>
 								</div>
 				
 			</div>
@@ -603,12 +610,12 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>ลักษณะงาน</label>
-									<select name="work_n" class="form-control">
+									<select name="work_n" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ประจำ">ประจำ</option>
 										<option value="รายวัน">รายวัน</option>
-										<option value="รายชั่วโมง">รายชั่วโมง</option>
-										<option value="สหิจศึกษา/ฝึกงาน">สหกิจศึกษา/ฝึกงาน</option>
+										<option value="สหิจศึกษา">สหิจศึกษา</option>
+										<option value="ฝึกงาน">ฝึกงาน</option>
 									</select>
 								</div>
 			</div>		
@@ -619,7 +626,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>1</label>
-									<select name="work_1" class="form-control">
+									<select name="work_1" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ภูมิศาสตร์">ภูมิศาสตร์</option>
 										<option value="ภูมิสารสนเทศ">ภูมิสารสนเทศ</option>
@@ -634,7 +641,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>2</label>
-									<select name="work_2" class="form-control">
+									<select name="work_2" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ภูมิศาสตร์">ภูมิศาสตร์</option>
 										<option value="ภูมิสารสนเทศ">ภูมิสารสนเทศ</option>
@@ -649,7 +656,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>3</label>
-									<select name="work_3" class="form-control">
+									<select name="work_3" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ภูมิศาสตร์">ภูมิศาสตร์</option>
 										<option value="ภูมิสารสนเทศ">ภูมิสารสนเทศ</option>
@@ -668,14 +675,13 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>1</label>
-									<select class="form-control" name="area_1">
+									<select class="form-control" name="area_1" required>
 										<option value="">กรุณาเลือก</option>
-										<option value="กรุงเทพและปริมณฑล">กรุงเทพและปริมณฑล</option>
-										<option value="ภาคเหนือ">ภาคเหนือ</option>
-										<option value="ภาคกลาง">ภาคกลาง</option>
-										<option value="ภาคอีสาน">ภาคอีสาน</option>
-										<option value="ภาคตะวันออก">ภาคตะวันออก</option>
-										<option value="ภาคใต้">ภาคใต้</option>
+										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
+										<?php } ?>
 									</select>
 								</div>
 				
@@ -683,14 +689,13 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>2</label>
-									<select class="form-control" name="area_2">
+									<select class="form-control" name="area_2" required>
 										<option value="">กรุณาเลือก</option>
-										<option value="กรุงเทพและปริมณฑล">กรุงเทพและปริมณฑล</option>
-										<option value="ภาคเหนือ">ภาคเหนือ</option>
-										<option value="ภาคกลาง">ภาคกลาง</option>
-										<option value="ภาคอีสาน">ภาคอีสาน</option>
-										<option value="ภาคตะวันออก">ภาคตะวันออก</option>
-										<option value="ภาคใต้">ภาคใต้</option>
+										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"><?php echo $arr_prov[pv_tn]; ?></option>
+										<?php } ?>
 									</select>
 								</div>
 				
@@ -698,7 +703,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>เงินเดือนที่ต้องการ</label>
-									<select name="salary" class="form-control">
+									<select name="salary" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="5,000">5,000</option>
 										<option value="10,000">10,000</option>
@@ -727,7 +732,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="th_s" class="form-control">
+									<select name="th_s" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -739,7 +744,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="th_r" class="form-control">
+									<select name="th_r" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -752,7 +757,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="th_w" class="form-control">
+									<select name="th_w" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -769,7 +774,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="en_s" class="form-control">
+									<select name="en_s" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -781,7 +786,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="en_r" class="form-control">
+									<select name="en_r" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -794,7 +799,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="en_w" class="form-control">
+									<select name="en_w" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -811,7 +816,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="cn_s" class="form-control">
+									<select name="cn_s" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -823,7 +828,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="cn_r" class="form-control">
+									<select name="cn_r" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -836,7 +841,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="cn_w" class="form-control">
+									<select name="cn_w" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -856,7 +861,7 @@
 				<div class="col-md-4">
 								<div class="form-group">
 									<label>Word</label>
-									<select name="word" class="form-control">
+									<select name="word" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -868,7 +873,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>Excel</label>
-									<select name="excel" class="form-control">
+									<select name="excel" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -881,7 +886,7 @@
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>powerpoint</label>
-									<select name="ppt" class="form-control">
+									<select name="ppt" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -898,24 +903,26 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>Photoshop</label>
-									<select name="ps" class="form-control">
+									<select name="ps" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 			</div>
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>Illustrator</label>
-									<select name="ai" class="form-control">
+									<select name="ai" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				
@@ -923,12 +930,13 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>premiere pro</label>
-									<select name="pr" class="form-control">
+									<select name="pr" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				
@@ -936,12 +944,13 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>lightroom</label>
-									<select name="lr" class="form-control">
+									<select name="lr" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				
@@ -953,7 +962,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>ArcGIS</label>
-									<select name="arcgis" class="form-control">
+									<select name="arcgis" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -964,7 +973,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>ERDAS</label>
-									<select name="erdas" class="form-control">
+									<select name="erdas" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -976,7 +985,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>ENVI</label>
-									<select name="envi" class="form-control">
+									<select name="envi" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
@@ -988,7 +997,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>QGIS</label>
-									<select name="qgis" class="form-control">
+									<select name="qgis" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
