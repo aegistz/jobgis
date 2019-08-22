@@ -5,9 +5,18 @@ include("config.php");
 include("check_student.php");
 include("api_service/profile_api.php");
 include("api_service/profile_delete.php");
+
+
+if (isset($_GET[eid])) {
+	
 $eid = $_GET[eid];
 $sql_profile = pg_query("SELECT * from student  where id_no = '$eid';");
 $arr_profile = pg_fetch_array($sql_profile);
+}
+
+
+
+
 ?>
 <html>
 	<head>

@@ -144,13 +144,11 @@ $num = pg_num_rows($sql);
 <?php } ?>
 							<li class="dropdown magz-dropdown"><a href="#">ตั้งค่า <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="icon ion-person"></i> My Account</a></li>
-									<li><a href="#"><i class="icon ion-heart"></i> Favorite</a></li>
-									<li><a href="#"><i class="icon ion-chatbox"></i> Comments</a></li>
-									<li><a href="#"><i class="icon ion-key"></i> Change Password</a></li>
-									<li><a href="#"><i class="icon ion-settings"></i> Settings</a></li>
+									<li><a href="setting.php#profile"><i class="icon ion-person"></i> ข้อมูลส่วนตัว</a></li>
+									<li><a href="setting.php#work-status"><i class="icon ion-heart"></i> สถานภาพการทำงาน</a></li>
+									<li><a href="setting.php#password"><i class="icon ion-key"></i> เปลี่ยนรหัสผ่าน</a></li>
 									<li class="divider"></li>
-									<li><a href="#"><i class="icon ion-log-out"></i> Logout</a></li>
+									<li><a href="logout.php"><i class="icon ion-log-out"></i> Logout</a></li>
 								</ul>
 							</li>
 <?php } ?>
