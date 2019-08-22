@@ -613,8 +613,8 @@
 									<label>ลักษณะงาน</label>
 									<select name="work_n" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
-										<option value="ประจำ">ประจำ</option>
-										<option value="รายวัน">รายวัน</option>
+										<option value="งานประจำ">งานประจำ</option>
+										<option value="งานรายวัน">งานรายวัน</option>
 										<option value="สหิจศึกษา">สหิจศึกษา</option>
 										<option value="ฝึกงาน">ฝึกงาน</option>
 									</select>
@@ -739,6 +739,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="พูดไม่ได้">พูดไม่ได้</option>
 									</select>
 								</div>
 							</div>
@@ -751,6 +752,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="อ่านไม่ได้">อ่านไม่ได้</option>
 									</select>
 								</div>
 				
@@ -764,6 +766,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="เขียนไม่ได้">เขียนไม่ได้</option>
 									</select>
 								</div>
 				
@@ -781,6 +784,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="พูดไม่ได้">พูดไม่ได้</option>
 									</select>
 								</div>
 			</div>
@@ -793,6 +797,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="อ่านไม่ได้">อ่านไม่ได้</option>
 									</select>
 								</div>
 				
@@ -806,6 +811,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="เขียนไม่ได้">เขียนไม่ได้</option>
 									</select>
 								</div>
 				
@@ -823,6 +829,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="พูดไม่ได้">พูดไม่ได้</option>
 									</select>
 								</div>
 			</div>
@@ -835,6 +842,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="อ่านไม่ได้">อ่านไม่ได้</option>
 									</select>
 								</div>
 				
@@ -848,6 +856,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="เขียนไม่ได้">เขียนไม่ได้</option>
 									</select>
 								</div>
 				
@@ -868,6 +877,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				</div>
@@ -880,6 +890,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				
@@ -893,6 +904,7 @@
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
 										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				
@@ -968,6 +980,8 @@
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
+										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 			</div>
@@ -979,6 +993,8 @@
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
+										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				
@@ -991,6 +1007,8 @@
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
+										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				
@@ -1003,6 +1021,8 @@
 										<option value="ดีมาก">ดีมาก</option>
 										<option value="ดี">ดี</option>
 										<option value="ปานกลาง">ปานกลาง</option>
+										<option value="พอใช้">พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน">ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 				
