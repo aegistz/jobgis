@@ -227,44 +227,40 @@
 	<body class="skin-blue">
 
 		<?php include 'header.php'; ?>
-
-
-		<section class="login first grey">
+	<section class="search">
 			<div class="container">
-				<div class="">				
-					<div class="">
-					<?php echo $message; ?>
-						<div class="box-body">
-					<h5>แก้ไขข้อมูล</h5>
-			<hr>
-	<div class="container mt-3">
-		<div class="col-md-2"><h6>
-			  <ul class="nav nav-tabs">
-			    <li class="nav-item">
-			      <a class="nav-link active " href="#personal">ข้อมูลส่วนตัว</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#edu">การศึกษา</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#work">การทำงาน/ฝึกงาน</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#Train">ประวัติการฝึกอบรม</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#objective">เป้าหมายในการทำงาน/ฝึกงาน</a>
-			    </li>
-			     <li class="nav-item">
-			      <a class="nav-link" href="#skills">ทักษะ</a>
-			    </li>
-			  </ul>
-			  </h6>
-			</div>
-		<div class="col-md-10">
-			<div class="form-group">
-				<div class="tab-content">
-				 	<div id="personal" class="container tab-pane active">
+				<div class="row">
+					<div class="col-md-3 sidebar" id="sidebar">
+						<aside>
+							<div class="aside-body">
+							<h2 class="aside-title">แก้ไขข้อมูล</h2>
+								<ul class="nav nav-stacked">
+								    <li class="active">
+								      <a data-toggle="tab" href="#personal">ข้อมูลส่วนตัว</a>
+								    </li>
+								    <li>
+								      <a data-toggle="tab" href="#edu">การศึกษา</a>
+								    </li>
+								    <li>
+								      <a data-toggle="tab" href="#work">การทำงาน/ฝึกงาน</a>
+								    </li>
+								    <li>
+								      <a data-toggle="tab" href="#Train">ประวัติการฝึกอบรม</a>
+								    </li>
+								    <li>
+								      <a data-toggle="tab" href="#objective">เป้าหมายในการทำงาน/ฝึกงาน</a>
+								    </li>
+								     <li>
+								      <a data-toggle="tab" href="#skills">ทักษะ</a>
+								    </li>
+								  </ul>
+							
+							</div>
+						</aside>
+					</div>
+					<div class="col-md-9 ">
+						<div class="tab-content">
+						  <div id="personal" class="tab-pane fade in active">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
 						<h5>ข้อมูลส่วนตัว</h5><hr>
 				    	<div class="col-md-12">
@@ -345,7 +341,7 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<label>รหัสไปรษณืย์</label>
+									<label>รหัสไปรษณีย์</label>
 									<input type="text" name="zip_code" class="form-control"  value="<?php echo $resume[zip_code] ;?>">
 								</div>
 							</div>
@@ -396,10 +392,10 @@
 							</div>
 						</div>
 </form>
-					</div>
-					<div id="edu" class="container tab-pane fade">
+						  </div>
+
+						  <div id="edu" class="tab-pane fade">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
-						<h5>การศึกษา</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -461,8 +457,9 @@
 							</div>
 						</div>
 </form>
-					</div>
-					<div id="work" class="container tab-pane fade">
+						  </div>
+
+						  <div id="work" class="tab-pane fade aside-body">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
 						<h5>การทำงาน/ฝึกงาน</h5><hr>
 				    	<div class="col-md-12">
@@ -519,8 +516,9 @@
 							</div>
 						</div>
 </form>
-					</div>
-					<div id="Train" class="container tab-pane fade">
+						  </div>
+
+						  <div id="Train" class="tab-pane fade aside-body">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
 						<h5>ประวัติการฝึกอบรม</h5><hr>
 				    	<div class="col-md-12">
@@ -551,8 +549,9 @@
 							</div>
 						</div>
 </form>
-					</div>
-					<div id="objective" class="container tab-pane fade">
+						  </div>
+
+						  <div id="objective" class="tab-pane fade aside-body">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
 						<h5>เป้าหมายในการทำงาน/ฝึกงาน</h5><hr>
 				    	<div class="col-md-12">
@@ -667,8 +666,9 @@
 							</div>
 						</div>
 </form>
-					</div>
-					<div id="skills" class="container tab-pane fade">
+						  </div>
+
+						  <div id="skills" class="tab-pane fade aside-body">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
 						<h6><p>ทักษะด้านภาษา</p></h6><hr>
 						<p><b>ภาษาไทย</b></p>
@@ -914,12 +914,7 @@
 							</div>
 						</div>
 </form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+						  </div>
 
 						</div>
 					</div>
@@ -996,6 +991,5 @@
 			});
 			});
 	</script>
-	</body>
 	</body>
 </html>
