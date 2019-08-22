@@ -261,7 +261,7 @@
 			  </ul>
 			  </h6>
 			</div>
-		<div class="col-md-9">
+		<div class="col-md-10">
 			<div class="form-group">
 				<div class="tab-content">
 				 	<div id="personal" class="container tab-pane active">

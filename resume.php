@@ -1028,14 +1028,14 @@
 				</div>	
 				<div class="col-md-3">
 								<div class="form-group">
-									<label>ตั้งแต่</label>
+									<label>ตั้งแต่วันที่</label>
 									<input type="date" name="date_start" class="form-control">
 								</div>
 				
 				</div>
 				<div class="col-md-3">
 								<div class="form-group">
-									<label>จนถึง</label>
+									<label>จนถึงวันที่</label>
 									<input type="date" name="date_end" class="form-control">
 								</div>
 				
