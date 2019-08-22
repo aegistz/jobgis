@@ -23,7 +23,7 @@ if ($_POST[send_request] == 'true') {
 
 
 		if ($sql) {
-			$mes = 'yessss';
+			header('location:profile.php#request');
 		}else{
 			$mes = '<div class="alert alert-dismissible alert-danger">
 					  <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -45,7 +45,6 @@ if ($_POST[send_request] == 'true') {
 ?>
 
 
-?>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -187,8 +186,8 @@ if ($_POST[send_request] == 'true') {
 
 						<p><?php echo $mes ; ?></p>
 						<div class="row">
-						<h3><label>Resume ของคุณ 
-							<a href="resume-edit.php" class="btn btn-primary btn-sm " title=""><i class="icon ion-settings"></i>  แก้ไข</a>
+						<h3><label>ตรวจสอบ Resume ของคุณ 
+							<a href="resume.php" class="btn btn-primary btn-sm " title=""><i class="icon ion-settings"></i>  แก้ไข</a>
 							
 						</label></h3>
 						<div class="page-description">
@@ -305,7 +304,7 @@ if ($_POST[send_request] == 'true') {
 							<div class="row">
 
 								<form  method="post" accept-charset="utf-8">
-<button type="submit" name="send_request" value="true" class="btn btn-primary btn-block">ยืนยันการส่ง Resume ไปยังสถานประกอบการนี้</button>
+<button type="submit" name="send_request" value="true" class="btn btn-primary btn-block" onclick="return confirm('ยืนยันการส่งใบสมัครมายังตำแหน่งงานนี้ ')">ยืนยันการส่ง Resume <br> ไปยังสถานประกอบการนี้</button>
 									
 								</form>
 							</div>

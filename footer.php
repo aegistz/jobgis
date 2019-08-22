@@ -16,11 +16,11 @@
 							<h1 class="block-title">Popular Tags <div class="right"><a href="#">See All <i class="ion-ios-arrow-thin-right"></i></a></div></h1>
 							<div class="block-body">
 								<ul class="tags">
-									<li><a href="#">หางาน GIS</a></li>
-									<li><a href="#">หาที่ฝึกงาน</a></li>
-									<li><a href="#">สหกิจศึกษา</a></li>
-									<li><a href="#">ฝึกงานได้เงิน</a></li>
-									<li><a href="#">งานธรณี</a></li>
+									<li><a href="search.php">หางาน GIS</a></li>
+									<li><a href="search.php">หาที่ฝึกงาน</a></li>
+									<li><a href="search.php?type=coop">สหกิจศึกษา</a></li>
+									<li><a href="search.php?type=apprentice">ฝึกงาน</a></li>
+									<li><a href="search.php">งานธรณี</a></li>
 								</ul>
 							</div>
 						</div>
@@ -128,7 +128,7 @@
 						<div class="copyright">
 							COPYRIGHT &copy; GISTNU 2019. ALL RIGHT RESERVED.
 							<div>
-								Made with <i class="ion-heart"></i> by <a href="http://cgistln.nu.ac.th">GISTNU</a>
+								Made with <i class="ion-heart"></i> by <a href="http://www.cgistln.nu.ac.th">GISTNU</a>
 							</div>
 						</div>
 					</div>

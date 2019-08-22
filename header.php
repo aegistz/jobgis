@@ -37,11 +37,12 @@ if(isset($_COOKIE["type"]))
 								<div class="help-block">
 									<div>Popular:</div>
 									<ul>
-										<li><a href="#">งาน GIS</a></li>
-										<li><a href="#">งานภูมิศาสตร์</a></li>
-										<li><a href="#">ฝึกงาน GIS</a></li>
-										<li><a href="#">วิเคาะห์ภาพถ่ายดาวเทียม</a></li>
-										<li><a href="#">งานพัฒนาระบบ</a></li>
+										<li><a href="search.php">งาน GIS</a></li>
+										<li><a href="search.php">งานภูมิศาสตร์</a></li>
+										<li><a href="search.php?type=apprentice">ฝึกงาน GIS</a></li>
+										<li><a href="search.php">วิเคาะห์ภาพถ่ายดาวเทียม</a></li>
+										<li><a href="search.php">งานพัฒนาระบบ</a></li>
+										<li><a href="search.php?type=coop">สหกิจศึกษา</a></li>
 									</ul>
 								</div>
 							</form>		

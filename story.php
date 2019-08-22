@@ -153,14 +153,16 @@ include("check_student.php")
 								</form>
 							</div>
 						</aside>
-						<aside>
-							<div class="aside-body">
-								<figure class="ads">
-									<img src="https://www.jobtopgun.com/images/th/banner_industrial_interpolitan.png?t=20180921171200">
-									<figcaption>Advertisement</figcaption>
-								</figure>
-							</div>
-						</aside>
+							<aside>
+								<div class="aside-body">
+									<figure class="ads">
+										<a href="http://tsw.gistda.or.th/" title="" target="_blank">
+										<img src="http://tsw.gistda.or.th/img/TSW2019_banner_th_2500x500.png">
+										<figcaption>Advertisement</figcaption>
+										</a>
+									</figure>
+								</div>
+							</aside>
 						<aside>
 							<h1 class="aside-title">Popular <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
 							<div class="aside-body">

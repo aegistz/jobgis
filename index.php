@@ -2,7 +2,8 @@
 <?php
 session_start();
 include("config.php");
-include("check_student.php")
+include("check_student.php");
+include("api_service/index_api.php");
 ?>
 <html>
 	<head>
@@ -94,36 +95,44 @@ include("check_student.php")
 										<div class="form-group row">
 											<label for="staticEmail" class="col-sm-4 col-form-label">สายอาชีพ</label>
 											<div class="col-sm-8">
-												<select class="form-control" >
-													<option>- - กดเพื่อเลือก - -</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
+												<select class="form-control" name="tag" >
+													<option value="">- - กดเพื่อเลือก - -</option>
+													<option value="ภูมิศาสตร์">ภูมิศาสตร์</option>
+													<option value="ภูมิสารสนเทศ">ภูมิสารสนเทศ</option>
+													<option value="ผังเมือง">ผังเมือง</option>
+													<option value="แผนที่">แผนที่</option>
+													<option value="ไอที">ไอที</option>
+													<option value="วิจัย">วิจัย</option>
+													<option value="กราฟฟิก">กราฟฟิก</option>
 												</select>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="staticEmail" class="col-sm-4 col-form-label">พื้นที่ทำงาน</label>
 											<div class="col-sm-8">
-												<select class="form-control" >
-													<option>- - กดเพื่อเลือก - -</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
+												<select class="form-control" name="area">
+													<option value="">- - กดเพื่อเลือก - -</option>
+													<?php 
+														$sql_province = pg_query("SELECT * from prov order by pv_tn asc");
+														while ( $arr_pro = pg_fetch_array($sql_province)) {
+													?>
+													<option value="<?php echo $arr_pro[pv_tn]; ?>">
+														<?php echo $arr_pro[pv_tn]; ?>
+													</option>
+												<?php } ?>
+
 												</select>
 											</div>
 										</div>
 										<div class="form-group row">
-											<label for="staticEmail" class="col-sm-4 col-form-label">วุฒิการศึกษา</label>
+											<label for="staticEmail" class="col-sm-4 col-form-label">ระดับการศึกษา</label>
 											<div class="col-sm-8">
-												<select class="form-control" >
-													<option>- - กดเพื่อเลือก - -</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
+												<select class="form-control" name="degree">
+													<option value="">- - กดเพื่อเลือก - -</option>
+													<option value="ต่ำกว่า ปวช.">ต่ำกว่า ปวช.</option>
+													<option value="ปวช. ปวส. อนุปริญญา">ปวช. ปวส. อนุปริญญา</option>
+													<option value="ปริญญาตรีขึ้นไป">ปริญญาตรีขึ้นไป</option>
+													<option value="ปริญญาโทขึ้นไป">ปริญญาโทขึ้นไป</option>
 												</select>
 											</div>
 										</div>
@@ -133,25 +142,31 @@ include("check_student.php")
 									<fieldset>
 										<div class="form-group row">
 											<label for="staticEmail" class="col-sm-4 col-form-label">ช่วงเงินเดือน</label>
-											<div class="col-sm-8">
-												<select class="form-control" >
-													<option>- - กดเพื่อเลือก - -</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
+											<div class="col-sm-8" >
+												<select class="form-control" name="budget">
+													<option value="">- - กดเพื่อเลือก - -</option>
+													<option value="">5,000 - 10,000</option>
+													<option value="">10,000 - 15,000</option>
+													<option value="">15,000 - 20,000</option>
+													<option value="">20,000 - 25,000</option>
+													<option value="">25,000 - 30,000</option>
+													<option value="">30,000 - 35,000</option>
+													<option value="">35,000 - 40,000</option>
+													<option value="">40,000 - 45,000</option>
+													<option value="">45,000 - 50,000</option>
+													<option value="">มากกว่า 50,000</option>
 												</select>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="staticEmail" class="col-sm-4 col-form-label">ประเภทงาน</label>
 											<div class="col-sm-8">
-												<select class="form-control" >
-													<option>- - กดเพื่อเลือก - -</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
+												<select class="form-control" name="type">
+													<option value="all_type">- - กดเพื่อเลือก - -</option>
+													<option value="full_time">งานประจำ</option>
+													<option value="daily_work">งานรายวัน</option>
+													<option value="apprentice">ฝึกงาน</option>
+													<option value="coop">สหกิจศึกษา</option>
 												</select>
 											</div>
 										</div>
@@ -178,7 +193,7 @@ include("check_student.php")
 								</thead>
 								<tbody>
 									<?php
-										$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 100 ;  ");
+										$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com  limit 100 ;  ");
 										while ( $arr = pg_fetch_array($sql) ) {
 									?>
 									<tr>
@@ -316,7 +331,7 @@ include("check_student.php")
 									</div>
 								</div>
 							</aside>
-							<aside>
+							<aside id="request">
 								<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
 								<div class="aside-body">
 									<ul class="nav nav-pills nav-stacked anyClass">
@@ -329,16 +344,54 @@ include("check_student.php")
 										<article class="article-mini">
 											<div class="inner">
 												<figure>
-													<a href="news.php">
 														<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
-													</a>
 												</figure>
+
 												<div class="padding">
-													<p><button  class="btn btn-warning btn-sm btn-block" >สถานะ : <?php echo $arr[request]; ?></button></p>
-													<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
+													<p>
+<?php if ($arr[request] == 'รอการยืนยัน') { ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-warning btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														  <ul class="dropdown-menu" role="menu">
+														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr[id_no] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
+														  </ul>
+														</div>
+<?php } else if($arr[request] == 'ยืนยันการสมัครแล้ว'){ ?> 
+														<div class="btn-group">
+														  <button type="button" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+
+<?php } else if($arr[request] == 'ไม่ผ่านการสมัคร'){  ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														  <ul class="dropdown-menu" role="menu">
+														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr[id_no] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
+														  </ul>
+														</div>
+
+<?php } else if($arr[request] == 'ผ่านการสมัคร รอการติดต่อกลับ'){   ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+
+<?php } ?>
+
+
+														
+													</p>
+													<h1><a href="news.php?q=<?php echo $arr[id_job];?>"><?php echo $arr[name_job]; ?></a></h1>
 													<p>
 														โดย : <?php echo $arr[name_com]; ?>
 													</p>
+												
 													
 												</div>
 											</div>
@@ -351,8 +404,10 @@ include("check_student.php")
 							<aside>
 								<div class="aside-body">
 									<figure class="ads">
-										<img src="https://www.jobtopgun.com/images/th/banner_industrial_interpolitan.png?t=20180921171200">
+										<a href="http://tsw.gistda.or.th/" title="" target="_blank">
+										<img src="http://tsw.gistda.or.th/img/TSW2019_banner_th_2500x500.png">
 										<figcaption>Advertisement</figcaption>
+										</a>
 									</figure>
 								</div>
 							</aside>
@@ -366,12 +421,12 @@ include("check_student.php")
 									<article class="article-mini">
 										<div class="inner">
 											<figure>
-												<a href="news.php">
+												<a href="news.php?q=<?php echo $arr[id_job]; ?>">
 													<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
 												</a>
 											</figure>
 											<div class="padding">
-												<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
+												<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 												<p>
 													<?php echo $arr[detail_job]; ?>
 												</p>
@@ -416,7 +471,7 @@ include("check_student.php")
 										<div class="time"><?php echo $arr[date_job]; ?></div>
 										<div class="category"><a href=""><?php echo $arr[type_job]; ?></a></div>
 									</div>
-									<h2><a href="news.php"><?php echo $arr[name_job]; ?></a></h2>
+									<h2><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h2>
 									<p><?php echo $arr[detail_job]; ?></p>
 								</div>
 							</div>

@@ -173,7 +173,24 @@ $arr_profile = pg_fetch_array($sql_profile);
 																if( $num != 0 ) {
 																	while( $arr = pg_fetch_array($query)  ){
 															?>
-															<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
+															<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a>
+
+																<div class="btn-group">
+																  <button type="button" class="close btn btn-sm dropdown-toggle" data-toggle="dropdown">
+																    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+																  </button>
+																  <ul class="dropdown-menu" role="menu">
+																    <li>
+																    	<form action="" method="get" accept-charset="utf-8">
+																    		<input type="hidden" name="imgid" value="<?php echo $arr[id_img]; ?>">
+																    	<button type="submit" name="type" value="delete_img_post" class="btn btn-block btn-sm btn-danger">x ลบ</button>
+																    	</form>
+																    </li>
+																  </ul>
+																</div>
+
+								
+															</li>
 															<?php }    }else{  ?>
 															<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
 															<?php } ?>
@@ -195,7 +212,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 																	<!-- image-preview-input -->
 																	<div class="btn btn-default image-preview-input">
 																		<font color="black">
-																		<span class="glyphicon glyphicon-folder-open"></span>
+																		<i class="fa fa-search"></i>
 																		<span class="image-preview-input-title">ค้นหา</span>
 																		<input type="file" accept="image/png, image/jpeg, image/gif" name="file" /> <!-- rename it -->
 																		</font>
@@ -288,7 +305,9 @@ $arr_profile = pg_fetch_array($sql_profile);
 													</div>
 													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>"><?php echo $arr[title_story]; ?></a></h1>
 													<p>
-														<?php echo $arr[detail_story]; ?>
+														<?php
+														echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
+														?>
 													</p>
 													<footer>
 														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
@@ -328,36 +347,76 @@ $arr_profile = pg_fetch_array($sql_profile);
 									</aside>
 								</div>
 								<div class="col-xs-12 col-md-4">
-									<aside>
-										<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
-										<div class="aside-body">
-											<?php
-											$sql = pg_query("SELECT * from user_request a
-												inner join job_company b on a.id_job = b.id_job
-												inner join company c on c.id_com = b.id_com where email_user = '$user[email]' ;  ");
-																			while ( $arr = pg_fetch_array($sql) ) {
-											?>
-											<article class="article-mini">
-												<div class="inner">
-													<figure>
-														<a href="news.php">
-															<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
-														</a>
-													</figure>
-													<div class="padding">
-														<p><button  class="btn btn-warning btn-sm btn-block" >สถานะ : <?php echo $arr[request]; ?></button></p>
-														<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
-														<p>
-															โดย : <?php echo $arr[name_com]; ?>
-														</p>
+									<aside id="request">
+								<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
+								<div class="aside-body">
+									<ul class="nav nav-pills nav-stacked anyClass">
+										<?php
+										$sql = pg_query("SELECT * from user_request a
+											inner join job_company b on a.id_job = b.id_job
+											inner join company c on c.id_com = b.id_com where email_user = '$user[email]' ;  ");
+																		while ( $arr = pg_fetch_array($sql) ) {
+										?>
+										<article class="article-mini">
+											<div class="inner">
+												<figure>
+														<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+												</figure>
+
+												<div class="padding">
+													<p>
+<?php if ($arr[request] == 'รอการยืนยัน') { ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-warning btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														  <ul class="dropdown-menu" role="menu">
+														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr[id_no] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
+														  </ul>
+														</div>
+<?php } else if($arr[request] == 'ยืนยันการสมัครแล้ว'){ ?> 
+														<div class="btn-group">
+														  <button type="button" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+
+<?php } else if($arr[request] == 'ไม่ผ่านการสมัคร'){  ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														  <ul class="dropdown-menu" role="menu">
+														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr[id_no] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
+														  </ul>
+														</div>
+
+<?php } else if($arr[request] == 'ผ่านการสมัคร รอการติดต่อกลับ'){   ?>
+														<div class="btn-group">
+														  <button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+
+<?php } ?>
+
+
 														
-													</div>
+													</p>
+													<h1><a href="news.php?q=<?php echo $arr[id_job];?>"><?php echo $arr[name_job]; ?></a></h1>
+													<p>
+														โดย : <?php echo $arr[name_com]; ?>
+													</p>
+												
+													
 												</div>
-											</article>
-											<hr>
-											<?php } ?>
-										</div>
-									</aside>
+											</div>
+										</article>
+										<hr>
+										<?php } ?>
+									</ul>
+								</div>
+							</aside>
 									<hr>
 									<aside>
 										<h1 class="aside-title">งานที่เกี่ยวข้อง </h1>
@@ -369,12 +428,12 @@ $arr_profile = pg_fetch_array($sql_profile);
 											<article class="article-mini">
 												<div class="inner">
 													<figure>
-														<a href="news.php">
+														<a href="news.php?q=<?php echo $arr[id_job]; ?>">
 															<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
 														</a>
 													</figure>
 													<div class="padding">
-														<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
+														<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 														<p>
 															<?php echo $arr[detail_job]; ?>
 														</p>
@@ -451,7 +510,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 										<article class="col-md-12 article-list">
 											<div class="inner">
 												<figure>
-													<a href="single.html">
+													<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
 														<img src="images/story/<?php echo $arr[img_story]; ?>">
 													</a>
 												</figure>
@@ -462,10 +521,10 @@ $arr_profile = pg_fetch_array($sql_profile);
 														</div>
 														<div class="time"><?php echo $arr[date_story]; ?></div>
 													</div>
-													<h1><a href="single.html"><?php echo $arr[title_story]; ?></a></h1>
+													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>"><?php echo $arr[title_story]; ?></a></h1>
 													<p>
 														<?php
-														echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="" title="">เพิ่มเติม</a>');
+														echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
 														?>
 													</p>
 													<footer>

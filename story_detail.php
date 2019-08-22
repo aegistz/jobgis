@@ -58,18 +58,20 @@ include("check_student.php");
 										</div>
 										<hr>
 										<ul>
-											<li><i class="fa fa-user" aria-hidden="true"></i> : <?php echo $result[title_name],'',$result[s_name],' ',$result[l_name]; ?></li>
+											<li>
+												<i class="fa fa-user" aria-hidden="true"></i> : <?php echo $result[title_name],'',$result[s_name],' ',$result[l_name]; ?>
+												<a href="profile.php?eid=<?php echo $result[id_no]; ?>" title=""><i class="fa fa-search"></i></a>
+												
+											</li>
 											<li><i class="fa fa-address-card" aria-hidden="true"></i> : <?php echo $result[university]; ?></li>
 											<li><i class="fa fa-map-marker" aria-hidden="true"></i> : <?php echo $result[province]; ?></li>
 										</ul>
 										<hr>
-
-
-<?php 
-	if ($id ==  $result[id_user]) {
-?>
+										<?php
+											if ($id ==  $result[id_user]) {
+										?>
 										<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราวนี้</a>
-<?php } ?>
+										<?php } ?>
 										
 									</div>
 								</article>
