@@ -427,8 +427,8 @@
 									<label>สัญชาติ</label>
 									<select name="nationality" class="form-control" required >
 										<option value="">กรุณาเลือก</option>
-										<option value="ไทย">ไทย</option>
-										<option value="อื่น ๆ">อื่น ๆ</option>
+										<option value="ไทย" <?php if($user[nationality]=='ไทย'){echo 'selected';} ?>>ไทย</option>
+										<option value="อื่น ๆ" <?php if($user[nationality]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ</option>
 									</select>
 								</div>
 			
@@ -438,9 +438,9 @@
 									<label>ศาสนา</label>
 									<select name="religion" class="form-control"required >
 										<option value="">กรุณาเลือก</option>
-										<option value="พุทธ">พุทธ</option>
-										<option value="คลิสต์">คลิสต์</option>
-										<option value="อิสลาม">อิสลาม</option>
+										<option value="พุทธ" <?php if($user[religion]=='พุทธ'){echo 'selected';} ?>>พุทธ</option>
+										<option value="คลิสต์" <?php if($user[religion]=='คลิสต์'){echo 'selected';} ?>>คลิสต์</option>
+										<option value="อิสลาม" <?php if($user[religion]=='อิสลาม'){echo 'selected';} ?>>อิสลาม</option>
 									</select>
 								</div>
 			
@@ -472,9 +472,9 @@
 									<label>สถานภาพทางทหาร</label>
 									<select name="status" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
-										<option value="ผ่านการเกณฑ์ทหาร">ผ่านการเกณฑ์ทหาร</option>
-										<option value="ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)">ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)</option>
-										<option value="ยังไม่ผ่านการเกณฑ์ทหาร">ยังไม่ผ่านการเกณฑ์ทหาร</option>
+										<option value="ผ่านการเกณฑ์ทหาร" <?php if($user[status]=='ผ่านการเกณฑ์ทหาร'){echo 'selected';} ?>>ผ่านการเกณฑ์ทหาร</option>
+										<option value="ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)" <?php if($user[status]=='ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)'){echo 'selected';} ?>>ได้รับการยกเว้น/จบหลักสูตรรักษาดินแดน (รด.)</option>
+										<option value="ยังไม่ผ่านการเกณฑ์ทหาร" <?php if($user[status]=='ยังไม่ผ่านการเกณฑ์ทหาร'){echo 'selected';} ?>>ยังไม่ผ่านการเกณฑ์ทหาร</option>
 									</select>
 								</div>
 				
@@ -485,7 +485,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>ที่อยู่</label>
-									<input type="text" name="address" class="form-control" required >
+									<input type="text" name="address" class="form-control" value="<?php echo $user[address] ;?>" required >
 								</div>
 				
 			</div>
@@ -525,7 +525,7 @@
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>รหัสไปรษณืย์</label>
-									<input type="text" name="zip_code" class="form-control" required>
+									<input type="text" name="zip_code" class="form-control" value="<?php echo $user[zip_code] ;?>" required>
 								</div>
 				
 			</div>
@@ -547,20 +547,20 @@
 				<div class="col-md-4">
 								<div class="form-group">
 									<label>ชื่อมหาวิทยาลัย</label>
-									<input type="text" name="university" class="form-control" required>
+									<input type="text" name="university" class="form-control" value="<?php echo $user[university] ;?>" required>
 								</div>
 				</div>
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>คณะ</label>
-									<input type="text" name="faculty" class="form-control" required>
+									<input type="text" name="faculty" class="form-control" value="<?php echo $user[faculty] ;?>" required>
 								</div>
 				
 			</div>
 			<div class="col-md-4">
 								<div class="form-group">
 									<label>สาขาวิชา</label>
-									<input type="text" name="sector" class="form-control" required>
+									<input type="text" name="sector" class="form-control" value="<?php echo $user[sector] ;?>" required>
 								</div>
 				
 			</div>			
@@ -571,33 +571,34 @@
 								<div class="form-group">
 									<label>ระดับการศึกษา</label>
 									<select name="degree" class="form-control" required>
-										<option value="ปวช." <?php if($resume[degree]=='ปวช.'){echo 'selected';} ?>>ปวช.</option>
-										<option value="ปวส." <?php if($resume[degree]=='ปวส.'){echo 'selected';} ?>>ปวส.</option>
-										<option value="อนุปริญญา" <?php if($resume[degree]=='อนุปริญญา'){echo 'selected';} ?>>อนุปริญญา</option>
-										<option value="ปริญญาตรี" <?php if($resume[degree]=='ปริญญาตรี'){echo 'selected';} ?>>ปริญญาตรี</option>
-										<option value="ปริญญาโท" <?php if($resume[degree]=='ปริญญาโท'){echo 'selected';} ?>>ปริญญาโท</option>
-										<option value="ปริญญาเอก" <?php if($resume[degree]=='ปริญญาเอก'){echo 'selected';} ?>>ปริญญาเอก</option>
+										<option value="" <?php if($user[degree]==''){echo 'selected';} ?>>กรุณาเลือก</option>
+										<option value="ปวช." <?php if($user[degree]=='ปวช.'){echo 'selected';} ?>>ปวช.</option>
+										<option value="ปวส." <?php if($user[degree]=='ปวส.'){echo 'selected';} ?>>ปวส.</option>
+										<option value="อนุปริญญา" <?php if($user[degree]=='อนุปริญญา'){echo 'selected';} ?>>อนุปริญญา</option>
+										<option value="ปริญญาตรี" <?php if($user[degree]=='ปริญญาตรี'){echo 'selected';} ?>>ปริญญาตรี</option>
+										<option value="ปริญญาโท" <?php if($user[degree]=='ปริญญาโท'){echo 'selected';} ?>>ปริญญาโท</option>
+										<option value="ปริญญาเอก" <?php if($user[degree]=='ปริญญาเอก'){echo 'selected';} ?>>ปริญญาเอก</option>
 									</select>
 								</div>
 			</div>
 			<div class="col-md-3">
 								<div class="form-group">
-									<label>วุฒการศึกษา</label>
-									<input type="text" name="edu_back" class="form-control" required>
+									<label>วุฒิการศึกษา</label>
+									<input type="text" name="edu_back" class="form-control" value="<?php echo $user[edu_back] ;?>" required>
 								</div>
 				
 			</div>
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>GPA</label>
-									<input type="text" name="gpa" class="form-control">
+									<input type="text" name="gpa" class="form-control" value="<?php echo $user[gpa] ;?>">
 								</div>
 				
 			</div>	
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>ปีที่สำเร็จการศึกษา</label>
-									<input type="text" name="graduation" class="form-control">
+									<input type="text" name="graduation" class="form-control" value="<?php echo $user[graduation] ;?>">
 								</div>
 				
 			</div>		
@@ -929,7 +930,7 @@
 			</div>
 			<div class="col-md-3">
 								<div class="form-group">
-									<label>premiere pro</label>
+									<label>Premiere pro</label>
 									<select name="pr" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
@@ -943,7 +944,7 @@
 			</div>
 			<div class="col-md-3">
 								<div class="form-group">
-									<label>lightroom</label>
+									<label>Lightroom</label>
 									<select name="lr" class="form-control" required>
 										<option value="">กรุณาเลือก</option>
 										<option value="ดีมาก">ดีมาก</option>
