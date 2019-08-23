@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include("config.php");
+include 'config.php';
+
 	  $email = $user['email'];
 	  $title_name = $_POST['title_name'];
 	  $s_name = $_POST['s_name'];
@@ -40,24 +41,26 @@ include("config.php");
 	  $study_university = $_POST['study_university'];
 	  $password = $_POST['password'];
 
-	   if ( isset($_POST[profile]) ) {
-        $sql1 = "UPDATE resume set 
-        		title_name = '$title_name' ,
-        		s_name = '$s_name' , 
-        		l_name = '$l_name' ,
-        		sex = '$sex' ,
-        		year_birth = '$year_birth',
-        		phone_number = '$phone_number' ,
-        		province = '$province' ,
-        		university = '$university' ,
-        		facutly = '$facutly' ,
-        		major = '$major' ,
-        		level_degree = '$level_degree' ,
-        		year_success = '$year_success'
-        		where email = '$email';";       
-           		$query1 = pg_query($sql1);
+	if ( isset($_POST[profile]) ) {
+       	$sql = "UPDATE student set  
+       			title_name = '$title_name' ,
+       			s_name = '$s_name' ,
+       			l_name = '$l_name' ,
+       			sex = '$sex' ,
+       			year_birth = '$year_birth' ,
+       			phone_number = '$phone_number' ,
+       			province = '$province' ,
+       			university = '$university' ,
+       			fuculty = '$facutly' ,
+       			major = '$major' ,
+       			level_degree = '$level_degree' ,
+       			year_success = '$year_success'
+
+        		where email = '$email' ;";
+           		$query = pg_query($sql);
            		header('location:setting.php#profile') ; 
 		}
+
 ?>
 <html>
 	<head>
@@ -135,33 +138,35 @@ include("config.php");
 						<div class="tab-content">
 
 						  <div id="profile" class="tab-pane fade in active">
-<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="setting.php.php" enctype="multipart/form-data">
+<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="setting.php" enctype="multipart/form-data">
+
+	
 						  	<div class="col-md-12">
 								<div class="col-md-2">
 									<div class="form-group">
 										<label>คำนำหน้า</label>
-										<input type="text" name="title_name" class="form-control" required="" value="<?php echo $user[title_name]; ?>">
+										<input type="text" name="title_name" class="form-control" required value="<?php echo $user[title_name]; ?>">
 									</div>
 			
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>ชื่อ</label>
-										<input type="text" name="s_name" class="form-control" required="" value="<?php echo $user[s_name]; ?>">
+										<input type="text" name="s_name" class="form-control" required value="<?php echo $user[s_name]; ?>">
 									</div>
 			
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>นามสกุล</label>
-										<input type="text" name="l_name" class="form-control" required="" value="<?php echo $user[l_name]; ?>">
+										<input type="text" name="l_name" class="form-control" required value="<?php echo $user[l_name]; ?>">
 									</div>
 									
 								</div>
 								<div class="col-md-2">
 									<div class="form-group">
 										<label>เพศ</label>
-										<select name="sex" class="form-control" required="">
+										<select name="sex" class="form-control" required>
 											<option value="">กรุณาเลือก</option>
 											<option value="ชาย" <?php if($user[sex] == 'ชาย'){echo 'selected';} ?>>ชาย</option>
 											<option value="หญิง" <?php if($user[sex] == 'หญิง'){echo 'selected';} ?>>หญิง</option>
@@ -174,14 +179,10 @@ include("config.php");
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>ปีเกิด</label>
-										<select name="year_birth" class="form-control" required="">
+										<select name="year_birth" class="form-control" required>
 												<option value="">กรุณาเลือก</option>
 											<?php for ($i=0; $i < 100; $i++) {  ?>
-<<<<<<< HEAD
 												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i ==$user[year_birth]){echo 'selected';} ?>><?php echo 2562- $i ; ?></option>
-=======
-												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i == $user[year_birth]){ echo 'selected';} ?> ><?php echo 2562- $i ; ?></option>
->>>>>>> 631c3ed4dbe3711c50236256f56eb29f62c2153a
 											<?php } ?>
 										</select>
 									</div>
@@ -189,14 +190,14 @@ include("config.php");
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>เบอร์โทรศัพท์</label>
-										<input type="number" name="phone_number" class="form-control" required=""value="<?php echo $user[phone_number]; ?>">
+										<input type="number" name="phone_number" class="form-control" required value="<?php echo $user[phone_number]; ?>">
 								</div>
 				
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>จังหวัดที่อาศัยในปัจจุบัน</label>
-										<select class="form-control" name="province" required="" >
+										<select class="form-control" name="province" required>
 											<option value="">กรุณาเลือก</option>
 											<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
 											while ($arr_prov = pg_fetch_array($sql_prov)) {
@@ -212,19 +213,19 @@ include("config.php");
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>ชื่อมหาวิทยาลัย</label>
-										<input type="text" name="university" class="form-control" required="" value="<?php echo $user[university]; ?>">
+										<input type="text" name="university" class="form-control" required value="<?php echo $user[university]; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>คณะ</label>
-										<input type="text" name="fuculty" class="form-control" required="" value="<?php echo $user[fuculty]; ?>">
+										<input type="text" name="fuculty" class="form-control" required value="<?php echo $user[fuculty]; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>สาขา</label>
-										<input type="text" name="major" class="form-control" required="" value="<?php echo $user[major]; ?>">
+										<input type="text" name="major" class="form-control" required value="<?php echo $user[major]; ?>">
 									</div>
 								</div>
 							</div>
@@ -233,7 +234,7 @@ include("config.php");
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>ระดับการศึกษา</label>
-										<select name="level_degree" class="form-control" required="">
+										<select name="level_degree" class="form-control" required>
 											<option value="ปริญญาตรี" <?php if($user[level_degree]=='ปริญญาตรี'){echo 'selected';} ?>>ปริญญาตรี</option>
 											<option value="ปริญญาโท" <?php if($user[level_degree]=='ปริญญาโท'){echo 'selected';} ?>>ปริญญาโท</option>
 											<option value="ปริญญาเอก" <?php if($user[level_degree]=='ปริญญาเอก'){echo 'selected';} ?>>ปริญญาเอก</option>
@@ -246,20 +247,19 @@ include("config.php");
 										<select name="year_success" class="form-control">
 											<?php for ($i=0; $i < 30; $i++) {  ?>
 												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i ==$user[year_success]){echo 'selected';} ?>><?php echo 2562- $i ; ?></option>
-												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i == $user[year_success]){ echo 'selected';} ?>><?php echo 2562- $i ; ?></option>
 											<?php } ?>
 										</select>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-12">
-							  <button type="submit" name="profile" class="btn btn-primary">บันทึกข้อมูล</button>
-					    	</div>
+								<button type="submit" class="btn btn-primary" name="profile">แก้ไขข้อมูล</button>
+							</div>
 </form>
 						  </div>
 
 						  <div id="work-status" class="tab-pane fade">
-<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="setting.php.php" enctype="multipart/form-data">
+<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="setting.php" enctype="multipart/form-data">
 					    	<div class="col-md-3">
 							  <div class="form-group">
 								<label>สถานภาพการทำงานปัจจุบัน</label>
