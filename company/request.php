@@ -54,8 +54,11 @@ include("check_student.php");
 									<a data-toggle="tab" href="#with">
 									<?php
 
-										$sql_user = pg_query("SELECT * from student
-										where s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
+										$sql_user = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+													inner join student b on a.email_user = b.email
+													inner join job_company c on a.id_job = c.id_job
+													where id_com = $id_com and request = 'รอการยืนยัน'
+													 ;  ");
 
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
@@ -65,8 +68,11 @@ include("check_student.php");
 							<li>
 									<a data-toggle="tab" href="#success">
 									<?php
-										$sql_user = pg_query("SELECT * from student
-										where s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
+										$sql_user = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+													inner join student b on a.email_user = b.email
+													inner join job_company c on a.id_job = c.id_job
+													where id_com = $id_com and request = 'ยืนยันการสมัครแล้ว'
+													 ;  ");
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
 									?>
@@ -75,8 +81,11 @@ include("check_student.php");
 							<li>
 									<a data-toggle="tab" href="#success">
 									<?php
-										$sql_user = pg_query("SELECT * from student
-										where s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
+										$sql_user = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+													inner join student b on a.email_user = b.email
+													inner join job_company c on a.id_job = c.id_job
+													where id_com = $id_com and request = 'ไม่ผ่านการสมัคร'
+													 ;  ");
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
 									?>
@@ -85,8 +94,11 @@ include("check_student.php");
 							<li>
 									<a data-toggle="tab" href="#reject">
 									<?php
-										$sql_user = pg_query("SELECT * from student
-										where s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
+										$sql_user = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+													inner join student b on a.email_user = b.email
+													inner join job_company c on a.id_job = c.id_job
+													where id_com = $id_com and request = 'ผ่านการสมัคร รอการติดต่อกลับ'
+													 ;  ");
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
 									?>
