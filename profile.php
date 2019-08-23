@@ -242,7 +242,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 													<div class="item">
 														<a href="#">
 															<div class="name">View</div>
-															<div class="value">3,729</div>
+															<div class="value">0</div>
 														</a>
 													</div>
 													<div class="item">
@@ -620,7 +620,7 @@ else {    ?>
 													<div class="item">
 														<a href="#">
 															<div class="name">View</div>
-															<div class="value">3,729</div>
+															<div class="value">0</div>
 														</a>
 													</div>
 												</div>
