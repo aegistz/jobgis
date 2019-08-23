@@ -110,7 +110,7 @@ $sql = pg_query("SELECT * from resume where email = '$user[email]';");
 $num = pg_num_rows($sql);
  if (  isset($_COOKIE["type"]) ) { ?>							
 							<li><a href="story.php">เรื่องราว</a></li>
-							<li><a href="search.php">ค้นหางาน</a></li>
+							<li><a href="search.php">ค้นหางาน/ผู้คน/สถานประกอบการ</a></li>
 							
 							<li class="dropdown magz-dropdown"><a href="#">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
