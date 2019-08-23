@@ -12,7 +12,7 @@ include 'config.php';
 	  $phone_number = $_POST['phone_number'];
 	  $province = $_POST['province'];
 	  $university = $_POST['university'];
-	  $facutly = $_POST['facutly'];
+	  $fuculty = $_POST['fuculty'];
 	  $major = $_POST['major'];
 	  $level_degree = $_POST['level_degree'];
 	  $year_success = $_POST['year_success'];
@@ -51,7 +51,7 @@ include 'config.php';
        			phone_number = '$phone_number' ,
        			province = '$province' ,
        			university = '$university' ,
-       			fuculty = '$facutly' ,
+       			fuculty = '$fuculty' ,
        			major = '$major' ,
        			level_degree = '$level_degree' ,
        			year_success = '$year_success'
