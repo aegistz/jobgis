@@ -114,9 +114,6 @@ include("check_student.php")
 								                
 
 								                </p>
-								                <footer>
-								                  <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
-								                </footer>
 								              </div>
 								            </div>
 								          </article>

@@ -45,10 +45,6 @@ include("check-company.php")
 					<div class="col-md-8 text-left">
 						<div class="row">
 							<div class="col-md-12">
-								<ol class="breadcrumb">
-									<li><a href="#">Home</a></li>
-									<li class="active">company</li>
-								</ol>
 								<h4 class="page-title">
 								รายการประกาศรับสมัครงาน/ฝึกงาน/สหกิจศึกษา
 								<a href="add-job.php" class="btn btn-primary"><i class="fa fa-plus"></i> เพิ่มประกาศรับใหม่</a>
@@ -86,13 +82,6 @@ include("check-company.php")
 										<p>
 											<?php echo $job_com[detail_job]; ?>
 										</p>
-										<footer>
-											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>198</div></a>
-											<a class="btn btn-primary more" href="view-job.php?q=<?php echo $job_com[id_job]; ?>">
-												<div>เพิ่มเติม</div>
-												<div><i class="ion-ios-arrow-thin-right"></i></div>
-											</a>
-										</footer>
 									</div>
 								</div>
 							</article>
@@ -130,20 +119,7 @@ include("check-company.php")
 
 
 <?php }  ?>
-							<div class="col-md-12 text-center">
-								<ul class="pagination">
-									<li class="prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">...</a></li>
-									<li><a href="#">97</a></li>
-									<li class="next"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
-								</ul>
-								<div class="pagination-help-text">
-									Showing 8 results of 776 &mdash; Page 1
-								</div>
-							</div>
+							
 						</div>
 					</div>
 					<div class="col-md-4 sidebar">
@@ -204,12 +180,12 @@ where id_com = $id_com;");
 								<article class="article-mini">
 									<div class="inner">
 										<figure>
-											<a href="single.html">
+											<a href="profile.php?eid=<?php echo $arr[id_no]; ?>">
 												<img src="../images/student/<?php echo $arr[profile_stu]; ?>">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="single.html"><?php echo $arr[s_name],' ',$arr[l_name] ; ?></a></h1>
+											<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[s_name],' ',$arr[l_name] ; ?></a></h1>
 											<div class="detail">
 												<div class="category"><a href="category.html">รับสมัครงาน</a></div>
 												<div class="time">2019-22-11</div>
@@ -222,6 +198,16 @@ where id_com = $id_com;");
 								
 							</div>
 						</aside>
+							<aside>
+								<div class="aside-body">
+									<figure class="ads">
+										<a href="http://tsw.gistda.or.th/" title="" target="_blank">
+										<img src="http://tsw.gistda.or.th/img/TSW2019_banner_th_2500x500.png">
+										<figcaption>Advertisement</figcaption>
+										</a>
+									</figure>
+								</div>
+							</aside>
 						<aside>
 							<div class="aside-body">
 								<form class="newsletter">

@@ -20,19 +20,19 @@ if( $_GET[type] == 'submit_mail' )
 {
 	$email = $_GET[email];
 
-	$sql = "UPDATE student set status_user = 'ยืนยัน' where email = '$email';  ";
+	$sql = "UPDATE company set status_company = 'ยืนยัน' where email_com = '$email';  ";
 	$query = pg_query($sql);
 
 	
-	$query2 = "SELECT * FROM student WHERE email = '$email'  ; ";
+	$query2 = "SELECT * FROM company WHERE email_com = '$email'  ; ";
 	$statement2 = pg_query($query2);
 	$arr = pg_fetch_array($statement2);
 
 
- 		setcookie("type", $arr["email"] , time() + 86399);
+	 	setcookie("type", $arr["email_com"] , time() + 86399);
 		setcookie("pass", $arr["password"] , time() + 86399);
-		setcookie("status", 'student', time() + 86399);
-		header('Location:./');
+		setcookie("status_com", 'company', time() + 86399);
+		header('Location:./company');
 		exit;
 
 }
@@ -84,7 +84,7 @@ if ( isset($_GET[type]) == 'resent' )
 		        <img src='http://www.geojobs.nu.ac.th/images/6logo.png' style='width: 120px;'>
 		        <div style='text-align:center'> 
 		           <p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
-		           <p><a href='http://www.geojobs.nu.ac.th/checkmail.php?email=".$_COOKIE[email]."&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
+		           <p><a href='http://www.geojobs.nu.ac.th/checkcompany.php?email=".$_COOKIE[email]."&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
 		        </div>
 		      </div>
 		        <div>       
@@ -169,10 +169,10 @@ if ( isset($_GET[type]) == 'resent' )
 					<div class="box box-border">
 						<div class="box-body">
 							<h7>เราได้ส่งการยืนยันไปยังอีเมลถึงคุณที่ <?php echo $_COOKIE[email]; ?> โปรดตรวจสอบอีเมลของคุณ</h7>
-<form method="post" action="checkmail.php">
+<form method="post" action="checkcompany.php">
 								<div class="form-group text-right">
-									<br><a href="login.php" class="btn btn-primary btn-block" type="submit" name="status_user" value="ดำเนินการต่อ">กลับหน้า Login</a>
-									<a href="checkmail.php?type=resent">ส่งไปยังอีเมลอีกครั้ง</a>
+									<br><a href="company/login.php" class="btn btn-primary btn-block" type="submit" name="status_user" value="ดำเนินการต่อ">กลับหน้า Login</a>
+									<a href="checkcompany.php?type=resent">ส่งไปยังอีเมลอีกครั้ง</a>
 								</div>
 </form>
 						</div>

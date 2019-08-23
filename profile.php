@@ -194,11 +194,11 @@ $arr_profile = pg_fetch_array($sql_profile);
 							<div class="aside-body">
 								<div class="featured-author">
 									<div class="featured-author-inner">
-										<?php if($user[bg_img] != ''){ ?>
-										<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
+											<?php if($user[bg_img] != ''){ ?>
+											<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
 											<?php }else{ ?>
-											<div class="featured-author-cover divbutton" style="background-image: url('http://www3.cgistln.nu.ac.th/dronephoto/images/full_img/chanonk_photos_135cc7cfce7e4ce_1556598734_.jpg');">
-												<?php } ?>
+											<div class="featured-author-cover divbutton" style="background-image: url('images/student/bg_img.png');">
+											<?php } ?>
 												
 												<div class="featured-author-center">
 
@@ -447,7 +447,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 												<div class="details">
 													<div class="detail">
 														<div class="category">
-															<a href="category.html">ประสบการณ์</a>
+															<a href="#">ประสบการณ์</a>
 														</div>
 														<div class="time">December 26, 2016</div>
 													</div>
@@ -587,7 +587,11 @@ else {    ?>
 								<div class="aside-body">
 									<div class="featured-author">
 										<div class="featured-author-inner">
+											<?php if($arr_profile[bg_img] != ''){ ?>
 											<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $arr_profile[bg_img]; ?>');">
+											<?php }else{ ?>
+											<div class="featured-author-cover divbutton" style="background-image: url('images/student/bg_img.png');">
+											<?php } ?>
 												<div class="featured-author-center">
 													<figure class="featured-author-picture">
 														<?php if($arr_profile[img] == ''){ ?>
@@ -677,7 +681,7 @@ else {    ?>
 												<div class="details">
 													<div class="detail">
 														<div class="category">
-															<a href="category.html">ประสบการณ์</a>
+															<a href="#">ประสบการณ์</a>
 														</div>
 														<div class="time">December 26, 2016</div>
 													</div>

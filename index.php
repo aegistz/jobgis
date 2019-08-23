@@ -292,7 +292,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 										<?php if($user[bg_img] != ''){ ?>
 										<div class="featured-author-cover" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
 											<?php }else{ ?>
-											<div class="featured-author-cover" style="background-image: url('http://www3.cgistln.nu.ac.th/dronephoto/images/full_img/chanonk_photos_135cc7cfce7e4ce_1556598734_.jpg');">
+											<div class="featured-author-cover" style="background-image: url('images/student/bg_img.png');">
 												<?php } ?>
 												<div class="featured-author-center divbutton">
 													<a href="profile.php" title="">

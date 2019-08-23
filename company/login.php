@@ -35,9 +35,9 @@ if(isset($_POST["login"]))
 					      if($count > 0) {
 
 					          if(  $password ==  $arr["password"] ) {
-					               setcookie("type", $user_name , time() + 86399);
+					               setcookie("type", $arr["email_com"] , time() + 86399);
 					               setcookie("pass", $arr["password"] , time() + 86399);
-								   setcookie("status", 'company', time() + 86399);
+								   setcookie("status_com", 'company', time() + 86399);
 					            //    header('Location:..'.$_SESSION['redirectURL']);
 					               header('Location:./');
 					               exit;
@@ -119,11 +119,15 @@ if(isset($_POST["login"]))
 									<input type="password" name="user_password" class="form-control">
 								</div>
 								<div class="form-group text-right">
-									<button class="btn btn-primary btn-block" type="submit" name="login">Login</button>
+									<button class="btn btn-warning btn-block" type="submit" name="login">Login</button>
 								</div>
 								<div class="form-group text-center">
 									<span class="text-muted"> สำหรับสถานประกอบการใหม่ </span> <a href="../reg-company.php">ลงทะเบียนที่นี่</a>
 								</div>
+								<div class="title-line">
+									or
+								</div>
+              	<a href="../login.php" class="btn btn-primary btn-block ">สำหรับบุคคลทั่วไป</a>
 							
 								
 </form>
