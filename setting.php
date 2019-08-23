@@ -442,7 +442,7 @@ include 'config.php';
 												<option value="มี" <?php if($user[free_issue]=='มี'){echo 'selected';} ?>>มี</option>
 												<option value="ไม่มี" <?php if($user[free_issue]=='ไม่มี'){echo 'selected';} ?>>ไม่มี</option>
 												<option value="อื่น ๆ" <?php if($user[free_issue]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ  
-													<input id="free_issue" type="text" class="form-control" name="free_issue_detail" placeholder="กรุณากรอก" value="<?php echo $user[free_issue_detail] ;?>">>
+													<input id="free_issue" type="text" class="form-control" name="free_issue_detail" placeholder="กรุณากรอก" value="<?php echo $user[free_issue_detail] ;?>">
 												</option>
 											</select>
 										</div>
@@ -460,7 +460,7 @@ include 'config.php';
 												<option value="คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท" <?php if($user[free_important]=='คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท'){echo 'selected';} ?>>คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท</option>
 												<option value="ค่าตอบแทนและสวัสดิการไม่เพียงพอ"  <?php if($user[free_important]=='ค่าตอบแทนและสวัสดิการไม่เพียงพอ'){echo 'selected';} ?>>ค่าตอบแทนและสวัสดิการไม่เพียงพอ</option>
 												<option value="อื่น ๆ" <?php if($user[free_important]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ  
-													<input id="free_important" type="text" class="form-control" name="free_important_detail" placeholder="กรุณากรอก" value="<?php echo $user[free_important_detail] ;?>">>
+													<input id="free_important" type="text" class="form-control" name="free_important_detail" placeholder="กรุณากรอก" value="<?php echo $user[free_important_detail] ;?>">
 												</option>
 											</select>
 										</div>
@@ -583,6 +583,23 @@ include 'config.php';
 			$('html,body').scrollTop(scrollmem);
 			});
 			});
+
+ 
+	<?php  if ( $user[status_work]=='ทำงานแล้ว' ) { ?>
+		document.getElementById('div2').style.display = 'inline';
+        document.getElementById('div1').style.display = 'none';
+        document.getElementById('div3').style.display = 'none';
+	<?php }else  if ( $user[status_work]=='ยังไม่ได้ทำงาน' ) { ?>
+		document.getElementById('div2').style.display = 'none';
+        document.getElementById('div1').style.display = 'inline';
+        document.getElementById('div3').style.display = 'none';
+	<?php }else  if ( $user[status_work]=='กำลังศึกษาต่อ' ) { ?>
+		document.getElementById('div2').style.display = 'none';
+        document.getElementById('div1').style.display = 'none';
+        document.getElementById('div3').style.display = 'inline';
+   	<?php } ?>
+
+
 		</script>
 	</body>
 </html>
