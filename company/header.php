@@ -19,7 +19,7 @@ include("config.php");
 							<form class="search" autocomplete="off">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" name="q" class="form-control" placeholder="ค้นหางานที่นี่ ....">									
+										<input type="text" name="q" class="form-control" placeholder="ค้นหาแรงงานเฉพาะด้านที่นี่ ....">									
 										<div class="input-group-btn">
 											<button class="btn btn-primary"><i class="ion-search"></i></button>
 										</div>
@@ -52,7 +52,7 @@ if($_COOKIE["status_com"]  == 'company' )
  ?>
 	<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
-								<li><a href="profile.php"><i class="ion-person"></i><div> <?php echo $company[name_com]; ?> </div></a></li>
+								<li><a href="./"><i class="ion-person"></i><div> <?php echo $company[name_com]; ?> </div></a></li>
 								<li><a href="logout.php"><i class="ion-log-out	"></i><div>Logout</div></a></li>
 							</ul>
 						</div>
@@ -95,8 +95,8 @@ if($_COOKIE["status_com"]  == 'company' )
 							<li class="for-tablet"><a href="login.html">Login</a></li>
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="./">หน้าแรก</a></li>
-							<li><a href="search.php">ค้นหาแรงงาน</a></li>
 							<li><a href="./">ข้อมูลผู้สมัครงาน</a></li>
+							<li><a href="search.php">ค้นหาแรงงาน</a></li>
 							
 							<li class="dropdown magz-dropdown"><a href="#">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">

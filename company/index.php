@@ -2,7 +2,18 @@
 <?php
 session_start();
 include("config.php");
-include("check-company.php")
+include("check-company.php");
+
+if ($_GET[type] == 'update_status_job') {
+	$sql_update_status = pg_query("UPDATE job_company set status_job = '$_GET[status]' where id_job = '$_GET[job_id]' ;");
+	header('location:./');
+}
+
+if ($_GET[type] == 'delete_job') {
+	$sql_delete_job = pg_query("DELETE from job_company where id_job = '$_GET[job_id]';");
+	header('location:./');
+}
+
 ?>
 <html>
 	<head>
@@ -47,7 +58,7 @@ include("check-company.php")
 							<div class="col-md-12">
 								<h4 class="page-title">
 								รายการประกาศรับสมัครงาน/ฝึกงาน/สหกิจศึกษา
-								<a href="add-job.php" class="btn btn-primary"><i class="fa fa-plus"></i> เพิ่มประกาศรับใหม่</a>
+								<a href="add-job.php" class="btn btn-warning"><i class="fa fa-plus"></i> เพิ่มประกาศรับใหม่</a>
 								</h4>
 								<p class="page-subtitle">ระบบจับคู่นักศึกษากับสถานประกอบการ</p>
 							</div>
@@ -57,7 +68,7 @@ include("check-company.php")
 							
 
 <?php 
-	$sql = pg_query("SELECT * from job_company where id_com = '$id_com' ;");
+	$sql = pg_query("SELECT * from job_company where id_com = '$id_com' order by id_job desc;");
 	$check = pg_num_rows($sql);
 	if ($check != 0 ) {
 	while( $job_com = pg_fetch_array($sql) ){
@@ -79,13 +90,45 @@ include("check-company.php")
 											</div>
 											<div class="time"><?php echo $job_com[date_job]; ?>
 												<div class="btn-group">
-																<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-																<i class="fa fa-bars"></i> </button>
-																<ul class="dropdown-menu" role="menu">
-																	<li><a href="story_edit.php?stoid=<?php echo $arr[id_story]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
-																	<li><a href="profile.php?type=delete_story&id_story=<?php echo $arr[id_story]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
-																</ul>
-															</div>
+
+													<?php if ($job_com[status_job] == 'เปิดรับสมัครอยู่') { ?>
+														<button type="button" class="btn-sm btn-success" >
+															สถานะงาน : เปิดรับสมัครอยู่ 
+														</button>
+													<?php } else{  ?>
+														<button type="button" class="btn-sm btn-danger" >
+															สถานะงาน : ปิดรับสมัคร
+														</button>
+
+													<?php } ?>
+
+													<button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+													<i class="fa fa-bars"></i> </button>
+													<ul class="dropdown-menu" role="menu">
+
+
+													<?php if ($job_com[status_job] == 'เปิดรับสมัครอยู่') { ?>
+														<li>
+															<a href="index.php?job_id=<?php echo $job_com[id_job]; ?>&status=ปิดรับสมัคร&type=update_status_job">
+																<i class="fa fa-power-off" aria-hidden="true"></i> ปิดรับสมัครงานตำแหน่งนี้
+															</a>
+														</li>
+													<?php }else{ ?>
+														<li>
+															<a href="index.php?job_id=<?php echo $job_com[id_job]; ?>&status=เปิดรับสมัครอยู่&type=update_status_job">
+																<i class="fa fa-check" aria-hidden="true"></i> เปิดรับสมัครงานตำแหน่งนี้
+															</a>
+														</li>
+
+													<?php } ?>
+
+
+														<li><a href="story_edit.php?stoid=<?php echo $arr[id_story]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขตำแหน่งงานนี้</a></li>
+
+
+														<li><a href="index.php?type=delete_job&job_id=<?php echo $job_com[id_job]; ?>" onclick="return confirm('ยืนยันการลบตำแหน่งงานนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบตำแหน่งงานนี้</a></li>
+													</ul>
+												</div>
 											</div>
 										</div>
 										<h1><a href="view-job.php?q=<?php echo $job_com[id_job]; ?>"><?php echo $job_com[name_job]; ?></a></h1>
@@ -118,7 +161,7 @@ include("check-company.php")
 										</p>
 										<footer>
 											<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>999</div></a>
-											<a class="btn btn-primary more" href="add-job.php">
+											<a class="btn btn-warning more" href="add-job.php">
 												<div>เพิ่มข้อมูล</div>
 												<div><i class="ion-ios-arrow-thin-right"></i></div>
 											</a>
@@ -136,7 +179,7 @@ include("check-company.php")
 						<aside>
 							<div class="aside-body">
 								<figure class="ads">
-									<a href="single.html">
+									<a href="./">
 										<img src="../images/img_job/<?php echo $company[logo_img]; ?>">
 									</a>
 								</figure>
@@ -158,13 +201,27 @@ include("check-company.php")
 												<div class="item">
 													<a href="#">
 														<div class="name">รอการตอบรับ</div>
-														<div class="value">22</div>
+														<div class="value">
+							<?php
+								$sql_request = pg_query("SELECT * from user_request a inner join job_company b on a.id_job = b.id_job where  request = 'รอการยืนยัน' and  id_com = '$id_com';"); 
+								$num_request = pg_num_rows($sql_request);
+								echo number_format($num_request);
+							?>
+
+
+														</div>
 													</a>
 												</div>
 												<div class="item">
 													<a href="#">
 														<div class="name">ผู้สมัครทั้งหมด</div>
-														<div class="value">3,729</div>
+														<div class="value">
+<?php
+								$sql_request = pg_query("SELECT * from user_request a inner join job_company b on a.id_job = b.id_job where  id_com = '$id_com';"); 
+								$num_request = pg_num_rows($sql_request);
+								echo number_format($num_request);
+							?>
+														</div>
 													</a>
 												</div>
 											</div>
@@ -181,7 +238,7 @@ include("check-company.php")
 							<div class="aside-body">
 
 <?php 
-	$sql = pg_query("SELECT *,b.img as profile_stu from user_request a 
+	$sql = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 inner join student b on a.email_user = b.email
 inner join job_company c on a.id_job = c.id_job
 where id_com = $id_com;");
@@ -195,15 +252,39 @@ where id_com = $id_com;");
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[s_name],' ',$arr[l_name] ; ?></a></h1>
+											<p>
+												
+
+<div class="btn-group">
+
+<?php if ($arr[request] == 'รอการยืนยัน') { ?>
+														<div class="btn-group">
+														  <button type="button" class="btn-sm btn-warning">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+<?php }  ?>
+													<button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+													<i class="fa fa-bars"></i> </button>
+													<ul class="dropdown-menu" role="menu">
+
+														<li><a href="view_request_user.php?id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> ยืนยันการสมัคร</a></li>
+
+
+													</ul>
+												</div>
+											</p>
+											<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[title_name],$arr[s_name],' ',$arr[l_name] ; ?></a></h1>
 											<div class="detail">
-												<div class="category"><a href="#">รับสมัครงาน</a></div>
-												<div class="time">2019-22-11</div>
+												<div class="category"><a href="#"><?php echo $arr[type_job]; ?></a></div>
+												<div class="time"><?php echo $arr[date_access]; ?></div>
 											</div>
-											<p>รับนักภูมิสารสนเทศ 3 ตำแหน่ง</p>
+											<p>ตำแหน่งที่สมัคร : <?php echo $arr[name_job]; ?>  </p>
+											<br>
 										</div>
 									</div>
 								</article>
+
 <?php } ?>
 								
 							</div>
@@ -228,7 +309,7 @@ where id_com = $id_com;");
 									<div class="input-group">
 										<input type="email" class="form-control email" placeholder="Your mail">
 										<div class="input-group-btn">
-											<button class="btn btn-primary"><i class="ion-paper-airplane"></i></button>
+											<button class="btn btn-warning"><i class="ion-paper-airplane"></i></button>
 										</div>
 									</div>
 									<p>By subscribing you will receive new articles in your email.</p>

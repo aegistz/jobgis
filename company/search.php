@@ -88,7 +88,7 @@ $sql_work = pg_query("SELECT * from job_company a
 									<div class="form-group">
 										<div class="input-group">
 											<input type="text" name="eqc" class="form-control" 
-											placeholder="ค้นหา งาน / ผู้คน / สถานประกอบการ  ...." 
+											placeholder="ค้นหาแรงงานเฉพาะด้านที่นี่ ...." 
 											value="<?php echo $_GET[eqc]; ?>">
 											<div class="input-group-btn">
 												<button class="btn btn-primary" type="submit">
@@ -116,39 +116,6 @@ $sql_work = pg_query("SELECT * from job_company a
 											</div>
 										</div>
 									<br> -->
-								
-							<h2 class="aside-title">ช่วงเวลา</h2>
-									<div class="form-group">
-										<label><input type="radio" name="time" value="all_time" checked> ทุกเวลา</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="time" value="day"  <?php if($_GET[time] =='day'){ echo 'checked';} ?> > วันนี้</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="time" value="week" <?php if($_GET[time] =='week'){ echo 'checked';} ?> > สัปดาห์นี้</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="time" value="month" <?php if($_GET[time] =='month'){ echo 'checked';} ?>> เดือนนี้</label>
-									</div>
-									<br>
-
-							<h2 class="aside-title">ประเภทงาน</h2>
-									<div class="form-group">
-										<label><input type="radio" name="type" value="all_type" checked> ทุกประเภท</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="type" value="full_time" <?php if($_GET[type] =='full_time'){ echo 'checked';} ?>> งานประจำ</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="type" value="daily_work" <?php if($_GET[type] =='daily_work'){ echo 'checked';} ?>> งานรายวัน</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="type" value="apprentice" <?php if($_GET[type] =='apprentice'){ echo 'checked';} ?>> ฝึกงาน</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="type" value="coop" <?php if($_GET[type] =='coop'){ echo 'checked';} ?>> สหกิจศึกษา</label>
-									</div>
-									<button type="submit" class="btn btn-primary btn-block">ค้นหา</button>
 </form>
 							</div>
 						</aside>
@@ -159,7 +126,7 @@ $sql_work = pg_query("SELECT * from job_company a
 								<li class="active"><a data-toggle="tab" href="#user">
 									<?php
 										$sql_user = pg_query("SELECT * from student
-										where s_name like '%$eqc%' ;  ");
+										where s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
 									?>

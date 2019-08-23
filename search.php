@@ -167,7 +167,7 @@ $sql_work = pg_query("SELECT * from job_company a
 								<li><a data-toggle="tab" href="#user">
 									<?php
 										$sql_user = pg_query("SELECT * from student
-										where s_name like '%$eqc%' ;  ");
+										where s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
 									?>
