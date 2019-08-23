@@ -311,9 +311,9 @@ include 'config.php';
 								<label>สถานภาพการทำงานปัจจุบัน</label>
 								<select name="status_work" class="form-control" required=""  onchange="showHide(this)" >
 									<option value="">กรุณาเลือก</option>
-									<option value="ทำงานแล้ว" >ทำงานแล้ว</option>
-									<option value="ยังไม่ได้ทำงาน">ยังไม่ได้ทำงาน</option>
-									<option value="กำลังศึกษาต่อ">กำลังศึกษาต่อ</option>
+									<option value="ทำงานแล้ว" <?php if($user[status_work]=='ทำงานแล้ว'){echo 'selected';} ?>>ทำงานแล้ว</option>
+									<option value="ยังไม่ได้ทำงาน" <?php if($user[status_work]=='ยังไม่ได้ทำงาน'){echo 'selected';} ?>>ยังไม่ได้ทำงาน</option>
+									<option value="กำลังศึกษาต่อ" <?php if($user[status_work]=='กำลังศึกษาต่อ'){echo 'selected';} ?>>กำลังศึกษาต่อ</option>
 								</select>
 								</div>
 					    	</div>
@@ -324,13 +324,13 @@ include 'config.php';
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>ชื่อตำแหน่งงาน</label>
-											<input type="text" name="work_name" class="form-control">
+											<input type="text" name="work_name" class="form-control" value="<?php echo $user[work_name] ;?>">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>หน่วยงาน</label>
-											<input type="text" name="work_company" class="form-control">
+											<input type="text" name="work_company" class="form-control" value="<?php echo $user[work_company] ;?>">
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -338,13 +338,13 @@ include 'config.php';
 											<label>ประเภทงานที่ทำ</label>
 											<select name="work_type" class="form-control"  onchange="showwork_type(this)">
 												<option value="">กรุณาเลือก</option>
-												<option value="ข้าราชการ/เจ้าหน้าที่ของรัฐ">ข้าราชการ/เจ้าหน้าที่ของรัฐ</option>
-												<option value="รัฐวิสาหกิจ">รัฐวิสาหกิจ</option>
-												<option value="พนักงานบริษัท/องค์กรธุรกิจเอกชน">พนักงานบริษัท/องค์กรธุรกิจเอกชน</option>
-												<option value="ดำเนินธุรกิจอิสระ/เจ้าของกิจการ">ดำเนินธุรกิจอิสระ/เจ้าของกิจการ</option>
-												<option value="พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ">พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ</option>
-												<option value="อื่น ๆ">อื่น ๆ  
-												<input id="work_type" type="text" class="form-control" name="work_type_detail" placeholder="กรุณากรอก">
+												<option value="ข้าราชการ/เจ้าหน้าที่ของรัฐ" <?php if($user[work_type]=='ข้าราชการ/เจ้าหน้าที่ของรัฐ'){echo 'selected';} ?>>ข้าราชการ/เจ้าหน้าที่ของรัฐ</option>
+												<option value="รัฐวิสาหกิจ" <?php if($user[work_type]=='รัฐวิสาหกิจ'){echo 'selected';} ?>>รัฐวิสาหกิจ</option>
+												<option value="พนักงานบริษัท/องค์กรธุรกิจเอกชน" <?php if($user[work_type]=='พนักงานบริษัท/องค์กรธุรกิจเอกชน'){echo 'selected';} ?>>พนักงานบริษัท/องค์กรธุรกิจเอกชน</option>
+												<option value="ดำเนินธุรกิจอิสระ/เจ้าของกิจการ" <?php if($user[work_type]=='ดำเนินธุรกิจอิสระ/เจ้าของกิจการ'){echo 'selected';} ?>>ดำเนินธุรกิจอิสระ/เจ้าของกิจการ</option>
+												<option value="พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ" <?php if($user[work_type]=='พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ'){echo 'selected';} ?>>พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ</option>
+												<option value="อื่น ๆ" <?php if($user[work_type]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ  
+												<input id="work_type" type="text" class="form-control" name="work_type_detail" placeholder="กรุณากรอก" value="<?php echo $user[work_type_detail] ;?>">
 												</option>
 											</select>
 										</div>
@@ -354,8 +354,8 @@ include 'config.php';
 											<label>ลักษณะงานที่ทำตรงกับสาขาที่ท่านได้สำเร็จการศึกษาหรือไม่</label>
 											<select name="work_detail" class="form-control" >
 												<option value="">กรุณาเลือก</option>
-												<option value="ตรงสาขา">ตรงสาขา</option>
-												<option value="ไม่ตรงสาขา">ไม่ตรงสาขา</option>
+												<option value="ตรงสาขา" <?php if($user[work_detail]=='ตรงสาขา'){echo 'selected';} ?>>ตรงสาขา</option>
+												<option value="ไม่ตรงสาขา" <?php if($user[work_detail]=='ไม่ตรงสาขา'){echo 'selected';} ?>>ไม่ตรงสาขา</option>
 											</select>
 										</div>
 									</div>
@@ -364,10 +364,10 @@ include 'config.php';
 											<label>ท่านสามารถนำความรู้จากสาขาวิชาที่เรียนมาประยุกต์ใช้ในหน้าที่การงานที่ทำอยู่ขณะนี้เพียงใด</label>
 											<select name="work_join" class="form-control" >
 												<option value="">กรุณาเลือก</option>
-												<option value="มากที่สุด">มากที่สุด</option>
-												<option value="มาก">มาก</option>
-												<option value="ปานกลาง">ปานกลาง</option>
-												<option value="น้อย">น้อย</option>
+												<option value="มากที่สุด" <?php if($user[work_join]=='มากที่สุด'){echo 'selected';} ?>>มากที่สุด</option>
+												<option value="มาก" <?php if($user[work_join]=='มาก'){echo 'selected';} ?>>มาก</option>
+												<option value="ปานกลาง" <?php if($user[work_join]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+												<option value="น้อย" <?php if($user[work_join]=='น้อย'){echo 'selected';} ?>>น้อย</option>
 											</select>
 										</div>
 									</div>
@@ -376,14 +376,14 @@ include 'config.php';
 											<label>ท่านคิดว่าความรู้ความสารถพิเศษด้านใดที่ช่วยให้ท่านได้ทำงาน</label>
 											<select name="work_skill" class="form-control" onchange="showwork_skill(this)" >
 												<option value="">กรุณาเลือก</option>
-												<option value="ด้านภาษาต่างประเทศ">ด้านภาษาต่างประเทศ</option>
-												<option value="ด้านการใช้คอมพิวเตอร์">ด้านการใช้คอมพิวเตอร์</option>
-												<option value="ด้านกิจกรรมสันทนาการ">ด้านกิจกรรมสันทนาการ</option>
-												<option value="ด้านศิลปะ">ด้านศิลปะ</option>
-												<option value="ด้านกีฬา">ด้านกีฬา</option>
-												<option value="ด้านนาฏศิลป์/ดนตรีขับร้อง">ด้านนาฏศิลป์/ดนตรีขับร้อง</option>
-												<option value="อื่น ๆ">อื่น ๆ  
-													<input id="work_skill" type="text" class="form-control" name="work_skill_detail" placeholder="กรุณากรอก">
+												<option value="ด้านภาษาต่างประเทศ" <?php if($user[work_skill]=='ด้านภาษาต่างประเทศ'){echo 'selected';} ?>>ด้านภาษาต่างประเทศ</option>
+												<option value="ด้านการใช้คอมพิวเตอร์" <?php if($user[work_skill]=='ด้านการใช้คอมพิวเตอร์'){echo 'selected';} ?>>ด้านการใช้คอมพิวเตอร์</option>
+												<option value="ด้านกิจกรรมสันทนาการ" <?php if($user[work_skill]=='ด้านกิจกรรมสันทนาการ'){echo 'selected';} ?>>ด้านกิจกรรมสันทนาการ</option>
+												<option value="ด้านศิลปะ" <?php if($user[work_skill]=='ด้านศิลปะ'){echo 'selected';} ?>>ด้านศิลปะ</option>
+												<option value="ด้านกีฬา" <?php if($user[work_skill]=='ด้านกีฬา'){echo 'selected';} ?>>ด้านกีฬา</option>
+												<option value="ด้านนาฏศิลป์/ดนตรีขับร้อง" <?php if($user[work_skill]=='ด้านนาฏศิลป์/ดนตรีขับร้อง'){echo 'selected';} ?>>ด้านนาฏศิลป์/ดนตรีขับร้อง</option>
+												<option value="อื่น ๆ" <?php if($user[work_skill]=='พอใจ'){echo 'selected';} ?>>อื่น ๆ  
+													<input id="work_skill" type="text" class="form-control" name="work_skill_detail" placeholder="กรุณากรอก" value="<?php echo $user[work_skill_detail] ;?>">
 												</option>
 											</select>
 										</div>
@@ -393,8 +393,8 @@ include 'config.php';
 											<label>ท่านมีความพึงพอใจต่องานที่ทำหรือไม่</label>
 											<select name="work_complace" class="form-control" >
 												<option value="">กรุณาเลือก</option>
-												<option value="พอใจ">พอใจ</option>
-												<option value="ไม่พอใจ">ไม่พอใจ</option>
+												<option value="พอใจ" <?php if($user[work_complace]=='พอใจ'){echo 'selected';} ?>>พอใจ</option>
+												<option value="ไม่พอใจ" <?php if($user[work_complace]=='ไม่พอใจ'){echo 'selected';} ?>>ไม่พอใจ</option>
 											</select>
 										</div>
 									</div>
@@ -403,14 +403,14 @@ include 'config.php';
 											<label>ถ้าไม่พอใจ โปรดระบุสาเหตุที่สำคัญที่สุด 1 ข้อต่อไปนี้	</label>
 											<select name="work_uncomplace" class="form-control"  onchange="showwork_uncomplace(this)" >
 												<option value="">กรุณาเลือก</option>
-												<option value="ระบบภายในองค์กร">ระบบภายในองค์กร</option>
-												<option value="มิตรภาพในองค์กร">มิตรภาพในองค์กร</option>
-												<option value="ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน">ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน</option>
-												<option value="ค่าตอบแทนต่ำ">ค่าตอบแทนต่ำ</option>
-												<option value="ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย">ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย</option>
-												<option value="สวัสดิการของพนักงานไม่เหมาะสม">สวัสดิการของพนักงานไม่เหมาะสม</option>
-												<option value="อื่น ๆ">อื่น ๆ  
-													<input id="work_uncomplace" type="text" class="form-control" name="work_uncomplace_detail" placeholder="กรุณากรอก">
+												<option value="ระบบภายในองค์กร" <?php if($user[work_uncomplace]=='ระบบภายในองค์กร'){echo 'selected';} ?>>ระบบภายในองค์กร</option>
+												<option value="มิตรภาพในองค์กร" <?php if($user[work_uncomplace]=='มิตรภาพในองค์กร'){echo 'selected';} ?>>มิตรภาพในองค์กร</option>
+												<option value="ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน" <?php if($user[work_uncomplace]=='ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน'){echo 'selected';} ?>>ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน</option>
+												<option value="ค่าตอบแทนต่ำ" <?php if($user[work_uncomplace]=='ค่าตอบแทนต่ำ'){echo 'selected';} ?>>ค่าตอบแทนต่ำ</option>
+												<option value="ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย" <?php if($user[work_uncomplace]=='ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย'){echo 'selected';} ?>>ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย</option>
+												<option value="สวัสดิการของพนักงานไม่เหมาะสม" <?php if($user[work_uncomplace]=='สวัสดิการของพนักงานไม่เหมาะสม'){echo 'selected';} ?>>สวัสดิการของพนักงานไม่เหมาะสม</option>
+												<option value="อื่น ๆ" <?php if($user[work_uncomplace]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ  
+													<input id="work_uncomplace" type="text" class="form-control" name="work_uncomplace_detail" placeholder="กรุณากรอก"  value="<?php echo $user[work_uncomplace] ;?>">
 												</option>
 											</select>
 										</div>
@@ -424,12 +424,12 @@ include 'config.php';
 											<label>สาเหตุที่ยังไม่ได้ทำงาน</label>
 											<select name="free_cause" class="form-control" onchange="showfree_cause(this)">
 												<option value="">กรุณาเลือก</option>
-												<option value="ยังไม่ประสงค์ทำงาน">ยังไม่ประสงค์ทำงาน</option>
-												<option value="ประสงค์ศึกษาต่อ">ประสงค์ศึกษาต่อ</option>
-												<option value="รอฟังคำตอบจากหน่วยงาน">รอฟังคำตอบจากหน่วยงาน</option>
-												<option value="หางานทำไม่ได้">หางานทำไม่ได้</option>
-												<option value="อื่น ๆ">อื่น ๆ  
-												<input id="free_cause" type="text" class="form-control" name="free_cause_detail" placeholder="กรุณากรอก">
+												<option value="ยังไม่ประสงค์ทำงาน" <?php if($user[free_cause]=='ยังไม่ประสงค์ทำงาน'){echo 'selected';} ?>>ยังไม่ประสงค์ทำงาน</option>
+												<option value="ประสงค์ศึกษาต่อ" <?php if($user[free_cause]=='ประสงค์ศึกษาต่อ'){echo 'selected';} ?>>ประสงค์ศึกษาต่อ</option>
+												<option value="รอฟังคำตอบจากหน่วยงาน" <?php if($user[free_cause]=='รอฟังคำตอบจากหน่วยงาน'){echo 'selected';} ?>>รอฟังคำตอบจากหน่วยงาน</option>
+												<option value="หางานทำไม่ได้" <?php if($user[free_cause]=='หางานทำไม่ได้'){echo 'selected';} ?>>หางานทำไม่ได้</option>
+												<option value="อื่น ๆ" <?php if($user[free_cause]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ  
+												<input id="free_cause" type="text" class="form-control" name="free_cause_detail" placeholder="กรุณากรอก" value="<?php echo $user[free_cause_detail] ;?>">
 												</option>
 											</select>
 										</div>
@@ -439,10 +439,10 @@ include 'config.php';
 											<label>ท่านมีปัญหาในการหางานทำหลังสำเร็จการศึกษาหรือไม่</label>
 											<select name="free_issue" class="form-control"  onchange="showfree_issue(this)">
 												<option value="">กรุณาเลือก</option>
-												<option value="มี">มี</option>
-												<option value="ไม่มี">ไม่มี</option>
-												<option value="อื่น ๆ">อื่น ๆ  
-													<input id="free_issue" type="text" class="form-control" name="free_issue_detail" placeholder="กรุณากรอก">
+												<option value="มี" <?php if($user[free_issue]=='มี'){echo 'selected';} ?>>มี</option>
+												<option value="ไม่มี" <?php if($user[free_issue]=='ไม่มี'){echo 'selected';} ?>>ไม่มี</option>
+												<option value="อื่น ๆ" <?php if($user[free_issue]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ  
+													<input id="free_issue" type="text" class="form-control" name="free_issue_detail" placeholder="กรุณากรอก" value="<?php echo $user[free_issue_detail] ;?>">>
 												</option>
 											</select>
 										</div>
@@ -452,15 +452,15 @@ include 'config.php';
 											<label>	ถ้ามีปัญหาโปรดระบุปัญหาสำคัญ </label>
 											<select name="free_important" class="form-control" onchange="showfree_important(this)">
 												<option value="">กรุณาเลือก</option>
-												<option value="ไม่มีข้อมูลหน่วยงานรับสมัคร">ไม่มีข้อมูลหน่วยงานรับสมัคร</option>
-												<option value="งานที่ทำยังไม่ตรงกับวุฒิการศึกษา">งานที่ทำยังไม่ตรงกับวุฒิการศึกษา</option>
-												<option value="กระบวนการคัดเลือกหลายขั้นตอน">กระบวนการคัดเลือกหลายขั้นตอน</option>
-												<option value="ขาดผู้สนับสนุนในการหางาน">ขาดผู้สนับสนุนในการหางาน</option>
-												<option value="ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน">ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน</option>
-												<option value="คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท">คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท</option>
-												<option value="ค่าตอบแทนและสวัสดิการไม่เพียงพอ">ค่าตอบแทนและสวัสดิการไม่เพียงพอ</option>
-												<option value="อื่น ๆ">อื่น ๆ  
-													<input id="free_important" type="text" class="form-control" name="free_important_detail" placeholder="กรุณากรอก">
+												<option value="ไม่มีข้อมูลหน่วยงานรับสมัคร" <?php if($user[free_important]=='ไม่มีข้อมูลหน่วยงานรับสมัคร'){echo 'selected';} ?>>ไม่มีข้อมูลหน่วยงานรับสมัคร</option>
+												<option value="งานที่ทำยังไม่ตรงกับวุฒิการศึกษา" <?php if($user[free_important]=='งานที่ทำยังไม่ตรงกับวุฒิการศึกษา'){echo 'selected';} ?>>งานที่ทำยังไม่ตรงกับวุฒิการศึกษา</option>
+												<option value="กระบวนการคัดเลือกหลายขั้นตอน" <?php if($user[free_important]=='กระบวนการคัดเลือกหลายขั้นตอน'){echo 'selected';} ?>>กระบวนการคัดเลือกหลายขั้นตอน</option>
+												<option value="ขาดผู้สนับสนุนในการหางาน" <?php if($user[free_important]=='ขาดผู้สนับสนุนในการหางาน'){echo 'selected';} ?>>ขาดผู้สนับสนุนในการหางาน</option>
+												<option value="ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน" <?php if($user[free_important]=='ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน'){echo 'selected';} ?>>ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน</option>
+												<option value="คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท" <?php if($user[free_important]=='คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท'){echo 'selected';} ?>>คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท</option>
+												<option value="ค่าตอบแทนและสวัสดิการไม่เพียงพอ"  <?php if($user[free_important]=='ค่าตอบแทนและสวัสดิการไม่เพียงพอ'){echo 'selected';} ?>>ค่าตอบแทนและสวัสดิการไม่เพียงพอ</option>
+												<option value="อื่น ๆ" <?php if($user[free_important]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ  
+													<input id="free_important" type="text" class="form-control" name="free_important_detail" placeholder="กรุณากรอก" value="<?php echo $user[free_important_detail] ;?>">>
 												</option>
 											</select>
 										</div>
@@ -469,12 +469,12 @@ include 'config.php';
 										<div class="form-group">
 											<label>ลักษณะงานที่ท่านต้องการ</label>
 											<select name="free_work_need" class="form-control" ><option value="">กรุณาเลือก</option>
-												<option value="ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น">ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น</option>
-												<option value="ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น">ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น</option>
-												<option value="ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น">ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น</option>
-												<option value="ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น">ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น</option>
-												<option value="ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น">ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น</option>
-												<option value="ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น">ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น</option>
+												<option value="ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น" <?php if($user[free_work_need]=='ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น'){echo 'selected';} ?>>ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น</option>
+												<option value="ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น" <?php if($user[free_work_need]=='ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น'){echo 'selected';} ?>>ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น</option>
+												<option value="ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น" <?php if($user[free_work_need]=='ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น'){echo 'selected';} ?>>ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น</option>
+												<option value="ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น" <?php if($user[free_work_need]=='ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น'){echo 'selected';} ?>>ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น</option>
+												<option value="ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น" <?php if($user[free_work_need]=='ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น'){echo 'selected';} ?>>ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น</option>
+												<option value="ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น" <?php if($user[free_work_need]=='ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น'){echo 'selected';} ?>>ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น</option>
 											</select>
 										</div>
 									</div>
@@ -482,9 +482,9 @@ include 'config.php';
 										<div class="form-group">
 											<label>ผู้ที่มีอิทธิพลต่อการตัดสินใจในการหางานทำ</label>
 											<select name="free_influence" class="form-control"><option value="">กรุณาเลือก</option>
-												<option value="ตัวเอง">ตัวเอง</option>
-												<option value="เพื่อน">เพื่อน</option>
-												<option value="ครอบครัว">ครอบครัว</option>
+												<option value="ตัวเอง" <?php if($user[free_influence]=='ตัวเอง'){echo 'selected';} ?>>ตัวเอง</option>
+												<option value="เพื่อน" <?php if($user[free_influence]=='เพื่อน'){echo 'selected';} ?>>เพื่อน</option>
+												<option value="ครอบครัว" <?php if($user[free_influence]=='ครอบครัว'){echo 'selected';} ?>>ครอบครัว</option>
 											</select>
 										</div>
 									</div>
@@ -495,19 +495,19 @@ include 'config.php';
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>สาขาวิชา</label>
-											<input type="text" name="study_major" class="form-control">
+											<input type="text" name="study_major" class="form-control" value="<?php echo $user[study_major] ;?>">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>ภาควิชา</label>
-											<input type="text" name="study_faculty" class="form-control">
+											<input type="text" name="study_faculty" class="form-control" value="<?php echo $user[study_faculty] ;?>">
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>สถาบันศึกษา</label>
-											<input type="text" name="study_university" class="form-control">
+											<input type="text" name="study_university" class="form-control" value="<?php echo $user[study_university] ;?>">
 										</div>
 									</div>
 		  						</div>
