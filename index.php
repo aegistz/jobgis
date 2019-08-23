@@ -271,16 +271,24 @@ $num_request_list = pg_num_rows($sql_request_list);
 											<div class="featured-author-cover" style="background-image: url('http://www3.cgistln.nu.ac.th/dronephoto/images/full_img/chanonk_photos_135cc7cfce7e4ce_1556598734_.jpg');">
 												<?php } ?>
 												<div class="featured-author-center divbutton">
+													<a href="profile.php" title="">
 													<figure class="featured-author-picture">
 														<?php if($user[img] == ''){ ?>
-														<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
+														<img  src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
 														<?php } else { ?>
 														<img src="images/student/<?php echo $user[img]; ?>" alt="Sample Article">
 														<?php } ?>
 													</figure>
+													</a>
 													<div class="featured-author-info">
-														<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>
-														<div class="desc"><?php echo $user[email]; ?> </div>
+														<h2 class="name">
+
+															<a class="btn btn-primary btn-sm" href="profile.php" title="">
+															คุณ <?php echo $user[s_name],' ', $user[l_name]; ?> 
+															</a>
+															<div class="desc"><b><?php echo $user[email]; ?></b> </div>
+														</h2>
+														
 													</div>
 												</div>
 											</div>
@@ -300,7 +308,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 													<div class="item">
 														<a href="#">
 															<div class="name">View</div>
-															<div class="value">3,729</div>
+															<div class="value">0</div>
 														</a>
 													</div>
 													<div class="item">
