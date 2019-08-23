@@ -10,6 +10,19 @@ inner join job_company c on a.id_job = c.id_job
 inner join resume d on d.email = b.email
 where id_com = $id_com and a.id_no = '$_GET[id_request]';");
 	$result = pg_fetch_array($sql);
+
+
+
+	
+if ($_GET[type] =='submit_request_3') {
+	$update_request = pg_query("UPDATE user_request set request = '$_GET[status]' where id_no = '$_GET[id_request]' ;");
+	header('location:request.php#type_3');
+}
+if ($_GET[type] =='submit_request_4') {
+	$update_request = pg_query("UPDATE user_request set request = '$_GET[status]' where id_no = '$_GET[id_request]' ;");
+	header('location:request.php#type_4');
+}
+
 ?>
 <html>
 	<head>
@@ -73,8 +86,13 @@ where id_com = $id_com and a.id_no = '$_GET[id_request]';");
 									</div>
 								</article>
 								<article class="article-mini">
-									<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-check" aria-hidden="true"></i> รับพิจารณาบุคคลนี้</a>
-									<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-danger btn-block"><i class="fa fa-window-close" aria-hidden="true"></i> ปฏิเสธบุคคลนี้</a>
+
+
+									<a href="view_request_user.php?type=submit_request_3&status=ผ่านการสมัคร รอการติดต่อกลับ&id_request=<?php echo $_GET[id_request]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-check" aria-hidden="true"></i> รับพิจารณาบุคคลนี้</a>
+									<a href="view_request_user.php?type=submit_request_4&status=ไม่ผ่านการสมัคร&id_request=<?php echo $_GET[id_request]; ?>" title="" class="btn btn-danger btn-block"><i class="fa fa-window-close" aria-hidden="true"></i> ปฏิเสธบุคคลนี้</a>
+
+
+
 								</article>
 								<hr>
 								<article>
