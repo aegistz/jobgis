@@ -237,7 +237,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 								</thead>
 								<tbody>
 									<?php
-										$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com  limit 100 ;  ");
+										$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com  where status_job = 'เปิดรับสมัครอยู่';  ");
 										while ( $arr = pg_fetch_array($sql) ) {
 									?>
 									<tr>

@@ -31,7 +31,7 @@ if ($_GET[type] =='delete_img_post') {
 
 if (isset($_GET[eid])) {
 	$eid = $_GET[eid];
-	$sql_profile = pg_query("SELECT * from student  where id_no = '$eid' and status_user = 'ยืนยัน;");
+	$sql_profile = pg_query("SELECT * from student  where id_no = '$eid' and status_user = 'ยืนยัน';");
 	$arr_profile = pg_fetch_array($sql_profile);
 }
 	

@@ -112,12 +112,15 @@ include("check_student.php");
 							<div class="col-md-3">
 
 <?php 
-	$sql_check = pg_query("SELECT * from user_request where id_job = '$result[id_job]' and email_user = '$user[email]' ;");
+	$sql_check = pg_query("SELECT * from user_request a full join resume b on a.email_user = b.email where id_job = '$result[id_job]' and email_user = '$user[email]' ;");
 	$num = pg_num_rows($sql_check);
 	$arr = pg_fetch_array($sql_check);
-	if ($num == 0) {
-?>
+	if ($num == 0 && $arr[email] != '' ) { ?>
 								<a class="btn btn-primary btn-block" href="send_request.php?q=<?php echo $_GET[q]; ?>"><i class="fa fa-share" aria-hidden="true"></i> กดสมัคร <br> ตำแหน่งงานนี้</a>
+<?php } else if ($num == 0 && $arr[email] == '' ) { ?>
+
+<a class="btn btn-warning btn-block" href="resume.php"><i class="fa fa-share" aria-hidden="true"></i> เพิ่มข้อมูล <br> Resume  <br>ก่อนทำการสมัคร</a>
+
 <?php }else { ?>
 <small>*สมัครตำแหน่งงานนี้แล้ว</small>
 	<?php if ($arr[request] == 'รอการยืนยัน') { ?>
@@ -205,13 +208,16 @@ include("check_student.php");
 							</div>
 
 <?php 
-	$sql_check = pg_query("SELECT * from user_request where id_job = '$result[id_job]' and email_user = '$user[email]' ;");
+	$sql_check = pg_query("SELECT * from user_request a full join resume b on a.email_user = b.email where id_job = '$result[id_job]' and email_user = '$user[email]' ;");
 	$num = pg_num_rows($sql_check);
 	$arr = pg_fetch_array($sql_check);
-	if ($num == 0) {
-?>
+	if ($num == 0 && $arr[email] != '' ) { ?>
 								<a class="btn btn-primary btn-block" href="send_request.php?q=<?php echo $_GET[q]; ?>"><i class="fa fa-share" aria-hidden="true"></i> กดสมัคร <br> ตำแหน่งงานนี้</a>
-<?php }  ?>
+<?php } else if ($num == 0 && $arr[email] == '' ) { ?>
+
+<a class="btn btn-warning btn-block" href="resume.php"><i class="fa fa-share" aria-hidden="true"></i> เพิ่มข้อมูล <br> Resume  <br>ก่อนทำการสมัคร</a>
+
+<?php } ?>
 
 
 
