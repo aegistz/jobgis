@@ -3,42 +3,56 @@
 session_start();
 include 'config.php';
 
-	  $email = $user['email'];
-	  $title_name = $_POST['title_name'];
-	  $s_name = $_POST['s_name'];
-	  $l_name = $_POST['l_name'];
-	  $sex = $_POST['sex'];
+	  $email_com = $company['email_com'];
+	  $name_com = $_POST['name_com'];
+	  $detail_com = $_POST['detail_com'];
+	  $website_com = $_POST['website_com'];
+	  $address_com = $_POST['address_com'];
+	  $tambon_com = $_POST['tambon_com'];
+	  $amphoe_com = $_POST['amphoe_com'];
+	  $province_com = $_POST['province_com'];
+	  $zipcode_com = $_POST['zipcode_com'];
+	  $phone_com = $_POST['phone_com'];
+	  $fax_com = $_POST['fax_com'];
+	  $type_com = $_POST['type_com'];
+	  $lat_com = $_POST['lat_com'];
+	  $lon_com = $_POST['lon_com'];
+	  $date_com = $_POST['date_com'];
+	  $user_name = $_POST['user_name'];
+	  $password = $_POST['password'];
+	  $status_company = $_POST['status_company'];
+	  $logo_img = $_POST['logo_img'];
+	 
+		 
+		 	if ( isset($_POST[profile]) ) {
+       	$sql1 = "UPDATE company set  
+       			name_com = '$name_com' ,
+       			detail_com = '$detail_com' ,
+       			website_com = '$website_com' ,
+       			address_com = '$address_com' ,
+       			province_com = '$province_com' ,
+       			amphoe_com = '$amphoe_com' ,
+       			tambon_com = '$tambon_com' ,
+       			zipcode_com = '$zipcode_com' ,
+       			phone_com = '$phone_com' ,
+       			fax_com = '$fax_com' ,
+       			type_com = '$type_com'
 
-			if ( isset($_POST[profile]) ) {
-       	$sql1 = "UPDATE student set  
-       			title_name = '$title_name' ,
-       			s_name = '$s_name' ,
-       			l_name = '$l_name' ,
-       			sex = '$sex' ,
-       			year_birth = '$year_birth' ,
-       			phone_number = '$phone_number' ,
-       			province = '$province' ,
-       			university = '$university' ,
-       			fuculty = '$fuculty' ,
-       			major = '$major' ,
-       			level_degree = '$level_degree' ,
-       			year_success = '$year_success'
-
-        		where email = '$email' ;";
+        		where email_com = '$email_com' ;";
            		$query1 = pg_query($sql1);
            		header('location:setting.php#profile') ; 
 		}
 			
 			if ( isset($_POST[password]) ) {
 
-			$sql = "SELECT * from student where password = '$_POST[pass_old]';";
+			$sql = "SELECT * from company where password = '$_POST[pass_old]';";
 			$query = pg_query($sql);
 			$num = pg_num_rows($query);
 			if ($num == 1 ){
 
-			$sql3 = "UPDATE student set  
+			$sql3 = "UPDATE company set  
        			password = '$_POST[pass_new]'
-       			WHERE email = '$email';";
+       			WHERE email_com = '$email_com';";
            		$query3 = pg_query($sql3);
            		header('location:setting.php#password') ; 
 		    }
@@ -122,38 +136,73 @@ include 'config.php';
 
 						  <div id="profile" class="tab-pane fade in active">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="setting.php" enctype="multipart/form-data">
-
-	
 						  	<div class="col-md-12">
-								<div class="col-md-2">
+							  	<div class="col-md-12">
 									<div class="form-group">
-										<label>คำนำหน้า</label>
-										<input type="text" name="title_name" class="form-control" required value="<?php echo $user[title_name]; ?>">
+										<label>ชื่อสถานภูมิภาค</label>
+										<input type="text" name="name_com" class="form-control" required value="<?php echo $company[name_com]; ?>">
 									</div>
-			
 								</div>
-								<div class="col-md-4">
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-12">
 									<div class="form-group">
-										<label>ชื่อ</label>
-										<input type="text" name="s_name" class="form-control" required value="<?php echo $user[s_name]; ?>">
+										<label>รายละเอียด</label>
+										<input type="text" name="detail_com" class="form-control" required value="<?php echo $company[detail_com]; ?>">
 									</div>
-			
 								</div>
-								<div class="col-md-4">
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-12">
 									<div class="form-group">
-										<label>นามสกุล</label>
-										<input type="text" name="l_name" class="form-control" required value="<?php echo $user[l_name]; ?>">
+										<label>เว็บไซต์</label>
+										<input type="text" name="website_com" class="form-control" required value="<?php echo $company[website_com]; ?>">
 									</div>
-									
 								</div>
-								<div class="col-md-2">
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-12">
 									<div class="form-group">
-										<label>เพศ</label>
-										<select name="sex" class="form-control" required>
-											<option value="">กรุณาเลือก</option>
-											<option value="ชาย" <?php if($user[sex] == 'ชาย'){echo 'selected';} ?>>ชาย</option>
-											<option value="หญิง" <?php if($user[sex] == 'หญิง'){echo 'selected';} ?>>หญิง</option>
-										</select>
+										<label>ที่อยู่ติดต่อ</label>
+										<input type="text" name="address_com" class="form-control" required value="<?php echo $company[address_com]; ?>">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>จังหวัด</label>
+										<span id="province_edit">
+			                            	<select class="form-control m-bot15" class="form-control"  name="province_com" required>
+			                                 <option value=''>เลือกจังหวัด</option>
+				                            </select>
+			                        	</span>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>อำเภอ</label>
+										<span id="amphoe_edit">
+				                            <select class="form-control m-bot15" class="form-control"  name="amphoe_com"  required> 
+				                                 <option  value="<?php echo $company[amphoe_com] ;?>"><?php echo $company[amphoe_com] ;?></option>
+				                            </select>
+		                        		</span>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>ตำบล</label>
+										<span id="tambon_edit">
+				                            <select class="form-control m-bot15" class="form-control"  name="tambon_com" required>
+				                                 <option value='<?php echo $company[tambon_com] ;?>'><?php echo $company[tambon_com] ;?></option>
+				                            </select>
+			                        	</span>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>รหัสไปรษณีย์</label>
+										<input type="text" name="zipcode_com" class="form-control" required value="<?php echo $company[zipcode_com]; ?>">
 									</div>
 								</div>
 							</div>
@@ -161,77 +210,58 @@ include 'config.php';
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>ปีเกิด</label>
-										<select name="year_birth" class="form-control" required>
-												<option value="">กรุณาเลือก</option>
-											<?php for ($i=0; $i < 100; $i++) {  ?>
-												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i ==$user[year_birth]){echo 'selected';} ?>><?php echo 2562- $i ; ?></option>
-											<?php } ?>
-										</select>
+										<label>หมายเลขโทรศัพท์</label>
+										<input type="text" name="phone_com" class="form-control" required value="<?php echo $company[phone_com]; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>เบอร์โทรศัพท์</label>
-										<input type="number" name="phone_number" class="form-control" required value="<?php echo $user[phone_number]; ?>">
+										<label>หมายเลขแฟกซ์</label>
+										<input type="text" name="fax_com" class="form-control" required value="<?php echo $company[fax_com]; ?>">
+									</div>
 								</div>
-				
-								</div>
-								<div class="col-md-4">
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-12">
 									<div class="form-group">
-										<label>จังหวัดที่อาศัยในปัจจุบัน</label>
-										<select class="form-control" name="province" required>
-											<option value="">กรุณาเลือก</option>
-											<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
-											while ($arr_prov = pg_fetch_array($sql_prov)) {
-											?>
-											<option value="<?php echo $arr_prov[pv_tn]; ?>"<?php if($arr_prov[pv_tn]==$user[province]){echo 'selected';} ?>><?php echo $arr_prov[pv_tn]; ?></option>
-											<?php } ?>
+										<label>ประเภทสถานประกอบการ</label>
+										<select  id="select"  class="form-control"  name="type_com"> 
+										  <option value="ยังไม่ได้กำหนด">-- กรุณาเลือก --</option>
+										  <option value="กฎหมาย">กฎหมาย</option>
+										  <option value="ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง">ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง</option>
+										  <option value="การโดยสารทางอากาศ/ทางบก/ทางน้ำ">การโดยสารทางอากาศ/ทางบก/ทางน้ำ</option>
+										  <option value="การขนส่งและคลังสินค้า/นำเข้าและส่งออก">การขนส่งและคลังสินค้า/นำเข้าและส่งออก</option>
+										  <option value="สถาบันการศึกษาและแนะแนวอาชีพ">สถาบันการศึกษาและแนะแนวอาชีพ</option>
+										  <option value="เกษตรกรรม/ประมง">เกษตรกรรม/ประมง</option>
+										  <option value="การท่องเที่ยว">การท่องเที่ยว</option>
+										  <option value="หน่วยงานราชการ">หน่วยงานราชการ</option>
+										  <option value="การผลิตและจำหน่ายเคมีภัณฑ์">การผลิตและจำหน่ายเคมีภัณฑ์</option>
+										  <option value="การวิจัยและพัฒนา">การวิจัยและพัฒนา</option>
+										  <option value="โทรคมนาคม">โทรคมนาคม</option>
+										  <option value="ตัวแทนขายส่ง/ขายปลีก">ตัวแทนขายส่ง/ขายปลีก</option>
+										  <option value="บัญชี ">บัญชี </option>
+										  <option value="เทคโนโลยีสารสนเทศ">เทคโนโลยีสารสนเทศ</option>
+										  <option value="มูลนิธิ และสังคมสงเคราะห์">มูลนิธิ และสังคมสงเคราะห์</option>
+										  <option value="โรงแรม/รีสอร์ท/ที่พัก">โรงแรม/รีสอร์ท/ที่พัก</option>
+										  <option value="รับจัดอีเว้นท์ (Organizer)">รับจัดอีเว้นท์ (Organizer)</option>
+										  <option value="สุขภาพและความงาม">สุขภาพและความงาม</option>
+										  <option value="สถาบันการเงิน/การประกันภัย/เงินทุนหลักทรัพย์">สถาบันการเงิน/การประกันภัย/เงินทุนหลักทรัพย์</option>
+										  <option value="สื่อสารมวลชนและการผลิตสื่อสิ่งพิมพ์">สื่อสารมวลชนและการผลิตสื่อสิ่งพิมพ์</option>
+										  <option value="เหมืองแร่/ไฟฟ้า/ก๊าซ/ประปา/ปิโตรเคมี">เหมืองแร่/ไฟฟ้า/ก๊าซ/ประปา/ปิโตรเคมี</option>
+										  <option value="อสังหาริมทรัพย์ ">อสังหาริมทรัพย์ </option>
+										  <option value="อุตสาหกรรมยานยนต์">อุตสาหกรรมยานยนต์</option>
+										  <option value="อาหาร/เครื่องดื่ม (ผลิต/จำหน่าย)">อาหาร/เครื่องดื่ม (ผลิต/จำหน่าย)</option>
+										  <option value="อุตสาหกรรมการผลิตอื่นๆ">อุตสาหกรรมการผลิตอื่นๆ</option>
+										  <option value="อื่นๆ">อื่นๆ</option>
 										</select>
 									</div>
 								</div>
 							</div>
-
 							<div class="col-md-12">
-								<div class="col-md-4">
+								<div class="col-md-12">
 									<div class="form-group">
-										<label>ชื่อมหาวิทยาลัย</label>
-										<input type="text" name="university" class="form-control" required value="<?php echo $user[university]; ?>">
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>คณะ</label>
-										<input type="text" name="fuculty" class="form-control" required value="<?php echo $user[fuculty]; ?>">
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>สาขา</label>
-										<input type="text" name="major" class="form-control" required value="<?php echo $user[major]; ?>">
-									</div>
-								</div>
-							</div>
-
-							<div class="col-md-12">
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>ระดับการศึกษา</label>
-										<select name="level_degree" class="form-control" required>
-											<option value="ปริญญาตรี" <?php if($user[level_degree]=='ปริญญาตรี'){echo 'selected';} ?>>ปริญญาตรี</option>
-											<option value="ปริญญาโท" <?php if($user[level_degree]=='ปริญญาโท'){echo 'selected';} ?>>ปริญญาโท</option>
-											<option value="ปริญญาเอก" <?php if($user[level_degree]=='ปริญญาเอก'){echo 'selected';} ?>>ปริญญาเอก</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label>ปีที่สำเร็จการศึกษา</label>
-										<select name="year_success" class="form-control">
-											<?php for ($i=0; $i < 30; $i++) {  ?>
-												<option value="<?php echo 2562- $i ; ?>" <?php if(2562- $i ==$user[year_success]){echo 'selected';} ?>><?php echo 2562- $i ; ?></option>
-											<?php } ?>
-										</select>
+										<label>อีเมล</label>
+										<input type="text" name="email_com" class="form-control" required value="<?php echo $company[email_com]; ?>" readonly="readonly">
 									</div>
 								</div>
 							</div>
@@ -242,7 +272,6 @@ include 'config.php';
 						  </div>
 
 						  <div id="password" class="tab-pane fade aside-body">
-							
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="setting.php" enctype="multipart/form-data">
 					    	<div class="col-md-6">
 							  <div class="form-group">
@@ -323,5 +352,30 @@ include 'config.php';
 
 
 		</script>
+		<script language=Javascript>
+	        function Inint_AJAX() {
+	           try { return new ActiveXObject("Msxml2.XMLHTTP");  } catch(e) {} 
+	           try { return new ActiveXObject("Microsoft.XMLHTTP"); } catch(e) {} 
+	           try { return new XMLHttpRequest();          } catch(e) {}
+	           alert("XMLHttpRequest not supported");
+	           return null;
+	        };
+
+	        function dochange(src, val) {
+	             var req = Inint_AJAX();
+	             req.onreadystatechange = function () { 
+	                  if (req.readyState==4) {
+	                       if (req.status==200) {
+	                            document.getElementById(src).innerHTML=req.responseText; 
+	                       } 
+	                  }
+	             };
+	             req.open("GET", "location.php?data="+src+"&val="+val+"&province=<?php echo $company[province_com]; ?>"); 
+	             req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8"); 
+	             req.send(null); 
+	        }
+
+	        window.onLoad=dochange('province_edit', -1);  
+    	</script>
 	</body>
 </html>
