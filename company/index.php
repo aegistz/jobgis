@@ -123,7 +123,7 @@ if ($_GET[type] == 'delete_job') {
 													<?php } ?>
 
 
-														<li><a href="story_edit.php?stoid=<?php echo $arr[id_story]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขตำแหน่งงานนี้</a></li>
+														<li><a href="edit_job.php?job_id=<?php echo $job_com[id_job]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขตำแหน่งงานนี้</a></li>
 
 
 														<li><a href="index.php?type=delete_job&job_id=<?php echo $job_com[id_job]; ?>" onclick="return confirm('ยืนยันการลบตำแหน่งงานนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบตำแหน่งงานนี้</a></li>

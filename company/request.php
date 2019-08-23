@@ -54,13 +54,13 @@ include("check_student.php");
 									<a data-toggle="tab" href="#with">
 									<?php
 
-										$sql_user = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+										$sql_user_1 = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 													inner join student b on a.email_user = b.email
 													inner join job_company c on a.id_job = c.id_job
 													where id_com = $id_com and request = 'รอการยืนยัน'
 													 ;  ");
 
-										$count_user = pg_num_rows($sql_user);
+										$count_user = pg_num_rows($sql_user_1);
 										echo $count_user;
 									?>
 								รอการยืนยัน</a>
@@ -68,12 +68,12 @@ include("check_student.php");
 							<li>
 									<a data-toggle="tab" href="#success">
 									<?php
-										$sql_user = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+										$sql_user_2 = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 													inner join student b on a.email_user = b.email
 													inner join job_company c on a.id_job = c.id_job
 													where id_com = $id_com and request = 'ยืนยันการสมัครแล้ว'
 													 ;  ");
-										$count_user = pg_num_rows($sql_user);
+										$count_user = pg_num_rows($sql_user_2);
 										echo $count_user;
 									?>
 								ยืนยันการสมัคร รอพิจารณา</a>
@@ -81,12 +81,12 @@ include("check_student.php");
 							<li>
 									<a data-toggle="tab" href="#success">
 									<?php
-										$sql_user = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+										$sql_user_3 = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 													inner join student b on a.email_user = b.email
 													inner join job_company c on a.id_job = c.id_job
 													where id_com = $id_com and request = 'ไม่ผ่านการสมัคร'
 													 ;  ");
-										$count_user = pg_num_rows($sql_user);
+										$count_user = pg_num_rows($sql_user_3);
 										echo $count_user;
 									?>
 								พิจารณาตำแหน่งงาน</a>
@@ -94,12 +94,12 @@ include("check_student.php");
 							<li>
 									<a data-toggle="tab" href="#reject">
 									<?php
-										$sql_user = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+										$sql_user_4 = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 													inner join student b on a.email_user = b.email
 													inner join job_company c on a.id_job = c.id_job
 													where id_com = $id_com and request = 'ผ่านการสมัคร รอการติดต่อกลับ'
 													 ;  ");
-										$count_user = pg_num_rows($sql_user);
+										$count_user = pg_num_rows($sql_user_4);
 										echo $count_user;
 									?>
 								ปฏิเสธการพิจารณาตำแหน่งงาน</a>
@@ -120,7 +120,7 @@ include("check_student.php");
 										<tbody>
 											<?php
 											
-												while ( $arr2 = pg_fetch_array($sql_user) ) {
+												while ( $arr2 = pg_fetch_array($sql_user_1) ) {
 											?>
 											<tr>
 												<td>
