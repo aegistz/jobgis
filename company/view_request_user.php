@@ -74,7 +74,7 @@ where id_com = $id_com and a.id_no = '$_GET[id_request]';");
 								</article>
 								<article class="article-mini">
 									<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-check" aria-hidden="true"></i> รับพิจารณาบุคคลนี้</a>
-									<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-danger btn-block"><i class="fa fa-check" aria-hidden="true"></i> ปฏิเสธบุคคลนี้</a>
+									<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-danger btn-block"><i class="fa fa-window-close" aria-hidden="true"></i> ปฏิเสธบุคคลนี้</a>
 								</article>
 								<hr>
 								<article>

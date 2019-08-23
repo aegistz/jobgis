@@ -493,7 +493,7 @@ if (isset($_GET[eid])) {
 													<p>
 <?php if ($arr[request] == 'รอการยืนยัน') { ?>
 														<div class="btn-group">
-														  <button type="button" class="btn btn-warning btn-block dropdown-toggle" data-toggle="dropdown">
+														  <button type="button" class="btn btn-sm btn-warning btn-block dropdown-toggle" data-toggle="dropdown">
 														    สถานะ : <?php echo $arr[request]; ?>
 														  </button>
 														  <ul class="dropdown-menu" role="menu">
@@ -502,14 +502,14 @@ if (isset($_GET[eid])) {
 														</div>
 <?php } else if($arr[request] == 'ยืนยันการสมัครแล้ว'){ ?> 
 														<div class="btn-group">
-														  <button type="button" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">
+														  <button type="button" class="btn btn-sm btn-info btn-block dropdown-toggle" data-toggle="dropdown">
 														    สถานะ : <?php echo $arr[request]; ?>
 														  </button>
 														</div>
 
 <?php } else if($arr[request] == 'ไม่ผ่านการสมัคร'){  ?>
 														<div class="btn-group">
-														  <button type="button" class="btn btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
+														  <button type="button" class="btn btn-sm btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
 														    สถานะ : <?php echo $arr[request]; ?>
 														  </button>
 														  <ul class="dropdown-menu" role="menu">
@@ -519,7 +519,7 @@ if (isset($_GET[eid])) {
 
 <?php } else if($arr[request] == 'ผ่านการสมัคร รอการติดต่อกลับ'){   ?>
 														<div class="btn-group">
-														  <button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown">
+														  <button type="button" class="btn btn-sm btn-success btn-block dropdown-toggle" data-toggle="dropdown">
 														    สถานะ : <?php echo $arr[request]; ?>
 														  </button>
 														</div>

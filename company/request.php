@@ -4,7 +4,27 @@ session_start();
 include("config.php");
 include("check_student.php");
 
+
+if ($_GET[type] =='submit_request') {
+	$update_request = pg_query("UPDATE user_request set request = '$_GET[status]' where id_no = '$_GET[id_request]' ;");
+	header('location:view_request_user.php?id_request='.$_GET[id_request]);
+}
+if ($_GET[type] =='submit_request_3') {
+	$update_request = pg_query("UPDATE user_request set request = '$_GET[status]' where id_no = '$_GET[id_request]' ;");
+	header('location:request.php#type_3');
+}
+if ($_GET[type] =='submit_request_4') {
+	$update_request = pg_query("UPDATE user_request set request = '$_GET[status]' where id_no = '$_GET[id_request]' ;");
+	header('location:request.php#type_4');
+}
+
+
+
+
 ?>
+
+
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -51,7 +71,7 @@ include("check_student.php");
 						<div class="nav-tabs-group">
 							<ul class="nav nav-tabs-list">
 								<li class="active">
-									<a data-toggle="tab" href="#with">
+									<a data-toggle="tab" href="#type_1">
 									<?php
 
 										$sql_user_1 = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
@@ -66,7 +86,7 @@ include("check_student.php");
 								รอการยืนยัน</a>
 							</li>
 							<li>
-									<a data-toggle="tab" href="#success">
+									<a data-toggle="tab" href="#type_2">
 									<?php
 										$sql_user_2 = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 													inner join student b on a.email_user = b.email
@@ -79,12 +99,12 @@ include("check_student.php");
 								ยืนยันการสมัคร รอพิจารณา</a>
 							</li>
 							<li>
-									<a data-toggle="tab" href="#success">
+									<a data-toggle="tab" href="#type_3">
 									<?php
 										$sql_user_3 = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 													inner join student b on a.email_user = b.email
 													inner join job_company c on a.id_job = c.id_job
-													where id_com = $id_com and request = 'ไม่ผ่านการสมัคร'
+													where id_com = $id_com and request = 'ผ่านการสมัคร รอการติดต่อกลับ'
 													 ;  ");
 										$count_user = pg_num_rows($sql_user_3);
 										echo $count_user;
@@ -92,12 +112,12 @@ include("check_student.php");
 								พิจารณาตำแหน่งงาน</a>
 							</li>
 							<li>
-									<a data-toggle="tab" href="#reject">
+									<a data-toggle="tab" href="#type_4">
 									<?php
 										$sql_user_4 = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 													inner join student b on a.email_user = b.email
 													inner join job_company c on a.id_job = c.id_job
-													where id_com = $id_com and request = 'ผ่านการสมัคร รอการติดต่อกลับ'
+													where id_com = $id_com and request = 'ไม่ผ่านการสมัคร'
 													 ;  ");
 										$count_user = pg_num_rows($sql_user_4);
 										echo $count_user;
@@ -107,45 +127,270 @@ include("check_student.php");
 								
 							</ul>
 						</div>
+
 						
-						<div class="row">
+						<div class="row"><br>
 							<div class="tab-content">
-								<div id="user" class="tab-pane fade in active">
-									<table id="example2" class="" style="width:100%">
+								<div id="type_1" class="tab-pane fade in active">
+									<table id="example1" class="table" style="width:100%">
 										<thead>
 											<tr>
+												<th></th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
 											
-												while ( $arr2 = pg_fetch_array($sql_user_1) ) {
+												while ( $arr = pg_fetch_array($sql_user_1) ) {
 											?>
 											<tr>
-												<td>
+												<td> 
 													<article class="article-mini">
 														<div class="inner">
 															<figure>
-																<a href="profile.php?eid=<?php echo $arr2[id_no]; ?>">
-																	<img src="../images/student/<?php echo $arr2[img]; ?>">
+																<a href="profile.php?eid=<?php echo $arr[id_no]; ?>">
+																	<img src="../images/student/<?php echo $arr[profile_stu]; ?>">
 																</a>
 															</figure>
 															<div class="padding">
-																<h1><a href="profile.php?eid=<?php echo $arr2[id_no]; ?>"><?php echo $arr2[s_name],' ',$arr2[l_name] ; ?></a></h1>
-																<p><?php echo $arr2[university]; ?></p>
-																
+																<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[title_name],$arr[s_name],' ',$arr[l_name] ; ?></a></h1>
+																<div class="detail">
+																	<div class="category"><a href="#"><?php echo $arr[type_job]; ?></a></div>
+																	<div class="time"><?php echo $arr[date_access]; ?></div>
+																</div>
+																<p>ตำแหน่งที่สมัคร : <?php echo $arr[name_job]; ?>  </p>
+																<br>
 															</div>
 														</div>
 													</article>
-													<hr>
+												</td>
+												<td width="35%">
+																	
+
+												<div class="btn-group">
+														<div class="btn-group">
+														  <button type="button" class="btn-sm btn-warning">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+													<button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+													<i class="fa fa-bars"></i> </button>
+													<ul class="dropdown-menu" role="menu">
+
+														<li><a href="request.php?type=submit_request&status=ยืนยันการสมัครแล้ว&id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> ยืนยันการสมัคร ตรวจสอบ Resume</a></li>
+
+
+													</ul>
+												</div>
+
 												</td>
 											</tr>
 											<?php } ?>
 										</tbody>
-										
 									</table>
 								</div>
+
+
+
+								<div id="type_2" class="tab-pane fade">
+									<table id="example2" class="table" style="width:100%">
+										<thead>
+											<tr>
+												<th></th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											
+												while ( $arr = pg_fetch_array($sql_user_2) ) {
+											?>
+											<tr>
+												<td> 
+													<article class="article-mini">
+														<div class="inner">
+															<figure>
+																<a href="profile.php?eid=<?php echo $arr[id_no]; ?>">
+																	<img src="../images/student/<?php echo $arr[profile_stu]; ?>">
+																</a>
+															</figure>
+															<div class="padding">
+																<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[title_name],$arr[s_name],' ',$arr[l_name] ; ?></a></h1>
+																<div class="detail">
+																	<div class="category"><a href="#"><?php echo $arr[type_job]; ?></a></div>
+																	<div class="time"><?php echo $arr[date_access]; ?></div>
+																</div>
+																<p>ตำแหน่งที่สมัคร : <?php echo $arr[name_job]; ?>  </p>
+																<br>
+															</div>
+														</div>
+													</article>
+												</td>
+												<td width="35%">
+																	
+
+												<div class="btn-group">
+														<div class="btn-group">
+														  <button type="button" class="btn btn-sm btn-info">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+													<button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+													<i class="fa fa-bars"></i> </button>
+													<ul class="dropdown-menu" role="menu">
+
+														<li><a href="view_request_user.php?id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-search" aria-hidden="true"></i> ตรวจสอบ Resume</a></li>
+
+														<li><a href="request.php?type=submit_request_3&status=ผ่านการสมัคร รอการติดต่อกลับ&id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-check" aria-hidden="true"></i> รับพิจารณาบุคคลนี้</a></li>
+
+														<li><a href="request.php?type=submit_request_4&status=ไม่ผ่านการสมัคร&id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-window-close" aria-hidden="true"></i> ปฏิเสธบุคคลนี้</a></li>
+
+
+													</ul>
+												</div>
+
+												</td>
+											</tr>
+											<?php } ?>
+										</tbody>
+									</table>
+								</div>
+
+
+
+								<div id="type_3" class="tab-pane fade">
+									<table id="example3" class="table" style="width:100%">
+										<thead>
+											<tr>
+												<th></th>
+												<th ></th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											
+												while ( $arr = pg_fetch_array($sql_user_3) ) {
+											?>
+											<tr>
+												<td> 
+													<article class="article-mini">
+														<div class="inner">
+															<figure>
+																<a href="profile.php?eid=<?php echo $arr[id_no]; ?>">
+																	<img src="../images/student/<?php echo $arr[profile_stu]; ?>">
+																</a>
+															</figure>
+															<div class="padding">
+																<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[title_name],$arr[s_name],' ',$arr[l_name] ; ?></a></h1>
+																<div class="detail">
+																	<div class="category"><a href="#"><?php echo $arr[type_job]; ?></a></div>
+																	<div class="time"><?php echo $arr[date_access]; ?></div>
+																</div>
+																<p>ตำแหน่งที่สมัคร : <?php echo $arr[name_job]; ?>  </p>
+																<br>
+															</div>
+														</div>
+													</article>
+												</td>
+												<td width="35%">
+																	
+
+												<div class="btn-group">
+														<div class="btn-group">
+														  <button type="button" class="btn btn-sm btn-success">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+													<button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+													<i class="fa fa-bars"></i> </button>
+													<ul class="dropdown-menu" role="menu">
+
+														<li><a href="view_request_user.php?id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-search" aria-hidden="true"></i> ตรวจสอบ Resume</a></li>
+
+														<li><a href="request.php?type=submit_request_4&status=ไม่ผ่านการสมัคร&id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-window-close" aria-hidden="true"></i> ปฏิเสธบุคคลนี้</a></li>
+													</ul>
+												</div>
+													<br>
+													<i>
+													โทร : <?php echo $arr[phone_number]; ?> <br>
+													Email : <?php echo $arr[email]; ?>
+													</i>
+
+												</td>
+											</tr>
+											<?php } ?>
+										</tbody>
+									</table>
+								</div>
+
+
+
+								<div id="type_4" class="tab-pane fade">
+									<table id="example4" class="table" style="width:100%">
+										<thead>
+											<tr>
+												<th></th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											
+												while ( $arr = pg_fetch_array($sql_user_4) ) {
+											?>
+											<tr>
+												<td> 
+													<article class="article-mini">
+														<div class="inner">
+															<figure>
+																<a href="profile.php?eid=<?php echo $arr[id_no]; ?>">
+																	<img src="../images/student/<?php echo $arr[profile_stu]; ?>">
+																</a>
+															</figure>
+															<div class="padding">
+																<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[title_name],$arr[s_name],' ',$arr[l_name] ; ?></a></h1>
+																<div class="detail">
+																	<div class="category"><a href="#"><?php echo $arr[type_job]; ?></a></div>
+																	<div class="time"><?php echo $arr[date_access]; ?></div>
+																</div>
+																<p>ตำแหน่งที่สมัคร : <?php echo $arr[name_job]; ?>  </p>
+																<br>
+															</div>
+														</div>
+													</article>
+												</td>
+												<td width="35%">
+																	
+
+												<div class="btn-group">
+														<div class="btn-group">
+														  <button type="button" class="btn btn-sm btn-danger">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+													<button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+													<i class="fa fa-bars"></i> </button>
+													<ul class="dropdown-menu" role="menu">
+
+														<li><a href="view_request_user.php?id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-search" aria-hidden="true"></i> ตรวจสอบ Resume</a></li>
+
+														<li><a href="request.php?type=submit_request_3&status=ผ่านการสมัคร รอการติดต่อกลับ&id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-check" aria-hidden="true"></i> รับพิจารณาบุคคลนี้</a></li>
+
+
+													</ul>
+												</div>
+													
+												</td>
+											</tr>
+											<?php } ?>
+										</tbody>
+									</table>
+								</div>
+
+
+
+
 								
 							</div>
 							
@@ -183,16 +428,16 @@ include("check_student.php");
 		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js" ></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-			$('#example').DataTable({
-				"searching": false,
+			$('#example1').DataTable({
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			$('#example2').DataTable({
-				"searching": false,
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			$('#example3').DataTable({
-				"searching": false,
+				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
+			});
+			$('#example4').DataTable({
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			} );

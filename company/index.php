@@ -14,6 +14,11 @@ if ($_GET[type] == 'delete_job') {
 	header('location:./');
 }
 
+if ($_GET[type] =='submit_request') {
+	$update_request = pg_query("UPDATE user_request set request = 'ยืนยันการสมัครแล้ว' where id_no = '$_GET[id_request]' ;");
+	header('location:view_request_user.php?id_request='.$_GET[id_request]);
+}
+
 ?>
 <html>
 	<head>
@@ -241,7 +246,7 @@ if ($_GET[type] == 'delete_job') {
 	$sql = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
 inner join student b on a.email_user = b.email
 inner join job_company c on a.id_job = c.id_job
-where id_com = $id_com;");
+where id_com = $id_com and request = 'รอการยืนยัน'   ;");
 	while ($arr = pg_fetch_array($sql)) {
 ?>
 								<article class="article-mini">
@@ -268,7 +273,7 @@ where id_com = $id_com;");
 													<i class="fa fa-bars"></i> </button>
 													<ul class="dropdown-menu" role="menu">
 
-														<li><a href="view_request_user.php?id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> ยืนยันการสมัคร</a></li>
+														<li><a href="index.php?type=submit_request&id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> ยืนยันการสมัคร ตรวจสอบ Resume</a></li>
 
 
 													</ul>
