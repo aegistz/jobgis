@@ -2,21 +2,141 @@
 <?php
 	session_start();
 	include 'config.php';
+
+
+		$job_id = $_GET[job_id];
+		$sql_profile = pg_query("SELECT * from job_company  where id_job = '$job_id';");
+		$job = pg_fetch_array($sql_profile);
+
+
+		$id_com = $_POST['id_com'];
+		$name_job = $_POST['name_job'];
+		$detail_job = $_POST['detail_job'];
+		$type_job = $_POST['type_job'];
+		$num_job = $_POST['num_job'];
+		$sex_job = $_POST['sex_job'];
+		$budget_job = $_POST['budget_job'];
+		$exp_job = $_POST['exp_job'];
+		$place_job = $_POST['place_job'];
+		$date_job = $_POST['date_job'];
+		$edu_job = $_POST['edu_job'];
+		$img = $_POST['img'];
+
+
+	 	if ( isset($_POST[edit_job]) ) {
+       	$sql1 = "UPDATE job_company set  
+       			name_job = '$name_job' , 
+       			detail_job = '$detail_job' ,
+       			type_job = '$type_job' ,
+       			num_job = '$num_job' ,
+       			sex_job = '$sex_job' ,
+       			budget_job = '$budget_job' ,
+       			exp_job = '$exp_job' ,
+       			place_job = '$place_job' ,
+       			edu_job = '$edu_job'
+				where id_job = '$job_id' ;";
+		   		$query1 = pg_query($sql1);
+		   		header('location:edit_job.php?job_id='.$job_id) ; 
+		}
+
+
+
+
+
+
+
+		if ( isset($_POST[edit_img]) ) {
+       
 	
+				$image = $_FILES["file"]["name"];
+				
+				if( empty( $image ) ) {
+				$error = 'File is empty, please select image to upload.';
+				} else if($_FILES["file"]["type"] == "application/msword") {
+				$error = 'Invalid image type, use (e.g. png, jpg, gif).';
+				} else if( $_FILES["file"]["error"] > 0 ) {
+				$error = 'Oops sorry, seems there is an error uploading your image, please try again later.';
+				} else {
+				
+				// strip file slashes in uploaded file, although it will not happen but just in case ;)
+				$filename = stripslashes( $_FILES['file']['name'] );
+				$ext = get_file_extension( $filename );
+				$ext = strtolower( $ext );
+				
+				if(( $ext != "jpg" ) && ( $ext != "jpeg" ) && ( $ext != "png" ) && ( $ext != "gif" ) ) {
+				$error = 'Unknown Image extension.';
+				return false;
+				} else {
+				// get uploaded file size
+				$size = filesize( $_FILES['file']['tmp_name'] );
+				
+				// get php ini settings for max uploaded file size
+				$max_upload = ini_get( 'upload_max_filesize' );
+				
+				// check if we're able to upload lessthan the max size
+				if( $size > $max_upload )
+				$error = 'You have exceeded the upload file size.';
+				
+				// check uploaded file extension if it is jpg or jpeg, otherwise png and if not then it goes to gif image conversion
+				$uploaded_file = $_FILES['file']['tmp_name'];
+				if( $ext == "jpg" || $ext == "jpeg" )
+				$source = imagecreatefromjpeg( $uploaded_file );
+				else if( $ext == "png" )
+				$source = imagecreatefrompng( $uploaded_file );
+				else
+				$source = imagecreatefromgif( $uploaded_file );
+				
+				// getimagesize() function simply get the size of an image
+				list( $width, $height) = getimagesize ( $uploaded_file );
+				$ratio = $height / $width;
+				
+				
+				// new width 100 in pixel format too
+				$nw1 = 450;
+				$nh1 = ceil( $ratio * $nw1 );
+				$dst1 = imagecreatetruecolor( $nw1, $nh1 );
+				
+				imagecopyresampled( $dst1, $source, 0, 0, 0, 0, $nw1, $nh1, $width, $height );
+				
+				// rename our upload image file name, this to avoid conflict in previous upload images
+				// to easily get our uploaded images name we added image size to the suffix
+				$rnd_name1 = 'photos_job_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
+				
+				// move it to uploads dir with full quality
+				imagejpeg( $dst1, '../images/story/'.$rnd_name1, 100 );
+				
+				// I think that's it we're good to clear our created images
+				imagedestroy( $source );
+				imagedestroy( $dst1 );
+						
+							
+							$sql = pg_query("UPDATE job_company set  img = '$img'
+								where job_id = '$job_id' ;");
+							header('location:edit_job.php?job_id='.$job_id);
+				
+				
+				
+				}
+				
+				}
 
-if( $_POST[submit_form] == 'true' ) 
-{
+
+		}
+
+
+
+
+
+function get_file_extension( $file )  {
+    if( empty( $file ) )
+        return;
  
-
-
-
-
-
-
-
+    // if goes here then good so all clear and good to go
+    $ext = end(explode( ".", $file ));
+ 
+    // return file extension
+    return $ext;
 }
-
-
 
 
 
@@ -76,17 +196,24 @@ if( $_POST[submit_form] == 'true' )
 	<section class="login first grey">
 		<div class="container">
 			<div class="">
-				<h4>เพิ่มข้อมูลประกาศรับสมัครงาน</h4>
+				<h4>แก้ไขการประกาศรับสมัครงาน</h4>
 
 				<div class="col-md-3">
+<form enctype="multipart/form-data" method="post">
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Poster หรือภาพประกอบ</label>
-							<input class="form-control " type="file" id="cname" name="file" onchange="readURL(this);"  accept="image/png, image/jpeg, image/gif">
+							<input class="form-control " type="file" id="cname" name="file" onchange="readURL_job(this);"  accept="image/png, image/jpeg, image/gif">
 
-	                          <img id="blah" src="http://orcalcontabilidade.com.br/images/footer-shadow.png" style="width:100%; max-height:100%;margin-top:20px;" alt="your image" />
+	                    <img   src="../images/img_job/<?php echo $job[img]; ?>" alt="" id="blah_job" width="100%" >
 						</div>
 					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<button type="submit" name="edit_img" class="btn btn-primary btn-block">เพิ่มรูปภาพ</button>
+						</div>
+					</div>
+</form>
 				</div>
 
 
@@ -97,14 +224,14 @@ if( $_POST[submit_form] == 'true' )
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>หัวข้อ/ชื่อตำแหน่งที่เปิดรับ *</label>
-										<input type="text" name="name_job" class="form-control" >
+										<input type="text" name="name_job" class="form-control" value="<?php echo $job[name_job]; ?>">
 									</div>
 									
 								</div>
 								<div class="col-md-8">
 									<div class="form-group">
 										<label>รายละเอียดเพิ่มเติม </label>
-										<textarea  type="text" name="detail_job" class="form-control" ></textarea>
+										<textarea  type="text" name="detail_job" class="form-control" ><?php echo $job[detail_job]; ?></textarea>
 									</div>
 									
 								</div>
@@ -113,11 +240,11 @@ if( $_POST[submit_form] == 'true' )
 										<label>ประเภทงาน</label>
 										<select  id="select"  class="form-control"  name="type_job"> 
 											  <option value="ยังไม่ได้กำหนด">-- กรุณาเลือก --</option>
-											  <option value="งานประจำ">งานประจำ</option>
-											  <option value="งานรายวัน">งานรายวัน</option>
-											  <option value="ฝึกงาน">ฝึกงาน</option>
-											  <option value="สหกิจศึกษา">สหกิจศึกษา</option>
-											  <option value="อื่น ๆ">อื่น ๆ</option>
+											  <option value="งานประจำ" <?php if($job[type_job]=='งานประจำ'){echo 'selected';} ?>>งานประจำ</option>
+											  <option value="งานรายวัน" <?php if($job[type_job]=='งานรายวัน'){echo 'selected';} ?>>งานรายวัน</option>
+											  <option value="ฝึกงาน" <?php if($job[type_job]=='ฝึกงาน'){echo 'selected';} ?>>ฝึกงาน</option>
+											  <option value="สหกิจศึกษา" <?php if($job[type_job]=='สหกิจศึกษา'){echo 'selected';} ?>>สหกิจศึกษา</option>
+											  <option value="อื่น ๆ" <?php if($job[type_job]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ</option>
 											 
 											</select>
 									</div>
@@ -128,19 +255,19 @@ if( $_POST[submit_form] == 'true' )
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>จำนวนที่รับ</label>
-										<input type="text" name="num_job" class="form-control" >
+										<input type="text" name="num_job" class="form-control" value="<?php echo $job[num_job]; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>เพศ</label>
-										<input type="text" name="sex_job" class="form-control" >
+										<input type="text" name="sex_job" class="form-control" value="<?php echo $job[sex_job]; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>เงินเดือน</label>
-										<input type="number" name="budget_job" class="form-control" >
+										<input type="number" name="budget_job" class="form-control" value="<?php echo $job[budget_job]; ?>">
 									</div>
 								</div>
 							</div>
@@ -150,19 +277,19 @@ if( $_POST[submit_form] == 'true' )
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>ประสบการณ์</label>
-										<input type="text" name="exp_job" class="form-control" >
+										<input type="text" name="exp_job" class="form-control" value="<?php echo $job[exp_job]; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>สถานที่ทำงาน</label>
-										<input type="text" name="place_job" class="form-control" >
+										<input type="text" name="place_job" class="form-control" value="<?php echo $job[place_job]; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>การศึกษา</label>
-										<input type="text" name="edu_job" class="form-control" >
+										<input type="text" name="edu_job" class="form-control" value="<?php echo $job[edu_job]; ?>">
 									</div>
 								</div>
 							</div>
@@ -215,7 +342,7 @@ if( $_POST[submit_form] == 'true' )
 					
 						<div class="col-md-12">
 							<div class="form-group text-right">
-								<button type="submit" name="submit_form" value="true" class="btn btn-primary btn-block">บันทึกข้อมูล</button>
+								<button type="submit" name="edit_job" value="true" class="btn btn-primary btn-block">บันทึกข้อมูล</button>
 							</div>
 						</div>
 						
@@ -253,12 +380,12 @@ if( $_POST[submit_form] == 'true' )
 
 
 
- function readURL(input) {
+ function readURL_job(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#blah')
+                    $('#blah_job')
                         .attr('src', e.target.result);
                 };
 
