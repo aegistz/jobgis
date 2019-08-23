@@ -30,6 +30,7 @@ include 'config.php';
 	  $work_uncomplace = $_POST['work_uncomplace'];
 	  $work_uncomplace_detail = $_POST['work_uncomplace_detail'];
 	  $free_cause = $_POST['free_cause'];
+	  $free_cause_detail = $_POST['free_cause_detail'];
 	  $free_issue = $_POST['free_issue'];
 	  $free_issue_detail = $_POST['free_issue_detail'];
 	  $free_important = $_POST['free_important'];
@@ -41,8 +42,8 @@ include 'config.php';
 	  $study_university = $_POST['study_university'];
 	  $password = $_POST['password'];
 
-	if ( isset($_POST[profile]) ) {
-       	$sql = "UPDATE student set  
+			if ( isset($_POST[profile]) ) {
+       	$sql1 = "UPDATE student set  
        			title_name = '$title_name' ,
        			s_name = '$s_name' ,
        			l_name = '$l_name' ,
@@ -57,9 +58,54 @@ include 'config.php';
        			year_success = '$year_success'
 
         		where email = '$email' ;";
-           		$query = pg_query($sql);
+           		$query1 = pg_query($sql1);
            		header('location:setting.php#profile') ; 
 		}
+			if ( isset($_POST[work_status]) ) {
+       	$sql2 = "UPDATE student set  
+       			status_work = '$status_work' , 
+       			work_name = '$work_name' ,
+       			work_company = '$work_company' ,
+       			work_type = '$work_type' , 
+       			work_type_detail = '$work_type_detail' ,
+       			work_detail = '$work_detail' , 
+       			work_join = '$work_join' ,
+       			work_skill = '$work_skill' ,
+       			work_skill_detail = '$work_skill_detail' ,
+       			work_complace = '$work_complace' ,
+       			work_uncomplace = '$work_uncomplace' ,
+       			work_uncomplace_detail = '$work_uncomplace_detail' ,
+       			free_cause = '$free_cause' ,
+       			free_cause_detail = '$free_cause_detail' ,
+       			free_issue = '$free_issue' ,
+       			free_issue_detail = '$free_issue_detail' ,
+       			free_important = '$free_important' ,
+       			free_important_detail = '$free_important_detail' ,
+       			free_work_need = '$free_work_need' ,
+       			free_influence = '$free_influence' ,
+       			study_major = '$study_major' ,
+       			study_faculty = '$study_faculty' ,
+       			study_university = '$study_university'
+        		where email = '$email' ;";
+
+           		$query2 = pg_query($sql2);
+           		header('location:setting.php#work-status') ; 
+		}
+			if ( isset($_POST[password]) ) {
+
+			$sql = "SELECT * from student where password = '$_POST[pass_old]';";
+			$query = pg_query($sql);
+			$num = pg_num_rows($query);
+			if ($num == 1 ){
+
+			$sql3 = "UPDATE student set  
+       			password = '$_POST[pass_new]'
+       			WHERE email = '$email';";
+           		$query3 = pg_query($sql3);
+           		header('location:setting.php#password') ; 
+		    }
+		}
+
 
 ?>
 <html>
@@ -276,243 +322,222 @@ include 'config.php';
 								  	<h5>กรุณากรอกข้อมูลเพิ่มเติมสำหรับผู้ที่มีงานทำแล้ว</h5>
 								  	<hr>
 									<div class="col-md-12">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>ชื่อตำแหน่งงาน</label>
-												<input type="text" name="work_name" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>หน่วยงาน</label>
-												<input type="text" name="work_company" class="form-control">
-											</div>
-										</div>
-									</div>
-
-									<div class="col-md-12">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>ประเภทงานที่ทำ</label>
-												<select name="work_type" class="form-control"  onchange="showwork_type(this)">
-													<option value="">กรุณาเลือก</option>
-													<option value="ข้าราชการ/เจ้าหน้าที่ของรัฐ">ข้าราชการ/เจ้าหน้าที่ของรัฐ</option>
-													<option value="รัฐวิสาหกิจ">รัฐวิสาหกิจ</option>
-													<option value="พนักงานบริษัท/องค์กรธุรกิจเอกชน">พนักงานบริษัท/องค์กรธุรกิจเอกชน</option>
-													<option value="ดำเนินธุรกิจอิสระ/เจ้าของกิจการ">ดำเนินธุรกิจอิสระ/เจ้าของกิจการ</option>
-													<option value="พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ">พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ</option>
-													<option value="อื่น ๆ">อื่น ๆ  
-														<input id="work_type" type="text" class="form-control" name="work_type_detail" placeholder="กรุณากรอก">
-													</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>ลักษณะงานที่ทำตรงกับสาขาที่ท่านได้สำเร็จการศึกษาหรือไม่</label>
-												<select name="work_detail" class="form-control" >
-													<option value="">กรุณาเลือก</option>
-													<option value="ตรงสาขา">ตรงสาขา</option>
-													<option value="ไม่ตรงสาขา">ไม่ตรงสาขา</option>
-												</select>
-											</div>
+										<div class="form-group">
+											<label>ชื่อตำแหน่งงาน</label>
+											<input type="text" name="work_name" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>ท่านสามารถนำความรู้จากสาขาวิชาที่เรียนมาประยุกต์ใช้ในหน้าที่การงานที่ทำอยู่ขณะนี้เพียงใด</label>
-												<select name="work_join" class="form-control" >
-													<option value="">กรุณาเลือก</option>
-													<option value="มากที่สุด">มากที่สุด</option>
-													<option value="มาก">มาก</option>
-													<option value="ปานกลาง">ปานกลาง</option>
-													<option value="น้อย">น้อย</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>ท่านคิดว่าความรู้ความสารถพิเศษด้านใดที่ช่วยให้ท่านได้ทำงาน</label>
-												<select name="work_skill" class="form-control" onchange="showwork_skill(this)" >
-													<option value="">กรุณาเลือก</option>
-													<option value="ด้านภาษาต่างประเทศ">ด้านภาษาต่างประเทศ</option>
-													<option value="ด้านการใช้คอมพิวเตอร์">ด้านการใช้คอมพิวเตอร์</option>
-													<option value="ด้านกิจกรรมสันทนาการ">ด้านกิจกรรมสันทนาการ</option>
-													<option value="ด้านศิลปะ">ด้านศิลปะ</option>
-													<option value="ด้านกีฬา">ด้านกีฬา</option>
-													<option value="ด้านนาฏศิลป์/ดนตรีขับร้อง">ด้านนาฏศิลป์/ดนตรีขับร้อง</option>
-													<option value="อื่น ๆ">อื่น ๆ  
-														<input id="work_skill" type="text" class="form-control" name="work_skill_detail" placeholder="กรุณากรอก">
-													</option>
-												</select>
-											</div>
+										<div class="form-group">
+											<label>หน่วยงาน</label>
+											<input type="text" name="work_company" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>ท่านมีความพึงพอใจต่องานที่ทำหรือไม่</label>
-												<select name="work_complace" class="form-control" >
-													<option value="">กรุณาเลือก</option>
-													<option value="พอใจ">พอใจ</option>
-													<option value="ไม่พอใจ">ไม่พอใจ</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>ถ้าไม่พอใจ โปรดระบุสาเหตุที่สำคัญที่สุด 1 ข้อต่อไปนี้	</label>
-												<select name="work_uncomplace" class="form-control"  onchange="showwork_uncomplace(this)" >
-													<option value="">กรุณาเลือก</option>
-													<option value="ระบบภายในองค์กร">ระบบภายในองค์กร</option>
-													<option value="มิตรภาพในองค์กร">มิตรภาพในองค์กร</option>
-													<option value="ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน">ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน</option>
-													<option value="ค่าตอบแทนต่ำ">ค่าตอบแทนต่ำ</option>
-													<option value="ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย">ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย</option>
-													<option value="สวัสดิการของพนักงานไม่เหมาะสม">สวัสดิการของพนักงานไม่เหมาะสม</option>
-													<option value="อื่น ๆ">อื่น ๆ  
-														<input id="work_uncomplace" type="text" class="form-control" name="work_uncomplace_detail" placeholder="กรุณากรอก">
-													</option>
-												</select>
-											</div>
+										<div class="form-group">
+											<label>ประเภทงานที่ทำ</label>
+											<select name="work_type" class="form-control"  onchange="showwork_type(this)">
+												<option value="">กรุณาเลือก</option>
+												<option value="ข้าราชการ/เจ้าหน้าที่ของรัฐ">ข้าราชการ/เจ้าหน้าที่ของรัฐ</option>
+												<option value="รัฐวิสาหกิจ">รัฐวิสาหกิจ</option>
+												<option value="พนักงานบริษัท/องค์กรธุรกิจเอกชน">พนักงานบริษัท/องค์กรธุรกิจเอกชน</option>
+												<option value="ดำเนินธุรกิจอิสระ/เจ้าของกิจการ">ดำเนินธุรกิจอิสระ/เจ้าของกิจการ</option>
+												<option value="พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ">พนักงานองค์กรต่างประเทศ/ธรุกิจต่างประเทศ</option>
+												<option value="อื่น ๆ">อื่น ๆ  
+												<input id="work_type" type="text" class="form-control" name="work_type_detail" placeholder="กรุณากรอก">
+												</option>
+											</select>
 										</div>
 									</div>
-		  						</div>
-
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ลักษณะงานที่ทำตรงกับสาขาที่ท่านได้สำเร็จการศึกษาหรือไม่</label>
+											<select name="work_detail" class="form-control" >
+												<option value="">กรุณาเลือก</option>
+												<option value="ตรงสาขา">ตรงสาขา</option>
+												<option value="ไม่ตรงสาขา">ไม่ตรงสาขา</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ท่านสามารถนำความรู้จากสาขาวิชาที่เรียนมาประยุกต์ใช้ในหน้าที่การงานที่ทำอยู่ขณะนี้เพียงใด</label>
+											<select name="work_join" class="form-control" >
+												<option value="">กรุณาเลือก</option>
+												<option value="มากที่สุด">มากที่สุด</option>
+												<option value="มาก">มาก</option>
+												<option value="ปานกลาง">ปานกลาง</option>
+												<option value="น้อย">น้อย</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ท่านคิดว่าความรู้ความสารถพิเศษด้านใดที่ช่วยให้ท่านได้ทำงาน</label>
+											<select name="work_skill" class="form-control" onchange="showwork_skill(this)" >
+												<option value="">กรุณาเลือก</option>
+												<option value="ด้านภาษาต่างประเทศ">ด้านภาษาต่างประเทศ</option>
+												<option value="ด้านการใช้คอมพิวเตอร์">ด้านการใช้คอมพิวเตอร์</option>
+												<option value="ด้านกิจกรรมสันทนาการ">ด้านกิจกรรมสันทนาการ</option>
+												<option value="ด้านศิลปะ">ด้านศิลปะ</option>
+												<option value="ด้านกีฬา">ด้านกีฬา</option>
+												<option value="ด้านนาฏศิลป์/ดนตรีขับร้อง">ด้านนาฏศิลป์/ดนตรีขับร้อง</option>
+												<option value="อื่น ๆ">อื่น ๆ  
+													<input id="work_skill" type="text" class="form-control" name="work_skill_detail" placeholder="กรุณากรอก">
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ท่านมีความพึงพอใจต่องานที่ทำหรือไม่</label>
+											<select name="work_complace" class="form-control" >
+												<option value="">กรุณาเลือก</option>
+												<option value="พอใจ">พอใจ</option>
+												<option value="ไม่พอใจ">ไม่พอใจ</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ถ้าไม่พอใจ โปรดระบุสาเหตุที่สำคัญที่สุด 1 ข้อต่อไปนี้	</label>
+											<select name="work_uncomplace" class="form-control"  onchange="showwork_uncomplace(this)" >
+												<option value="">กรุณาเลือก</option>
+												<option value="ระบบภายในองค์กร">ระบบภายในองค์กร</option>
+												<option value="มิตรภาพในองค์กร">มิตรภาพในองค์กร</option>
+												<option value="ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน">ไม่ได้นำองค์ความรู้มาปรับใช้ในการทำงาน</option>
+												<option value="ค่าตอบแทนต่ำ">ค่าตอบแทนต่ำ</option>
+												<option value="ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย">ความมั่นคงก้าวหน้าในหน้าที่การงานมีน้อย</option>
+												<option value="สวัสดิการของพนักงานไม่เหมาะสม">สวัสดิการของพนักงานไม่เหมาะสม</option>
+												<option value="อื่น ๆ">อื่น ๆ  
+													<input id="work_uncomplace" type="text" class="form-control" name="work_uncomplace_detail" placeholder="กรุณากรอก">
+												</option>
+											</select>
+										</div>
+									</div>
+	  							</div>
 		  						<div id="div1">
 								  	<h5>กรุณากรอกข้อมูลเพิ่มเติมสำหรับผู้ที่ยังไม่ได้ทำงาน</h5>
 								  	<hr>
 									<div class="col-md-12">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>สาเหตุที่ยังไม่ได้ทำงาน</label>
-												<select name="free_cause" class="form-control" onchange="showfree_cause(this)">
-													<option value="">กรุณาเลือก</option>
-													<option value="ยังไม่ประสงค์ทำงาน">ยังไม่ประสงค์ทำงาน</option>
-													<option value="ประสงค์ศึกษาต่อ">ประสงค์ศึกษาต่อ</option>
-													<option value="รอฟังคำตอบจากหน่วยงาน">รอฟังคำตอบจากหน่วยงาน</option>
-													<option value="หางานทำไม่ได้">หางานทำไม่ได้</option>
-													<option value="อื่น ๆ">อื่น ๆ  
-														<input id="free_cause" type="text" class="form-control" name="free_cause_detail" placeholder="กรุณากรอก">
-													</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>ท่านมีปัญหาในการหางานทำหลังสำเร็จการศึกษาหรือไม่</label>
-												<select name="free_issue" class="form-control"  onchange="showfree_issue(this)">
-													<option value="">กรุณาเลือก</option>
-													<option value="มี">มี</option>
-													<option value="ไม่มี">ไม่มี</option>
-													<option value="อื่น ๆ">อื่น ๆ  
-														<input id="free_issue" type="text" class="form-control" name="free_issue_detail" placeholder="กรุณากรอก">
-													</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>	ถ้ามีปัญหาโปรดระบุปัญหาสำคัญ </label>
-												<select name="free_important" class="form-control" onchange="showfree_important(this)">
-													<option value="">กรุณาเลือก</option>
-													<option value="ไม่มีข้อมูลหน่วยงานรับสมัคร">ไม่มีข้อมูลหน่วยงานรับสมัคร</option>
-													<option value="งานที่ทำยังไม่ตรงกับวุฒิการศึกษา">งานที่ทำยังไม่ตรงกับวุฒิการศึกษา</option>
-													<option value="กระบวนการคัดเลือกหลายขั้นตอน">กระบวนการคัดเลือกหลายขั้นตอน</option>
-													<option value="ขาดผู้สนับสนุนในการหางาน">ขาดผู้สนับสนุนในการหางาน</option>
-													<option value="ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน">ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน</option>
-													<option value="คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท">คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท</option>
-													<option value="ค่าตอบแทนและสวัสดิการไม่เพียงพอ">ค่าตอบแทนและสวัสดิการไม่เพียงพอ</option>
-													<option value="อื่น ๆ">อื่น ๆ  
-														<input id="free_important" type="text" class="form-control" name="free_important_detail" placeholder="กรุณากรอก">
-													</option>
-												</select>
-											</div>
+										<div class="form-group">
+											<label>สาเหตุที่ยังไม่ได้ทำงาน</label>
+											<select name="free_cause" class="form-control" onchange="showfree_cause(this)">
+												<option value="">กรุณาเลือก</option>
+												<option value="ยังไม่ประสงค์ทำงาน">ยังไม่ประสงค์ทำงาน</option>
+												<option value="ประสงค์ศึกษาต่อ">ประสงค์ศึกษาต่อ</option>
+												<option value="รอฟังคำตอบจากหน่วยงาน">รอฟังคำตอบจากหน่วยงาน</option>
+												<option value="หางานทำไม่ได้">หางานทำไม่ได้</option>
+												<option value="อื่น ๆ">อื่น ๆ  
+												<input id="free_cause" type="text" class="form-control" name="free_cause_detail" placeholder="กรุณากรอก">
+												</option>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>ลักษณะงานที่ท่านต้องการ</label>
-												<select name="free_work_need" class="form-control" ><option value="">กรุณาเลือก</option>
-													<option value="ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น">ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น</option>
-													<option value="ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น">ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น</option>
-													<option value="ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น">ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น</option>
-													<option value="ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น">ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น</option>
-													<option value="ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น">ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น</option>
-													<option value="ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น">ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>ผู้ที่มีอิทธิพลต่อการตัดสินใจในการหางานทำ</label>
-												<select name="free_influence" class="form-control"><option value="">กรุณาเลือก</option>
-													<option value="ตัวเอง">ตัวเอง</option>
-													<option value="เพื่อน">เพื่อน</option>
-													<option value="ครอบครัว">ครอบครัว</option>
-												</select>
-											</div>
+										<div class="form-group">
+											<label>ท่านมีปัญหาในการหางานทำหลังสำเร็จการศึกษาหรือไม่</label>
+											<select name="free_issue" class="form-control"  onchange="showfree_issue(this)">
+												<option value="">กรุณาเลือก</option>
+												<option value="มี">มี</option>
+												<option value="ไม่มี">ไม่มี</option>
+												<option value="อื่น ๆ">อื่น ๆ  
+													<input id="free_issue" type="text" class="form-control" name="free_issue_detail" placeholder="กรุณากรอก">
+												</option>
+											</select>
 										</div>
 									</div>
-		 						 </div>
-
-		 						 <div id="div3">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>	ถ้ามีปัญหาโปรดระบุปัญหาสำคัญ </label>
+											<select name="free_important" class="form-control" onchange="showfree_important(this)">
+												<option value="">กรุณาเลือก</option>
+												<option value="ไม่มีข้อมูลหน่วยงานรับสมัคร">ไม่มีข้อมูลหน่วยงานรับสมัคร</option>
+												<option value="งานที่ทำยังไม่ตรงกับวุฒิการศึกษา">งานที่ทำยังไม่ตรงกับวุฒิการศึกษา</option>
+												<option value="กระบวนการคัดเลือกหลายขั้นตอน">กระบวนการคัดเลือกหลายขั้นตอน</option>
+												<option value="ขาดผู้สนับสนุนในการหางาน">ขาดผู้สนับสนุนในการหางาน</option>
+												<option value="ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน">ขาดผู้ค้ำประกัน/เงินค้ำประกัน/ตำแหน่งค้ำประกัน</option>
+												<option value="คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท">คุณสมบัติยังไม่ตรงตามความต้องการของบริษัท</option>
+												<option value="ค่าตอบแทนและสวัสดิการไม่เพียงพอ">ค่าตอบแทนและสวัสดิการไม่เพียงพอ</option>
+												<option value="อื่น ๆ">อื่น ๆ  
+													<input id="free_important" type="text" class="form-control" name="free_important_detail" placeholder="กรุณากรอก">
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ลักษณะงานที่ท่านต้องการ</label>
+											<select name="free_work_need" class="form-control" ><option value="">กรุณาเลือก</option>
+												<option value="ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น">ด้านการศึกษา เช่น งานสอน นักวิชาการ ฝึกอบรม เป็นต้น</option>
+												<option value="ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น">ด้านการเกษตร เช่น ประมง เกษตรกรรม ปศุสัตว์ เป็นต้น</option>
+												<option value="ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น">ด้านอุตสาหกรรม  เช่น อาหาร สิ่งทอ อิเล็กทรอนิกส์ ก่อสร้าง เหมืองแร่ เป็นต้น</option>
+												<option value="ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น">ด้านการบริการ เช่น งานขาย บรรณาลักษณ์ กฏหมาย การเมือง เป็นต้น</option>
+												<option value="ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น">ด้านการสื่อสารมวลชน เช่น ผู้สื่อข่าว ช่างภาพ ประชาสัมพันธ์ เป็นต้น</option>
+												<option value="ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น">ด้านวิทยาศาสตร์และเทคโนโลยี เช่น คอมพิวเตอร์ งานวิจัย เป็นต้น</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ผู้ที่มีอิทธิพลต่อการตัดสินใจในการหางานทำ</label>
+											<select name="free_influence" class="form-control"><option value="">กรุณาเลือก</option>
+												<option value="ตัวเอง">ตัวเอง</option>
+												<option value="เพื่อน">เพื่อน</option>
+												<option value="ครอบครัว">ครอบครัว</option>
+											</select>
+										</div>
+									</div>
+		 						</div>
+		 						<div id="div3">
 								  	<h5>กรุณากรอกข้อมูลเพิ่มเติมการศึกษาต่อ</h5>
 								  	<hr>
 									<div class="col-md-12">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>สาขาวิชา</label>
-												<input type="text" name="study_major" class="form-control">
-											</div>
+										<div class="form-group">
+											<label>สาขาวิชา</label>
+											<input type="text" name="study_major" class="form-control">
 										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>ภาควิชา</label>
-												<input type="text" name="study_facutly" class="form-control">
-											</div>
-								
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ภาควิชา</label>
+											<input type="text" name="study_faculty" class="form-control">
 										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>สถาบันศึกษา</label>
-												<input type="text" name="study_university" class="form-control">
-											</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>สถาบันศึกษา</label>
+											<input type="text" name="study_university" class="form-control">
 										</div>
 									</div>
 		  						</div>
-
-
-							    	</div>
-							    	<div class="col-md-12">
-									  <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
-							    	</div>
+							</div>
+					    	<div class="col-md-12">
+							  <button type="submit" class="btn btn-primary" name="work_status">บันทึกข้อมูล</button>
+					    	</div>
 									 
 </form>
 						  </div>
 
 						  <div id="password" class="tab-pane fade aside-body">
 							
-							    <form action="/action_page.php">
-							    	<div class="col-md-6">
-									  <div class="form-group">
-									    <label for="pwd">กรอกรหัสผ่านเดิม :</label>
-									    <input type="password" class="form-control" id="pwd">
-									  </div>
-							    	</div>
-							    	<div class="col-md-6">
-									  <div class="form-group">
-									    <label for="pwd">กรอกรหัสใหม่ :</label>
-									    <input type="password" class="form-control" id="pwd">
-									  </div>
-							    	</div>
-							    	<div class="col-md-12">
-									  <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
-							    	</div>
-									 
-								</form>
+<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="setting.php" enctype="multipart/form-data">
+					    	<div class="col-md-6">
+							  <div class="form-group">
+							    <label for="pwd">กรอกรหัสผ่านเดิม *</label>
+							    <input type="password" class="form-control" id="pwd" required="" name="pass_old" placeholder="รหัสผ่านเดิม">
+							  </div>
+					    	</div>
+					    	<div class="col-md-6">
+							  <div class="form-group">
+							    <label for="pwd">กรอกรหัสใหม่ *</label>
+							    <input type="password" class="form-control" id="pwd" required="" name="pass_new" placeholder="รหัสผ่านใหม่">
+							  </div>
+					    	</div>
+					    	<div class="col-md-12">
+							  <button type="submit" class="btn btn-primary" name="password">บันทึกข้อมูล</button>
+					    	</div>
+</form>
 						  </div>
 
 						</div>
