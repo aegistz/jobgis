@@ -4,15 +4,32 @@ session_start();
 include("config.php");
 include("check_student.php");
 include("api_service/profile_api.php");
-include("api_service/profile_delete.php");
+//include("api_service/profile_delete.php");
+
+if ($_GET[type] == 'delete_story') {
+
+	$id_story = $_GET[id_story];
+
+	$sql_delete = pg_query("DELETE from story where id_story = '$id_story' and id_user = '$id'  ;");
+	
+	
+	header('location:profile.php#story');
 
 
-if (isset($_GET[eid])) {
+}
+
+
+
+if ($_GET[type] =='delete_img_post') {
+	$imgid = $_GET[imgid];
+	$sqlsss = "DELETE from photo_user where id_img = '$imgid' and id_user = '$id'  ";
+	$sql_delete = pg_query("DELETE from photo_user where id_img = '$imgid' and id_user = '$id'  ;");
+	//header('location:profile.php');
+}
 	
 $eid = $_GET[eid];
 $sql_profile = pg_query("SELECT * from student  where id_no = '$eid';");
 $arr_profile = pg_fetch_array($sql_profile);
-}
 
 
 
@@ -73,6 +90,96 @@ $arr_profile = pg_fetch_array($sql_profile);
 		.image-preview-input-title {
 		margin-left:2px;
 		}</style>
+
+
+<style>
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 	</head>
 	<body class="skin-blue">
@@ -94,13 +201,15 @@ $arr_profile = pg_fetch_array($sql_profile);
 												<?php } ?>
 												
 												<div class="featured-author-center">
+
 													<figure class="featured-author-picture">
 														<?php if($user[img] == ''){ ?>
-														<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
+														<img id="myImg" src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
 														<?php } else { ?>
-														<img src="images/student/<?php echo $user[img]; ?>" alt="Sample Article">
+														<img id="myImg" src="images/student/<?php echo $user[img]; ?>" alt="Sample Article">
 														<?php } ?>
 													</figure>
+													
 													<div class="featured-author-info">
 														<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>
 														<div class="desc"><?php echo $user[email]; ?> </div>
@@ -120,7 +229,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 												<div class="featured-author-count">
 													<div class="item">
 														<a href="#">
-															<div class="name">Posts</div>
+															<div class="name">Posts </div>
 															<div class="value">
 																<?php
 																$sql_post_num = pg_query("SELECT * from  story where id_user = '$user[id_no]';");
@@ -171,8 +280,11 @@ $arr_profile = pg_fetch_array($sql_profile);
 														</div>
 													</div>
 												</div> -->
+
+
+
 												<div class="block">
-													<h2 class="block-title">Photos ของคุณ</h2>
+													<h2 class="block-title">Photos ของคุณ </h2>
 													<div class="block-body">
 														<ul class="item-list-round" data-magnific="gallery">
 															<?php
@@ -339,7 +451,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 														</div>
 														<div class="time">December 26, 2016</div>
 													</div>
-													<h1><a href="single.html">..............</a></h1>
+													<h1><a href="#">..............</a></h1>
 													<p>
 														..............
 													</p>
@@ -355,7 +467,9 @@ $arr_profile = pg_fetch_array($sql_profile);
 										
 									</aside>
 								</div>
-								<div class="col-xs-12 col-md-4">
+
+
+								<div class="col-xs-12 col-md-4 sidebar" id="sidebar">
 									<aside id="request">
 								<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
 								<div class="aside-body">
@@ -426,7 +540,17 @@ $arr_profile = pg_fetch_array($sql_profile);
 									</ul>
 								</div>
 							</aside>
-									<hr>
+								
+							<aside>
+								<div class="aside-body">
+									<figure class="ads">
+										<a href="http://tsw.gistda.or.th/" title="" target="_blank">
+										<img src="http://tsw.gistda.or.th/img/TSW2019_banner_th_2500x500.png">
+										<figcaption>Advertisement</figcaption>
+										</a>
+									</figure>
+								</div>
+							</aside>
 									<aside>
 										<h1 class="aside-title">งานที่เกี่ยวข้อง </h1>
 										<div class="aside-body">
@@ -455,8 +579,8 @@ $arr_profile = pg_fetch_array($sql_profile);
 								</div>
 							</div>
 						</div>
-						<?php 	} // if case show profile
-						else {    ?>
+<?php 	} // if case show profile
+else {    ?>
 						<div class="col-md-12">
 							<div class="sidebar-title for-tablet">Sidebar</div>
 							<aside>
@@ -467,9 +591,9 @@ $arr_profile = pg_fetch_array($sql_profile);
 												<div class="featured-author-center">
 													<figure class="featured-author-picture">
 														<?php if($arr_profile[img] == ''){ ?>
-														<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
+														<img  id="myImg" src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
 														<?php } else { ?>
-														<img src="images/student/<?php echo $arr_profile[img]; ?>" alt="Sample Article">
+														<img  id="myImg" src="images/student/<?php echo $arr_profile[img]; ?>" alt="Sample Article">
 														<?php } ?>
 													</figure>
 													<div class="featured-author-info">
@@ -557,7 +681,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 														</div>
 														<div class="time">December 26, 2016</div>
 													</div>
-													<h1><a href="single.html">..............</a></h1>
+													<h1><a href="#">..............</a></h1>
 													<p>
 														..............
 													</p>
@@ -747,5 +871,30 @@ $arr_profile = pg_fetch_array($sql_profile);
 			}
 			}
 			</script>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
+
+
 		</body>
 	</html>

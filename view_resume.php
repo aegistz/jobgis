@@ -3,6 +3,7 @@
 <?php 
 	session_start();
 	include 'config.php';
+include("check_student.php");
 
 	   $email = $user['email'];
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php 
 	include 'config.php';
+include("check_student.php");
 
 	  	  $email = $user['email'];
 	  	  $title_name = $_POST['title_name'];
