@@ -43,15 +43,24 @@ include 'config.php';
            		header('location:setting.php#profile') ; 
 		}
 			
-			if ( isset($_POST[password]) ) {
 
-			$sql = "SELECT * from company where password = '$_POST[pass_old]';";
+
+
+		if ( isset($_POST[password]) ) {
+
+			$salt = 'gistnu@geojobs'; 
+
+			$pass_old = sha1($_POST[pass_old].$salt);
+			$pass_new = sha1($_POST[pass_new].$salt);
+
+
+			$sql = "SELECT * from company where password = '$pass_old';";
 			$query = pg_query($sql);
 			$num = pg_num_rows($query);
 			if ($num == 1 ){
 
 			$sql3 = "UPDATE company set  
-       			password = '$_POST[pass_new]'
+       			password = '$pass_new'
        			WHERE email_com = '$email_com';";
            		$query3 = pg_query($sql3);
            		header('location:setting.php#password') ; 
