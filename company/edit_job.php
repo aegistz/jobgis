@@ -45,8 +45,8 @@
 
 
 
-		if ( isset($_POST[edit_img]) ) {
-       
+	if( $_POST[edit_img] == 'true' )
+{
 	
 				$image = $_FILES["file"]["name"];
 				
@@ -100,18 +100,17 @@
 				
 				// rename our upload image file name, this to avoid conflict in previous upload images
 				// to easily get our uploaded images name we added image size to the suffix
-				$rnd_name1 = 'photos_job_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
+				$rnd_name1 = 'photos_student_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
 				
 				// move it to uploads dir with full quality
-				imagejpeg( $dst1, '../images/story/'.$rnd_name1, 100 );
+				imagejpeg( $dst1, '../images/img_job/'.$rnd_name1, 100 );
 				
 				// I think that's it we're good to clear our created images
 				imagedestroy( $source );
 				imagedestroy( $dst1 );
 						
-							
-							$sql = pg_query("UPDATE job_company set  img = '$img'
-								where job_id = '$job_id' ;");
+							$sql = pg_query("UPDATE job_company set  img = '$rnd_name1'
+								where id_job = '$job_id' ;");
 							header('location:edit_job.php?job_id='.$job_id);
 				
 				
@@ -119,12 +118,7 @@
 				}
 				
 				}
-
-
-		}
-
-
-
+}
 
 
 function get_file_extension( $file )  {
@@ -203,14 +197,14 @@ function get_file_extension( $file )  {
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Poster หรือภาพประกอบ</label>
-							<input class="form-control " type="file" id="cname" name="file" onchange="readURL_job(this);"  accept="image/png, image/jpeg, image/gif">
+							<input class="form-control " type="file" name="file"  onchange="readURL_job(this);" >
 
 	                    <img   src="../images/img_job/<?php echo $job[img]; ?>" alt="" id="blah_job" width="100%" >
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">
-							<button type="submit" name="edit_img" class="btn btn-primary btn-block">เพิ่มรูปภาพ</button>
+							<button type="submit" name="edit_img" value="true" class="btn btn-primary btn-block">เพิ่มรูปภาพ</button>
 						</div>
 					</div>
 </form>
