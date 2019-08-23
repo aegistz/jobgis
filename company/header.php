@@ -3,6 +3,7 @@ session_start();
 
 include("config.php");
 ?>
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <header class="primary">
 			<div class="firstbar">
 				<div class="container">
@@ -114,13 +115,10 @@ if($_COOKIE["status_com"]  == 'company' )
 
 							<li class="dropdown magz-dropdown"><a href="#">ตั้งค่า <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="icon ion-person"></i> My Account</a></li>
-									<li><a href="#"><i class="icon ion-heart"></i> Favorite</a></li>
-									<li><a href="#"><i class="icon ion-chatbox"></i> Comments</a></li>
-									<li><a href="#"><i class="icon ion-key"></i> Change Password</a></li>
-									<li><a href="#"><i class="icon ion-settings"></i> Settings</a></li>
+									<li><a href="setting.php"><i class="icon ion-person"></i> My Account</a></li>
+									<li><a href="setting.php"><i class="icon ion-key"></i> Change Password</a></li>
 									<li class="divider"></li>
-									<li><a href="#"><i class="icon ion-log-out"></i> Logout</a></li>
+									<li><a href="logout.php"><i class="icon ion-log-out"></i> Logout</a></li>
 								</ul>
 							</li>
 

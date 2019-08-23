@@ -74,9 +74,19 @@ include("check-company.php")
 									<div class="details">
 										<div class="detail">
 											<div class="category">
-												<a href="category.html"><?php echo $job_com[type_job]; ?></a>
+												<a href="#"><?php echo $job_com[type_job]; ?></a>
+
 											</div>
-											<div class="time"><?php echo $job_com[date_job]; ?></div>
+											<div class="time"><?php echo $job_com[date_job]; ?>
+												<div class="btn-group">
+																<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+																<i class="fa fa-bars"></i> </button>
+																<ul class="dropdown-menu" role="menu">
+																	<li><a href="story_edit.php?stoid=<?php echo $arr[id_story]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																	<li><a href="profile.php?type=delete_story&id_story=<?php echo $arr[id_story]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
+																</ul>
+															</div>
+											</div>
 										</div>
 										<h1><a href="view-job.php?q=<?php echo $job_com[id_job]; ?>"><?php echo $job_com[name_job]; ?></a></h1>
 										<p>
@@ -187,7 +197,7 @@ where id_com = $id_com;");
 										<div class="padding">
 											<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[s_name],' ',$arr[l_name] ; ?></a></h1>
 											<div class="detail">
-												<div class="category"><a href="category.html">รับสมัครงาน</a></div>
+												<div class="category"><a href="#">รับสมัครงาน</a></div>
 												<div class="time">2019-22-11</div>
 											</div>
 											<p>รับนักภูมิสารสนเทศ 3 ตำแหน่ง</p>
