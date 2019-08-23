@@ -61,21 +61,22 @@ include("check_student.php");
 <?php 
 	$sql = pg_query("SELECT * from job_company ORDER BY RANDOM() limit 5 ;");
 	$check = pg_num_rows($sql);
-	while( $job_com = pg_fetch_array($sql) ){
+	while( $arr = pg_fetch_array($sql) ){
 		
 			
 ?>										
 								<article class="article-mini">
 									<div class="inner">
 										<figure>
-											<a href="news.php?q=<?php echo $job_com[id_job]; ?>">
-												<img src="images/img_job/<?php echo $job_com[img]; ?>" >
+											<a href="news.php">
+												<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="news.php?q=<?php echo $job_com[id_job]; ?>"><?php echo $job_com[name_job]; ?></a></h1>
+											<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
 											<p>
-										</p>
+												<?php echo $arr[detail_job]; ?> 
+											</p>
 										</div>
 									</div>
 								</article>
@@ -104,7 +105,7 @@ include("check_student.php");
 								<ul class="details">
 									<li>Posted on <?php echo $result[date_job]; ?></li>
 									<li><a><?php echo $result[type_job]; ?></a></li>
-									<li>By <a href="#"><?php echo $result[name_com]; ?></a></li>
+									<li>By <a href="company.php?com_id=<?php echo $result[id_com]; ?>"><?php echo $result[name_com]; ?></a></li>
 								</ul>
 							</header>
 							</div>
@@ -258,42 +259,23 @@ include("check_student.php");
 							<div>สถานประกอบการ</div>
 						</div>
 
-						<div class="author">
-							<figure>
-								<img src="images/img_job/<?php echo $result[logo_img]; ?>">
-							</figure>
-							<div class="details">
-								<div class="job">สถานประกอบการ</div>
-								<h5 class="name"><?php echo $result[name_com]; ?></h5>
-								<p>พนักงานประจำ/นักศึกษาฝึกงาน/สหกิจศึกษา</p>
-								<!-- <ul class="social trp sm">
-									<li>
-										<a href="#" class="facebook">
-											<svg><rect/></svg>
-											<i class="ion-social-facebook"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="twitter">
-											<svg><rect/></svg>
-											<i class="ion-social-twitter"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="youtube">
-											<svg><rect/></svg>
-											<i class="ion-social-youtube"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="googleplus">
-											<svg><rect/></svg>
-											<i class="ion-social-googleplus"></i>
-										</a>
-									</li>
-								</ul> -->
+						<article class="col-md-12 article-list">
+							<div class="inner">
+								<figure>
+									<a href="company.php?com_id=<?php echo $result[id_com]; ?>">
+										<img src="images/img_job/<?php echo $result[logo_img]; ?>" alt="Sample Article">
+									</a>
+								</figure>
+								<div class="details">
+									<h1><a href="company.php?com_id=<?php echo $result[id_com]; ?>"><?php echo $result[name_com]; ?></a></h1>
+									<p>
+										<i><b>ประเภทหน่วยงาน : <?php echo $result[type_com]; ?> ที่อยู่  : </b>    <?php echo $result[province_com]; ?></i> <br>
+										
+									</p>
+									
+								</div>
 							</div>
-						</div>
+						</article>
 
 
 					</div>

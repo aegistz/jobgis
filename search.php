@@ -2,6 +2,7 @@
 <?php
 session_start();
 include("config.php");
+include("check_student.php");
 $eqc = $_GET[eqc];
 
 
@@ -212,16 +213,12 @@ $sql_work = pg_query("SELECT * from job_company a
 																</div>
 																<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 																<p>
-																	<?php echo $arr[detail_job]; ?> <br>
+																	<?php
+															echo mb_strimwidth($arr[detail_job], 0, 200, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														?> <br>
 																	<small> <i><b>การรับ  : </b>    <?php echo $arr[type_job]; ?></i> </small>
 																</p>
-																<footer>
-																	<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-																	<a class="btn btn-primary more" href="news.php?q=<?php echo $arr[id_job]; ?>">
-																		<div>More</div>
-																		<div><i class="ion-ios-arrow-thin-right"></i></div>
-																	</a>
-																</footer>
+																
 															</div>
 														</div>
 													</article>
@@ -285,23 +282,16 @@ $sql_work = pg_query("SELECT * from job_company a
 													<article class="col-md-12 article-list">
 														<div class="inner">
 															<figure>
-																<a href="news.php?q=<?php echo $arr[id_job]; ?>">
+																<a href="company.php?com_id=<?php echo $arr[id_com]; ?>">
 																	<img src="images/img_job/<?php echo $arr[logo_img]; ?>" alt="Sample Article">
 																</a>
 															</figure>
 															<div class="details">
-																<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_com]; ?></a></h1>
+																<h1><a href="company.php?com_id=<?php echo $arr[id_com]; ?>"><?php echo $arr[name_com]; ?></a></h1>
 																<p>
 																	<i><b>ประเภทหน่วยงาน : <?php echo $arr[type_com]; ?> ที่อยู่  : </b>    <?php echo $arr[province_com]; ?></i> <br>
 																	
 																</p>
-																<footer>
-																	<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-																	<a class="btn btn-primary more" href="news.php?q=<?php echo $arr[id_job]; ?>">
-																		<div>More</div>
-																		<div><i class="ion-ios-arrow-thin-right"></i></div>
-																	</a>
-																</footer>
 															</div>
 														</div>
 													</article>

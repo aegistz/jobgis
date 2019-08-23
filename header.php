@@ -221,6 +221,11 @@ $num = pg_num_rows($sql);
   </div>
 </div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <img class="modal-content" id="img01">
+  <span class="close">x ปิด</span>
+</div>
 
 
 		</header>

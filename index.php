@@ -4,6 +4,14 @@ session_start();
 include("config.php");
 include("check_student.php");
 include("api_service/index_api.php");
+
+$sql_request_list = pg_query("SELECT * from user_request a
+inner join job_company b on a.id_job = b.id_job
+inner join company c on c.id_com = b.id_com where email_user = '$user[email]' ;  ");
+
+
+$num_request_list = pg_num_rows($sql_request_list);
+
 ?>
 <html>
 	<head>
@@ -40,16 +48,28 @@ include("api_service/index_api.php");
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 		<style>
 			.row.content {
-		height: 620px
-		}
-		.anyClass {
-		height: 450px;
-		overflow-y: scroll;
-		}
-		.largeWidth {
-		width: 100%;
-		height: 620px;
-		}
+				height: 620px
+			}
+			.anyClass {
+<?php 
+	if ($num_request_list == 0) {
+		echo 'height: 10px;';
+	}else if ($num_request_list == 1) {
+		echo 'height: 200px;';
+	}else if ($num_request_list == 2) {
+		echo 'height: 450px;';
+	}else {
+		echo 'height: 650px;';
+	}
+?>
+				
+
+				overflow-y: scroll;
+			}
+			.largeWidth {
+				width: 100%;
+				height: 620px;
+			}
 		</style>
 	</head>
 	<body class="skin-blue">
@@ -214,16 +234,19 @@ include("api_service/index_api.php");
 														</div>
 														<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 														<p>
-															<?php echo $arr[detail_job]; ?> <br>
+														<?php
+															echo mb_strimwidth($arr[detail_job], 0, 200, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														?>
+															<br>
 															<small> <i><b>การรับ  : </b>    <?php echo $arr[type_job]; ?></i> </small>
 														</p>
-														<footer>
+														<!-- <footer>
 															<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
 															<a class="btn btn-primary more" href="news.php?q=<?php echo $arr[id_job]; ?>">
 																<div>More</div>
 																<div><i class="ion-ios-arrow-thin-right"></i></div>
 															</a>
-														</footer>
+														</footer> -->
 													</div>
 												</div>
 											</article>
@@ -332,14 +355,11 @@ include("api_service/index_api.php");
 								</div>
 							</aside>
 							<aside id="request">
-								<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
+								<h1 class="aside-title">สถานะงานที่ท่านสมัคร </h1>
 								<div class="aside-body">
 									<ul class="nav nav-pills nav-stacked anyClass">
 										<?php
-										$sql = pg_query("SELECT * from user_request a
-											inner join job_company b on a.id_job = b.id_job
-											inner join company c on c.id_com = b.id_com where email_user = '$user[email]' ;  ");
-																		while ( $arr = pg_fetch_array($sql) ) {
+											while ( $arr = pg_fetch_array($sql_request_list) ) {
 										?>
 										<article class="article-mini">
 											<div class="inner">
@@ -389,7 +409,9 @@ include("api_service/index_api.php");
 													</p>
 													<h1><a href="news.php?q=<?php echo $arr[id_job];?>"><?php echo $arr[name_job]; ?></a></h1>
 													<p>
-														โดย : <?php echo $arr[name_com]; ?>
+														โดย : <a href="company.php?com_id=<?php echo $arr[id_com]; ?>" title="">
+															<?php echo $arr[name_com]; ?>
+														</a> 
 													</p>
 												
 													
@@ -428,7 +450,9 @@ include("api_service/index_api.php");
 											<div class="padding">
 												<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 												<p>
-													<?php echo $arr[detail_job]; ?>
+													<?php
+															echo mb_strimwidth($arr[detail_job], 0, 120, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														?>
 												</p>
 											</div>
 										</div>
@@ -472,7 +496,9 @@ include("api_service/index_api.php");
 										<div class="category"><a href=""><?php echo $arr[type_job]; ?></a></div>
 									</div>
 									<h2><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h2>
-									<p><?php echo $arr[detail_job]; ?></p>
+									<p><?php
+															echo mb_strimwidth($arr[detail_job], 0, 120, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														?></p>
 								</div>
 							</div>
 						</article>

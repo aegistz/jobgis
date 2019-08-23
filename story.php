@@ -181,7 +181,9 @@ include("check_student.php")
 										<div class="padding">
 											<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
 											<p>
-												<?php echo $arr[detail_job]; ?> 
+												<?php
+															echo mb_strimwidth($arr[detail_job], 0, 120, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														?>
 											</p>
 										</div>
 									</div>
