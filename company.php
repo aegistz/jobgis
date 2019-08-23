@@ -6,7 +6,7 @@ include("check_student.php");
 
 
 $id_com = $_GET[com_id];
-$sql = pg_query("SELECT * from company a inner join job_company b on a.id_com = b.id_com where a.id_com = '$id_com' ;");
+$sql = pg_query("SELECT * from company a full join job_company b on a.id_com = b.id_com where a.id_com = '$id_com' ;");
 $company = pg_fetch_array($sql);
 ?>
 <html>
