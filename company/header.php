@@ -95,7 +95,7 @@ if($_COOKIE["status_com"]  == 'company' )
 							<li class="for-tablet"><a href="login.html">Login</a></li>
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="./">หน้าแรก</a></li>
-							<li><a href="./">ข้อมูลผู้สมัครงาน</a></li>
+							<li><a href="request.php">ข้อมูลผู้สมัครงาน</a></li>
 							<li><a href="search.php">ค้นหาแรงงาน</a></li>
 							
 							<li class="dropdown magz-dropdown"><a href="#">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>

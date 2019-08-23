@@ -76,7 +76,8 @@ where id_com = $id_com and a.id_no = '$_GET[id_request]';");
 									<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-check" aria-hidden="true"></i> รับพิจารณาบุคคลนี้</a>
 									<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-danger btn-block"><i class="fa fa-check" aria-hidden="true"></i> ปฏิเสธบุคคลนี้</a>
 								</article>
-								<aside>
+								<hr>
+								<article>
 							<h1 class="aside-title">ตำแหน่งงานที่สมัคร</h1>
 							<div class="aside-body">
 
@@ -84,7 +85,6 @@ where id_com = $id_com and a.id_no = '$_GET[id_request]';");
 						
 							<div class="main">
 								<p><b><?php echo $result[name_job]; ?></b> </p>
-								<p><?php echo $result[detail_job]; ?> <hr>
 								<b>หน้าที่และความรับผิดชอบ</b> <br>
 <?php 
 	$sql2 = pg_query("SELECT ROW_NUMBER () OVER (ORDER BY id_respon) as row,* from respon_job where id_job =  '$result[id_job]' ORDER BY id_respon;");
@@ -118,7 +118,7 @@ where id_com = $id_com and a.id_no = '$_GET[id_request]';");
 					
 
 							</div>
-						</aside>
+						</article>
 
 
 
