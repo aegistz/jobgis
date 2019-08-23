@@ -8,9 +8,9 @@ include 'config.php';
 	  $detail_com = $_POST['detail_com'];
 	  $website_com = $_POST['website_com'];
 	  $address_com = $_POST['address_com'];
-	  $tambon_com = $_POST['tambon_com'];
-	  $amphoe_com = $_POST['amphoe_com'];
-	  $province_com = $_POST['province_com'];
+	  $tambon_com = $_POST['tambon'];
+	  $amphoe_com = $_POST['amphoe'];
+	  $province_com = $_POST['province'];
 	  $zipcode_com = $_POST['zipcode_com'];
 	  $phone_com = $_POST['phone_com'];
 	  $fax_com = $_POST['fax_com'];
@@ -182,7 +182,7 @@ include 'config.php';
 									<div class="form-group">
 										<label>จังหวัด</label>
 										<span id="province_edit">
-			                            	<select class="form-control m-bot15" class="form-control"  name="province_com" required>
+			                            	<select class="form-control m-bot15" class="form-control"  name="province" required>
 			                                 <option value=''>เลือกจังหวัด</option>
 				                            </select>
 			                        	</span>
@@ -192,7 +192,7 @@ include 'config.php';
 									<div class="form-group">
 										<label>อำเภอ</label>
 										<span id="amphoe_edit">
-				                            <select class="form-control m-bot15" class="form-control"  name="amphoe_com"  required> 
+				                            <select class="form-control m-bot15" class="form-control"  name="amphoe"  required> 
 				                                 <option  value="<?php echo $company[amphoe_com] ;?>"><?php echo $company[amphoe_com] ;?></option>
 				                            </select>
 		                        		</span>
@@ -202,7 +202,7 @@ include 'config.php';
 									<div class="form-group">
 										<label>ตำบล</label>
 										<span id="tambon_edit">
-				                            <select class="form-control m-bot15" class="form-control"  name="tambon_com" required>
+				                            <select class="form-control m-bot15" class="form-control"  name="tambon" required>
 				                                 <option value='<?php echo $company[tambon_com] ;?>'><?php echo $company[tambon_com] ;?></option>
 				                            </select>
 			                        	</span>
