@@ -317,7 +317,7 @@ include("check_student.php");
 		                            <select class="form-control m-bot15" class="form-control"  name="province" required>
 		                                 <option value=''>เลือกจังหวัด</option>
 		                            </select>
-		                        </span>
+		                        	</span>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -337,7 +337,7 @@ include("check_student.php");
 		                            <select class="form-control m-bot15" class="form-control"  name="tambon" required>
 		                                 <option value='<?php echo $resume[tambon] ;?>'><?php echo $resume[tambon] ;?></option>
 		                            </select>
-		                        </span>
+		                        	</span>
 								</div>
 							</div>
 							<div class="col-md-2">
