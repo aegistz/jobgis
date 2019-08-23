@@ -38,7 +38,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 		<link rel="stylesheet" href="scripts/owlcarousel/dist/assets/owl.theme.default.min.css">
 		<!-- Magnific Popup -->
 		<link rel="stylesheet" href="scripts/magnific-popup/dist/magnific-popup.css">
-		<link rel="stylesheet" href="scripts/sweetalert/dist/sweetalert.css">
+<link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
 		<!-- Custom style -->
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/skins/blue.css">
@@ -70,6 +70,30 @@ $num_request_list = pg_num_rows($sql_request_list);
 				width: 100%;
 				height: 620px;
 			}
+
+			.example button {
+  float: left;
+  background-color: #4E3E55;
+  color: white;
+  border: none;
+  box-shadow: none;
+  font-size: 17px;
+  font-weight: 500;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 15px 35px;
+  margin: 26px 5px 0 5px;
+  cursor: pointer; 
+}
+.example button:focus{
+  outline: none; 
+}
+.example button:hover{
+  background-color: #33DE23; 
+}
+.example button:active{
+  background-color: #81ccee; 
+}
 		</style>
 	</head>
 	<body class="skin-blue">
@@ -513,6 +537,9 @@ $num_request_list = pg_num_rows($sql_request_list);
 						<?php } ?>
 					</div>
 				</div>
+
+
+
 			</section>
 			<!-- Start footer -->
 			<?php include 'footer.php'; ?>
@@ -531,6 +558,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 			<!-- <script src="js/demo.js"></script> -->
 			<script src="js/e-magz.js"></script>
 			<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"  ></script>
+			<script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 			<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js" ></script>
 			<script type="text/javascript">
 				$(document).ready(function() {
@@ -539,6 +567,24 @@ $num_request_list = pg_num_rows($sql_request_list);
 					"aLengthMenu": [[5, 25, 50, 100], [5, 25, 50, 100, "All"]]
 				});
 				} );
+
+			
+				document.getElementById('b4').onclick = function(){
+					swal({
+						title: "Are you sure?",
+						text: "You will not be able to recover this imaginary file!",
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonColor: '#DD6B55',
+						confirmButtonText: 'Yes, delete it!',
+						closeOnConfirm: false,
+						//closeOnCancel: false
+					},
+					function(){
+						swal("Deleted!", "Your imaginary file has been deleted!", "success");
+					});
+				};
+
 			</script>
 		</body>
 	</html>
