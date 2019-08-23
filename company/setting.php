@@ -235,33 +235,33 @@ include 'config.php';
 									<div class="form-group">
 										<label>ประเภทสถานประกอบการ</label>
 										<select  id="select"  class="form-control"  name="type_com"> 
-										  <option value="ยังไม่ได้กำหนด">-- กรุณาเลือก --</option>
-										  <option value="กฎหมาย">กฎหมาย</option>
-										  <option value="ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง">ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง</option>
-										  <option value="การโดยสารทางอากาศ/ทางบก/ทางน้ำ">การโดยสารทางอากาศ/ทางบก/ทางน้ำ</option>
-										  <option value="การขนส่งและคลังสินค้า/นำเข้าและส่งออก">การขนส่งและคลังสินค้า/นำเข้าและส่งออก</option>
-										  <option value="สถาบันการศึกษาและแนะแนวอาชีพ">สถาบันการศึกษาและแนะแนวอาชีพ</option>
-										  <option value="เกษตรกรรม/ประมง">เกษตรกรรม/ประมง</option>
-										  <option value="การท่องเที่ยว">การท่องเที่ยว</option>
-										  <option value="หน่วยงานราชการ">หน่วยงานราชการ</option>
-										  <option value="การผลิตและจำหน่ายเคมีภัณฑ์">การผลิตและจำหน่ายเคมีภัณฑ์</option>
-										  <option value="การวิจัยและพัฒนา">การวิจัยและพัฒนา</option>
-										  <option value="โทรคมนาคม">โทรคมนาคม</option>
-										  <option value="ตัวแทนขายส่ง/ขายปลีก">ตัวแทนขายส่ง/ขายปลีก</option>
-										  <option value="บัญชี ">บัญชี </option>
-										  <option value="เทคโนโลยีสารสนเทศ">เทคโนโลยีสารสนเทศ</option>
-										  <option value="มูลนิธิ และสังคมสงเคราะห์">มูลนิธิ และสังคมสงเคราะห์</option>
-										  <option value="โรงแรม/รีสอร์ท/ที่พัก">โรงแรม/รีสอร์ท/ที่พัก</option>
-										  <option value="รับจัดอีเว้นท์ (Organizer)">รับจัดอีเว้นท์ (Organizer)</option>
-										  <option value="สุขภาพและความงาม">สุขภาพและความงาม</option>
-										  <option value="สถาบันการเงิน/การประกันภัย/เงินทุนหลักทรัพย์">สถาบันการเงิน/การประกันภัย/เงินทุนหลักทรัพย์</option>
-										  <option value="สื่อสารมวลชนและการผลิตสื่อสิ่งพิมพ์">สื่อสารมวลชนและการผลิตสื่อสิ่งพิมพ์</option>
-										  <option value="เหมืองแร่/ไฟฟ้า/ก๊าซ/ประปา/ปิโตรเคมี">เหมืองแร่/ไฟฟ้า/ก๊าซ/ประปา/ปิโตรเคมี</option>
-										  <option value="อสังหาริมทรัพย์ ">อสังหาริมทรัพย์ </option>
-										  <option value="อุตสาหกรรมยานยนต์">อุตสาหกรรมยานยนต์</option>
-										  <option value="อาหาร/เครื่องดื่ม (ผลิต/จำหน่าย)">อาหาร/เครื่องดื่ม (ผลิต/จำหน่าย)</option>
-										  <option value="อุตสาหกรรมการผลิตอื่นๆ">อุตสาหกรรมการผลิตอื่นๆ</option>
-										  <option value="อื่นๆ">อื่นๆ</option>
+										  <option value="ยังไม่ได้กำหนด" <?php if($company[type_com]=='ยังไม่ได้กำหนด'){echo 'selected';} ?>>-- กรุณาเลือก --</option>
+										  <option value="กฎหมาย"<?php if($company[type_com]=='กฎหมาย'){echo 'selected';} ?>>กฎหมาย</option>
+										  <option value="ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง" <?php if($company[type_com]=='ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง'){echo 'selected';} ?>>ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง</option>
+										  <option value="การโดยสารทางอากาศ/ทางบก/ทางน้ำ" <?php if($company[type_com]=='การโดยสารทางอากาศ/ทางบก/ทางน้ำ'){echo 'selected';} ?>>การโดยสารทางอากาศ/ทางบก/ทางน้ำ</option>
+										  <option value="การขนส่งและคลังสินค้า/นำเข้าและส่งออก" <?php if($company[type_com]=='การขนส่งและคลังสินค้า/นำเข้าและส่งออก'){echo 'selected';} ?>>การขนส่งและคลังสินค้า/นำเข้าและส่งออก</option>
+										  <option value="สถาบันการศึกษาและแนะแนวอาชีพ" <?php if($company[type_com]=='สถาบันการศึกษาและแนะแนวอาชีพ'){echo 'selected';} ?>>สถาบันการศึกษาและแนะแนวอาชีพ</option>
+										  <option value="เกษตรกรรม/ประมง" <?php if($company[type_com]=='กษตรกรรม/ประมง'){echo 'selected';} ?>>เกษตรกรรม/ประมง</option>
+										  <option value="การท่องเที่ยว" <?php if($company[type_com]=='การท่องเที่ยว'){echo 'selected';} ?>>การท่องเที่ยว</option>
+										  <option value="หน่วยงานราชการ" <?php if($company[type_com]=='หน่วยงานราชการ'){echo 'selected';} ?>>หน่วยงานราชการ</option>
+										  <option value="การผลิตและจำหน่ายเคมีภัณฑ์" <?php if($company[type_com]=='การผลิตและจำหน่ายเคมีภัณฑ์'){echo 'selected';} ?>>การผลิตและจำหน่ายเคมีภัณฑ์</option>
+										  <option value="การวิจัยและพัฒนา" <?php if($company[type_com]=='การวิจัยและพัฒนา'){echo 'selected';} ?>>การวิจัยและพัฒนา</option>
+										  <option value="โทรคมนาคม" <?php if($company[type_com]=='โทรคมนาคม'){echo 'selected';} ?>>โทรคมนาคม</option>
+										  <option value="ตัวแทนขายส่ง/ขายปลีก" <?php if($company[type_com]=='ตัวแทนขายส่ง/ขายปลีก'){echo 'selected';} ?>>ตัวแทนขายส่ง/ขายปลีก</option>
+										  <option value="บัญชี" <?php if($company[type_com]=='บัญชี'){echo 'selected';} ?>>บัญชี </option>
+										  <option value="เทคโนโลยีสารสนเทศ" <?php if($company[type_com]=='เทคโนโลยีสารสนเทศ'){echo 'selected';} ?>>เทคโนโลยีสารสนเทศ</option>
+										  <option value="มูลนิธิ และสังคมสงเคราะห์" <?php if($company[type_com]=='มูลนิธิ และสังคมสงเคราะห์'){echo 'selected';} ?>>มูลนิธิ และสังคมสงเคราะห์</option>
+										  <option value="โรงแรม/รีสอร์ท/ที่พัก" <?php if($company[type_com]=='โรงแรม/รีสอร์ท/ที่พัก'){echo 'selected';} ?>>โรงแรม/รีสอร์ท/ที่พัก</option>
+										  <option value="รับจัดอีเว้นท์ (Organizer)" <?php if($company[type_com]=='รับจัดอีเว้นท์ (Organizer)'){echo 'selected';} ?>>รับจัดอีเว้นท์ (Organizer)</option>
+										  <option value="สุขภาพและความงาม" <?php if($company[type_com]=='สุขภาพและความงาม'){echo 'selected';} ?>>สุขภาพและความงาม</option>
+										  <option value="สถาบันการเงิน/การประกันภัย/เงินทุนหลักทรัพย์" <?php if($company[type_com]=='สถาบันการเงิน/การประกันภัย/เงินทุนหลักทรัพย์'){echo 'selected';} ?>>สถาบันการเงิน/การประกันภัย/เงินทุนหลักทรัพย์</option>
+										  <option value="สื่อสารมวลชนและการผลิตสื่อสิ่งพิมพ์" <?php if($company[type_com]=='สื่อสารมวลชนและการผลิตสื่อสิ่งพิมพ์'){echo 'selected';} ?>>สื่อสารมวลชนและการผลิตสื่อสิ่งพิมพ์</option>
+										  <option value="เหมืองแร่/ไฟฟ้า/ก๊าซ/ประปา/ปิโตรเคมี" <?php if($company[type_com]=='เหมืองแร่/ไฟฟ้า/ก๊าซ/ประปา/ปิโตรเคมี'){echo 'selected';} ?>>เหมืองแร่/ไฟฟ้า/ก๊าซ/ประปา/ปิโตรเคมี</option>
+										  <option value="อสังหาริมทรัพย์" <?php if($company[type_com]=='อสังหาริมทรัพย์'){echo 'selected';} ?>>อสังหาริมทรัพย์ </option>
+										  <option value="อุตสาหกรรมยานยนต์" <?php if($company[type_com]=='อุตสาหกรรมยานยนต์'){echo 'selected';} ?>>อุตสาหกรรมยานยนต์</option>
+										  <option value="อาหาร/เครื่องดื่ม (ผลิต/จำหน่าย)" <?php if($company[type_com]=='อาหาร/เครื่องดื่ม (ผลิต/จำหน่าย)'){echo 'selected';} ?>>อาหาร/เครื่องดื่ม (ผลิต/จำหน่าย)</option>
+										  <option value="อุตสาหกรรมการผลิตอื่นๆ" <?php if($company[type_com]=='อุตสาหกรรมการผลิตอื่นๆ'){echo 'selected';} ?>>อุตสาหกรรมการผลิตอื่นๆ</option>
+										  <option value="อื่นๆ" <?php if($company[type_com]=='อื่นๆ'){echo 'selected';} ?>>อื่นๆ</option>
 										</select>
 									</div>
 								</div>
