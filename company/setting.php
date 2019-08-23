@@ -234,7 +234,7 @@ include 'config.php';
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>ประเภทสถานประกอบการ</label>
-										<select  id="select"  class="form-control"  name="type_com"> 
+										<select  id="select"  class="form-control"  name="type_com" required> 
 										  <option value="ยังไม่ได้กำหนด" <?php if($company[type_com]=='ยังไม่ได้กำหนด'){echo 'selected';} ?>>-- กรุณาเลือก --</option>
 										  <option value="กฎหมาย"<?php if($company[type_com]=='กฎหมาย'){echo 'selected';} ?>>กฎหมาย</option>
 										  <option value="ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง" <?php if($company[type_com]=='ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง'){echo 'selected';} ?>>ก่อสร้าง/ผลิตและจัดจำหน่ายอุปกรณ์ก่อสร้าง</option>
