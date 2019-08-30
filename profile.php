@@ -300,7 +300,7 @@ if (isset($_GET[eid])) {
 															<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a>
 
 																<div class="btn-group">
-																  <button type="button" class="close btn btn-sm dropdown-toggle" data-toggle="dropdown">
+																  <button type="button" class=" btn btn-sm dropdown-toggle" data-toggle="dropdown">
 																    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
 																  </button>
 																  <ul class="dropdown-menu" role="menu">

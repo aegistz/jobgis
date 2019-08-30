@@ -181,7 +181,7 @@ Highcharts.chart('container', {
             "colorByPoint": true,
             "data": [
 <?php 
-	$sql = pg_query("SELECT university,count(*) from user_job  where owner_input = '$admin[id_admin]'    group by university;");
+	$sql = pg_query("SELECT university,count(*) from user_job     group by university;");
 	while ($arr = pg_fetch_array($sql)) {
 		
 ?>	
@@ -201,7 +201,7 @@ Highcharts.chart('container', {
         "series": [
 
 <?php 
-	$sql = pg_query("SELECT university,count(*) from user_job   where owner_input = '$admin[id_admin]'   group by university;");
+	$sql = pg_query("SELECT university,count(*) from user_job group by university;");
 	while ($arr = pg_fetch_array($sql)) {
 ?>	
         
@@ -210,7 +210,7 @@ Highcharts.chart('container', {
                 "id": "<?php echo $arr[university]; ?>",
                 "data": [
 <?php 
-	$sql2 = pg_query("SELECT major,count(*) from user_job  where  university = '$arr[university]'  and owner_input = '$admin[id_admin]'   group by major;");
+	$sql2 = pg_query("SELECT major,count(*) from user_job  where  university = '$arr[university]'     group by major;");
 	while ($arr2 = pg_fetch_array($sql2)) {
 ?>	
 

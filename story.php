@@ -57,7 +57,7 @@ include("check_student.php")
 						
 						<div class="row">
 
-<table id="example" class="" style="width:100%">
+<table id="" class="" style="width:100%">
         <thead>
             <tr>
                 <th></th>
@@ -67,7 +67,7 @@ include("check_student.php")
 <?php
 								$query = pg_query("SELECT * from story  a
 									inner join student b on a.id_user = b.id_no
-									order by a.date_story desc ;");
+									order by a.date_story desc limit 50 ;");
 								while ( $arr = pg_fetch_array($query) ) {
 							?>
             <tr>
@@ -82,11 +82,11 @@ include("check_student.php")
 								              <div class="details">
 								                <div class="detail">
 								                	<div class="row">
-								                		<div class="col-md-2">
+								                		<div class="col-md-2 col-xs-3">
 								                		<img src="images/student/<?php echo $arr[img]; ?>" alt="" width="100%">
 								                		</div>
 
-								                		<div class="col-md-10">
+								                		<div class="col-md-10  col-xs-9">
 									                		<div class="category">
 											                   <h6 >
 											                   		<a href="profile.php?eid=<?php echo $arr[id_no] ?>" title="">
@@ -109,7 +109,7 @@ include("check_student.php")
 								                	</a></h1>
 								                <p>
 								                 <?php 
-								                 echo mb_strimwidth($arr[detail_story], 0, 150, '....<a href="" title="">เพิ่มเติม</a>');
+								                 echo mb_strimwidth($arr[detail_story], 0, 150, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
 								                 ?> 
 								                
 

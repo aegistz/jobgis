@@ -229,7 +229,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 						</div>
 						
 						<div class="row">
-							<table id="example" class="" style="width:100%">
+							<table id="example" style="width:100%">
 								<thead>
 									<tr>
 										<th></th>
@@ -395,9 +395,13 @@ $num_request_list = pg_num_rows($sql_request_list);
 										?>
 										<article class="article-mini">
 											<div class="inner">
+
 												<figure>
+													<a href="news.php?q=<?php echo $arr[id_job];?>" title="">
 														<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+													</a>
 												</figure>
+													
 
 												<div class="padding">
 													<p>
@@ -469,7 +473,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 								<h1 class="aside-title">Popular <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
 								<div class="aside-body">
 									<?php
-																	$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 5 ;  ");
+																	$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com   where status_job = 'เปิดรับสมัครอยู่' limit 5 ;  ");
 																	while ( $arr = pg_fetch_array($sql) ) {
 									?>
 									<article class="article-mini">
@@ -512,7 +516,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 					</h1>
 					<div class="owl-carousel owl-theme carousel-1">
 						<?php
-														$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com limit 5 ;  ");
+														$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com where status_job = 'เปิดรับสมัครอยู่' limit 5 ;  ");
 														while ( $arr = pg_fetch_array($sql) ) {
 						?>
 						<article class="article">

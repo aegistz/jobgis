@@ -6,8 +6,24 @@ include("check_student.php");
 	
 	$email = $user['email'];
 
-	$sql = pg_query("SELECT * from job_company a inner join company b on a.id_com = b.id_com where id_job = '$_GET[q]' ;");
+	$sql = pg_query("SELECT * from job_company a inner join company b on a.id_com = b.id_com where id_job = '$_GET[q]' and status_job = 'เปิดรับสมัครอยู่';");
+	$num = pg_num_rows($sql);
 	$result = pg_fetch_array($sql);
+
+	if ( $num == 0 ) {
+		header('location:./');
+	}
+
+	$sql_resume = pg_query("SELECT * from resume where email = '$user[email]';");
+	$num_resume = pg_num_rows($sql_resume);
+
+	if ( $num_resume == 0 ) {
+		$mes = '<div class="alert alert-dismissible alert-danger">
+				  <button type="button" class="close" data-dismiss="alert">&times;</button>
+				  <strong>Warning!</strong> ท่านยังไม่ได้กรอกข้อมุล Resume   <a href="resume.php" title="">กรอกข้อมูล Resume ที่นี่</a>
+				</div>';
+	}
+
 
 
 
@@ -17,28 +33,47 @@ if ($_POST[send_request] == 'true') {
 	$sql_check = pg_query("SELECT * from user_request where email_user = '$user[email]'  and id_job = '$result[id_job]' ;");
 	$num = pg_num_rows($sql_check);
 
-	if ($num == 0) {
-		$sql = pg_query("INSERT INTO user_request (id_job , email_user , date_access , request) 
-		values ( '$result[id_job]', '$user[email]' , '$date' , 'รอการยืนยัน');");
+	$sql_resume = pg_query("SELECT * from resume where email = '$user[email]';");
+	$num_resume = pg_num_rows($sql_resume);
 
 
-		if ($sql) {
-			header('location:profile.php#request');
-		}else{
-			$mes = '<div class="alert alert-dismissible alert-danger">
-					  <button type="button" class="close" data-dismiss="alert">&times;</button>
-					  <strong>Warning!</strong> ไม่สามารถส่งข้อมูลได้ กรุณาลองอีกครั้ง
-					</div>';
-		}
+	if (  $num_resume != 0 ) {
+
+			if ($num == 0) {
+				$sql = pg_query("INSERT INTO user_request (id_job , email_user , date_access , request) 
+				values ( '$result[id_job]', '$user[email]' , '$date' , 'รอการยืนยัน');");
+
+
+				if ($sql) {
+					header('location:profile.php#request');
+				}else{
+					$mes = '<div class="alert alert-dismissible alert-danger">
+							  <button type="button" class="close" data-dismiss="alert">&times;</button>
+							  <strong>Warning!</strong> ไม่สามารถส่งข้อมูลได้ กรุณาลองอีกครั้ง
+							</div>';
+				}
+
+			}else{
+
+				$mes = '<div class="alert alert-dismissible alert-danger">
+							  <button type="button" class="close" data-dismiss="alert">&times;</button>
+							  <strong>Warning!</strong> ท่านเคยส่งใบสมัครไปยังสถานประกอบการนี้แล้ว  <a href="" title="">ตรวจสอบที่นี่</a>
+							</div>';
+
+			}
 	}else{
 		$mes = '<div class="alert alert-dismissible alert-danger">
-					  <button type="button" class="close" data-dismiss="alert">&times;</button>
-					  <strong>Warning!</strong> ท่านเคยส่งใบสมัครไปยังสถานประกอบการนี้แล้ว  <a href="" title="">ตรวจสอบที่นี่</a>
-					</div>';
-
+							  <button type="button" class="close" data-dismiss="alert">&times;</button>
+							  <strong>Warning!</strong> ท่านจำเป็นต้องกรอกข้อมูล  Resume ก่อนทำการสมัครตำแหน่งงานนี้  
+							  <a href="resume.php" title="">กรอกข้อมูล Resume ที่นี่</a>
+							</div>';
 	}
 
+	
+
 }
+
+
 	   $sql = "SELECT * FROM resume WHERE email = '$email'; ";
 	   $query = pg_query($sql);
 	   $resume = pg_fetch_array($query)
@@ -187,8 +222,14 @@ if ($_POST[send_request] == 'true') {
 						<p><?php echo $mes ; ?></p>
 						<div class="row">
 						<h3><label>ตรวจสอบ Resume ของคุณ 
-							<a href="resume-edit.php" class="btn btn-primary btn-sm " title=""><i class="icon ion-settings"></i>  แก้ไข</a>
-							
+
+<?php 
+	if ($num_resume != 0 ) {
+?>
+							<a href="resume-edit.php" class="btn btn-primary btn-sm " title="">
+								<i class="icon ion-settings"></i>  แก้ไข
+							</a>
+<?php } ?>							
 						</label></h3>
 						<div class="page-description">
 							<div class="row">
