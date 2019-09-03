@@ -7,7 +7,9 @@ include("check-company.php");
 
 
 $eid = $_GET[eid];
-$sql_profile = pg_query("SELECT * from student  where id_no = '$eid';");
+$sql_profile = pg_query("SELECT *,a.s_name as name , a.l_name as last_name  ,a.university as user_university , b.email as check_resume
+											from student a
+										full join resume b on a.email = b.email  where a.id_no = '$eid'    ;");
 $arr_profile = pg_fetch_array($sql_profile);
 
 
@@ -93,7 +95,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 											<div class="featured-author-body">
 												<div class="featured-author-count">
 													<div class="item">
-														<a href="#">
+														<a  data-toggle="tab" href="#menu1">
 															<div class="name">Posts</div>
 															<div class="value">
 																<?php
@@ -105,9 +107,14 @@ $arr_profile = pg_fetch_array($sql_profile);
 														</a>
 													</div>
 													<div class="item">
-														<a href="#">
+														<a  data-toggle="tab" href="#menu2">
 															<div class="name">View</div>
-															<div class="value">0</div>
+															<div class="vlaue">Resume</div>
+														</a>
+													</div>
+													<div class="item">
+														<a class="btn btn-warning btn-block"  data-toggle="tab" href="#menu2">
+															ยืนข้อเสนองาน
 														</a>
 													</div>
 												</div>
@@ -118,7 +125,8 @@ $arr_profile = pg_fetch_array($sql_profile);
 								
 							</aside>
 							<div class="row">
-								<div class="col-xs-12 col-md-8">
+								<div class="col-xs-12 col-md-8 tab-content">
+<div id="menu1" class="tab-pane fade in active">
 									<aside>
 										<?php
 											
@@ -179,14 +187,113 @@ $arr_profile = pg_fetch_array($sql_profile);
 											</div>
 										</article>
 										<?php } ?>
-										
-										
-										
 									</aside>
+</div>
+<div id="menu2" class="tab-pane fade">
+    <div class="row">
+									<div class="col-md-6 col-sm-6">
+										<div class="col-md-7">
+											<div class="form-group">
+												<p>
+													ชื่อ <?php echo $arr_profile[title_name] ;?>&nbsp;<?php echo $arr_profile[s_name] ;?>&nbsp;<?php echo $arr_profile[l_name] ;?><br>
+													โทรศัพท์มือถือ : <?php echo $arr_profile[phone] ;?><br>
+													E-mail : <?php echo $arr_profile[email] ;?><br>
+													ที่อยู่ : <?php echo $arr_profile[address] ;?> ต.<?php echo $arr_profile[tambon] ;?> อ.​<?php echo $arr_profile[amphoe] ;?> จ.<?php echo $arr_profile[province] ;?> <?php echo $arr_profile[zip_code] ;?>
+
+												</p>
+												<p>
+													<h5>การศึกษา</h5>
+													มหาวิทยาลัย : <?php echo $arr_profile[university] ;?> <br>
+													วุฒิการศึกษา : <?php echo $arr_profile[edu_back] ;?> <br>
+													ระดับการศึกษา : <?php echo $arr_profile[degree] ;?> <br>
+													คณะ : <?php echo $arr_profile[faculty] ;?> <br>
+													สาขา : <?php echo $arr_profile[sector] ;?> <br>
+													GPA : <?php echo $arr_profile[gpa] ;?> <br>
+												</p>
+												<p>
+													<h5>การทำงาน/การฝึกงาน</h5>
+													ชื่อบริษัท : <?php echo $arr_profile[company] ;?> <br>
+													ที่อยู่ติดต่อ : <?php echo $arr_profile[address_com] ;?> <br>
+													ตำแหน่ง : <?php echo $arr_profile[rank_com] ;?> <br>
+													หน้าที่รับผิดชอบ : <?php echo $arr_profile[role_com] ;?> <br>
+													เงินเดือน : <?php echo $arr_profile[salary_com] ;?> <br>
+													ตั้งแต่วันที่ : <?php echo $arr_profile[date_start] ;?> <br>
+													จนถึงวันที่ : <?php echo $arr_profile[date_end] ;?><br>
+												</p>
+												<p>
+													<h5>ประวัติการฝึกอบรม</h5>
+													หน่วยงานที่ฝึกอบรม : <?php echo $arr_profile[department] ;?><br>
+													หลักสูตร : <?php echo $arr_profile[course] ;?><br>
+													ระยะเวลาที่ฝึกอบรม : <?php echo $arr_profile[course_time] ;?> <br>
+
+												</p>
+												<p>
+													<h5>เป้าหมายในการทำงาน/ฝึกงาน</h5>
+													ลักษณะงานที่ต้องการ : <?php echo $arr_profile[work_n] ;?> <br>
+													สายงานที่ต้องการ <br>
+													1. <?php echo $arr_profile[work_1] ;?><br>
+													2. <?php echo $arr_profile[work_2] ;?><br>
+													3. <?php echo $arr_profile[work_3] ;?><br>
+													พื้นที่ฝึกงานที่ต้องการ <br>
+													1. <?php echo $arr_profile[area_1] ;?><br>
+													2. <?php echo $arr_profile[area_2] ;?><br>
+												</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+											<div class="col-md-7">
+												<div class="form-group">
+													
+													<p>
+														สัญชาติ : <?php echo $arr_profile[nationality] ;?><br>
+														ศาสนา : <?php echo $arr_profile[religion] ;?><br>
+														ส่วนสูง : <?php echo $arr_profile[hight] ;?><br>
+														วันเกิด : <?php echo $arr_profile[birthday] ;?><br>
+														สถานภาพทางทหาร : <?php echo $arr_profile[status] ;?>
+													</p>
+													<p>
+														<b>ทักษะทางภาษา</b> <br>
+														ภาษาไทย <br>
+														 	พูด : <?php echo $arr_profile[th_s] ;?> <br>
+														 	อ่าน : <?php echo $arr_profile[th_r] ;?><br>
+														 	เขียน : <?php echo $arr_profile[th_w] ;?><br>
+														ภาษาอังกฤษ <br>
+														 	พูด : <?php echo $arr_profile[en_s] ;?><br>
+														 	อ่าน : <?php echo $arr_profile[en_r] ;?><br>
+														 	เขียน : <?php echo $arr_profile[en_w] ;?><br>
+														ภาษาจีน <br>
+															พูด : <?php echo $arr_profile[cn_s] ;?><br>
+															อ่าน : <?php echo $arr_profile[cn_r] ;?><br>
+															เขียน : <?php echo $arr_profile[cn_w] ;?><br>
+														<b>ทักษะทางคอมพิวเตอร์ </b><br>
+														Microsoft office <br>
+														word : <?php echo $arr_profile[word] ;?><br>
+														excel : <?php echo $arr_profile[excel] ;?><br>
+														powerpoint : <?php echo $arr_profile[ppt] ;?><br>
+														<b>Adobe</b> <br>
+														photoshop : <?php echo $arr_profile[ps] ;?><br>
+														Illustrator : <?php echo $arr_profile[ai] ;?><br>
+														Premiere pro : <?php echo $arr_profile[pr] ;?><br>
+														Lightroom : <?php echo $arr_profile[lr] ;?><br>
+														<b>ทักษะทาง GIS</b><br>
+														Arcgis : <?php echo $arr_profile[arcgis] ;?><br>
+														Erdes : <?php echo $arr_profile[erdas] ;?><br>
+														Envi : <?php echo $arr_profile[envi] ;?><br>
+														QGIS : <?php echo $arr_profile[qgis] ;?><br>
+
+
+													</p>
+												</div>
+											</div>
+									</div>
+							</div>
+  </div>
+
 								</div>
 								<div class="col-xs-12 col-md-4">
 									<aside>
-										<h1 class="aside-title">ภาพประสบการณ์ </h1>
+										<h1 class="aside-title">ภาพ </h1>
 										<div class="block">
 											<div class="block-body">
 												<ul class="item-list-round" data-magnific="gallery">

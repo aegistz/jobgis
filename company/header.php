@@ -21,7 +21,7 @@ include("config.php");
 									<div class="input-group">
 										<input type="text" name="q" class="form-control" placeholder="ค้นหาแรงงานเฉพาะด้านที่นี่ ....">									
 										<div class="input-group-btn">
-											<button class="btn btn-primary"><i class="ion-search"></i></button>
+											<button class="btn btn-warning"><i class="ion-search"></i></button>
 										</div>
 									</div>
 								</div>
@@ -95,7 +95,17 @@ if($_COOKIE["status_com"]  == 'company' )
 							<li class="for-tablet"><a href="login.html">Login</a></li>
 							<li class="for-tablet"><a href="register.html">Register</a></li>
 							<li><a href="./">หน้าแรก</a></li>
-							<li><a href="request.php">ข้อมูลผู้สมัครงาน</a></li>
+							<li><a href="request.php">ข้อมูลผู้สมัครงาน  
+							<?php
+								$sql_request = pg_query("SELECT * from user_request a inner join job_company b on a.id_job = b.id_job where  request = 'รอการยืนยัน' and  id_com = '$id_com';"); 
+								$num_request = pg_num_rows($sql_request);
+								if ($num_request != 0) {
+									echo '<div class="badge">'.$num_request.' คน</div>';
+								}
+							?>
+								
+
+							</a></li>
 							<li><a href="search.php">ค้นหาแรงงาน</a></li>
 							
 							<li class="dropdown magz-dropdown"><a href="#">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>

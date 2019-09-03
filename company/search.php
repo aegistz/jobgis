@@ -82,7 +82,7 @@ $sql_work = pg_query("SELECT * from job_company a
 				<div class="row">
 					<div class="col-md-3 sidebar" id="sidebar">
 						<aside>
-							<h2 class="aside-title">ค้นหางาน</h2>
+							<h2 class="aside-title">ค้นหาแรงงาน</h2>
 							<div class="aside-body">
 <form class="checkbox-group" id="myForm" action="search.php"  autocomplete="on">
 									<div class="form-group">
@@ -91,31 +91,51 @@ $sql_work = pg_query("SELECT * from job_company a
 											placeholder="ค้นหาแรงงานเฉพาะด้านที่นี่ ...." 
 											value="<?php echo $_GET[eqc]; ?>">
 											<div class="input-group-btn">
-												<button class="btn btn-primary" type="submit">
+												<button class="btn btn-warning" type="submit">
 													<i class="ion-search"></i>
 												</button>
 											</div>
 										</div>
 									</div>
 									<br>
-							<!-- <h2 class="aside-title">พื้นที่ทำงาน</h2>
+									<h2 class="aside-title">ระดับการศึกษา</h2>
 										<div class="form-group row">
 											<div class="col-sm-12">
 												<select class="form-control" name="area">
 													<option value="">- - เลือกทั้งหมด - -</option>
-													<?php 
-														$sql_province = pg_query("SELECT * from prov order by pv_tn asc");
-														while ( $arr_pro = pg_fetch_array($sql_province)) {
-													?>
-													<option value="<?php echo $arr_pro[pv_tn];?>" <?php if($_GET[area] == $arr_pro[pv_tn]){ echo 'selected'; } ?> >
-														<?php echo $arr_pro[pv_tn]; ?>
-													</option>
-												<?php } ?>
-
+													<option value="">ปริญญาตรี หรือต่ำกว่า</option>
+													<option value="">ปริญญาโท</option>
+													<option value="">ปริญญาเอก</option>
 												</select>
 											</div>
 										</div>
-									<br> -->
+										<br>
+									<h2 class="aside-title">สถานะงานปัจจุบัน</h2>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<select class="form-control" name="area">
+													<option value="">- - เลือกทั้งหมด - -</option>
+													<option value="">ทำงานแล้ว</option>
+													<option value="">ยังไม่ได้ทำงาน</option>
+													<option value="">กำลังศึกษาต่อ</option>
+												</select>
+											</div>
+										</div>
+										<br>
+									<h2 class="aside-title">เป้าหมายการหางาน</h2>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<select class="form-control" name="area">
+													<option value="">- - เลือกทั้งหมด - -</option>
+													<option value="">งานประจำ</option>
+													<option value="">งานรายวัน</option>
+													<option value="">สหกิจศึกษา</option>
+													<option value="">ฝึกงาน</option>
+												</select>
+											</div>
+										</div>
+										<br>
+										<button type="submit" class="btn btn-warning btn-block">Search</button>
 </form>
 							</div>
 						</aside>
@@ -125,12 +145,14 @@ $sql_work = pg_query("SELECT * from job_company a
 							<ul class="nav nav-tabs-list">
 								<li class="active"><a data-toggle="tab" href="#user">
 									<?php
-										$sql_user = pg_query("SELECT * from student
-										where s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
+										$sql_user = pg_query("SELECT *,a.s_name as name , a.l_name as last_name  ,a.university as user_university , b.email as check_resume
+											from student a
+										full join resume b on a.email = b.email
+										where a.s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
 									?>
-								ผู้คน</a></li>
+								ผู้คนที่พบ</a></li>
 								
 							</ul>
 						</div>
@@ -152,18 +174,34 @@ $sql_work = pg_query("SELECT * from job_company a
 											<tr>
 												<td>
 													<article class="article-mini">
-														<div class="inner">
+														<div class="col-md-4">
+															<div class="inner">	
 															<figure>
 																<a href="profile.php?eid=<?php echo $arr2[id_no]; ?>">
 																	<img src="../images/student/<?php echo $arr2[img]; ?>">
 																</a>
 															</figure>
 															<div class="padding">
-																<h1><a href="profile.php?eid=<?php echo $arr2[id_no]; ?>"><?php echo $arr2[s_name],' ',$arr2[l_name] ; ?></a></h1>
-																<p><?php echo $arr2[university]; ?></p>
+																<h1><a href="profile.php?eid=<?php echo $arr2[id_no]; ?>">
+																	<i class="fa fa-search"></i> 
+																	<?php echo $arr2[name],' ',$arr2[last_name] ; ?></a></h1>
+																<p><?php echo $arr2[user_university]; ?> <br>
+																ข้อมูล Resume  :  <?php if ($arr2[check_resume] == '') {
+																	echo '<i><font color="red">ไม่มีข้อมูล</font></i>     ';
+																}else{ echo '<b><font color="green">มีข้อมูล</font></b>' ;} ?></p>
 																
 															</div>
 														</div>
+														</div>
+														<div class="col-md-8">
+															<ul>
+																<li>สถานะงาน : <?php echo $arr2[status_work]; ?></li>
+																<li>ประเภทงานกับการศึกษา : <?php echo $arr2[work_detail]; ?></li>
+																<li>ความพอใจในงานปัจจุบัน : <?php echo $arr2[work_complace]; ?></li>
+															</ul>
+														</div>
+														
+
 													</article>
 													<hr>
 												</td>
