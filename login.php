@@ -122,6 +122,7 @@ if(isset($_POST["login"]))
 							<h4>เข้าสู่ระบบ  <?php echo $_COOKIE["status"]; ?></h4>
 <form name="login" method="post" action="login.php">
 <span><?php echo $message; ?></span>
+
 								<div class="form-group">
 									<label>Username / Email</label>
 									<input type="text"  name="user_email"  class="form-control">

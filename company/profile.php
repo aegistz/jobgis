@@ -114,7 +114,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 													</div>
 													<div class="item">
 														<a class="btn btn-warning btn-block"  data-toggle="tab" href="#menu2">
-															ยืนข้อเสนองาน
+															<i class="fa fa-handshake-o" aria-hidden="true"></i> ยืนข้อเสนองาน
 														</a>
 													</div>
 												</div>

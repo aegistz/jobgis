@@ -6,37 +6,6 @@ include("check_student.php");
 $eqc = $_GET[eqc];
 
 
-if ( $_GET[time] == 'all_time' ) {
-	$time = '';
-}else if ($_GET[time] == 'day') {
-	$time = "and date_job > current_date - interval '1 days'";
-}else if ($_GET[time] == 'week') {
-	$time = "and date_job > current_date - interval '7 days'";
-}else if ($_GET[time] == 'month') {
-	$time = "and date_job > current_date - interval '30 days'";
-}
-
-
-if ($_GET[type] == 'all_type') {
-	$type = '';
-}else if ($_GET[type] == 'full_time') {
-	$type = 'งานประจำ';
-}else if ($_GET[type] == 'daily_work') {
-	$type = 'งานรายวัน';
-}else if ($_GET[type] == 'apprentice') {
-	$type = 'ฝึกงาน';
-}else if ($_GET[type] == 'coop') {
-	$type = 'สหกิจศึกษา';
-}
-
-
-$sql_work = pg_query("SELECT * from job_company a
-											inner join company b on a.id_com = b.id_com
-											where name_job like '%$eqc%'
-											and type_job like  '%$type%'
-											$time
-
-											;  ");
 ?>
 <html>
 	<head>
@@ -101,11 +70,11 @@ $sql_work = pg_query("SELECT * from job_company a
 									<h2 class="aside-title">ระดับการศึกษา</h2>
 										<div class="form-group row">
 											<div class="col-sm-12">
-												<select class="form-control" name="area">
+												<select class="form-control" name="degree">
 													<option value="">- - เลือกทั้งหมด - -</option>
-													<option value="">ปริญญาตรี หรือต่ำกว่า</option>
-													<option value="">ปริญญาโท</option>
-													<option value="">ปริญญาเอก</option>
+													<option value="ปริญญาตรี">ปริญญาตรี หรือต่ำกว่า</option>
+													<option value="ปริญญาโท">ปริญญาโท</option>
+													<option value="ปริญญาเอก">ปริญญาเอก</option>
 												</select>
 											</div>
 										</div>
@@ -113,11 +82,11 @@ $sql_work = pg_query("SELECT * from job_company a
 									<h2 class="aside-title">สถานะงานปัจจุบัน</h2>
 										<div class="form-group row">
 											<div class="col-sm-12">
-												<select class="form-control" name="area">
+												<select class="form-control" name="work_status">
 													<option value="">- - เลือกทั้งหมด - -</option>
-													<option value="">ทำงานแล้ว</option>
-													<option value="">ยังไม่ได้ทำงาน</option>
-													<option value="">กำลังศึกษาต่อ</option>
+													<option value="ทำงานแล้ว">ทำงานแล้ว</option>
+													<option value="ยังไม่ได้ทำงาน">ยังไม่ได้ทำงาน</option>
+													<option value="กำลังศึกษาต่อ">กำลังศึกษาต่อ</option>
 												</select>
 											</div>
 										</div>
@@ -125,12 +94,12 @@ $sql_work = pg_query("SELECT * from job_company a
 									<h2 class="aside-title">เป้าหมายการหางาน</h2>
 										<div class="form-group row">
 											<div class="col-sm-12">
-												<select class="form-control" name="area">
+												<select class="form-control" name="target_work">
 													<option value="">- - เลือกทั้งหมด - -</option>
-													<option value="">งานประจำ</option>
-													<option value="">งานรายวัน</option>
-													<option value="">สหกิจศึกษา</option>
-													<option value="">ฝึกงาน</option>
+													<option value="งานประจำ">งานประจำ</option>
+													<option value="งานรายวัน">งานรายวัน</option>
+													<option value="สหกิจศึกษา">สหกิจศึกษา</option>
+													<option value="ฝึกงาน">ฝึกงาน</option>
 												</select>
 											</div>
 										</div>
@@ -148,7 +117,7 @@ $sql_work = pg_query("SELECT * from job_company a
 										$sql_user = pg_query("SELECT *,a.s_name as name , a.l_name as last_name  ,a.university as user_university , b.email as check_resume
 											from student a
 										full join resume b on a.email = b.email
-										where a.s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
+										where a.s_name like '%$eqc%' and status_user = 'ยืนยัน' order by check_resume asc;  ");
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
 									?>
@@ -250,14 +219,17 @@ $sql_work = pg_query("SELECT * from job_company a
 			$(document).ready(function() {
 			$('#example').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			$('#example2').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			$('#example3').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			} );

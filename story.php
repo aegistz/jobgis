@@ -57,7 +57,7 @@ include("check_student.php")
 						
 						<div class="row">
 
-<table id="" class="" style="width:100%">
+<table id="example" class="" style="width:100%">
         <thead>
             <tr>
                 <th></th>
@@ -219,6 +219,7 @@ include("check_student.php")
 			$(document).ready(function() {
 			    $('#example').DataTable({
 			    	 "searching": false,
+					 "aaSorting" : [],
 			    	  "aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			    });
 

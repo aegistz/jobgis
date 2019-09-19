@@ -237,7 +237,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 								</thead>
 								<tbody>
 									<?php
-										$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com  where status_job = 'เปิดรับสมัครอยู่';  ");
+										$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com  where status_job = 'เปิดรับสมัครอยู่' order by date_job desc;  ");
 										while ( $arr = pg_fetch_array($sql) ) {
 									?>
 									<tr>
@@ -568,6 +568,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 				$(document).ready(function() {
 				$('#example').DataTable({
 					"searching": false,
+					"aaSorting" : [],
 					"aLengthMenu": [[5, 25, 50, 100], [5, 25, 50, 100, "All"]]
 				});
 				} );

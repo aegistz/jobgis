@@ -113,7 +113,35 @@ include("check_admin.php");
 						        </thead>
 						        <tbody>
 <?php 
-	$sql = pg_query("SELECT * from user_job where owner_input = '$admin[id_admin]'   ;");
+	$sql = pg_query("SELECT id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email from user_job    group by id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email ;");
 	while ($arr = pg_fetch_array($sql)) {
 		
 ?>						        	

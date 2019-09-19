@@ -70,6 +70,10 @@ if (isset($_GET[eid])) {
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/demo.css">
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
+		<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+
+<!-- Include JS file. -->
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/js/froala_editor.pkgd.min.js'></script>
 		<style>
 		.image-preview-input {
 		position: relative;
@@ -358,7 +362,7 @@ if (isset($_GET[eid])) {
 								<div class="col-xs-12 col-md-8">
 									<aside>
 										<article class="col-md-12 article-list" id="story">
-											<form enctype="multipart/form-data" method="post">
+<form enctype="multipart/form-data" method="post" >
 												<div class="col-md-12">
 													<h3 class="title">บอกเล่าเรื่องราวใหม่</h3>
 												</div>
@@ -571,7 +575,9 @@ if (isset($_GET[eid])) {
 													<div class="padding">
 														<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 														<p>
-															<?php echo $arr[detail_job]; ?>
+															<?php
+														echo mb_strimwidth($arr[detail_job], 0, 100, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														?>
 														</p>
 													</div>
 												</div>
@@ -879,28 +885,30 @@ else {    ?>
 			}
 			</script>
 
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
+			<script>
+			// Get the modal
+			var modal = document.getElementById("myModal");
 
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById("myImg");
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
-}
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("myImg");
+			var modalImg = document.getElementById("img01");
+			var captionText = document.getElementById("caption");
+			img.onclick = function(){
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() { 
-  modal.style.display = "none";
-}
-</script>
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() { 
+			  modal.style.display = "none";
+			}
+			</script>
+
+		
 
 
 		</body>

@@ -57,28 +57,54 @@ include("check-company.php");
 							<div class="aside-body">
 
 <?php 
-	$sql = pg_query("SELECT * from job_company ORDER BY RANDOM() limit 5 ;");
-	$check = pg_num_rows($sql);
-	while( $arr = pg_fetch_array($sql) ){
-		
-			
-?>										
+	$sql = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+inner join student b on a.email_user = b.email
+inner join job_company c on a.id_job = c.id_job
+where id_com = $id_com and request = 'รอการยืนยัน'  and a.id_job = '$_GET[q]' ;");
+	while ($arr = pg_fetch_array($sql)) {
+?>
 								<article class="article-mini">
 									<div class="inner">
 										<figure>
-											<a href="news.php">
-												<img src="../images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+											<a href="profile.php?eid=<?php echo $arr[id_no]; ?>">
+												<img src="../images/student/<?php echo $arr[profile_stu]; ?>">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
 											<p>
-												<?php echo $arr[detail_job]; ?> 
+												
+
+<div class="btn-group">
+
+<?php if ($arr[request] == 'รอการยืนยัน') { ?>
+														<div class="btn-group">
+														  <button type="button" class="btn-sm btn-warning">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+<?php }  ?>
+													<button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+													<i class="fa fa-bars"></i> </button>
+													<ul class="dropdown-menu" role="menu">
+
+														<li><a href="index.php?type=submit_request&id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> ยืนยันการสมัคร ตรวจสอบ Resume</a></li>
+
+
+													</ul>
+												</div>
 											</p>
+											<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[title_name],$arr[s_name],' ',$arr[l_name] ; ?></a></h1>
+											<div class="detail">
+												<div class="category"><a href="#"><?php echo $arr[type_job]; ?></a></div>
+												<div class="time"><?php echo $arr[date_access]; ?></div>
+											</div>
+											<p>ตำแหน่งที่สมัคร : <?php echo $arr[name_job]; ?>  </p>
+											<br>
 										</div>
 									</div>
 								</article>
-<?php  } ?>
+
+<?php } ?>
 
 							</div>
 						</aside>

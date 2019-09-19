@@ -52,6 +52,47 @@ if ($_GET[type] =='submit_request') {
 		<link rel="stylesheet" href="../css/demo.css">
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
+<style>
+			.row.content {
+				height: 620px
+			}
+			.anyClass {
+height: 450px;
+				
+
+				overflow-y: scroll;
+			}
+			.largeWidth {
+				width: 100%;
+				height: 620px;
+			}
+
+			.example button {
+  float: left;
+  background-color: #4E3E55;
+  color: white;
+  border: none;
+  box-shadow: none;
+  font-size: 17px;
+  font-weight: 500;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 15px 35px;
+  margin: 26px 5px 0 5px;
+  cursor: pointer; 
+}
+.example button:focus{
+  outline: none; 
+}
+.example button:hover{
+  background-color: #33DE23; 
+}
+.example button:active{
+  background-color: #81ccee; 
+}
+		</style>
+
 	</head>
 	<body class="skin-blue">
 		<?php include 'header.php'; ?>
@@ -63,7 +104,16 @@ if ($_GET[type] =='submit_request') {
 							<div class="col-md-12">
 								<h4 class="page-title">
 								รายการประกาศรับสมัครงาน/ฝึกงาน/สหกิจศึกษา
-								<a href="add-job.php" class="btn btn-warning"><i class="fa fa-plus"></i> เพิ่มประกาศรับใหม่</a>
+									<div class="btn-group">
+									  <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+									    <i class="fa fa-plus"></i> เพิ่มประกาศรับใหม่
+									  </button>
+									  <div class="dropdown-menu">
+									    <a class="dropdown-item btn"  href="add-job.php">พนักงานประจำ/รายวัน</a>
+									    <a class="dropdown-item btn" href="#">สหกิจศึกษา/ฝึกงาน</a>
+									    <a class="dropdown-item btn" href="#">นักวิจัย</a>
+									  </div>
+									</div>
 								</h4>
 								<p class="page-subtitle">ระบบจับคู่นักศึกษากับสถานประกอบการ</p>
 							</div>
@@ -138,7 +188,9 @@ if ($_GET[type] =='submit_request') {
 										</div>
 										<h1><a href="view-job.php?q=<?php echo $job_com[id_job]; ?>"><?php echo $job_com[name_job]; ?></a></h1>
 										<p>
-											<?php echo $job_com[detail_job]; ?>
+											<?php
+															echo mb_strimwidth($job_com[detail_job], 0, 200, '....<a href="view-job.php?q='.$job_com[id_job].'" title="">เพิ่มเติม</a>');
+														?>
 										</p>
 									</div>
 								</div>
@@ -240,7 +292,7 @@ if ($_GET[type] =='submit_request') {
 						</aside>
 						<aside>
 							<h1 class="aside-title">ผู้สมัครงานล่าสุด</h1>
-							<div class="aside-body">
+							<div class="aside-body anyClass">
 
 <?php 
 	$sql = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
@@ -249,7 +301,7 @@ inner join job_company c on a.id_job = c.id_job
 where id_com = $id_com and request = 'รอการยืนยัน'   ;");
 	while ($arr = pg_fetch_array($sql)) {
 ?>
-								<article class="article-mini">
+								<article class="article-mini ">
 									<div class="inner">
 										<figure>
 											<a href="profile.php?eid=<?php echo $arr[id_no]; ?>">

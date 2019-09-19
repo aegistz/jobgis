@@ -341,14 +341,17 @@ $sql_work = pg_query("SELECT * from job_company a
 			$(document).ready(function() {
 			$('#example').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			$('#example2').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			$('#example3').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			} );
