@@ -119,7 +119,7 @@ if(isset($_POST["login"]))
 				<div class="box-wrapper">				
 					<div class="box box-border">
 						<div class="box-body">
-							<h4>เข้าสู่ระบบ  <?php echo $_COOKIE["status"]; ?></h4>
+							<h4>เข้าสู่ระบบ  </h4>
 <form name="login" method="post" action="login.php">
 <span><?php echo $message; ?></span>
 
