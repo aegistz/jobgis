@@ -6,6 +6,7 @@ $success = '';
  
 if( $_POST[upload_img] == 'true' ) 
 {
+  
     // get uploaded file name
     $image = $_FILES["file"]["name"];
  
@@ -86,7 +87,7 @@ if( $_POST[upload_img] == 'true' )
 
 
 if( $_POST[upload_story] == 'true' ) 
-{
+{  $error = 'File is empty, please select image to upload.';
     // get uploaded file name
     $image = $_FILES["file"]["name"];
  
