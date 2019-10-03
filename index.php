@@ -308,7 +308,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 														<h2 class="name">
 
 															<a class="btn btn-primary btn-sm" href="profile.php" title="">
-															คุณ <?php echo $_COOKIE["status"]; ?> 
+															คุณ <?php echo $user[s_name],' ',$user[l_name]; ?> 
 															</a>
 															<div class="desc"><b><?php echo $user[email]; ?></b> </div>
 														</h2>
