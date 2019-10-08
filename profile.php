@@ -356,7 +356,7 @@ if (isset($_GET[eid])) {
 										</div>
 									</div>
 								</div>
-								
+								<?php echo $error; ?>
 							</aside>
 							<div class="row">
 								<div class="col-xs-12 col-md-8">
