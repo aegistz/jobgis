@@ -2,7 +2,7 @@
 <?php
 session_start();
 include("config.php");
-include("check_student.php")
+include("check_student.php");
 
 ?>
 <html>
