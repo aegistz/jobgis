@@ -3,8 +3,42 @@
 session_start();
 include("config.php");
 include("check_student.php");
+
+	$id = $_GET[stoid];
+
 	$sql = pg_query("SELECT * from story a inner join student b on a.id_user = b.id_no where id_story = '$_GET[stoid]' ;");
 	$result = pg_fetch_array($sql);
+
+	date_default_timezone_set('Asia/Bangkok');
+	$year =  date("Y"); 
+	$month =  date("m"); 
+
+	$now_day = date("Y-m-d");
+	$date_time = date("Y-m-d H:i:s");
+
+
+
+	if ( isset($_POST[comment]) ) {
+
+	$user_comment = $user[email];
+	$detail_comment = $_POST[detail_comment];
+	$date_comment = $date_time;
+    $sql = "INSERT INTO comment (user_comment,detail_comment,date_comment,status,id_story) values ( '$user_comment','$detail_comment','$date_comment','show','$_GET[stoid]');";
+    $query = pg_query($sql);
+    header('location:story_detail.php?stoid='.$_GET[stoid].'') ; 
+
+	}
+
+	if ( isset($_POST[update]) ) {
+
+	$no_id = $_POST[no_id];
+
+    $sql = "UPDATE comment set status = 'close' where no_id = '$no_id';  ";
+	$query = pg_query($sql);
+
+	}
+
+
 ?>
 <html>
 	<head>
@@ -39,6 +73,15 @@ include("check_student.php");
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style type="text/css">
+			.circle{
+			    height: auto;
+			    width: auto;
+			    border: 3px solid #fff; 
+			    border-radius: 50%; 
+			    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+			}
+		</style>
 	</head>
 	<body class="skin-blue">
 		<?php include 'header.php'; ?>
@@ -99,7 +142,89 @@ include("check_student.php");
 								</p>
 								
 							</article>
-							
+
+							<div>
+								
+								<h5>Comments</h5>
+							<table>
+<?php
+	$sql = pg_query("SELECT * from story a inner join comment b on a.id_story = b.id_story where a.id_story = '$_GET[stoid]'; ");
+	$num = pg_num_rows($sql);
+	if($num < 1){
+ ?>
+ 								<tbody>
+ 									<tr>
+											<div class="comment_container d-flex flex-row">
+												<div>
+													<div class="comment_image">
+														<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc_e-W3V8EDrruqEM6whqINxXtg0tn-hDQXPQoQGRELJUKpx0b" alt="">
+													</div>
+												</div>
+												<div class="">
+													<p class="">ยังไม่มี comment ขณะนี้</p>
+												</div>
+											</div>
+										</tr>
+<?php 
+				}else {
+				$sql = pg_query("SELECT * from story a inner join comment b on a.id_story = b.id_story where a.id_story = b.id_story and status = 'show' order by no_id asc;");
+				while ($arr = pg_fetch_array($sql) ) {
+
+				$sql2 = pg_query("SELECT * from comment a inner join student b on a.user_comment = b.email where a.user_comment = '$arr[user_comment]'; ");
+				$arr2 = pg_fetch_array($sql2);
+				$num2 = pg_num_rows($sql2);
+
+				$sql3 = pg_query("SELECT * from comment where user_comment = '$_COOKIE[email]' and id_story = '$_GET[stoid]'; ");
+				$arr3 = pg_fetch_array($sql3);
+					
+?>
+<form method="post">
+										<tr>
+											<div class="">
+												<div>
+													<?php if ($num2 < 1) { ?>
+														<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc_e-W3V8EDrruqEM6whqINxXtg0tn-hDQXPQoQGRELJUKpx0b">
+													<?php }else { ?>
+														<img  class="img-circle" src="images/student/<?php echo $arr2[img]; ?>" alt="" style="width: 50px">
+													<?php } ?>
+												</div>
+												<div class="">
+													<?php if ($num2 < 1 ) { ?>
+														<span class=""><?php echo $arr[email]; ?></span>
+													<?php } else{ ?>
+														<span class=""><a href="profile.php?id=<?php echo $arr[email]; ?>"><?php echo $arr2[s_name]; ?> <?php echo $arr2[l_name]; ?></a></span>
+													<?php } ?>
+													<span class="">|</span>
+													<span class=""><?php echo $arr[date_comment]; ?></span>
+													<span class="">|</span>
+													<?php if ($_COOKIE[email] == $arr[email] ) { ?>
+		                                      			<input type="hidden" name="no_id" value="<?php echo $arr[no_id]; ?>">
+														<span class="">
+															<button name="update" class="btn btn-primary">x</button>
+														</span>
+													<?php }  ?>
+
+												</div>
+												<p class=""><?php echo $arr[detail_comment]; ?><?php echo $arr[status]; ?><?php echo $arr[id_story]; ?></p>
+											</div>
+										</tr>
+</form>
+<?php } } ?>
+								</tbody>
+							</table>						
+							</div>
+							<div>
+								<?php echo $sql3 ?>
+								<h5>Leave a comment</h5>
+
+						<div class="">
+<form method="post" action="">
+								<input  class="form-control form-control-sm"  value="ผู้ส่ง : <?php echo $user[email]; ?>" readonly="" ><br>
+								<textarea  class="form-control form-control-lg" name="detail_comment" placeholder="พิมพ์ข้อความที่นี่" required="required" style="width: 100% "></textarea>
+								<button  type="submit" class="btn btn-primary" name="comment" style="width: 100%">send message</button>
+</form>
+						</div>
+							</div>
 							
 						</div>
 					</div>
