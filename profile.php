@@ -412,7 +412,7 @@ if (isset($_GET[eid])) {
 										<article class="col-md-12 article-list">
 											<div class="inner">
 												<figure>
-													<!-- <?php echo $arr[id_story]; ?> -->
+													<?php echo $arr[id_story]; ?>
 													<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
 														<img src="images/story/<?php echo $arr[img_story]; ?>">
 													</a>

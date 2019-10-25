@@ -23,7 +23,7 @@ include("check_student.php");
 	$user_comment = $user[email];
 	$detail_comment = $_POST[detail_comment];
 	$date_comment = $date_time;
-    $sql = "INSERT INTO comment (user_comment,detail_comment,date_comment,status,id_story) values ( '$user_comment','$detail_comment','$date_comment','show','$_GET[stoid]');";
+    $sql = "INSERT INTO comment (user_comment,detail_comment,date_comment,status,id_story,iduser_comment) values ( '$user_comment','$detail_comment','$date_comment','show','$_GET[stoid]','$user[id_no]');";
     $query = pg_query($sql);
     header('location:story_detail.php?stoid='.$_GET[stoid].'') ; 
 
@@ -148,7 +148,7 @@ include("check_student.php");
 								<h5>Comments</h5>
 							<table>
 <?php
-	$sql = pg_query("SELECT * from story a inner join comment b on a.id_story = b.id_story where a.id_story = '$_GET[stoid]'; ");
+	$sql = pg_query("SELECT * from story a inner join comment b on a.id_story = b.id_story where a.id_story = '$id'; ");
 	$num = pg_num_rows($sql);
 	if($num < 1){
  ?>
@@ -167,14 +167,14 @@ include("check_student.php");
 										</tr>
 <?php 
 				}else {
-				$sql = pg_query("SELECT * from story a inner join comment b on a.id_story = b.id_story where a.id_story = b.id_story and status = 'show' order by no_id asc;");
+				$sql = pg_query("SELECT * from story a inner join comment b on a.id_story = b.id_story where a.id_story = $id and status = 'show' order by no_id asc;");
 				while ($arr = pg_fetch_array($sql) ) {
 
 				$sql2 = pg_query("SELECT * from comment a inner join student b on a.user_comment = b.email where a.user_comment = '$arr[user_comment]'; ");
 				$arr2 = pg_fetch_array($sql2);
 				$num2 = pg_num_rows($sql2);
 
-				$sql3 = pg_query("SELECT * from comment where user_comment = '$_COOKIE[email]' and id_story = '$_GET[stoid]'; ");
+				$sql3 = pg_query("SELECT * from comment where user_comment = '$user[email]' and id_story = '$id'; ");
 				$arr3 = pg_fetch_array($sql3);
 					
 ?>
@@ -190,14 +190,14 @@ include("check_student.php");
 												</div>
 												<div class="">
 													<?php if ($num2 < 1 ) { ?>
-														<span class=""><?php echo $arr[email]; ?></span>
+														<span class=""><?php echo $arr[user_comment]; ?></span>
 													<?php } else{ ?>
-														<span class=""><a href="profile.php?id=<?php echo $arr[email]; ?>"><?php echo $arr2[s_name]; ?> <?php echo $arr2[l_name]; ?></a></span>
+														<span class=""><a href="profile.php?eid=<?php echo $arr[iduser_comment]; ?>"><?php echo $arr2[s_name]; ?> <?php echo $arr2[l_name]; ?></a></span>
 													<?php } ?>
 													<span class="">|</span>
 													<span class=""><?php echo $arr[date_comment]; ?></span>
 													<span class="">|</span>
-													<?php if ($_COOKIE[email] == $arr[email] ) { ?>
+													<?php if ($user[email] == $arr[user_comment] ) { ?>
 		                                      			<input type="hidden" name="no_id" value="<?php echo $arr[no_id]; ?>">
 														<span class="">
 															<button name="update" class="btn btn-primary">x</button>
@@ -214,7 +214,6 @@ include("check_student.php");
 							</table>						
 							</div>
 							<div>
-								<?php echo $sql3 ?>
 								<h5>Leave a comment</h5>
 
 						<div class="">
