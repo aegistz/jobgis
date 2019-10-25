@@ -6,11 +6,13 @@ include("check_student.php");
 include("api_service/profile_api.php");
 //include("api_service/profile_delete.php");
 
+
+
 if ($_GET[type] == 'delete_story') {
 
 	$id_story = $_GET[id_story];
 
-	$sql_delete = pg_query("DELETE from story where id_story = '$id_story' and id_user = '$id'  ;");
+	$sql_delete = pg_query("DELETE from story where id_story = '$id_story' and id_user = '$user[id_no]'  ;");
 	
 	
 	header('location:profile.php#story');
@@ -23,7 +25,7 @@ if ($_GET[type] == 'delete_story') {
 if ($_GET[type] =='delete_img_post') {
 	$imgid = $_GET[imgid];
 	$sqlsss = "DELETE from photo_user where id_img = '$imgid' and id_user = '$id'  ";
-	$sql_delete = pg_query("DELETE from photo_user where id_img = '$imgid' and id_user = '$id'  ;");
+	$sql_delete = pg_query("DELETE from photo_user where id_img = '$imgid' and id_user = '$user[id_no]'  ;");
 	//header('location:profile.php');
 }
 
@@ -190,7 +192,7 @@ if (isset($_GET[eid])) {
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 	</head>
 	<body class="skin-blue">
-		<?php include 'header.php'; ?>
+	<?php include 'header.php'; ?> 
 		<section class="home">
 			<div class="container">
 				<div class="row">
@@ -412,7 +414,6 @@ if (isset($_GET[eid])) {
 										<article class="col-md-12 article-list">
 											<div class="inner">
 												<figure>
-													<?php echo $arr[id_story]; ?>
 													<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
 														<img src="images/story/<?php echo $arr[img_story]; ?>">
 													</a>

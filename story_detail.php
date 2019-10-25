@@ -205,7 +205,7 @@ include("check_student.php");
 													<?php }  ?>
 
 												</div>
-												<p class=""><?php echo $arr[detail_comment]; ?><?php echo $arr[status]; ?><?php echo $arr[id_story]; ?></p>
+												<p class=""><?php echo $arr[detail_comment]; ?></p>
 											</div>
 										</tr>
 </form>
