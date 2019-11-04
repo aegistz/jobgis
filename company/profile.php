@@ -3,28 +3,16 @@
 session_start();
 include("config.php");
 include("check-company.php");
-
-
-
 $eid = $_GET[eid];
 $sql_profile = pg_query("SELECT *,a.s_name as name , a.l_name as last_name  ,a.university as user_university , b.email as check_resume
 											from student a
 										full join resume b on a.email = b.email  where a.id_no = '$eid'    ;");
 $arr_profile = pg_fetch_array($sql_profile);
-
-
-
-
-
 ?>
-
-
-
-
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="description" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC">
 		<meta name="author" content="GISTNU by Teerayoot injun Teerayoot5056@gmail.com">
@@ -52,31 +40,24 @@ $arr_profile = pg_fetch_array($sql_profile);
 		<link rel="stylesheet" href="../css/skins/blue.css">
 		<link rel="stylesheet" href="../css/demo.css">
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
-
-
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
-
 	</head>
-
 	<body class="skin-blue">
-
 		<?php include 'header.php'; ?>
-
 		<section class="home">
 			<div class="container">
 				<div class="row">
-
-						<div class="col-md-12">
-							<div class="sidebar-title for-tablet">Sidebar</div>
-							<aside>
-								<div class="aside-body">
-									<div class="featured-author">
-										<div class="featured-author-inner">
-											<?php if($arr_profile[bg_img] != ''){ ?>
-											<div class="featured-author-cover divbutton" style="background-image: url('../images/student/<?php echo $arr_profile[bg_img]; ?>');">
+					<div class="col-md-12">
+						<div class="sidebar-title for-tablet">Sidebar</div>
+						<aside>
+							<div class="aside-body">
+								<div class="featured-author">
+									<div class="featured-author-inner">
+										<?php if($arr_profile[bg_img] != ''){ ?>
+										<div class="featured-author-cover divbutton" style="background-image: url('../images/student/<?php echo $arr_profile[bg_img]; ?>');">
 											<?php }else{ ?>
 											<div class="featured-author-cover divbutton" style="background-image: url('../images/student/bg_img.png');">
-											<?php } ?>
+												<?php } ?>
 												<div class="featured-author-center">
 													<figure class="featured-author-picture">
 														<?php if($arr_profile[img] == ''){ ?>
@@ -95,7 +76,7 @@ $arr_profile = pg_fetch_array($sql_profile);
 											<div class="featured-author-body">
 												<div class="featured-author-count">
 													<div class="item">
-														<a  data-toggle="tab" href="#menu1">
+														<a  data-toggle="tab" href="#menu1" >
 															<div class="name">Posts</div>
 															<div class="value">
 																<?php
@@ -113,8 +94,8 @@ $arr_profile = pg_fetch_array($sql_profile);
 														</a>
 													</div>
 													<div class="item">
-														<a class="btn btn-warning btn-block"  data-toggle="tab" href="#menu2">
-															<i class="fa fa-handshake-o" aria-hidden="true"></i> ยืนข้อเสนองาน
+														<a class="btn  btn-block"  data-toggle="tab" href="#menu3">
+															<i class="fa fa-handshake-o" aria-hidden="true"></i> <b>ยืนข้อเสนองาน</b>
 														</a>
 													</div>
 												</div>
@@ -126,170 +107,242 @@ $arr_profile = pg_fetch_array($sql_profile);
 							</aside>
 							<div class="row">
 								<div class="col-xs-12 col-md-8 tab-content">
-<div id="menu1" class="tab-pane fade in active">
-									<aside>
-										<?php
-											
-											$query = pg_query("SELECT * from story where id_user = '$eid' order by id_story desc ;");
-											$num = pg_num_rows($query);
-											if( $num != 0 ) {
-												while( $arr = pg_fetch_array($query)  ){
-										?>
-										<article class="col-md-12 article-list">
-											<div class="inner">
-												<figure>
-													<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
-														<img src="../images/story/<?php echo $arr[img_story]; ?>">
-													</a>
-												</figure>
-												<div class="details">
-													<div class="detail">
-														<div class="category">
-															<a href=""><?php echo $arr[tag_story]; ?></a>
+									<div id="menu1" class="tab-pane fade in active">
+										<aside>
+											<?php
+												
+												$query = pg_query("SELECT * from story where id_user = '$eid' order by id_story desc ;");
+												$num = pg_num_rows($query);
+												if( $num != 0 ) {
+													while( $arr = pg_fetch_array($query)  ){
+											?>
+											<article class="col-md-12 article-list">
+												<div class="inner">
+													<figure>
+														<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
+															<img src="../images/story/<?php echo $arr[img_story]; ?>">
+														</a>
+													</figure>
+													<div class="details">
+														<div class="detail">
+															<div class="category">
+																<a href=""><?php echo $arr[tag_story]; ?></a>
+															</div>
+															<div class="time"><?php echo $arr[date_story]; ?></div>
 														</div>
-														<div class="time"><?php echo $arr[date_story]; ?></div>
+														<h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>"><?php echo $arr[title_story]; ?></a></h1>
+														<p>
+															<?php
+															echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
+															?>
+														</p>
+														<footer>
+															<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
+														</footer>
 													</div>
-													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>"><?php echo $arr[title_story]; ?></a></h1>
-													<p>
-														<?php
-														echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
-														?>
-													</p>
-													<footer>
-														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
-													</footer>
 												</div>
-											</div>
-										</article>
-										<?php }    }else{  ?>
-										<article class="col-md-12 article-list">
-											<div class="inner">
-												<figure>
-													<a href="">
-														<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
-													</a>
-												</figure>
-												<div class="details">
-													<div class="detail">
-														<div class="category">
-															<a href="#">ประสบการณ์</a>
+											</article>
+											<?php }    }else{  ?>
+											<article class="col-md-12 article-list">
+												<div class="inner">
+													<figure>
+														<a href="">
+															<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
+														</a>
+													</figure>
+													<div class="details">
+														<div class="detail">
+															<div class="category">
+																<a href="#">ประสบการณ์</a>
+															</div>
+															<div class="time">December 26, 2016</div>
 														</div>
-														<div class="time">December 26, 2016</div>
+														<h1><a href="#">..............</a></h1>
+														<p>
+															..............
+														</p>
+														<footer>
+															<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
+														</footer>
 													</div>
-													<h1><a href="#">..............</a></h1>
-													<p>
-														..............
-													</p>
-													<footer>
-														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
-													</footer>
 												</div>
-											</div>
-										</article>
-										<?php } ?>
-									</aside>
-</div>
-<div id="menu2" class="tab-pane fade">
-    <div class="row">
-									<div class="col-md-6 col-sm-6">
-										<div class="col-md-7">
-											<div class="form-group">
-												<p>
-													ชื่อ <?php echo $arr_profile[title_name] ;?>&nbsp;<?php echo $arr_profile[s_name] ;?>&nbsp;<?php echo $arr_profile[l_name] ;?><br>
-													โทรศัพท์มือถือ : <?php echo $arr_profile[phone] ;?><br>
-													E-mail : <?php echo $arr_profile[email] ;?><br>
-													ที่อยู่ : <?php echo $arr_profile[address] ;?> ต.<?php echo $arr_profile[tambon] ;?> อ.​<?php echo $arr_profile[amphoe] ;?> จ.<?php echo $arr_profile[province] ;?> <?php echo $arr_profile[zip_code] ;?>
-
-												</p>
-												<p>
-													<h5>การศึกษา</h5>
-													มหาวิทยาลัย : <?php echo $arr_profile[university] ;?> <br>
-													วุฒิการศึกษา : <?php echo $arr_profile[edu_back] ;?> <br>
-													ระดับการศึกษา : <?php echo $arr_profile[degree] ;?> <br>
-													คณะ : <?php echo $arr_profile[faculty] ;?> <br>
-													สาขา : <?php echo $arr_profile[sector] ;?> <br>
-													GPA : <?php echo $arr_profile[gpa] ;?> <br>
-												</p>
-												<p>
-													<h5>การทำงาน/การฝึกงาน</h5>
-													ชื่อบริษัท : <?php echo $arr_profile[company] ;?> <br>
-													ที่อยู่ติดต่อ : <?php echo $arr_profile[address_com] ;?> <br>
-													ตำแหน่ง : <?php echo $arr_profile[rank_com] ;?> <br>
-													หน้าที่รับผิดชอบ : <?php echo $arr_profile[role_com] ;?> <br>
-													เงินเดือน : <?php echo $arr_profile[salary_com] ;?> <br>
-													ตั้งแต่วันที่ : <?php echo $arr_profile[date_start] ;?> <br>
-													จนถึงวันที่ : <?php echo $arr_profile[date_end] ;?><br>
-												</p>
-												<p>
-													<h5>ประวัติการฝึกอบรม</h5>
-													หน่วยงานที่ฝึกอบรม : <?php echo $arr_profile[department] ;?><br>
-													หลักสูตร : <?php echo $arr_profile[course] ;?><br>
-													ระยะเวลาที่ฝึกอบรม : <?php echo $arr_profile[course_time] ;?> <br>
-
-												</p>
-												<p>
-													<h5>เป้าหมายในการทำงาน/ฝึกงาน</h5>
-													ลักษณะงานที่ต้องการ : <?php echo $arr_profile[work_n] ;?> <br>
-													สายงานที่ต้องการ <br>
-													1. <?php echo $arr_profile[work_1] ;?><br>
-													2. <?php echo $arr_profile[work_2] ;?><br>
-													3. <?php echo $arr_profile[work_3] ;?><br>
-													พื้นที่ฝึกงานที่ต้องการ <br>
-													1. <?php echo $arr_profile[area_1] ;?><br>
-													2. <?php echo $arr_profile[area_2] ;?><br>
-												</p>
-											</div>
-										</div>
+											</article>
+											<?php } ?>
+										</aside>
 									</div>
-									<div class="col-md-6 col-sm-6">
-											<div class="col-md-7">
-												<div class="form-group">
-													
-													<p>
-														สัญชาติ : <?php echo $arr_profile[nationality] ;?><br>
-														ศาสนา : <?php echo $arr_profile[religion] ;?><br>
-														ส่วนสูง : <?php echo $arr_profile[hight] ;?><br>
-														วันเกิด : <?php echo $arr_profile[birthday] ;?><br>
-														สถานภาพทางทหาร : <?php echo $arr_profile[status] ;?>
-													</p>
-													<p>
-														<b>ทักษะทางภาษา</b> <br>
-														ภาษาไทย <br>
-														 	พูด : <?php echo $arr_profile[th_s] ;?> <br>
-														 	อ่าน : <?php echo $arr_profile[th_r] ;?><br>
-														 	เขียน : <?php echo $arr_profile[th_w] ;?><br>
-														ภาษาอังกฤษ <br>
-														 	พูด : <?php echo $arr_profile[en_s] ;?><br>
-														 	อ่าน : <?php echo $arr_profile[en_r] ;?><br>
-														 	เขียน : <?php echo $arr_profile[en_w] ;?><br>
-														ภาษาจีน <br>
+									<div id="menu2" class="tab-pane fade">
+										<div class="row">
+											<div class="col-md-6 col-sm-6">
+												<div class="col-md-7">
+													<div class="form-group">
+														<p>
+															ชื่อ <?php echo $arr_profile[title_name] ;?>&nbsp;<?php echo $arr_profile[s_name] ;?>&nbsp;<?php echo $arr_profile[l_name] ;?><br>
+															โทรศัพท์มือถือ : <?php echo $arr_profile[phone] ;?><br>
+															E-mail : <?php echo $arr_profile[email] ;?><br>
+															ที่อยู่ : <?php echo $arr_profile[address] ;?> ต.<?php echo $arr_profile[tambon] ;?> อ.​<?php echo $arr_profile[amphoe] ;?> จ.<?php echo $arr_profile[province] ;?> <?php echo $arr_profile[zip_code] ;?>
+														</p>
+														<p>
+															<h5>การศึกษา</h5>
+															มหาวิทยาลัย : <?php echo $arr_profile[university] ;?> <br>
+															วุฒิการศึกษา : <?php echo $arr_profile[edu_back] ;?> <br>
+															ระดับการศึกษา : <?php echo $arr_profile[degree] ;?> <br>
+															คณะ : <?php echo $arr_profile[faculty] ;?> <br>
+															สาขา : <?php echo $arr_profile[sector] ;?> <br>
+															GPA : <?php echo $arr_profile[gpa] ;?> <br>
+														</p>
+														<p>
+															<h5>การทำงาน/การฝึกงาน</h5>
+															ชื่อบริษัท : <?php echo $arr_profile[company] ;?> <br>
+															ที่อยู่ติดต่อ : <?php echo $arr_profile[address_com] ;?> <br>
+															ตำแหน่ง : <?php echo $arr_profile[rank_com] ;?> <br>
+															หน้าที่รับผิดชอบ : <?php echo $arr_profile[role_com] ;?> <br>
+															เงินเดือน : <?php echo $arr_profile[salary_com] ;?> <br>
+															ตั้งแต่วันที่ : <?php echo $arr_profile[date_start] ;?> <br>
+															จนถึงวันที่ : <?php echo $arr_profile[date_end] ;?><br>
+														</p>
+														<p>
+															<h5>ประวัติการฝึกอบรม</h5>
+															หน่วยงานที่ฝึกอบรม : <?php echo $arr_profile[department] ;?><br>
+															หลักสูตร : <?php echo $arr_profile[course] ;?><br>
+															ระยะเวลาที่ฝึกอบรม : <?php echo $arr_profile[course_time] ;?> <br>
+														</p>
+														<p>
+															<h5>เป้าหมายในการทำงาน/ฝึกงาน</h5>
+															ลักษณะงานที่ต้องการ : <?php echo $arr_profile[work_n] ;?> <br>
+															สายงานที่ต้องการ <br>
+															1. <?php echo $arr_profile[work_1] ;?><br>
+															2. <?php echo $arr_profile[work_2] ;?><br>
+															3. <?php echo $arr_profile[work_3] ;?><br>
+															พื้นที่ฝึกงานที่ต้องการ <br>
+															1. <?php echo $arr_profile[area_1] ;?><br>
+															2. <?php echo $arr_profile[area_2] ;?><br>
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="col-md-7">
+													<div class="form-group">
+														
+														<p>
+															สัญชาติ : <?php echo $arr_profile[nationality] ;?><br>
+															ศาสนา : <?php echo $arr_profile[religion] ;?><br>
+															ส่วนสูง : <?php echo $arr_profile[hight] ;?><br>
+															วันเกิด : <?php echo $arr_profile[birthday] ;?><br>
+															สถานภาพทางทหาร : <?php echo $arr_profile[status] ;?>
+														</p>
+														<p>
+															<b>ทักษะทางภาษา</b> <br>
+															ภาษาไทย <br>
+															พูด : <?php echo $arr_profile[th_s] ;?> <br>
+															อ่าน : <?php echo $arr_profile[th_r] ;?><br>
+															เขียน : <?php echo $arr_profile[th_w] ;?><br>
+															ภาษาอังกฤษ <br>
+															พูด : <?php echo $arr_profile[en_s] ;?><br>
+															อ่าน : <?php echo $arr_profile[en_r] ;?><br>
+															เขียน : <?php echo $arr_profile[en_w] ;?><br>
+															ภาษาจีน <br>
 															พูด : <?php echo $arr_profile[cn_s] ;?><br>
 															อ่าน : <?php echo $arr_profile[cn_r] ;?><br>
 															เขียน : <?php echo $arr_profile[cn_w] ;?><br>
-														<b>ทักษะทางคอมพิวเตอร์ </b><br>
-														Microsoft office <br>
-														word : <?php echo $arr_profile[word] ;?><br>
-														excel : <?php echo $arr_profile[excel] ;?><br>
-														powerpoint : <?php echo $arr_profile[ppt] ;?><br>
-														<b>Adobe</b> <br>
-														photoshop : <?php echo $arr_profile[ps] ;?><br>
-														Illustrator : <?php echo $arr_profile[ai] ;?><br>
-														Premiere pro : <?php echo $arr_profile[pr] ;?><br>
-														Lightroom : <?php echo $arr_profile[lr] ;?><br>
-														<b>ทักษะทาง GIS</b><br>
-														Arcgis : <?php echo $arr_profile[arcgis] ;?><br>
-														Erdes : <?php echo $arr_profile[erdas] ;?><br>
-														Envi : <?php echo $arr_profile[envi] ;?><br>
-														QGIS : <?php echo $arr_profile[qgis] ;?><br>
-
-
-													</p>
+															<b>ทักษะทางคอมพิวเตอร์ </b><br>
+															Microsoft office <br>
+															word : <?php echo $arr_profile[word] ;?><br>
+															excel : <?php echo $arr_profile[excel] ;?><br>
+															powerpoint : <?php echo $arr_profile[ppt] ;?><br>
+															<b>Adobe</b> <br>
+															photoshop : <?php echo $arr_profile[ps] ;?><br>
+															Illustrator : <?php echo $arr_profile[ai] ;?><br>
+															Premiere pro : <?php echo $arr_profile[pr] ;?><br>
+															Lightroom : <?php echo $arr_profile[lr] ;?><br>
+															<b>ทักษะทาง GIS</b><br>
+															Arcgis : <?php echo $arr_profile[arcgis] ;?><br>
+															Erdes : <?php echo $arr_profile[erdas] ;?><br>
+															Envi : <?php echo $arr_profile[envi] ;?><br>
+															QGIS : <?php echo $arr_profile[qgis] ;?><br>
+														</p>
+													</div>
 												</div>
 											</div>
+										</div>
 									</div>
-							</div>
-  </div>
-
+									<div id="menu3" class="tab-pane fade">
+										<div class="">
+											<p class="lead">เลือกตำแหน่งที่ต้องการยืนเสนอ</p>
+											<hr class="my-4">
+											
+											<div class="row">
+												
+												<?php
+													$sql = pg_query("SELECT * from job_company where id_com = '$id_com' order by id_job desc;");
+													$check = pg_num_rows($sql);
+													if ($check != 0 ) {
+													while( $job_com = pg_fetch_array($sql) ){
+														
+															
+												?>
+												<article class="col-md-12 article-list">
+													<div class="inner">
+														<figure>
+															<a href="view-job.php?q=<?php echo $job_com[id_job]; ?>">
+																<img src="../images/img_job/<?php echo $job_com[img]; ?>">
+															</a>
+														</figure>
+														<div class="details">
+															<div class="detail">
+																<div class="category">
+																	<a href="#"><?php echo $job_com[type_job]; ?></a>
+																</div>
+															</div>
+															<h1><a href="view-job.php?q=<?php echo $job_com[id_job]; ?>"><?php echo $job_com[name_job]; ?></a></h1>
+															<p>
+																<?php
+																				echo mb_strimwidth($job_com[detail_job], 0, 200, '....<a href="view-job.php?q='.$job_com[id_job].'" title="">เพิ่มเติม</a>');
+																?>
+															</p>
+															<button type="button" class="btn-lg btn-warning btn-block" >
+															<i class="fa fa-handshake-o" aria-hidden="true"></i> กดยืนเสนอตำแหน่งงานนี้
+															</button>
+														</div>
+													</div>
+												</article>
+												<?php } }  else { ?>
+												
+												<article class="col-md-12 article-list">
+													<div class="inner">
+														<figure>
+															<a href="">
+																<img src="https://patientnews.com/wp-content/uploads/2019/03/dummy.png">
+															</a>
+														</figure>
+														<div class="details">
+															<div class="detail">
+																<div class="category">
+																	<a href="">Tag</a>
+																</div>
+																<div class="time">9999-99-9</div>
+															</div>
+															<h1><a href="">ท่านยังไม่เพิ่มข้อมูลตำแหน่งงานที่เปิดรับ</a></h1>
+															<p>
+																เพิ่มให้ได้บุคคลเข้าร่วมทำงานตามที่ท่านต้องการ
+																สามารถกดเพิ่มข้อมูลการงานรับสมัครงาน / ฝึกงาน / สหกิจศึกษา ได้ ที่นี่
+															</p>
+															<footer>
+																<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>999</div></a>
+																<a class="btn btn-warning more" href="add-job.php">
+																	<div>เพิ่มข้อมูล</div>
+																	<div><i class="ion-ios-arrow-thin-right"></i></div>
+																</a>
+															</footer>
+														</div>
+													</div>
+												</article>
+												<?php }  ?>
+												
+											</div>
+										</div>
+									</div>
+									
 								</div>
 								<div class="col-xs-12 col-md-4">
 									<aside>
@@ -334,23 +387,21 @@ $arr_profile = pg_fetch_array($sql_profile);
 					</div>
 				</div>
 			</section>
-
-		<!-- Start footer -->
-		<?php include 'footer.php'; ?>
-		<!-- End Footer -->
-
-		<!-- JS -->
-		<script src="../js/jquery.js"></script>
-		<script src="../js/jquery.migrate.js"></script>
-		<script src="../scripts/bootstrap/bootstrap.min.js"></script>
-		<script>var $target_end=$(".best-of-the-week");</script>
-		<script src="../scripts/jquery-number/jquery.number.min.js"></script>
-		<script src="../scripts/owlcarousel/dist/owl.carousel.min.js"></script>
-		<script src="../scripts/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-		<script src="../scripts/easescroll/jquery.easeScroll.js"></script>
-		<script src="../scripts/sweetalert/dist/sweetalert.min.js"></script>
-		<script src="../scripts/toast/jquery.toast.min.js"></script>
-		<!-- <script src="js/demo.js"></script> -->
-		<script src="../js/e-magz.js"></script>
-	</body>
-</html>
+			<!-- Start footer -->
+			<?php include 'footer.php'; ?>
+			<!-- End Footer -->
+			<!-- JS -->
+			<script src="../js/jquery.js"></script>
+			<script src="../js/jquery.migrate.js"></script>
+			<script src="../scripts/bootstrap/bootstrap.min.js"></script>
+			<script>var $target_end=$(".best-of-the-week");</script>
+			<script src="../scripts/jquery-number/jquery.number.min.js"></script>
+			<script src="../scripts/owlcarousel/dist/owl.carousel.min.js"></script>
+			<script src="../scripts/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+			<script src="../scripts/easescroll/jquery.easeScroll.js"></script>
+			<script src="../scripts/sweetalert/dist/sweetalert.min.js"></script>
+			<script src="../scripts/toast/jquery.toast.min.js"></script>
+			<!-- <script src="js/demo.js"></script> -->
+			<script src="../js/e-magz.js"></script>
+		</body>
+	</html>
