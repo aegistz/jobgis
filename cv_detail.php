@@ -6,9 +6,8 @@ include("check_student.php");
 
 	$id = $_GET[stoid];
 
-	$sql = pg_query("SELECT * from story a inner join student b on a.id_user = b.id_no where id_story = '$_GET[stoid]' ;");
+	$sql = pg_query("SELECT * from cv a inner join student b on a.id_user = b.id_no where id_cv = '$_GET[stoid]' ;");
 	$result = pg_fetch_array($sql);
-
 
 	date_default_timezone_set('Asia/Bangkok');
 	$year =  date("Y"); 
@@ -19,14 +18,14 @@ include("check_student.php");
 
 
 
-	if ( isset($_POST[comment_story]) ) {
+	if ( isset($_POST[comment_cv]) ) {
 
 	$user_comment = $user[email];
 	$detail_comment = $_POST[detail_comment];
 	$date_comment = $date_time;
-    $sql = "INSERT INTO comment_story (user_comment,detail_comment,date_comment,status,id_story,iduser_comment) values ( '$user_comment','$detail_comment','$date_comment','show','$_GET[stoid]','$user[id_no]');";
+    $sql = "INSERT INTO comment_cv (user_comment,detail_comment,date_comment,status,id_cv,iduser_comment) values ( '$user_comment','$detail_comment','$date_comment','show','$_GET[stoid]','$user[id_no]');";
     $query = pg_query($sql);
-    header('location:story_detail.php?stoid='.$_GET[stoid].'') ; 
+    header('location:cv_detail.php?stoid='.$_GET[stoid].'') ; 
 
 	}
 
@@ -34,7 +33,7 @@ include("check_student.php");
 
 	$no_id = $_POST[no_id];
 
-    $sql = "UPDATE comment_story set status = 'close' where no_id = '$no_id';  ";
+    $sql = "UPDATE comment_cv set status = 'close' where no_id = '$no_id';  ";
 	$query = pg_query($sql);
 
 	}
@@ -114,7 +113,7 @@ include("check_student.php");
 										<?php
 											if ($id ==  $result[id_user]) {
 										?>
-										<a href="story_edit.php?stoid=<?php echo $result[id_story]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราวนี้</a>
+										<a href="story_edit.php?stoid=<?php echo $result[id_cv]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราวนี้</a>
 										<?php } ?>
 										
 									</div>
@@ -131,15 +130,15 @@ include("check_student.php");
 						<article class="article main-article">
 							<header>
 								
-								<h2><?php echo $result[title_story]; ?></h2>
+								<h2><?php echo $result[title_cv]; ?></h2>
 								<ul class="details">
-									<li>Posted on <?php echo $result[date_story]; ?></li>
-									<li><a><?php echo $result[tag_story]; ?></a></li>
+									<li>Posted on <?php echo $result[date_cv]; ?></li>
+									<li><a><?php echo $result[tag_cv]; ?></a></li>
 								</ul>
 							</header>
 							<div class="main">
-								<p><?php echo $result[detail_story]; ?> <hr>
-									<img src="images/story/<?php echo $result[img_story]; ?>" alt="" width="100%">
+								<p><?php echo $result[detail_cv]; ?> <hr>
+									<img src="images/cv/<?php echo $result[img_cv]; ?>" alt="" width="100%">
 								</p>
 								
 							</article>
@@ -149,7 +148,7 @@ include("check_student.php");
 								<h5>Comments</h5>
 							<table>
 <?php
-	$sql = pg_query("SELECT * from story a inner join comment_story b on a.id_story = b.id_story where a.id_story = '$id'; ");
+	$sql = pg_query("SELECT * from cv a inner join comment_cv b on a.id_cv = b.id_cv where a.id_cv = '$id'; ");
 	$num = pg_num_rows($sql);
 	if($num < 1){
  ?>
@@ -168,14 +167,14 @@ include("check_student.php");
 										</tr>
 <?php 
 				}else {
-				$sql = pg_query("SELECT * from story a inner join comment_story b on a.id_story = b.id_story where a.id_story = $id and status = 'show' order by no_id asc;");
+				$sql = pg_query("SELECT * from cv a inner join comment_cv b on a.id_cv = b.id_cv where a.id_cv = $id and status = 'show' order by no_id asc;");
 				while ($arr = pg_fetch_array($sql) ) {
 
-				$sql2 = pg_query("SELECT * from comment_story a inner join student b on a.user_comment = b.email where a.user_comment = '$arr[user_comment]'; ");
+				$sql2 = pg_query("SELECT * from comment_cv a inner join student b on a.user_comment = b.email where a.user_comment = '$arr[user_comment]'; ");
 				$arr2 = pg_fetch_array($sql2);
 				$num2 = pg_num_rows($sql2);
 
-				$sql3 = pg_query("SELECT * from comment_story where user_comment = '$user[email]' and id_story = '$id'; ");
+				$sql3 = pg_query("SELECT * from comment_cv where user_comment = '$user[email]' and id_cv = '$id'; ");
 				$arr3 = pg_fetch_array($sql3);
 					
 ?>
@@ -221,7 +220,7 @@ include("check_student.php");
 <form method="post" action="">
 								<input  class="form-control form-control-sm"  value="ผู้ส่ง : <?php echo $user[email]; ?>" readonly="" ><br>
 								<textarea  class="form-control form-control-lg" name="detail_comment" placeholder="พิมพ์ข้อความที่นี่" required="required" style="width: 100% "></textarea>
-								<button  type="submit" class="btn btn-primary" name="comment_story" style="width: 100%">send message</button>
+								<button  type="submit" class="btn btn-primary" name="comment_cv" style="width: 100%">send message</button>
 </form>
 						</div>
 							</div>

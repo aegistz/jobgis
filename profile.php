@@ -15,9 +15,26 @@ if ($_GET[type] == 'delete_story') {
 	$sql_delete = pg_query("DELETE from story where id_story = '$id_story' and id_user = '$user[id_no]'  ;");
 	
 	
-	header('location:profile.php#story');
+	header('location:profile.php#story1');
+}
+if ($_GET[type] == 'delete_cv') {
 
+	$id_cv = $_GET[id_cv];
 
+	$sql_delete = pg_query("DELETE from cv where id_cv = '$id_cv' and id_user = '$user[id_no]'  ;");
+	
+	
+	header('location:profile.php#cv');
+}
+
+if ($_GET[type] == 'delete_block') {
+
+	$id_block = $_GET[id_block];
+
+	$sql_delete = pg_query("DELETE from block where id_block = '$id_block' and id_user = '$user[id_no]'  ;");
+	
+	
+	header('location:profile.php#block');
 }
 
 
@@ -26,7 +43,7 @@ if ($_GET[type] =='delete_img_post') {
 	$imgid = $_GET[imgid];
 	$sqlsss = "DELETE from photo_user where id_img = '$imgid' and id_user = '$id'  ";
 	$sql_delete = pg_query("DELETE from photo_user where id_img = '$imgid' and id_user = '$user[id_no]'  ;");
-	//header('location:profile.php');
+	header('location:profile.php');
 }
 
 
@@ -73,6 +90,12 @@ if (isset($_GET[eid])) {
 		<link rel="stylesheet" href="css/demo.css">
 		<link rel="icon" href="https://www.gistda.or.th/main/sites/default/files/favicon.ico" type="image/png" >
 		<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+		<script src="ckeditor/ckeditor.js"></script>
+		<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+		<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+		<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/js/froala_editor.pkgd.min.js'></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+<!-- 		<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script> -->
 
 <!-- Include JS file. -->
 <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.5/js/froala_editor.pkgd.min.js'></script>
@@ -188,11 +211,27 @@ if (isset($_GET[eid])) {
     width: 100%;
   }
 }
+.fr-wrapper > div:frist-child {
+		display: none;;
+	}
+.group 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+.input2		{
+  font-size:18px;
+  font-family: 'Kanit';
+  padding:10px 10px 10px 5px;
+  display:block;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus 		{ outline:none; }
 </style>
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 	</head>
 	<body class="skin-blue">
-	<?php include 'header.php'; ?> 
+	<?php include 'header.php'; ?>  
 		<section class="home">
 			<div class="container">
 				<div class="row">
@@ -364,17 +403,128 @@ if (isset($_GET[eid])) {
 								<div class="col-xs-12 col-md-8">
 									<aside>
 										<article class="col-md-12 article-list" id="story">
+											<div class="col-md-12">
+												<h3 class="title">บอกเล่าเรื่องราวใหม่</h3>
+											</div>
+											 <ul class="nav nav-tabs col-md-12" role="tablist">
+											    <li class="nav-item">
+											      <a class="nav-link active" data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
+											    </li>
+											    <li class="nav-item">
+											      <a class="nav-link" data-toggle="tab" href="#story1">บอกเล่าเรื่องราวใหม่ ๆ</a>
+											    </li>
+											    <li class="nav-item">
+											      <a class="nav-link" data-toggle="tab" href="#block">แบ่งปันไอเดีย</a>
+											    </li>
+											  </ul>
+											  <div class="tab-content">
+											  	<div id="cv" class="container tab active col-md-12"><br>
 <form enctype="multipart/form-data" method="post" >
-												<div class="col-md-12">
-													<h3 class="title">บอกเล่าเรื่องราวใหม่</h3>
-												</div>
 												<div class="form-group col-md-12">
-													<label for="message">ประสบการณ์การทำงาน เพื่อประกอบการพิจารณารับเข้าทำงาน <span class="required"></span></label>
-													
+													<!-- <label for="message">ประสบการณ์การทำงาน เพื่อประกอบการพิจารณารับเข้าทำงาน <span class="required"></span></label> -->
 													<div class="form-group row">
 														<label for="staticEmail" class="col-sm-2 col-form-label">หัวข้อ</label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control" name="title">
+															<input type="text" class="input2" name="title_cv">
+														</div>
+													</div>
+													
+													<div class="form-group row">
+														<label for="staticEmail" class="col-sm-2 col-form-label">รายละเอียด</label>
+														<div class="col-sm-10">
+															<textarea class="form-control" name="detail_cv" placeholder="กรอกรายละเอียดงานที่นี่ ..."></textarea>
+														</div>
+													</div>
+													<div class="form-group col-md-7">
+														<div class="form-group row">
+															<label for="staticEmail" class="col-sm-3 col-form-label">ภาพประกอบ</label>
+															<div class="col-sm-9">
+																<input type="file" name="file" onchange="readURL6(this);">
+															</div>
+														</div>
+														<button class="btn btn-primary btn-block" type="submit" name="upload_cv" value="true">Post</button>
+													</div>
+													<div class="form-group col-md-5">
+														<img src="" alt="" id="blah6" width="100%">
+													</div>
+												</div>
+</form>
+										<?php
+											
+											$query = pg_query("SELECT * from cv where id_user = '$id' order by id_cv desc ;");
+											$num = pg_num_rows($query);
+											if( $num != 0 ) {
+												while( $arr = pg_fetch_array($query)  ){
+										?>
+										<article class="col-md-12 article-list">
+											<div class="inner">
+												<figure>
+													<a href="cv_detail.php?stoid=<?php echo $arr[id_cv]; ?>">
+														<img src="images/cv/<?php echo $arr[img_cv]; ?>">
+													</a>
+												</figure>
+												<div class="details">
+													<div class="detail">
+														<div class="category">
+															<a href=""><?php echo $arr[tag_cv]; ?></a>
+														</div>
+														<div class="time"><?php echo $arr[date_cv]; ?></div>
+															<div class="btn-group">
+																<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+																<i class="fa fa-bars"></i> </button>
+																<ul class="dropdown-menu" role="menu">
+																	<li><a href="cv_edit.php?stoid=<?php echo $arr[id_cv]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																	<li><a href="profile.php?type=delete_cv&id_cv=<?php echo $arr[id_cv]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะไม่สามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
+																</ul>
+															</div>
+													</div>
+													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_cv]; ?>"><?php echo $arr[title_cv]; ?></a></h1>
+													<p>
+														<?php
+														echo mb_strimwidth($arr[detail_cv], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_cv].'" title="">เพิ่มเติม</a>');
+														?>
+													</p>
+													<footer>
+														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
+													</footer>
+												</div>
+											</div>
+										</article>
+										<?php }    }else{  ?>
+										<article class="col-md-12 article-list">
+											<div class="inner">
+												<figure>
+													<a href="">
+														<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
+													</a>
+												</figure>
+												<div class="details">
+													<div class="detail">
+														<div class="category">
+															<a href="#">ประสบการณ์</a>
+														</div>
+														<div class="time">December 26, 2016</div>
+													</div>
+													<h1><a href="#">..............</a></h1>
+													<p>
+														..............
+													</p>
+													<footer>
+														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
+													</footer>
+												</div>
+											</div>
+										</article>
+										<?php } ?>
+												</div>
+												<div id="story1" class="container tab fade col-md-12"><br>
+<form enctype="multipart/form-data" method="post" >
+												<div class="form-group col-md-12">
+													<!-- <label for="message">บอกเล่าเรื่องราวใหม่ ๆ<span class="required"></span></label> -->
+													<div class="form-group row">
+														<label for="staticEmail" class="col-sm-2 col-form-label">หัวข้อ</label>
+														<div class="col-sm-10">
+															<input type="text" class="input2" name="title">
 														</div>
 													</div>
 													
@@ -384,7 +534,6 @@ if (isset($_GET[eid])) {
 															<textarea class="form-control" name="detail" placeholder="กรอกรายละเอียดงานที่นี่ ..."></textarea>
 														</div>
 													</div>
-
 													<div class="form-group col-md-7">
 														<div class="form-group row">
 															<label for="staticEmail" class="col-sm-3 col-form-label">ภาพประกอบ</label>
@@ -397,13 +546,8 @@ if (isset($_GET[eid])) {
 													<div class="form-group col-md-5">
 														<img src="" alt="" id="blah4" width="100%">
 													</div>
-													
-													
-													
 												</div>
-												
 </form>
-										</article>
 										<?php
 											
 											$query = pg_query("SELECT * from story where id_user = '$id' order by id_story desc ;");
@@ -471,13 +615,124 @@ if (isset($_GET[eid])) {
 											</div>
 										</article>
 										<?php } ?>
-										
-										
-										
+												</div>
+												<div id="block" class="container tab fade col-md-12"><br>
+<form enctype="multipart/form-data" method="post" >
+												<div class="form-group col-md-12">
+													<div class="radio">
+													  <label><input type="radio" name="optradio" checked>เรื่องราวทั่วไป</label>
+													</div>
+													<div class="radio">
+													  <label><input type="radio" name="optradio">geoinformatich</label>
+													</div>
+													<div class="radio disabled">
+													  <label><input type="radio" name="optradio" >ข่าวสารเกี่ยวกับภูมิสารสนเทศ</label>
+													</div>
+												</div>
+												<div class="form-group col-md-12">
+													<!-- <label for="message">แบ่งปันไอเดีย<span class="required"></span></label> -->
+													<div class="form-group row">
+														<div class="form-group col-md-7">
+														<div class="form-group row">
+															<label for="staticEmail" class="col-sm-3 col-form-label">ภาพหน้าปก</label>
+															<div class="col-sm-9">
+																<input type="file" name="file" onchange="readURL5(this);">
+															</div>
+														</div>
+														<div class="form-group col-md-5">
+														<img src="" alt="" id="blah5" width="100%">
+														</div>
+														</div>
+														<div class="col-sm-12">
+															<input type="text" class="input2" name="title_block" placeholder="หัวข้อ">
+														</div>
+													</div>
+													
+													<div class="form-group row">
+														<div class="col-sm-12">
+															<textarea id="froala-editor" name="detail_block"></textarea>
+														</div>
+														<div class="col-sm-12">
+															<button class="btn btn-primary btn-block" type="submit" name="upload_block" value="true">Post</button>
+														</div>
+													</div>
+												</div>
+</form>	
+										<?php
+											
+											$query = pg_query("SELECT * from block where id_user = '$id' order by id_block desc ;");
+											$num = pg_num_rows($query);
+											if( $num != 0 ) {
+												while( $arr = pg_fetch_array($query)  ){
+										?>
+										<article class="col-md-12 article-list">
+											<div class="inner">
+												<figure>
+													<a href="block_detail.php?stoid=<?php echo $arr[id_block]; ?>">
+														<img src="images/block/<?php echo $arr[img_block]; ?>">
+													</a>
+												</figure>
+												<div class="details">
+													<div class="detail">
+														<div class="category">
+															<a href=""><?php echo $arr[tag_block]; ?></a>
+														</div>
+														<div class="time"><?php echo $arr[date_block]; ?></div>
+															<div class="btn-group">
+																<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+																<i class="fa fa-bars"></i> </button>
+																<ul class="dropdown-menu" role="menu">
+																	<li><a href="story_edit.php?stoid=<?php echo $arr[id_block]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																	<li><a href="profile.php?type=delete_block&id_block=<?php echo $arr[id_block]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
+																</ul>
+															</div>
+													</div>
+													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_block]; ?>"><?php echo $arr[title_block]; ?></a></h1>
+													<p>
+														<?php
+														echo mb_strimwidth($arr[detail_block], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_block].'" title="">เพิ่มเติม</a>');
+														?>
+													</p>
+													<footer>
+														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
+													</footer>
+												</div>
+											</div>
+										</article>
+										<?php }    }else{  ?>
+										<article class="col-md-12 article-list">
+											<div class="inner">
+												<figure>
+													<a href="">
+														<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
+													</a>
+												</figure>
+												<div class="details">
+													<div class="detail">
+														<div class="category">
+															<a href="#">ประสบการณ์</a>
+														</div>
+														<div class="time">December 26, 2016</div>
+													</div>
+													<h1><a href="#">..............</a></h1>
+													<p>
+														..............
+													</p>
+													<footer>
+														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
+													</footer>
+												</div>
+											</div>
+										</article>
+										<?php } ?>
+												</div>
+										</div>					
+										</article>
+
+											
 									</aside>
-								</div>
-
-
+									</div>
+								
 								<div class="col-xs-12 col-md-4 sidebar" id="sidebar">
 									<aside id="request">
 								<h1 class="aside-title">สถานะงานท่านสมัคร </h1>
@@ -770,6 +1025,9 @@ else {    ?>
 			<script src="scripts/easescroll/jquery.easeScroll.js"></script>
 			<script src="scripts/sweetalert/dist/sweetalert.min.js"></script>
 			<script src="scripts/toast/jquery.toast.min.js"></script>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+			<script type="text/javascript" src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 			<!-- <script src="js/demo.js"></script> -->
 			<script src="js/e-magz.js"></script>
 			<script>
@@ -885,6 +1143,26 @@ else {    ?>
 			reader.readAsDataURL(input.files[0]);
 			}
 			}
+			function readURL5(input) {
+			if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+			$('#blah5')
+			.attr('src', e.target.result);
+			};
+			reader.readAsDataURL(input.files[0]);
+			}
+			}
+			function readURL6(input) {
+			if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+			$('#blah6')
+			.attr('src', e.target.result);
+			};
+			reader.readAsDataURL(input.files[0]);
+			}
+			}
 			</script>
 
 			<script>
@@ -909,7 +1187,22 @@ else {    ?>
 			  modal.style.display = "none";
 			}
 			</script>
-
+			<script>
+                    CKEDITOR.replace( 'ckeditor' );
+            </script>
+        	<script>
+            ClassicEditor
+                    .create( document.querySelector( '#editor' ) )
+                    .then( editor => {
+                            console.log( editor );
+                    } )
+                    .catch( error => {
+                            console.error( error );
+                    } );
+            </script>
+            <script>
+			  new FroalaEditor('textarea#froala-editor')
+			</script>
 		
 
 
