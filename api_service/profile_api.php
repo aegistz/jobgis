@@ -331,10 +331,11 @@ if( $_POST[upload_block] == 'true' )
             $date_time = date("Y-m-d H:i:s");
             $title_block = $_POST[title_block];
             $detail_block = $_POST[detail_block];
+            $tag_block = $_POST[tag_block];
 
         
            $is_uploaded = pg_query( "  INSERT INTO block (title_block ,img_block,  detail_block , tag_block, date_block ,id_user) 
-            values ( '$title_block','$rnd_name1','$detail_block','แบ่งปันไอเดีย' ,'$date_time' ,'$user[id_no]'  )   ;" );
+            values ( '$title_block','$rnd_name1','$detail_block','$tag_block' ,'$date_time' ,'$user[id_no]'  )   ;" );
 
            
               header('location:profile.php');

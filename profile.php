@@ -620,13 +620,13 @@ input:focus 		{ outline:none; }
 <form enctype="multipart/form-data" method="post" >
 												<div class="form-group col-md-12">
 													<div class="radio">
-													  <label><input type="radio" name="optradio" checked>เรื่องราวทั่วไป</label>
+													  <label><input type="radio" name="tag_block" value="เรื่องราวทั่วไป" checked>เรื่องราวทั่วไป</label>
 													</div>
 													<div class="radio">
-													  <label><input type="radio" name="optradio">geoinformatich</label>
+													  <label><input type="radio" name="tag_block" value="geoinformatich">geoinformatich</label>
 													</div>
 													<div class="radio disabled">
-													  <label><input type="radio" name="optradio" >ข่าวสารเกี่ยวกับภูมิสารสนเทศ</label>
+													  <label><input type="radio" name="tag_block" value="ข่าวสารเกี่ยวกับภูมิสารสนเทศ">ข่าวสารเกี่ยวกับภูมิสารสนเทศ</label>
 													</div>
 												</div>
 												<div class="form-group col-md-12">
