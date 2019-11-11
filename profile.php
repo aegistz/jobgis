@@ -402,7 +402,7 @@ input:focus 		{ outline:none; }
 							<div class="row">
 								<div class="col-xs-12 col-md-8">
 									<aside>
-										<article class="col-md-12 article-list" id="story">
+										<article class="col-md-12 article-list">
 											<div class="col-md-12">
 												<h3 class="title">บอกเล่าเรื่องราวใหม่</h3>
 											</div>
@@ -411,7 +411,7 @@ input:focus 		{ outline:none; }
 											      <a class="nav-link active" data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
 											    </li>
 											    <li class="nav-item">
-											      <a class="nav-link" data-toggle="tab" href="#story1">บอกเล่าเรื่องราวใหม่ ๆ</a>
+											      <a class="nav-link" data-toggle="tab" href="#story">บอกเล่าเรื่องราวใหม่ ๆ</a>
 											    </li>
 											    <li class="nav-item">
 											      <a class="nav-link" data-toggle="tab" href="#block">แบ่งปันไอเดีย</a>
@@ -517,7 +517,7 @@ input:focus 		{ outline:none; }
 										</article>
 										<?php } ?>
 												</div>
-												<div id="story1" class="container tab fade col-md-12"><br>
+												<div id="story" class="container tab fade col-md-12"><br>
 <form enctype="multipart/form-data" method="post" >
 												<div class="form-group col-md-12">
 													<!-- <label for="message">บอกเล่าเรื่องราวใหม่ ๆ<span class="required"></span></label> -->
@@ -650,7 +650,8 @@ input:focus 		{ outline:none; }
 													
 													<div class="form-group row">
 														<div class="col-sm-12">
-															<textarea id="froala-editor" name="detail_block"></textarea>
+														<!-- 	<textarea id="edit" name="detail_block"></textarea> -->
+															<textarea name="detail_block" id="editor"></textarea>
 														</div>
 														<div class="col-sm-12">
 															<button class="btn btn-primary btn-block" type="submit" name="upload_block" value="true">Post</button>
@@ -682,7 +683,7 @@ input:focus 		{ outline:none; }
 																<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 																<i class="fa fa-bars"></i> </button>
 																<ul class="dropdown-menu" role="menu">
-																	<li><a href="story_edit.php?stoid=<?php echo $arr[id_block]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																	<li><a href="block_edit.php?stoid=<?php echo $arr[id_block]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
 																	<li><a href="profile.php?type=delete_block&id_block=<?php echo $arr[id_block]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
 																</ul>
 															</div>
@@ -1028,6 +1029,7 @@ else {    ?>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
 			<script type="text/javascript" src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+			<script src="ckeditor/ckeditor.js"></script>
 			<!-- <script src="js/demo.js"></script> -->
 			<script src="js/e-magz.js"></script>
 			<script>
@@ -1187,24 +1189,14 @@ else {    ?>
 			  modal.style.display = "none";
 			}
 			</script>
+			 <script>
+			      CKEDITOR.replace('editor', {
+			        filebrowserUploadUrl: 'ckeditor/ck_upload.php',
+			        filebrowserUploadMethod: 'form'
+			    });
+			 </script>
 			<script>
-                    CKEDITOR.replace( 'ckeditor' );
-            </script>
-        	<script>
-            ClassicEditor
-                    .create( document.querySelector( '#editor' ) )
-                    .then( editor => {
-                            console.log( editor );
-                    } )
-                    .catch( error => {
-                            console.error( error );
-                    } );
-            </script>
-            <script>
-			  new FroalaEditor('textarea#froala-editor')
-			</script>
-		
-
-
+			    new FroalaEditor('textarea#edit')
+			</script> 
 		</body>
 	</html>

@@ -3,17 +3,17 @@
 session_start();
 include("config.php");
 include("check_student.php");
-	$sql = pg_query("SELECT * from story a inner join student b on a.id_user = b.id_no where id_story = '$_GET[stoid]' ;");
+	$sql = pg_query("SELECT * from block a inner join student b on a.id_user = b.id_no where id_block = '$_GET[stoid]' ;");
 	$result = pg_fetch_array($sql);
-if( $_POST[update_story] == 'true' )
+if( $_POST[update_block] == 'true' )
 {
-				$title_story = $_POST[title_story];
-				$detail_story = $_POST[detail_story];
+				$title_block = $_POST[title_block];
+				$detail_block = $_POST[detail_block];
 				$stoid = $_POST[stoid];
-				$sql = pg_query("UPDATE story set title_story = '$title_story' , detail_story = '$detail_story' where id_story = '$stoid' ;");
-				header('location:story_detail.php?stoid='.$stoid);
+				$sql = pg_query("UPDATE block set title_block = '$title_block' , detail_block = '$detail_block' where id_block = '$stoid' ;");
+				header('location:block_detail.php?stoid='.$stoid);
 }
-if( $_POST[update_story] == 'false' )
+if( $_POST[update_block] == 'false' )
 {
 	
 				$image = $_FILES["file"]["name"];
@@ -71,16 +71,16 @@ if( $_POST[update_story] == 'false' )
 				$rnd_name1 = 'photos_student_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
 				
 				// move it to uploads dir with full quality
-				imagejpeg( $dst1, 'images/story/'.$rnd_name1, 100 );
+				imagejpeg( $dst1, 'images/block/'.$rnd_name1, 100 );
 				
 				// I think that's it we're good to clear our created images
 				imagedestroy( $source );
 				imagedestroy( $dst1 );
 						
 							$stoid = $_POST[stoid];
-							$sql = pg_query("UPDATE story set  img_story = '$rnd_name1'
-								where id_story = '$stoid' ;");
-							header('location:story_edit.php?stoid='.$stoid);
+							$sql = pg_query("UPDATE block set  img_block = '$rnd_name1'
+								where id_block = '$stoid' ;");
+							header('location:block_edit.php?stoid='.$stoid);
 				
 				
 				
@@ -88,16 +88,15 @@ if( $_POST[update_story] == 'false' )
 				
 				}
 }
-if ( isset($_POST[delete_story]) ) {
+if ( isset($_POST[delete_block]) ) {
 
 	$stoid = $_POST[stoid];
 
-	$sql_delete = pg_query("DELETE from story where id_story = '$stoid' ;");
+	$sql_delete = pg_query("DELETE from block where id_block = '$stoid' ;");
 	
 	
-	header('location:profile.php#story');
+	header('location:profile.php#block');
 }
-
 
 
 function get_file_extension( $file )  {
@@ -147,7 +146,7 @@ function get_file_extension( $file )  {
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body class="skin-blue">
-		<?php include 'header.php'; ?>
+		<?php include 'header.php'; ?> 
 		
 		<section class="single">
 			<div class="container">
@@ -170,10 +169,10 @@ function get_file_extension( $file )  {
 												<li><i class="fa fa-map-marker" aria-hidden="true"></i> : <?php echo $result[province]; ?></li>
 											</ul>
 											<hr>
-											<input type="hidden" name="stoid" value="<?php echo $result[id_story]; ?>">
-											<button type="submit" title="" name="update_story" value="true" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> บันทึกเรื่องราว</button>
-											<button  type="submit" name="delete_story"  class="btn btn-danger btn-block"  onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')"><i class="fa fa-window-close" aria-hidden="true"></i>ลบเรื่องราว</button>
-											<a href="profile.php#story" class="btn  btn-sm btn-block" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i></i>กลับ</a>
+											<input type="hidden" name="stoid" value="<?php echo $result[id_block]; ?>">
+											<button type="submit" title="" name="update_block" value="true" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> บันทึกเรื่องราว</button>
+											<button  type="submit" name="delete_block" class="btn btn-danger btn-block" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')"><i class="fa fa-window-close" aria-hidden="true"></i>ลบเรื่องราว</button>
+											<a href="profile.php#block" class="btn  btn-sm btn-block" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i></i>กลับ</a>
 											
 										</div>
 									</article>
@@ -190,25 +189,25 @@ function get_file_extension( $file )  {
 								<header>
 									
 									<h2>
-									<input type="text"  name="title_story" class="form-control" value="<?php echo $result[title_story]; ?>" name="">
+									<input type="text"  name="title_cv" class="form-control" value="<?php echo $result[title_block]; ?>" name="">
 									</h2>
 									<ul class="details">
-										<li>Posted on <?php echo $result[date_story]; ?></li>
-										<li><a><?php echo $result[tag_story]; ?></a></li>
+										<li>Posted on <?php echo $result[date_block]; ?></li>
+										<li><a><?php echo $result[tag_block]; ?></a></li>
 									</ul>
 								</header>
 								<div class="main">
 									<p>
-										<textarea name="detail_story" class="form-control"  rows="6" ><?php echo $result[detail_story]; ?> </textarea>
+										<textarea name="detail_block" class="form-control"  rows="6" id="editor" ><?php echo $result[detail_block]; ?> </textarea>
 										<hr>
 									</p>
 									<div class="col-md-6">
-										เลือกภาพใหม่
+										เลือกภาพหน้าปกใหม่
 										<input class="form-control " type="file" name="file"  onchange="readURL_edit(this);" >
-										<button type="submit" class="btn btn-sm btn-primary" name="update_story" value="false">บันทึกรูปภาพ</button>
+										<button type="submit" class="btn btn-sm btn-primary" name="update_cv" value="false">บันทึกรูปภาพ</button>
 									</div>
 									<div class="col-md-6">
-										<img src="images/story/<?php echo $result[img_story]; ?>" id="blah_edit"  width="100%">
+										<img src="images/block/<?php echo $result[img_block]; ?>" id="blah_edit"  width="100%">
 									</div>
 									
 									
@@ -236,6 +235,7 @@ function get_file_extension( $file )  {
 			<script src="scripts/easescroll/jquery.easeScroll.js"></script>
 			<script src="scripts/sweetalert/dist/sweetalert.min.js"></script>
 			<script src="scripts/toast/jquery.toast.min.js"></script>
+			<script src="ckeditor/ckeditor.js"></script>
 			<!-- <script src="js/demo.js"></script> -->
 			<script src="js/e-magz.js"></script>
 			
@@ -251,6 +251,11 @@ function get_file_extension( $file )  {
 			}
 			}
 			</script>
-			
+			 <script>
+			      CKEDITOR.replace('editor', {
+			        filebrowserUploadUrl: 'ckeditor/ck_upload.php',
+			        filebrowserUploadMethod: 'form'
+			    });
+			 </script>
 		</body>
 	</html>

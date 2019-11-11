@@ -75,7 +75,7 @@ if( $_POST[upload_img] == 'true' )
 
 		
            $is_uploaded = pg_query( "  INSERT INTO photo_user (name_img , id_user ,  date_img ) values ( '$rnd_name1','$user[id_no]','$date_now'  )   ;" );
-           header('location:profile.php#story');
+           header('location:profile.php');
             
            
  
@@ -161,7 +161,7 @@ if( $_POST[upload_story] == 'true' )
            	values ( '$title_story' ,'$detail_story','$rnd_name1','แบ่งปันเรื่องราว' ,'$date_now' ,'$user[id_no]'  )   ;" );
 
            
-              header('location:profile.php');
+              header('location:profile.php#story');
            
  
         }
@@ -249,7 +249,7 @@ if( $_POST[upload_cv] == 'true' )
             values ( '$title_cv' , '$rnd_name1','$detail_cv','ประสบการณ์' ,'$date_time' ,'$user[id_no]'  )   ;" );
 
            
-              header('location:profile.php');
+              header('location:profile.php#cv');
            
  
         }
@@ -322,7 +322,7 @@ if( $_POST[upload_block] == 'true' )
             imagedestroy( $dst1 );
 
             $showpic = "images/block/".$rnd_name1;
-
+            
             date_default_timezone_set('Asia/Bangkok');
             $year =  date("Y"); 
             $month =  date("m"); 
@@ -338,7 +338,7 @@ if( $_POST[upload_block] == 'true' )
             values ( '$title_block','$rnd_name1','$detail_block','$tag_block' ,'$date_time' ,'$user[id_no]'  )   ;" );
 
            
-              header('location:profile.php');
+              header('location:profile.php#block');
            
  
         }
@@ -510,6 +510,33 @@ function get_file_extension( $file )  {
  
     // return file extension
     return $ext;
+}
+    function froalaEditor()  
+    {
+
+    $allowedExts = array("gif", "jpeg", "jpg", "png", "blob");
+    $temp = explode(".", $_FILES["file"]["name"]);
+    $extension = end($temp);
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $_FILES["file"]["tmp_name"]);
+
+    if ((($mime == "image/gif")
+    || ($mime == "image/jpeg")
+    || ($mime == "image/pjpeg")
+    || ($mime == "image/x-png")
+    || ($mime == "image/png"))
+    && in_array(strtolower($extension), $allowedExts)) {
+        // Generate new random name.
+        $name = sha1(microtime()) . "." . $extension;
+
+        // Save file in the uploads folder.
+        move_uploaded_file($_FILES["file"]["tmp_name"], getcwd() . "/images/img_block_detail/ " . $name);
+
+        // Generate response.
+        $response = new StdClass;
+        $response->link = "/images/img_block_detail/" . $name;
+        echo stripslashes(json_encode($response));
+    }
 }
 
 
