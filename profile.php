@@ -407,8 +407,8 @@ input:focus 		{ outline:none; }
 												<h3 class="title">บอกเล่าเรื่องราวใหม่</h3>
 											</div>
 											 <ul class="nav nav-tabs col-md-12" role="tablist">
-											    <li class="nav-item">
-											      <a class="nav-link active" data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
+											    <li class="nav-item active">
+											      <a class="nav-link " data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
 											    </li>
 											    <li class="nav-item">
 											      <a class="nav-link" data-toggle="tab" href="#story">บอกเล่าเรื่องราวใหม่ ๆ</a>
