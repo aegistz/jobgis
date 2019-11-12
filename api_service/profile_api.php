@@ -60,7 +60,7 @@ if( $_POST[upload_img] == 'true' )
  
             // rename our upload image file name, this to avoid conflict in previous upload images
             // to easily get our uploaded images name we added image size to the suffix
-            $rnd_name1 = 'photos_student_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
+            $rnd_name1 = 'photos_student_'.uniqid(mt_rand(10, 15)).'_'.time().'_720x720.'.$ext;
             
             // move it to uploads dir with full quality
             imagejpeg( $dst1, 'images/student/'.$rnd_name1, 100 );
@@ -141,7 +141,7 @@ if( $_POST[upload_story] == 'true' )
  
             // rename our upload image file name, this to avoid conflict in previous upload images
             // to easily get our uploaded images name we added image size to the suffix
-            $rnd_name1 = 'photos_story_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
+            $rnd_name1 = 'photos_story_'.uniqid(mt_rand(10, 15)).'_'.time().'_720x720.'.$ext;
             
             // move it to uploads dir with full quality
             imagejpeg( $dst1, 'images/story/'.$rnd_name1, 100 );
@@ -224,7 +224,7 @@ if( $_POST[upload_cv] == 'true' )
  
             // rename our upload image file name, this to avoid conflict in previous upload images
             // to easily get our uploaded images name we added image size to the suffix
-            $rnd_name1 = 'photos_cv_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
+            $rnd_name1 = 'photos_cv_'.uniqid(mt_rand(10, 15)).'_'.time().'_720x720.'.$ext;
             
             // move it to uploads dir with full quality
             imagejpeg( $dst1, 'images/cv/'.$rnd_name1, 100 );
@@ -312,7 +312,7 @@ if( $_POST[upload_block] == 'true' )
  
             // rename our upload image file name, this to avoid conflict in previous upload images
             // to easily get our uploaded images name we added image size to the suffix
-            $rnd_name1 = 'photos_block_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
+            $rnd_name1 = 'photos_block_'.uniqid(mt_rand(10, 15)).'_'.time().'_720x720.'.$ext;
             
             // move it to uploads dir with full quality
             imagejpeg( $dst1, 'images/block/'.$rnd_name1, 100 );

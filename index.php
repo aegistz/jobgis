@@ -504,7 +504,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 			</section>
 			<section class="best-of-the-week">
 				<div class="container">
-					<h1><div class="text">งานที่คนสนใจมากที่สุด</div>
+					<h1><div class="text">บทความว่าสุด</div>
 					<div class="carousel-nav" id="best-of-the-week-nav">
 						<div class="prev">
 							<i class="ion-ios-arrow-left"></i>
@@ -516,22 +516,22 @@ $num_request_list = pg_num_rows($sql_request_list);
 					</h1>
 					<div class="owl-carousel owl-theme carousel-1">
 						<?php
-														$sql = pg_query("SELECT * from job_company a  inner join company b on a.id_com = b.id_com where status_job = 'เปิดรับสมัครอยู่' limit 5 ;  ");
+														$sql = pg_query("SELECT * from block a inner join student b on a.id_user = b.id_no order by a.id_block desc limit 10 ;  ");
 														while ( $arr = pg_fetch_array($sql) ) {
 						?>
 						<article class="article">
 							<div class="inner">
 								<figure>
-									<a  href="news.php?q=<?php echo $arr[id_job]; ?>">
-										<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+									<a  href="block_detail.php?stoid=<?php echo $arr[id_block]; ?>">
+										<img src="images/block/<?php echo $arr[img_block]; ?>" alt="Sample Article">
 									</a>
 								</figure>
 								<div class="padding">
 									<div class="detail">
-										<div class="time"><?php echo $arr[date_job]; ?></div>
+										<div class="time"><?php echo $arr[date_block]; ?></div>
 										<div class="category"><a href=""><?php echo $arr[type_job]; ?></a></div>
 									</div>
-									<h2><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h2>
+									<h2><a href="block_detail.php?stoid=<?php echo $arr[id_block]; ?>"><?php echo $arr[title_block]; ?></a></h2>
 									<p><?php
 															echo mb_strimwidth($arr[detail_job], 0, 120, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
 														?></p>

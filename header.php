@@ -112,9 +112,9 @@ $num = pg_num_rows($sql);
 							<li><a href="story.php">เรื่องราว</a></li>
 							<li><a href="search.php">ค้นหางาน/ผู้คน/สถานประกอบการ</a></li>
 							
-							<li class="dropdown magz-dropdown"><a href="#">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
+							<li class="dropdown magz-dropdown"><a href="block.php">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="">ทั่วไป</a></li>
+									<li><a href="block.php">ทั่วไป</a></li>
 									<li class="dropdown magz-dropdown"><a href="">ข่าวสาร <i class="ion-ios-arrow-right"></i></a>
 										<ul class="dropdown-menu">
 											<li><a href="">เกษตร</a></li>

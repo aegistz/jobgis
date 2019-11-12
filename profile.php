@@ -619,15 +619,11 @@ input:focus 		{ outline:none; }
 												<div id="block" class="container tab fade col-md-12"><br>
 <form enctype="multipart/form-data" method="post" >
 												<div class="form-group col-md-12">
-													<div class="radio">
-													  <label><input type="radio" name="tag_block" value="เรื่องราวทั่วไป" checked>เรื่องราวทั่วไป</label>
-													</div>
-													<div class="radio">
-													  <label><input type="radio" name="tag_block" value="geoinformatich">geoinformatich</label>
-													</div>
-													<div class="radio disabled">
-													  <label><input type="radio" name="tag_block" value="ข่าวสารเกี่ยวกับภูมิสารสนเทศ">ข่าวสารเกี่ยวกับภูมิสารสนเทศ</label>
-													</div>
+													<select class="form-control" name="tag_block">
+												        <option value="เกษตร">เกษตร</option>
+												        <option value="เทคโนโลยี">เทคโนโลยี</option>
+												        <option value="ชาวบ้าน">ชาวบ้าน</option>
+												    </select>
 												</div>
 												<div class="form-group col-md-12">
 													<!-- <label for="message">แบ่งปันไอเดีย<span class="required"></span></label> -->
@@ -689,11 +685,6 @@ input:focus 		{ outline:none; }
 															</div>
 													</div>
 													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_block]; ?>"><?php echo $arr[title_block]; ?></a></h1>
-													<p>
-														<?php
-														echo mb_strimwidth($arr[detail_block], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_block].'" title="">เพิ่มเติม</a>');
-														?>
-													</p>
 													<footer>
 														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
 													</footer>
@@ -877,8 +868,8 @@ else {    ?>
 											<div class="featured-author-body">
 												<div class="featured-author-count">
 													<div class="item">
-														<a href="#">
-															<div class="name">Posts</div>
+														<!-- <a href="#">
+															<div class="name">เรื่องราว</div>
 															<div class="value">
 																<?php
 																$sql_post_num = pg_query("SELECT * from  story where id_user = '$arr_profile[id_no]';");
@@ -890,9 +881,35 @@ else {    ?>
 													</div>
 													<div class="item">
 														<a href="#">
-															<div class="name">View</div>
+															<div class="name">บทความ</div>
 															<div class="value">0</div>
-														</a>
+														</a> -->
+													<ul class="nav nav-tabs" role="tablist">
+													    <li class="nav-item">
+													     	<a class="nav-link " data-toggle="tab" href="#view_story">
+														      	เรื่องราว
+														      	<div class="value">
+																	<?php
+																	$sql_post_num = pg_query("SELECT * from  story where id_user = '$arr_profile[id_no]';");
+																	$num_post = pg_num_rows($sql_post_num);
+																	echo number_format($num_post) ;
+																	?>
+																</div>
+														    </a>
+													    </li>
+													    <li class="nav-item">
+													      	<a class="nav-link" data-toggle="tab" href="#view_block">
+														     	บทความ
+														      	<div class="value">
+																	<?php
+																	$sql_post_num = pg_query("SELECT * from  block where id_user = '$arr_profile[id_no]';");
+																	$num_post = pg_num_rows($sql_post_num);
+																	echo number_format($num_post) ;
+																	?>
+																</div>
+														  	</a>
+													    </li>
+													  </ul>
 													</div>
 												</div>
 											</div>
@@ -901,110 +918,173 @@ else {    ?>
 								</div>
 								
 							</aside>
+
+
+						  <!-- Tab panes -->
 							<div class="row">
-								<div class="col-xs-12 col-md-8">
-									<aside>
-										<?php
-											
-											$query = pg_query("SELECT * from story where id_user = '$eid' order by id_story desc ;");
-											$num = pg_num_rows($query);
-											if( $num != 0 ) {
-												while( $arr = pg_fetch_array($query)  ){
-										?>
-										<article class="col-md-12 article-list">
-											<div class="inner">
-												<figure>
-													<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
-														<img src="images/story/<?php echo $arr[img_story]; ?>">
-													</a>
-												</figure>
-												<div class="details">
-													<div class="detail">
-														<div class="category">
-															<a href=""><?php echo $arr[tag_story]; ?></a>
-														</div>
-														<div class="time"><?php echo $arr[date_story]; ?></div>
-													</div>
-													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>"><?php echo $arr[title_story]; ?></a></h1>
-													<p>
-														<?php
-														echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
-														?>
-													</p>
-													<footer>
-														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
-													</footer>
-												</div>
-											</div>
-										</article>
-										<?php }    }else{  ?>
-										<article class="col-md-12 article-list">
-											<div class="inner">
-												<figure>
-													<a href="">
-														<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
-													</a>
-												</figure>
-												<div class="details">
-													<div class="detail">
-														<div class="category">
-															<a href="#">ประสบการณ์</a>
-														</div>
-														<div class="time">December 26, 2016</div>
-													</div>
-													<h1><a href="#">..............</a></h1>
-													<p>
-														..............
-													</p>
-													<footer>
-														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
-													</footer>
-												</div>
-											</div>
-										</article>
-										<?php } ?>
-										
-										
-										
-									</aside>
-								</div>
-								<div class="col-xs-12 col-md-4">
-									<aside>
-										<h1 class="aside-title">ภาพประสบการณ์ </h1>
-										<div class="block">
-											<div class="block-body">
-												<ul class="item-list-round" data-magnific="gallery">
-													<?php
-														$id = $_GET[eid];
-														$query = pg_query("with ss as (
-													SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
-													) SELECT * from ss where row between 1 and 6");
-														$num = pg_num_rows($query);
-														if( $num != 0 ) {
-															while( $arr = pg_fetch_array($query)  ){
-													?>
-													<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
-													<?php }
-														$sql2 = pg_query("with ss as (
-													SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
-													) SELECT * from ss where row >= 7");
-														$num2 = pg_num_rows($sql2);
-														$arr2 = pg_fetch_array($sql2);
-													?>
-													<li><a href="images/student/<?php echo $arr2[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr2[name_img]; ?>');"><div class="more"> +<?php echo $num2; ?> </div></a></li>
-													<?php
-														while ( $arr3 = pg_fetch_array($sql2) ) {
-													?>
-													<li class="hidden"><a href="images/student/<?php echo $arr3[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr3[name_img]; ?>');"></a></li>
-													<?php } }else{  ?>
-													<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
-													<?php } ?>
+								<div class="tab-content">
+							      <div id="view_story" class=" tab-pane active"><br>
+							    	<div class="col-xs-12 col-md-8">
+										<aside>
+												<?php
 													
-												</ul>
+													$query = pg_query("SELECT * from story where id_user = '$eid' order by id_story desc ;");
+													$num = pg_num_rows($query);
+													if( $num != 0 ) {
+														while( $arr = pg_fetch_array($query)  ){
+												?>
+												<article class="col-md-12 article-list">
+													<div class="inner">
+														<figure>
+															<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
+																<img src="images/story/<?php echo $arr[img_story]; ?>">
+															</a>
+														</figure>
+														<div class="details">
+															<div class="detail">
+																<div class="category">
+																	<a href=""><?php echo $arr[tag_story]; ?></a>
+																</div>
+																<div class="time"><?php echo $arr[date_story]; ?></div>
+															</div>
+															<h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>"><?php echo $arr[title_story]; ?></a></h1>
+															<p>
+																<?php
+																echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
+																?>
+															</p>
+															<footer>
+																<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
+															</footer>
+														</div>
+													</div>
+												</article>
+												<?php }    }else{  ?>
+												<article class="col-md-12 article-list">
+													<div class="inner">
+														<figure>
+															<a href="">
+																<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
+															</a>
+														</figure>
+														<div class="details">
+															<div class="detail">
+																<div class="category">
+																	<a href="#">ประสบการณ์</a>
+																</div>
+																<div class="time">December 26, 2016</div>
+															</div>
+															<h1><a href="#">..............</a></h1>
+															<p>
+																..............
+															</p>
+															<footer>
+																<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
+															</footer>
+														</div>
+													</div>
+												</article>
+												<?php } ?>	
+										</aside>
+								    </div>
+								  </div>
+								  <div id="view_block" class=" tab-pane fade"><br>
+							    	<div class="col-xs-12 col-md-8">
+								      	<aside>
+												<?php
+													
+													$query = pg_query("SELECT * from block where id_user = '$eid' order by id_block desc ;");
+													$num = pg_num_rows($query);
+													if( $num != 0 ) {
+														while( $arr = pg_fetch_array($query)  ){
+												?>
+												<article class="col-md-12 article-list">
+													<div class="inner">
+														<figure>
+															<a href="story_detail.php?stoid=<?php echo $arr[id_block]; ?>">
+																<img src="images/block/<?php echo $arr[img_block]; ?>">
+															</a>
+														</figure>
+														<div class="details">
+															<div class="detail">
+																<div class="category">
+																	<a href=""><?php echo $arr[tag_block]; ?></a>
+																</div>
+																<div class="time"><?php echo $arr[date_block]; ?></div>
+															</div>
+															<h1><a href="story_detail.php?stoid=<?php echo $arr[id_block]; ?>"><?php echo $arr[title_block]; ?></a></h1>
+															<footer>
+																<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
+															</footer>
+														</div>
+													</div>
+												</article>
+												<?php }    }else{  ?>
+												<article class="col-md-12 article-list">
+													<div class="inner">
+														<figure>
+															<a href="">
+																<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
+															</a>
+														</figure>
+														<div class="details">
+															<div class="detail">
+																<div class="category">
+																	<a href="#">ประสบการณ์</a>
+																</div>
+																<div class="time">December 26, 2016</div>
+															</div>
+															<h1><a href="#">..............</a></h1>
+															<p>
+																..............
+															</p>
+															<footer>
+																<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
+															</footer>
+														</div>
+													</div>
+												</article>
+												<?php } ?>	
+										</aside>
+								    </div>
+								  </div>
+									<div class="col-xs-12 col-md-4">
+										<aside>
+											<h1 class="aside-title">ภาพประสบการณ์ </h1>
+											<div class="block">
+												<div class="block-body">
+													<ul class="item-list-round" data-magnific="gallery">
+														<?php
+															$id = $_GET[eid];
+															$query = pg_query("with ss as (
+														SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
+														) SELECT * from ss where row between 1 and 6");
+															$num = pg_num_rows($query);
+															if( $num != 0 ) {
+																while( $arr = pg_fetch_array($query)  ){
+														?>
+														<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
+														<?php }
+															$sql2 = pg_query("with ss as (
+														SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
+														) SELECT * from ss where row >= 7");
+															$num2 = pg_num_rows($sql2);
+															$arr2 = pg_fetch_array($sql2);
+														?>
+														<li><a href="images/student/<?php echo $arr2[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr2[name_img]; ?>');"><div class="more"> +<?php echo $num2; ?> </div></a></li>
+														<?php
+															while ( $arr3 = pg_fetch_array($sql2) ) {
+														?>
+														<li class="hidden"><a href="images/student/<?php echo $arr3[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr3[name_img]; ?>');"></a></li>
+														<?php } }else{  ?>
+														<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
+														<?php } ?>
+														
+													</ul>
+												</div>
 											</div>
-										</div>
-									</aside>
-									
+										</aside>
+									</div>
 								</div>
 							</div>
 						</div>
