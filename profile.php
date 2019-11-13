@@ -414,7 +414,7 @@ input:focus 		{ outline:none; }
 											      <a class="nav-link" data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
 											    </li>
 											    <li class="nav-item">
-											      <a class="nav-link" data-toggle="tab" href="#block">บทความ</a>
+											      <a class="nav-link" data-toggle="tab" href="#block">เพิ่มบทความ</a>
 											    </li>
 											  </ul>
 											  <div class="tab-content">
