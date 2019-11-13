@@ -117,9 +117,9 @@ $num = pg_num_rows($sql);
 									<li><a href="block.php">ทั่วไป</a></li>
 									<li class="dropdown magz-dropdown"><a href="">ข่าวสาร <i class="ion-ios-arrow-right"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="">เกษตร</a></li>
-											<li><a href="">เทคโนโลยี</a></li>
-											<li><a href="">ชาวบ้าน</a>
+											<li><a href="block.php?q=farmland">เกษตร</a></li>
+											<li><a href="block.php?q=technology">เทคโนโลยี</a></li>
+											<li><a href="block.php?q=villager">ชาวบ้าน</a>
 										</ul>
 									</li>
 									<li><a href="">ธรุกิจ</a></li>

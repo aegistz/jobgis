@@ -3,6 +3,21 @@
 session_start();
 include("config.php");
 include("check_student.php");
+
+
+if ($_GET[q] == 'all_type') {
+	$q = '';
+}else if ($_GET[q] == 'farmland') {
+	$q = 'เกษตร';
+}else if ($_GET[q] == 'technology') {
+	$q = 'เทคโนโลยี';
+}else if ($_GET[q] == 'villager') {
+	$q = 'ชาวบ้าน';
+}
+
+$sql_block = pg_query("SELECT * from block a inner join student b on a.id_user = b.id_no where tag_block like '%$q%' order by a.date_block desc limit 50 ;");
+
+
 ?>
 <html>
 	<head>
@@ -53,9 +68,18 @@ include("check_student.php");
 							echo sha1($str);
 							?>  -->
 						</div>
+						<form>
+							<div class="hidden">
+							<label><input type="radio" name="q" value="all_type" checked> รวม</label>
+							<label><input type="radio" name="q" value="farmland" <?php if($_GET[q] =='farmland'){ echo 'checked';} ?>> เกษตร</label>
+							<label><input type="radio" name="q" value="technology" <?php if($_GET[q] =='technology'){ echo 'checked';} ?>>เทคโนโลยี </label>
+							<label><input type="radio" name="q" value="villager" <?php if($_GET[q] =='villager'){ echo 'checked';} ?>> ชาวบ้าน</label>
+							<button type="submit" class="btn btn-primary btn-block">ค้นหา</button>	
+							</div>
+						</form>
+							
 						
 						<div class="row">
-
 <table id="example" class="" style="width:100%">
         <thead>
             <tr>
@@ -64,8 +88,7 @@ include("check_student.php");
         </thead>
         <tbody>
 <?php
-								$query = pg_query("SELECT * from block a inner join student b on a.id_user = b.id_no  order by a.date_block desc limit 20 ;");
-								while ( $arr = pg_fetch_array($query) ) {
+								while ( $arr = pg_fetch_array($sql_block) ) {
 							?>
             <tr>
                 <td>
@@ -73,7 +96,7 @@ include("check_student.php");
 								            <div class="inner">
 								              <figure>
 									              <a href="block_detail.php?stoid=<?php echo $arr[id_block]; ?>">
-									                <img src="images/block/<?php echo $arr[img_block]; ?>">
+									                <img src="images/block/<?php echo $arr[img_block]; ?>"name="type" value="farmland" <?php if($_GET[type] =='farmland'){ echo 'checked';} ?>>
 								                </a>
 								              </figure>
 								              <div class="details">

@@ -408,116 +408,17 @@ input:focus 		{ outline:none; }
 											</div>
 											 <ul class="nav nav-tabs col-md-12" role="tablist">
 											    <li class="nav-item active">
-											      <a class="nav-link " data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
+											      <a class="nav-link " data-toggle="tab" href="#story">บอกเล่าเรื่องราวใหม่ ๆ</a>
 											    </li>
 											    <li class="nav-item">
-											      <a class="nav-link" data-toggle="tab" href="#story">บอกเล่าเรื่องราวใหม่ ๆ</a>
+											      <a class="nav-link" data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
 											    </li>
 											    <li class="nav-item">
-											      <a class="nav-link" data-toggle="tab" href="#block">แบ่งปันไอเดีย</a>
+											      <a class="nav-link" data-toggle="tab" href="#block">บทความ</a>
 											    </li>
 											  </ul>
 											  <div class="tab-content">
-											  	<div id="cv" class="container tab active col-md-12"><br>
-<form enctype="multipart/form-data" method="post" >
-												<div class="form-group col-md-12">
-													<!-- <label for="message">ประสบการณ์การทำงาน เพื่อประกอบการพิจารณารับเข้าทำงาน <span class="required"></span></label> -->
-													<div class="form-group row">
-														<label for="staticEmail" class="col-sm-2 col-form-label">หัวข้อ</label>
-														<div class="col-sm-10">
-															<input type="text" class="input2" name="title_cv">
-														</div>
-													</div>
-													
-													<div class="form-group row">
-														<label for="staticEmail" class="col-sm-2 col-form-label">รายละเอียด</label>
-														<div class="col-sm-10">
-															<textarea class="form-control" name="detail_cv" placeholder="กรอกรายละเอียดงานที่นี่ ..."></textarea>
-														</div>
-													</div>
-													<div class="form-group col-md-7">
-														<div class="form-group row">
-															<label for="staticEmail" class="col-sm-3 col-form-label">ภาพประกอบ</label>
-															<div class="col-sm-9">
-																<input type="file" name="file" onchange="readURL6(this);">
-															</div>
-														</div>
-														<button class="btn btn-primary btn-block" type="submit" name="upload_cv" value="true">Post</button>
-													</div>
-													<div class="form-group col-md-5">
-														<img src="" alt="" id="blah6" width="100%">
-													</div>
-												</div>
-</form>
-										<?php
-											
-											$query = pg_query("SELECT * from cv where id_user = '$id' order by id_cv desc ;");
-											$num = pg_num_rows($query);
-											if( $num != 0 ) {
-												while( $arr = pg_fetch_array($query)  ){
-										?>
-										<article class="col-md-12 article-list">
-											<div class="inner">
-												<figure>
-													<a href="cv_detail.php?stoid=<?php echo $arr[id_cv]; ?>">
-														<img src="images/cv/<?php echo $arr[img_cv]; ?>">
-													</a>
-												</figure>
-												<div class="details">
-													<div class="detail">
-														<div class="category">
-															<a href=""><?php echo $arr[tag_cv]; ?></a>
-														</div>
-														<div class="time"><?php echo $arr[date_cv]; ?></div>
-															<div class="btn-group">
-																<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-																<i class="fa fa-bars"></i> </button>
-																<ul class="dropdown-menu" role="menu">
-																	<li><a href="cv_edit.php?stoid=<?php echo $arr[id_cv]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
-																	<li><a href="profile.php?type=delete_cv&id_cv=<?php echo $arr[id_cv]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะไม่สามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
-																</ul>
-															</div>
-													</div>
-													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_cv]; ?>"><?php echo $arr[title_cv]; ?></a></h1>
-													<p>
-														<?php
-														echo mb_strimwidth($arr[detail_cv], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_cv].'" title="">เพิ่มเติม</a>');
-														?>
-													</p>
-													<footer>
-														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
-													</footer>
-												</div>
-											</div>
-										</article>
-										<?php }    }else{  ?>
-										<article class="col-md-12 article-list">
-											<div class="inner">
-												<figure>
-													<a href="">
-														<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
-													</a>
-												</figure>
-												<div class="details">
-													<div class="detail">
-														<div class="category">
-															<a href="#">ประสบการณ์</a>
-														</div>
-														<div class="time">December 26, 2016</div>
-													</div>
-													<h1><a href="#">..............</a></h1>
-													<p>
-														..............
-													</p>
-													<footer>
-														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
-													</footer>
-												</div>
-											</div>
-										</article>
-										<?php } ?>
-												</div>
-												<div id="story" class="container tab fade col-md-12"><br>
+												<div id="story" class="container tab active  col-md-12"><br>
 <form enctype="multipart/form-data" method="post" >
 												<div class="form-group col-md-12">
 													<!-- <label for="message">บอกเล่าเรื่องราวใหม่ ๆ<span class="required"></span></label> -->
@@ -581,6 +482,105 @@ input:focus 		{ outline:none; }
 													<p>
 														<?php
 														echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
+														?>
+													</p>
+													<footer>
+														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
+													</footer>
+												</div>
+											</div>
+										</article>
+										<?php }    }else{  ?>
+										<article class="col-md-12 article-list">
+											<div class="inner">
+												<figure>
+													<a href="">
+														<img src="https://1lsgxo2se94f2ujtfj2u2vci-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/dummy.png">
+													</a>
+												</figure>
+												<div class="details">
+													<div class="detail">
+														<div class="category">
+															<a href="#">ประสบการณ์</a>
+														</div>
+														<div class="time">December 26, 2016</div>
+													</div>
+													<h1><a href="#">..............</a></h1>
+													<p>
+														..............
+													</p>
+													<footer>
+														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>99</div></a>
+													</footer>
+												</div>
+											</div>
+										</article>
+										<?php } ?>
+												</div>
+												<div id="cv" class="container tab fade col-md-12"><br>
+<form enctype="multipart/form-data" method="post" >
+												<div class="form-group col-md-12">
+													<!-- <label for="message">ประสบการณ์การทำงาน เพื่อประกอบการพิจารณารับเข้าทำงาน <span class="required"></span></label> -->
+													<div class="form-group row">
+														<label for="staticEmail" class="col-sm-2 col-form-label">หัวข้อ</label>
+														<div class="col-sm-10">
+															<input type="text" class="input2" name="title_cv">
+														</div>
+													</div>
+													
+													<div class="form-group row">
+														<label for="staticEmail" class="col-sm-2 col-form-label">รายละเอียด</label>
+														<div class="col-sm-10">
+															<textarea class="form-control" name="detail_cv" placeholder="กรอกรายละเอียดงานที่นี่ ..."></textarea>
+														</div>
+													</div>
+													<div class="form-group col-md-7">
+														<div class="form-group row">
+															<label for="staticEmail" class="col-sm-3 col-form-label">ภาพประกอบ</label>
+															<div class="col-sm-9">
+																<input type="file" name="file" onchange="readURL6(this);">
+															</div>
+														</div>
+														<button class="btn btn-primary btn-block" type="submit" name="upload_cv" value="true">Post</button>
+													</div>
+													<div class="form-group col-md-5">
+														<img src="" alt="" id="blah6" width="100%">
+													</div>
+												</div>
+</form>
+										<?php
+											
+											$query = pg_query("SELECT * from cv where id_user = '$id' order by id_cv desc ;");
+											$num = pg_num_rows($query);
+											if( $num != 0 ) {
+												while( $arr = pg_fetch_array($query)  ){
+										?>
+										<article class="col-md-12 article-list">
+											<div class="inner">
+												<figure>
+													<a href="cv_detail.php?stoid=<?php echo $arr[id_cv]; ?>">
+														<img src="images/cv/<?php echo $arr[img_cv]; ?>">
+													</a>
+												</figure>
+												<div class="details">
+													<div class="detail">
+														<div class="category">
+															<a href=""><?php echo $arr[tag_cv]; ?></a>
+														</div>
+														<div class="time"><?php echo $arr[date_cv]; ?></div>
+															<div class="btn-group">
+																<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+																<i class="fa fa-bars"></i> </button>
+																<ul class="dropdown-menu" role="menu">
+																	<li><a href="cv_edit.php?stoid=<?php echo $arr[id_cv]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																	<li><a href="profile.php?type=delete_cv&id_cv=<?php echo $arr[id_cv]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะไม่สามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
+																</ul>
+															</div>
+													</div>
+													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_cv]; ?>"><?php echo $arr[title_cv]; ?></a></h1>
+													<p>
+														<?php
+														echo mb_strimwidth($arr[detail_cv], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_cv].'" title="">เพิ่มเติม</a>');
 														?>
 													</p>
 													<footer>
