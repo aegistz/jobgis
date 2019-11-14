@@ -113,7 +113,7 @@ include("check_student.php");
 										<?php
 											if ($id ==  $result[id_user]) {
 										?>
-										<a href="story_edit.php?stoid=<?php echo $result[id_cv]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราวนี้</a>
+										<a href="cv_edit.php?stoid=<?php echo $result[id_cv]; ?>" title="" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราวนี้</a>
 										<?php } ?>
 										
 									</div>
@@ -125,7 +125,7 @@ include("check_student.php");
 					<div class="col-md-9">
 						<ol class="breadcrumb">
 							<li><a href="#">Home</a></li>
-							<li class="active">Story</li>
+							<li class="active">Curriculum Vitae</li>
 						</ol>
 						<article class="article main-article">
 							<header>

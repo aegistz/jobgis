@@ -11,7 +11,7 @@ if( $_POST[update_block] == 'true' )
 				$detail_block = $_POST[detail_block];
 				$stoid = $_POST[stoid];
 				$sql = pg_query("UPDATE block set title_block = '$title_block' , detail_block = '$detail_block' where id_block = '$stoid' ;");
-				header('location:block_detail.php?stoid='.$stoid);
+				header('location:blog_detail.php?stoid='.$stoid);
 }
 if( $_POST[update_block] == 'false' )
 {
@@ -80,7 +80,7 @@ if( $_POST[update_block] == 'false' )
 							$stoid = $_POST[stoid];
 							$sql = pg_query("UPDATE block set  img_block = '$rnd_name1'
 								where id_block = '$stoid' ;");
-							header('location:block_edit.php?stoid='.$stoid);
+							header('location:blog_edit.php?stoid='.$stoid);
 				
 				
 				
@@ -172,7 +172,7 @@ function get_file_extension( $file )  {
 											<input type="hidden" name="stoid" value="<?php echo $result[id_block]; ?>">
 											<button type="submit" title="" name="update_block" value="true" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> บันทึกเรื่องราว</button>
 											<button  type="submit" name="delete_block" class="btn btn-danger btn-block" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')"><i class="fa fa-window-close" aria-hidden="true"></i>ลบเรื่องราว</button>
-											<a href="profile.php#block" class="btn  btn-sm btn-block" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i></i>กลับ</a>
+											<a href="profile.php#blog" class="btn  btn-sm btn-block" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i></i>กลับ</a>
 											
 										</div>
 									</article>
@@ -189,7 +189,7 @@ function get_file_extension( $file )  {
 								<header>
 									
 									<h2>
-									<input type="text"  name="title_cv" class="form-control" value="<?php echo $result[title_block]; ?>" name="">
+									<input type="text"  name="title_block" class="form-control" value="<?php echo $result[title_block]; ?>" >
 									</h2>
 									<ul class="details">
 										<li>Posted on <?php echo $result[date_block]; ?></li>
@@ -207,7 +207,7 @@ function get_file_extension( $file )  {
 										<button type="submit" class="btn btn-sm btn-primary" name="update_cv" value="false">บันทึกรูปภาพ</button>
 									</div>
 									<div class="col-md-6">
-										<img src="images/block/<?php echo $result[img_block]; ?>" id="blah_edit"  width="100%">
+										<img src="images/story/<?php echo $result[img_block]; ?>" id="blah_edit"  width="100%">
 									</div>
 									
 									

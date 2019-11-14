@@ -620,9 +620,11 @@ input:focus 		{ outline:none; }
 <form enctype="multipart/form-data" method="post" >
 												<div class="form-group col-md-12">
 													<select class="form-control" name="tag_block">
+												        <option value="ทั่วไป">ทั่วไป</option>
 												        <option value="เกษตร">เกษตร</option>
 												        <option value="เทคโนโลยี">เทคโนโลยี</option>
 												        <option value="ชาวบ้าน">ชาวบ้าน</option>
+												        <option value="ธุรกิจ">ธุรกิจ</option>
 												    </select>
 												</div>
 												<div class="form-group col-md-12">

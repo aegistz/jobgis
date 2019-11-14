@@ -71,7 +71,7 @@ if( $_POST[update_cv] == 'false' )
 				$rnd_name1 = 'photos_student_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
 				
 				// move it to uploads dir with full quality
-				imagejpeg( $dst1, 'images/cv/'.$rnd_name1, 100 );
+				imagejpeg( $dst1, 'images/story/'.$rnd_name1, 100 );
 				
 				// I think that's it we're good to clear our created images
 				imagedestroy( $source );
@@ -207,7 +207,7 @@ function get_file_extension( $file )  {
 										<button type="submit" class="btn btn-sm btn-primary" name="update_cv" value="false">บันทึกรูปภาพ</button>
 									</div>
 									<div class="col-md-6">
-										<img src="images/cv/<?php echo $result[img_cv]; ?>" id="blah_edit"  width="100%">
+										<img src="images/story/<?php echo $result[img_cv]; ?>" id="blah_edit"  width="100%">
 									</div>
 									
 									
