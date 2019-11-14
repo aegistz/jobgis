@@ -114,12 +114,12 @@ $num = pg_num_rows($sql);
 							
 							<li class="dropdown magz-dropdown"><a href="block.php">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="block.php">ทั่วไป</a></li>
+									<li><a href="blog.php">ทั่วไป</a></li>
 									<li class="dropdown magz-dropdown"><a href="">ข่าวสาร <i class="ion-ios-arrow-right"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="block.php?q=farmland">เกษตร</a></li>
-											<li><a href="block.php?q=technology">เทคโนโลยี</a></li>
-											<li><a href="block.php?q=villager">ชาวบ้าน</a>
+											<li><a href="blog.php?q=farmland">เกษตร</a></li>
+											<li><a href="blog.php?q=technology">เทคโนโลยี</a></li>
+											<li><a href="blog.php?q=villager">ชาวบ้าน</a>
 										</ul>
 									</li>
 									<li><a href="">ธรุกิจ</a></li>

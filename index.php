@@ -522,8 +522,8 @@ $num_request_list = pg_num_rows($sql_request_list);
 						<article class="article">
 							<div class="inner">
 								<figure>
-									<a  href="block_detail.php?stoid=<?php echo $arr[id_block]; ?>">
-										<img src="images/block/<?php echo $arr[img_block]; ?>" alt="Sample Article">
+									<a  href="blog_detail.php?stoid=<?php echo $arr[id_block]; ?>">
+										<img src="images/story/<?php echo $arr[img_block]; ?>" alt="Sample Article">
 									</a>
 								</figure>
 								<div class="padding">
