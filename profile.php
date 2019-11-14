@@ -414,7 +414,7 @@ input:focus 		{ outline:none; }
 											      <a class="nav-link" data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
 											    </li>
 											    <li class="nav-item">
-											      <a class="nav-link" data-toggle="tab" href="#block">เพิ่มบทความ</a>
+											      <a class="nav-link" data-toggle="tab" href="#blog">เพิ่มบทความ</a>
 											    </li>
 											  </ul>
 											  <div class="tab-content">
@@ -616,7 +616,7 @@ input:focus 		{ outline:none; }
 										</article>
 										<?php } ?>
 												</div>
-												<div id="block" class="container tab fade col-md-12"><br>
+												<div id="blog" class="container tab fade col-md-12"><br>
 <form enctype="multipart/form-data" method="post" >
 												<div class="form-group col-md-12">
 													<select class="form-control" name="tag_block">

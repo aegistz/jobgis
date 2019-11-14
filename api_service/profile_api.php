@@ -338,7 +338,7 @@ if( $_POST[upload_block] == 'true' )
             values ( '$title_block','$rnd_name1','$detail_block','$tag_block' ,'$date_time' ,'$user[id_no]'  )   ;" );
 
            
-              header('location:profile.php#block');
+              header('location:profile.php#blog');
            
  
         }
