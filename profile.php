@@ -414,7 +414,7 @@ input:focus 		{ outline:none; }
 											      <a class="nav-link" data-toggle="tab" href="#cv">ประสบการณ์การทำงาน</a>
 											    </li>
 											    <li class="nav-item">
-											      <a class="nav-link" data-toggle="tab" href="#block">เพิ่มบทความ</a>
+											      <a class="nav-link" data-toggle="tab" href="#blog">เพิ่มบทความ</a>
 											    </li>
 											  </ul>
 											  <div class="tab-content">
@@ -559,7 +559,7 @@ input:focus 		{ outline:none; }
 											<div class="inner">
 												<figure>
 													<a href="cv_detail.php?stoid=<?php echo $arr[id_cv]; ?>">
-														<img src="images/cv/<?php echo $arr[img_cv]; ?>">
+														<img src="images/story/<?php echo $arr[img_cv]; ?>">
 													</a>
 												</figure>
 												<div class="details">
@@ -616,7 +616,7 @@ input:focus 		{ outline:none; }
 										</article>
 										<?php } ?>
 												</div>
-												<div id="block" class="container tab fade col-md-12"><br>
+												<div id="blog" class="container tab fade col-md-12"><br>
 <form enctype="multipart/form-data" method="post" >
 												<div class="form-group col-md-12">
 													<select class="form-control" name="tag_block">
@@ -665,8 +665,8 @@ input:focus 		{ outline:none; }
 										<article class="col-md-12 article-list">
 											<div class="inner">
 												<figure>
-													<a href="block_detail.php?stoid=<?php echo $arr[id_block]; ?>">
-														<img src="images/block/<?php echo $arr[img_block]; ?>">
+													<a href="blog_detail.php?stoid=<?php echo $arr[id_block]; ?>">
+														<img src="images/story/<?php echo $arr[img_block]; ?>">
 													</a>
 												</figure>
 												<div class="details">
@@ -679,7 +679,7 @@ input:focus 		{ outline:none; }
 																<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 																<i class="fa fa-bars"></i> </button>
 																<ul class="dropdown-menu" role="menu">
-																	<li><a href="block_edit.php?stoid=<?php echo $arr[id_block]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																	<li><a href="blog_edit.php?stoid=<?php echo $arr[id_block]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
 																	<li><a href="profile.php?type=delete_block&id_block=<?php echo $arr[id_block]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
 																</ul>
 															</div>
@@ -1002,7 +1002,7 @@ else {    ?>
 													<div class="inner">
 														<figure>
 															<a href="story_detail.php?stoid=<?php echo $arr[id_block]; ?>">
-																<img src="images/block/<?php echo $arr[img_block]; ?>">
+																<img src="images/story/<?php echo $arr[img_block]; ?>">
 															</a>
 														</figure>
 														<div class="details">

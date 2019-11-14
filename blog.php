@@ -95,8 +95,8 @@ $sql_block = pg_query("SELECT * from block a inner join student b on a.id_user =
 							<article class="col-md-12 article-list">
 								            <div class="inner">
 								              <figure>
-									              <a href="block_detail.php?stoid=<?php echo $arr[id_block]; ?>">
-									                <img src="images/block/<?php echo $arr[img_block]; ?>"name="type" value="farmland" <?php if($_GET[type] =='farmland'){ echo 'checked';} ?>>
+									              <a href="blog_detail.php?stoid=<?php echo $arr[id_block]; ?>">
+									                <img src="images/story/<?php echo $arr[img_block]; ?>"name="type" value="farmland" <?php if($_GET[type] =='farmland'){ echo 'checked';} ?>>
 								                </a>
 								              </figure>
 								              <div class="details">

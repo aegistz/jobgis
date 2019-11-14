@@ -133,7 +133,7 @@ if( $_POST[upload_story] == 'true' )
  
  
             // new width 100 in pixel format too
-            $nw1 = 450;
+            $nw1 = 720;
             $nh1 = ceil( $ratio * $nw1 );
             $dst1 = imagecreatetruecolor( $nw1, $nh1 );
  
@@ -216,7 +216,7 @@ if( $_POST[upload_cv] == 'true' )
  
  
             // new width 100 in pixel format too
-            $nw1 = 450;
+            $nw1 = 720;
             $nh1 = ceil( $ratio * $nw1 );
             $dst1 = imagecreatetruecolor( $nw1, $nh1 );
  
@@ -227,13 +227,13 @@ if( $_POST[upload_cv] == 'true' )
             $rnd_name1 = 'photos_cv_'.uniqid(mt_rand(10, 15)).'_'.time().'_720x720.'.$ext;
             
             // move it to uploads dir with full quality
-            imagejpeg( $dst1, 'images/cv/'.$rnd_name1, 100 );
+            imagejpeg( $dst1, 'images/story/'.$rnd_name1, 100 );
  
             // I think that's it we're good to clear our created images
             imagedestroy( $source );
             imagedestroy( $dst1 );
 
-            $showpic = "images/cv/".$rnd_name1;
+            $showpic = "images/story/".$rnd_name1;
 
             date_default_timezone_set('Asia/Bangkok');
             $year =  date("Y"); 
@@ -304,7 +304,7 @@ if( $_POST[upload_block] == 'true' )
  
  
             // new width 100 in pixel format too
-            $nw1 = 450;
+            $nw1 = 720;
             $nh1 = ceil( $ratio * $nw1 );
             $dst1 = imagecreatetruecolor( $nw1, $nh1 );
  
@@ -312,16 +312,16 @@ if( $_POST[upload_block] == 'true' )
  
             // rename our upload image file name, this to avoid conflict in previous upload images
             // to easily get our uploaded images name we added image size to the suffix
-            $rnd_name1 = 'photos_block_'.uniqid(mt_rand(10, 15)).'_'.time().'_720x720.'.$ext;
+            $rnd_name1 = 'photos_blog_'.uniqid(mt_rand(10, 15)).'_'.time().'_720x720.'.$ext;
             
             // move it to uploads dir with full quality
-            imagejpeg( $dst1, 'images/block/'.$rnd_name1, 100 );
+            imagejpeg( $dst1, 'images/story/'.$rnd_name1, 100 );
  
             // I think that's it we're good to clear our created images
             imagedestroy( $source );
             imagedestroy( $dst1 );
 
-            $showpic = "images/block/".$rnd_name1;
+            $showpic = "images/story/".$rnd_name1;
             
             date_default_timezone_set('Asia/Bangkok');
             $year =  date("Y"); 
@@ -338,7 +338,7 @@ if( $_POST[upload_block] == 'true' )
             values ( '$title_block','$rnd_name1','$detail_block','$tag_block' ,'$date_time' ,'$user[id_no]'  )   ;" );
 
            
-              header('location:profile.php#block');
+              header('location:profile.php#blog');
            
  
         }

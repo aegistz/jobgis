@@ -138,7 +138,7 @@ include("check_student.php");
 							</header>
 							<div class="main">
 								<p><?php echo $result[detail_cv]; ?> <hr>
-									<img src="images/cv/<?php echo $result[img_cv]; ?>" alt="" width="100%">
+									<img src="images/story/<?php echo $result[img_cv]; ?>" alt="" width="100%">
 								</p>
 								
 							</article>

@@ -71,7 +71,7 @@ if( $_POST[update_block] == 'false' )
 				$rnd_name1 = 'photos_student_'.uniqid(mt_rand(10, 15)).'_'.time().'_450x450.'.$ext;
 				
 				// move it to uploads dir with full quality
-				imagejpeg( $dst1, 'images/block/'.$rnd_name1, 100 );
+				imagejpeg( $dst1, 'images/story/'.$rnd_name1, 100 );
 				
 				// I think that's it we're good to clear our created images
 				imagedestroy( $source );
