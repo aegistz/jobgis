@@ -122,7 +122,7 @@ $num = pg_num_rows($sql);
 											<li><a href="blog.php?q=villager">ชาวบ้าน</a>
 										</ul>
 									</li>
-									<li><a href="">ธรุกิจ</a></li>
+									<li><a href="blog.php?q=business">ธรุกิจ</a></li>
 								</ul>
 							</li>
 <?php if ($num == 0) { ?>

@@ -13,6 +13,8 @@ if ($_GET[q] == 'all_type') {
 	$q = 'เทคโนโลยี';
 }else if ($_GET[q] == 'villager') {
 	$q = 'ชาวบ้าน';
+}else if ($_GET[q] == 'business') {
+	$q = 'ธุรกิจ';
 }
 
 $sql_block = pg_query("SELECT * from block a inner join student b on a.id_user = b.id_no where tag_block like '%$q%' order by a.date_block desc limit 50 ;");
@@ -74,6 +76,7 @@ $sql_block = pg_query("SELECT * from block a inner join student b on a.id_user =
 							<label><input type="radio" name="q" value="farmland" <?php if($_GET[q] =='farmland'){ echo 'checked';} ?>> เกษตร</label>
 							<label><input type="radio" name="q" value="technology" <?php if($_GET[q] =='technology'){ echo 'checked';} ?>>เทคโนโลยี </label>
 							<label><input type="radio" name="q" value="villager" <?php if($_GET[q] =='villager'){ echo 'checked';} ?>> ชาวบ้าน</label>
+							<label><input type="radio" name="q" value="business" <?php if($_GET[q] =='business'){ echo 'checked';} ?>> ธุรกิจ</label>
 							<button type="submit" class="btn btn-primary btn-block">ค้นหา</button>	
 							</div>
 						</form>
