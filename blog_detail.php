@@ -81,6 +81,8 @@ include("check_student.php");
 			    border-radius: 50%; 
 			    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
 			}
+
+			
 		</style>
 	</head>
 	<body class="skin-blue">
