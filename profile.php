@@ -869,50 +869,32 @@ else {    ?>
 											</div>
 											<div class="featured-author-body">
 												<div class="featured-author-count">
+													
+
 													<div class="item">
-														<!-- <a href="#">
+														<a data-toggle="tab" href="#view_story">
 															<div class="name">เรื่องราว</div>
-															<div class="value">
-																<?php
-																$sql_post_num = pg_query("SELECT * from  story where id_user = '$arr_profile[id_no]';");
-																$num_post = pg_num_rows($sql_post_num);
-																echo number_format($num_post) ;
-																?>
-															</div>
-														</a>
-													</div>
-													<div class="item">
-														<a href="#">
-															<div class="name">บทความ</div>
-															<div class="value">0</div>
-														</a> -->
-													<ul class="nav nav-tabs" role="tablist">
-													    <li class="nav-item">
-													     	<a class="nav-link " data-toggle="tab" href="#view_story">
-														      	เรื่องราว
-														      	<div class="value">
-																	<?php
+															<div class="value"><?php
 																	$sql_post_num = pg_query("SELECT * from  story where id_user = '$arr_profile[id_no]';");
 																	$num_post = pg_num_rows($sql_post_num);
 																	echo number_format($num_post) ;
-																	?>
-																</div>
-														    </a>
-													    </li>
-													    <li class="nav-item">
-													      	<a class="nav-link" data-toggle="tab" href="#view_block">
-														     	บทความ
-														      	<div class="value">
-																	<?php
+																	?></div>
+														</a>
+													</div>
+
+													<div class="item">
+														<a data-toggle="tab" href="#view_block">
+															<div class="name">บทความ</div>
+															<div class="value"><?php
 																	$sql_post_num = pg_query("SELECT * from  block where id_user = '$arr_profile[id_no]';");
 																	$num_post = pg_num_rows($sql_post_num);
 																	echo number_format($num_post) ;
-																	?>
-																</div>
-														  	</a>
-													    </li>
-													  </ul>
+																	?></div>
+														</a>
 													</div>
+
+
+
 												</div>
 											</div>
 										</div>
