@@ -221,7 +221,7 @@ include("check_student.php");
 <form method="post" action="">
 								<input  class="form-control form-control-sm"  value="ผู้ส่ง : <?php echo $user[email]; ?>" readonly="" ><br>
 								<textarea  class="form-control form-control-lg" name="detail_comment" placeholder="พิมพ์ข้อความที่นี่" required="required" style="width: 100% "></textarea>
-								<button  type="submit" class="btn btn-primary" name="comment_cv" style="width: 100%">send message</button>
+								<button  type="submit" class="btn btn-primary" name="comment_block" style="width: 100%">send message</button>
 </form>
 						</div>
 							</div>
