@@ -4,7 +4,7 @@ session_start();
 include("config.php");
 include("check_student.php");
 
-	$id = $_GET[stoid];
+	$id_blog = $_GET[stoid];
 
 	$sql = pg_query("SELECT * from block a inner join student b on a.id_user = b.id_no where id_block = '$_GET[stoid]' ;");
 	$result = pg_fetch_array($sql);
@@ -149,7 +149,7 @@ include("check_student.php");
 								<h5>Comments</h5>
 							<table>
 <?php
-	$sql = pg_query("SELECT * from block a inner join comment_block b on a.id_block = b.id_block where a.id_block = '$id'; ");
+	$sql = pg_query("SELECT * from block a inner join comment_block b on a.id_block = b.id_block where  status = 'show' and a.id_block = '$id_blog'; ");
 	$num = pg_num_rows($sql);
 	if($num < 1){
  ?>
@@ -168,14 +168,14 @@ include("check_student.php");
 										</tr>
 <?php 
 				}else {
-				$sql = pg_query("SELECT * from block a inner join comment_block b on a.id_block = b.id_block where a.id_block = $id and status = 'show' order by no_id asc;");
+				$sql = pg_query("SELECT * from block a inner join comment_block b on a.id_block = b.id_block where a.id_block = $id_blog and status = 'show' order by no_id asc;");
 				while ($arr = pg_fetch_array($sql) ) {
 
 				$sql2 = pg_query("SELECT * from comment_block a inner join student b on a.user_comment = b.email where a.user_comment = '$arr[user_comment]'; ");
 				$arr2 = pg_fetch_array($sql2);
 				$num2 = pg_num_rows($sql2);
 
-				$sql3 = pg_query("SELECT * from comment_block where user_comment = '$user[email]' and id_block = '$id'; ");
+				$sql3 = pg_query("SELECT * from comment_block where user_comment = '$user[email]' and id_block = '$id_blog'; ");
 				$arr3 = pg_fetch_array($sql3);
 					
 ?>

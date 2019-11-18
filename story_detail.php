@@ -4,7 +4,7 @@ session_start();
 include("config.php");
 include("check_student.php");
 
-	$id = $_GET[stoid];
+	$id_story = $_GET[stoid];
 
 	$sql = pg_query("SELECT * from story a inner join student b on a.id_user = b.id_no where id_story = '$_GET[stoid]' ;");
 	$result = pg_fetch_array($sql);
@@ -148,12 +148,13 @@ include("check_student.php");
 								
 								<h5>Comments</h5>
 							<table>
+								<tbody>
 <?php
-	$sql = pg_query("SELECT * from story a inner join comment_story b on a.id_story = b.id_story where a.id_story = '$id'; ");
+	$sql = pg_query("SELECT * from story a inner join comment_story b on a.id_story = b.id_story where status = 'show' and a.id_story = '$id_story'; ");
 	$num = pg_num_rows($sql);
 	if($num < 1){
  ?>
- 								<tbody>
+ 								
  									<tr>
 											<div class="comment_container d-flex flex-row">
 												<div>
@@ -162,20 +163,20 @@ include("check_student.php");
 													</div>
 												</div>
 												<div class="">
-													<p class="">ยังไม่มี comment ขณะนี้</p>
+													<p class="">ยังไม่มี comment ขณะนี้ </p>
 												</div>
 											</div>
 										</tr>
 <?php 
 				}else {
-				$sql = pg_query("SELECT * from story a inner join comment_story b on a.id_story = b.id_story where a.id_story = $id and status = 'show' order by no_id asc;");
+				$sql = pg_query("SELECT * from story a inner join comment_story b on a.id_story = b.id_story where a.id_story = $id_story and status = 'show' order by no_id asc;");
 				while ($arr = pg_fetch_array($sql) ) {
 
 				$sql2 = pg_query("SELECT * from comment_story a inner join student b on a.user_comment = b.email where a.user_comment = '$arr[user_comment]'; ");
 				$arr2 = pg_fetch_array($sql2);
 				$num2 = pg_num_rows($sql2);
 
-				$sql3 = pg_query("SELECT * from comment_story where user_comment = '$user[email]' and id_story = '$id'; ");
+				$sql3 = pg_query("SELECT * from comment_story where user_comment = '$user[email]' and id_story = '$id_story'; ");
 				$arr3 = pg_fetch_array($sql3);
 					
 ?>
