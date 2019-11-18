@@ -577,7 +577,7 @@ input:focus 		{ outline:none; }
 																</ul>
 															</div>
 													</div>
-													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_cv]; ?>"><?php echo $arr[title_cv]; ?></a></h1>
+													<h1><a href="cv_detail.php?stoid=<?php echo $arr[id_cv]; ?>"><?php echo $arr[title_cv]; ?></a></h1>
 													<p>
 														<?php
 														echo mb_strimwidth($arr[detail_cv], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_cv].'" title="">เพิ่มเติม</a>');
@@ -686,7 +686,7 @@ input:focus 		{ outline:none; }
 																</ul>
 															</div>
 													</div>
-													<h1><a href="story_detail.php?stoid=<?php echo $arr[id_block]; ?>"><?php echo $arr[title_block]; ?></a></h1>
+													<h1><a href="blog_detail.php?stoid=<?php echo $arr[id_block]; ?>"><?php echo $arr[title_block]; ?></a></h1>
 													<footer>
 														<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
 													</footer>
