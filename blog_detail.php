@@ -141,6 +141,7 @@ include("check_student.php");
 							<div class="main">
 								<p><?php echo $result[detail_block]; ?> <hr>
 								</p>
+								<input type="text" value="<?php echo $result[detail_block]; ?>"readonly>
 								
 							</article>
 
