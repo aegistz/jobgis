@@ -189,7 +189,7 @@
 		        <img src='http://www.geojobs.nu.ac.th/images/6logo.png' style='width: 120px;'>
 		        <div style='-align:center'> 
 		           <p>ขอบคุณที่ร่วมเป็นครอบครัวเดียวกับเรา </p><br>
-		           <p><a href='http://www.geojobs.nu.ac.th/checkmail.php?email=$email&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
+		           <p><a href='http://www.geojobs.nu.ac.th/checkmail.php?email=".$email."&type=submit_mail' >กดที่นี่ เพื่อยืนยันการสมัคร</a>   </p>
 		        </div>
 		      </div>
 		        <div>       

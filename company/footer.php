@@ -16,15 +16,15 @@
 							<h1 class="block-title">Popular Tags <div class="right"><a href="#">See All <i class="ion-ios-arrow-thin-right"></i></a></div></h1>
 							<div class="block-body">
 								<ul class="tags">
-									<li><a href="#">หางาน GIS</a></li>
-									<li><a href="#">หาที่ฝึกงาน</a></li>
-									<li><a href="#">สหกิจศึกษา</a></li>
-									<li><a href="#">ฝึกงานได้เงิน</a></li>
-									<li><a href="#">งานธรณี</a></li>
+									<li><a href="search.php">หางาน GIS</a></li>
+									<li><a href="search.php">หาที่ฝึกงาน</a></li>
+									<li><a href="search.php?type=coop">สหกิจศึกษา</a></li>
+									<li><a href="search.php?type=apprentice">ฝึกงาน</a></li>
+									<li><a href="search.php">งานธรณี</a></li>
 								</ul>
 							</div>
 						</div>
-						<div class="line"></div>
+						<!-- <div class="line"></div>
 						<div class="block">
 							<h1 class="block-title">Newsletter</h1>
 							<div class="block-body">
@@ -39,21 +39,21 @@
 									<button class="btn btn-primary btn-block white">Subscribe</button>
 								</form>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="col-md-4 col-xs-12 col-sm-6">
 						<div class="block">
 							<h1 class="block-title">Follow Us</h1>
 							<div class="block-body">
-								<p>Follow us and stay in touch to get the latest news</p>
+								<p>ติดตามข่าวสารต่าง ๆ ได้ที่นี่</p>
 								<ul class="social trp">
 									<li>
-										<a href="#" class="facebook">
+										<a href="https://www.facebook.com/gistda/" class="facebook">
 											<svg><rect width="0" height="0"/></svg>
 											<i class="ion-social-facebook"></i>
 										</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a href="#" class="twitter">
 											<svg><rect width="0" height="0"/></svg>
 											<i class="ion-social-twitter-outline"></i>
@@ -106,11 +106,11 @@
 											<svg><rect width="0" height="0"/></svg>
 											<i class="ion-social-rss"></i>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>
-						<div class="line"></div>
+						<!-- <div class="line"></div>
 						<div class="block">
 							<div class="block-body no-margin">
 								<ul class="footer-nav-horizontal">
@@ -120,7 +120,7 @@
 									<li><a href="page.html">About</a></li>
 								</ul>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<div class="row">
@@ -128,7 +128,7 @@
 						<div class="copyright">
 							COPYRIGHT &copy; GISTNU 2019. ALL RIGHT RESERVED.
 							<div>
-								Made with <i class="ion-heart"></i> by <a href="http://cgistln.nu.ac.th">GISTNU</a>
+								Made with <i class="ion-heart"></i> by <a href="http://www.cgistln.nu.ac.th">GISTNU</a>
 							</div>
 						</div>
 					</div>

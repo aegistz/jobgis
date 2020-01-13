@@ -659,8 +659,11 @@ include("check_admin.php");
 									  	<a href="../images/template_excel.jpg" target="_blank" title="">
 										    <img src="../images/template_excel.jpg" alt="" width="100%">
 									  	</a>
+									  	<b>
 										    * กดที่รูปเพื่อดูภาพขนาดใหญ่ <br>
-										    ** ชื่อจังหวัดไม่ต้องใส่คำนำหน้า เช่น จ. หรือ จังหวัด 
+										    ** ชื่อจังหวัดไม่ต้องใส่คำนำหน้า เช่น จ. หรือ จังหวัด  <br>
+										    ** ปีที่เริ่มศึกษา ปีที่จบการศึกษา และ ปีเกิด ห้ามเป็นค่าว่าง ถ้าไม่มีข้อมูลให้ใส่ เลข  0
+										</b>
 									  </div>
 									  <div id="ex2" class="tab-pane fade">
 									  	<div class="row">
@@ -728,8 +731,39 @@ include("check_admin.php");
 						        </thead>
 						        <tbody>
 
+
+
+
 <?php 
-	$sql = pg_query("SELECT * from user_job   where owner_input = '$admin[id_admin]';");
+	$sql = pg_query("SELECT id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email from user_job  where owner_input = '$admin[id_admin]'  group by id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email ;");
 	while ($arr = pg_fetch_array($sql)) {
 		
 ?>						        	
@@ -742,7 +776,7 @@ include("check_admin.php");
 						                <td><?php echo $arr[major]; ?></td>
 						                <td><?php echo $arr[email]; ?></td>
 						                <td>
-				<a href="update_student.php?q=<?php echo $arr[id_no]; ?>"  class="btn btn-info btn-sm" >
+				<a href="update_student.php?q=<?php echo $arr[id_student]; ?>"  class="btn btn-info btn-sm" >
 					<i class="fa fa-search"></i>
 				</a>
 										</td>

@@ -3,6 +3,7 @@
 <?php 
 	session_start();
 	include 'config.php';
+include("check_student.php");
 
 	   $email = $user['email'];
 
@@ -43,6 +44,15 @@
 
 
 		<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+		<style>
+		.circle{
+	    height: auto;
+	    width: auto;
+	    border: 3px solid #fff; 
+	    border-radius: 50%; 
+	    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+		}
+		</style>
 
 	</head>
 
@@ -53,14 +63,18 @@
 		<section class="page">
 			<div class="container">
 				<div class="row">
-					<div class="form-group">
+					<div class="featured-author-center">
 						<figure class="featured-author-picture">
-								<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article" style="width: 150px ">
+							<?php if($user[img] == ''){ ?>
+							<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article" style="width: 150px ">
+							<?php } else { ?>
+							<img class="circle"  src="images/student/<?php echo $user[img]; ?>" alt="Sample Article" style="width: 150px ">
+							<?php } ?>
 						</figure>
 					</div>
 						<h3>
 							<label>
-								Resume <a href="edit-resume.php" class="btn btn-primary"><i class="icon ion-settings"></i>  แก้ไข</a>
+								Resume <a href="resume-edit.php" class="btn btn-primary"><i class="icon ion-settings"></i>  แก้ไข</a>
 							</label>
 						</h3>
 						<hr>
@@ -188,5 +202,6 @@
 		<script src="scripts/toast/jquery.toast.min.js"></script>
 		<!-- <script src="js/demo.js"></script> -->
 		<script src="js/e-magz.js"></script>
+
 	</body>
 </html>

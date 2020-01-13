@@ -222,10 +222,11 @@ if( $_POST[submit_form] == 'true' )
 																<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 																<strong>Success!</strong> ลงทะเบียนเสร็จสิ้นแล้ว
 															</div>';
-											header('Location:checklogin.php?user_email='.$email.'&user_password='.$telephone.'&login=Login');
-											setcookie("email", $email , time() + 3600);
-											header('Location: checkmail.php');
-												exit;
+											
+												setcookie("email", $_POST[email_com] , time() + 3600);
+												header('Location: checkcompany.php');
+													  exit;
+
 										}else{
 											$message = '<div class="alert alert-danger alert-dismissible">
 														<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -361,9 +362,9 @@ function get_file_extension( $file )  {
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Poster หรือภาพประกอบ</label>
-											<input class="form-control " type="file" id="cname" name="file" onchange="readURL(this);"  accept="image/png, image/jpeg, image/gif">
+											<input class="form-control " type="file" id="cname" name="file" onchange="readURL_com(this);"  accept="image/png, image/jpeg, image/gif">
 
-                                              <img id="blah" src="http://orcalcontabilidade.com.br/images/footer-shadow.png" style="width:100%; max-height:100%;margin-top:20px;" alt="your image" />
+                                              <img id="blah_com" src="http://orcalcontabilidade.com.br/images/footer-shadow.png" style="width:100%; max-height:100%;margin-top:20px;" alt="your image" />
 										</div>
 										
 									</div>
@@ -552,12 +553,12 @@ function get_file_extension( $file )  {
 		});
 
 
-		 function readURL(input) {
+		 function readURL_com(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#blah')
+                    $('#blah_com')
                         .attr('src', e.target.result);
                 };
 

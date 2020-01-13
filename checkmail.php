@@ -31,6 +31,7 @@ if( $_GET[type] == 'submit_mail' )
 
  		setcookie("type", $arr["email"] , time() + 86399);
 		setcookie("pass", $arr["password"] , time() + 86399);
+		setcookie("status", 'student', time() + 86399);
 		header('Location:./');
 		exit;
 
@@ -58,7 +59,7 @@ if ( isset($_GET[type]) == 'resent' )
 		// ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
 
 
-		$sender = "gistnu"; // ชื่อผู้ส่ง
+		$sender = "GEOJOBs"; // ชื่อผู้ส่ง
 		$email_sender = "gistnu@NU.com"; // เมล์ผู้ส่ง 
 		$email_receiver = $_COOKIE[email]; // เมล์ผู้รับ ***
 

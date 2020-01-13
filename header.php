@@ -37,11 +37,12 @@ if(isset($_COOKIE["type"]))
 								<div class="help-block">
 									<div>Popular:</div>
 									<ul>
-										<li><a href="#">งาน GIS</a></li>
-										<li><a href="#">งานภูมิศาสตร์</a></li>
-										<li><a href="#">ฝึกงาน GIS</a></li>
-										<li><a href="#">วิเคาะห์ภาพถ่ายดาวเทียม</a></li>
-										<li><a href="#">งานพัฒนาระบบ</a></li>
+										<li><a href="search.php">งาน GIS</a></li>
+										<li><a href="search.php">งานภูมิศาสตร์</a></li>
+										<li><a href="search.php?type=apprentice">ฝึกงาน GIS</a></li>
+										<li><a href="search.php">วิเคาะห์ภาพถ่ายดาวเทียม</a></li>
+										<li><a href="search.php">งานพัฒนาระบบ</a></li>
+										<li><a href="search.php?type=coop">สหกิจศึกษา</a></li>
 									</ul>
 								</div>
 							</form>		
@@ -109,19 +110,19 @@ $sql = pg_query("SELECT * from resume where email = '$user[email]';");
 $num = pg_num_rows($sql);
  if (  isset($_COOKIE["type"]) ) { ?>							
 							<li><a href="story.php">เรื่องราว</a></li>
-							<li><a href="search.php">ค้นหางาน</a></li>
+							<li><a href="search.php">ค้นหางาน/ผู้คน/สถานประกอบการ</a></li>
 							
-							<li class="dropdown magz-dropdown"><a href="#">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
+							<li class="dropdown magz-dropdown"><a href="block.php">บทความน่าสนใจ <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="">ทั่วไป</a></li>
+									<li><a href="blog.php">ทั่วไป</a></li>
 									<li class="dropdown magz-dropdown"><a href="">ข่าวสาร <i class="ion-ios-arrow-right"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="">เกษตร</a></li>
-											<li><a href="">เทคโนโลยี</a></li>
-											<li><a href="">ชาวบ้าน</a>
+											<li><a href="blog.php?q=farmland">เกษตร</a></li>
+											<li><a href="blog.php?q=technology">เทคโนโลยี</a></li>
+											<li><a href="blog.php?q=villager">ชาวบ้าน</a>
 										</ul>
 									</li>
-									<li><a href="">ธรุกิจ</a></li>
+									<li><a href="blog.php?q=business">ธรุกิจ</a></li>
 								</ul>
 							</li>
 <?php if ($num == 0) { ?>
@@ -143,13 +144,11 @@ $num = pg_num_rows($sql);
 <?php } ?>
 							<li class="dropdown magz-dropdown"><a href="#">ตั้งค่า <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="icon ion-person"></i> My Account</a></li>
-									<li><a href="#"><i class="icon ion-heart"></i> Favorite</a></li>
-									<li><a href="#"><i class="icon ion-chatbox"></i> Comments</a></li>
-									<li><a href="#"><i class="icon ion-key"></i> Change Password</a></li>
-									<li><a href="#"><i class="icon ion-settings"></i> Settings</a></li>
+									<li><a href="setting.php#profile"><i class="icon ion-person"></i> ข้อมูลส่วนตัว</a></li>
+									<li><a href="setting.php#work-status"><i class="icon ion-heart"></i> สถานภาพการทำงาน</a></li>
+									<li><a href="setting.php#password"><i class="icon ion-key"></i> เปลี่ยนรหัสผ่าน</a></li>
 									<li class="divider"></li>
-									<li><a href="#"><i class="icon ion-log-out"></i> Logout</a></li>
+									<li><a href="logout.php"><i class="icon ion-log-out"></i> Logout</a></li>
 								</ul>
 							</li>
 <?php } ?>
@@ -222,6 +221,11 @@ $num = pg_num_rows($sql);
   </div>
 </div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <img class="modal-content" id="img01">
+  <span class="close">x ปิด</span>
+</div>
 
 
 		</header>

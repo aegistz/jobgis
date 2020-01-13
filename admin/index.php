@@ -87,11 +87,11 @@ include("check_admin.php");
 		<section class="home">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-7 col-sm-12 col-xs-12">
+					<div class="col-md-6 col-sm-12 col-xs-12">
 						<div id="map" style="width: 100%; height: 550px;"></div>	
 
 					</div>
-					<div class="col-md-5 col-sm-12 col-xs-12">
+					<div class="col-md-6 col-sm-12 col-xs-12">
 
 						<div class="jumbotron">
 						  <h4 class="display-3">ระบบฐานข้อมูลนักศึกษา</h4>
@@ -181,7 +181,38 @@ Highcharts.chart('container', {
             "colorByPoint": true,
             "data": [
 <?php 
-	$sql = pg_query("SELECT university,count(*) from user_job  where owner_input = '$admin[id_admin]'    group by university;");
+	$sql = pg_query("
+
+with index as (SELECT id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email from user_job  
+group by id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email)SELECT university,count(*) from index     group by university;");
 	while ($arr = pg_fetch_array($sql)) {
 		
 ?>	
@@ -201,7 +232,36 @@ Highcharts.chart('container', {
         "series": [
 
 <?php 
-	$sql = pg_query("SELECT university,count(*) from user_job   where owner_input = '$admin[id_admin]'   group by university;");
+	$sql = pg_query("with index as (SELECT id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email from user_job  
+group by id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email)SELECT university,count(*) from index group by university;");
 	while ($arr = pg_fetch_array($sql)) {
 ?>	
         
@@ -210,7 +270,36 @@ Highcharts.chart('container', {
                 "id": "<?php echo $arr[university]; ?>",
                 "data": [
 <?php 
-	$sql2 = pg_query("SELECT major,count(*) from user_job  where  university = '$arr[university]'  and owner_input = '$admin[id_admin]'   group by major;");
+	$sql2 = pg_query("with index as (SELECT id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email from user_job  
+group by id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email)SELECT major,count(*) from index  where  university = '$arr[university]'     group by major;");
 	while ($arr2 = pg_fetch_array($sql2)) {
 ?>	
 
@@ -259,8 +348,39 @@ Highcharts.chart('container', {
     // Retrieve start point
     // Connect to database
 
-    $sql = "select place_now,geom,gid,count(*) ,ST_AsGeoJSON(geom) AS geojson from prov a 
-inner join user_job b on a.pv_tn = b.place_now
+    $sql = "
+with index as (SELECT id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email from user_job  
+group by id_student,title_name,
+s_name,
+l_name,
+birth_year,
+phone_number,
+status_study,
+place_now,
+university,
+success_degree,
+facutly,
+major,
+qualification,
+year_start,
+year_end,
+email)
+    SELECT place_now,geom,gid,count(*) ,ST_AsGeoJSON(geom) AS geojson from prov a 
+inner join index b on a.pv_tn = b.place_now
 group by place_now,geom,gid ; ";
     
    // Perform database query

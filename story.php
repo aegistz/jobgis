@@ -2,7 +2,7 @@
 <?php
 session_start();
 include("config.php");
-include("check_student.php")
+include("check_student.php");
 
 ?>
 <html>
@@ -67,7 +67,7 @@ include("check_student.php")
 <?php
 								$query = pg_query("SELECT * from story  a
 									inner join student b on a.id_user = b.id_no
-									order by a.date_story desc ;");
+									order by a.date_story desc limit 50 ;");
 								while ( $arr = pg_fetch_array($query) ) {
 							?>
             <tr>
@@ -82,11 +82,11 @@ include("check_student.php")
 								              <div class="details">
 								                <div class="detail">
 								                	<div class="row">
-								                		<div class="col-md-2">
+								                		<div class="col-md-2 col-xs-3">
 								                		<img src="images/student/<?php echo $arr[img]; ?>" alt="" width="100%">
 								                		</div>
 
-								                		<div class="col-md-10">
+								                		<div class="col-md-10  col-xs-9">
 									                		<div class="category">
 											                   <h6 >
 											                   		<a href="profile.php?eid=<?php echo $arr[id_no] ?>" title="">
@@ -109,14 +109,11 @@ include("check_student.php")
 								                	</a></h1>
 								                <p>
 								                 <?php 
-								                 echo mb_strimwidth($arr[detail_story], 0, 150, '....<a href="" title="">เพิ่มเติม</a>');
+								                 echo mb_strimwidth($arr[detail_story], 0, 150, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
 								                 ?> 
 								                
 
 								                </p>
-								                <footer>
-								                  <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
-								                </footer>
 								              </div>
 								            </div>
 								          </article>
@@ -153,14 +150,16 @@ include("check_student.php")
 								</form>
 							</div>
 						</aside>
-						<aside>
-							<div class="aside-body">
-								<figure class="ads">
-									<img src="https://www.jobtopgun.com/images/th/banner_industrial_interpolitan.png?t=20180921171200">
-									<figcaption>Advertisement</figcaption>
-								</figure>
-							</div>
-						</aside>
+							<aside>
+								<div class="aside-body">
+									<figure class="ads">
+										<a href="http://tsw.gistda.or.th/" title="" target="_blank">
+										<img src="http://tsw.gistda.or.th/img/TSW2019_banner_th_2500x500.png">
+										<figcaption>Advertisement</figcaption>
+										</a>
+									</figure>
+								</div>
+							</aside>
 						<aside>
 							<h1 class="aside-title">Popular <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
 							<div class="aside-body">
@@ -179,7 +178,9 @@ include("check_student.php")
 										<div class="padding">
 											<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
 											<p>
-												<?php echo $arr[detail_job]; ?> 
+												<?php
+															echo mb_strimwidth($arr[detail_job], 0, 120, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														?>
 											</p>
 										</div>
 									</div>
@@ -218,6 +219,7 @@ include("check_student.php")
 			$(document).ready(function() {
 			    $('#example').DataTable({
 			    	 "searching": false,
+					 "aaSorting" : [],
 			    	  "aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			    });
 

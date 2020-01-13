@@ -19,7 +19,7 @@ include("check-company.php");
 		<meta property="og:title" content="GEOJOBS GISTDA GISTNU JOB GIST GIS GEOINFOMETIC" />
 		<meta property="og:type" content="article" />
 		<meta property="og:url" content="http://www.cgistln.nu.ac.th" />
-		<meta property="og:image" content="../images/gistda_logo.png" />
+		<meta property="og:image" content="../../images/gistda_logo.png" />
 		<title> GEOJOBs &mdash; GISTDA  </title>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="../scripts/bootstrap/bootstrap.min.css">
@@ -53,31 +53,58 @@ include("check-company.php");
 				<div class="row">
 					<div class="col-md-4 sidebar" id="sidebar">
 						<aside>
-							<h1 class="aside-title">งานอื่น ๆ ของคุณ <a href="#" class="all">See All <i class="ion-ios-arrow-right"></i></a></h1>
+							<h1 class="aside-title">รายชื่อคนที่สมัครตำแหน่งงานนี้</h1>
 							<div class="aside-body">
 
 <?php 
-	$sql = pg_query("SELECT * from job_company where id_com = '$id_com' limit 5 ;");
-	$check = pg_num_rows($sql);
-	while( $job_com = pg_fetch_array($sql) ){
-		
-			
-?>										
+	$sql = pg_query("SELECT *,b.img as profile_stu,a.id_no as id_request from user_request a 
+inner join student b on a.email_user = b.email
+inner join job_company c on a.id_job = c.id_job
+where id_com = $id_com and request = 'รอการยืนยัน'  and a.id_job = '$_GET[q]' ;");
+	while ($arr = pg_fetch_array($sql)) {
+?>
 								<article class="article-mini">
 									<div class="inner">
 										<figure>
-											<a href="view-job.php?q=<?php echo $job_com[id_job]; ?>">
-												<img src="../images/img_job/<?php echo $job_com[img]; ?>" >
+											<a href="profile.php?eid=<?php echo $arr[id_no]; ?>">
+												<img src="../images/student/<?php echo $arr[profile_stu]; ?>">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="view-job.php?q=<?php echo $job_com[id_job]; ?>"><?php echo $job_com[name_job]; ?></a></h1>
 											<p>
-										</p>
+												
+
+<div class="btn-group">
+
+<?php if ($arr[request] == 'รอการยืนยัน') { ?>
+														<div class="btn-group">
+														  <button type="button" class="btn-sm btn-warning">
+														    สถานะ : <?php echo $arr[request]; ?>
+														  </button>
+														</div>
+<?php }  ?>
+													<button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+													<i class="fa fa-bars"></i> </button>
+													<ul class="dropdown-menu" role="menu">
+
+														<li><a href="index.php?type=submit_request&id_request=<?php echo $arr[id_request]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> ยืนยันการสมัคร ตรวจสอบ Resume</a></li>
+
+
+													</ul>
+												</div>
+											</p>
+											<h1><a href="profile.php?eid=<?php echo $arr[id_no]; ?>"><?php echo $arr[title_name],$arr[s_name],' ',$arr[l_name] ; ?></a></h1>
+											<div class="detail">
+												<div class="category"><a href="#"><?php echo $arr[type_job]; ?></a></div>
+												<div class="time"><?php echo $arr[date_access]; ?></div>
+											</div>
+											<p>ตำแหน่งที่สมัคร : <?php echo $arr[name_job]; ?>  </p>
+											<br>
 										</div>
 									</div>
 								</article>
-<?php  } ?>
+
+<?php } ?>
 
 							</div>
 						</aside>
@@ -94,30 +121,45 @@ include("check-company.php");
 						  <li class="active">News</li>
 						</ol>
 						<article class="article main-article">
-							<header>
+							<div class="row">
+								<div class="col-md-12">
+								<header>
 								<img src="../images/img_job/<?php echo $result[logo_img]; ?>" width="20%" alt="">
-								<h2>Plant breeder เจ้าหน้าที่ปรับปรุงพันธุ์ข้าว</h2>
+								<h2><?php echo $result[name_job]; ?></h2>
 								<ul class="details">
-									<li>Posted on 31 December, 2018</li>
-									<li><a>ข่าวรับสมัคร</a></li>
-									<li>By <a href="#">Jบริษัท เจริญโภคภัณฑ์วิศวกรรม จำกัด</a></li>
+									<li>Posted on <?php echo $result[date_job]; ?></li>
+									<li><a><?php echo $result[type_job]; ?></a></li>
+									<li>By <a href="company.php?com_id=<?php echo $result[id_com]; ?>"><?php echo $result[name_com]; ?></a></li>
 								</ul>
 							</header>
-							<div class="main">
-								<p>
-								<b>หน้าที่และความรับผิดชอบ</b> <br>
-1.ปรับปรุงพันธุ์พืช (ข้าว) (conventional plant breeding และ biotechnology) <br>
+							</div>
+							
+							</div>
+							
+							
 
-2.ทดสอบพันธุ์ <br>
-3.พัฒนาเครื่องหมายโมเลกุลสำหรับงานวิจัยและปรับปรุงพันธุ์ข้าวและพืชอื่นๆ <br>
-4.เก็บข้อมูลวิจัยด้านพืช <br> <br>
+							<div class="main">
+								<p><?php echo $result[detail_job]; ?> <hr>
+								<b>หน้าที่และความรับผิดชอบ</b> <br>
+<?php 
+	$sql2 = pg_query("SELECT ROW_NUMBER () OVER (ORDER BY id_respon) as row,* from respon_job where id_job =  '$result[id_job]' ORDER BY id_respon;");
+	while ( $arr2 = pg_fetch_array($sql2)) {
+		echo $arr2[row].'. '.$arr2[detail_respon].'<br>';
+	}
+?>
+
+<br>
 
 <b>คุณสมบัติ</b> <br>
-1.ปริญญาโท/ปริญญาเอก สาขา ปรับปรุงพันธุ์พืช (Plant breeding) <br>
-2.มีความรู้ด้านการปรับปรุงพันธุ์พืช (ข้าว) (conventional plant breeding และ biotechnology)  <br>
-3.มีความรู้ด้านพัฒนาเครื่องหมายโมเลกุลสำหรับงานวิจัยและปรับปรุงพันธุ์ข้าวและพืชอื่นๆ  <br>
-4.มีความรู้ด้านสถิติเพื่องานวิจัย การเก็บข้อมูลวิจัยด้านพืช  <br>
-5.ทำงานวิจัย หรือวิทยานิพนธ์ ด้านปรับปรุงพันธุ์ข้าว หรือพืชอื่นๆ
+<?php 
+	$sql2 = pg_query("SELECT ROW_NUMBER () OVER (ORDER BY id_property) as row,* from property_job where id_job =  '$result[id_job]' ORDER BY id_property;");
+	while ( $arr2 = pg_fetch_array($sql2)) {
+		echo $arr2[row].'. '.$arr2[detail_property].'<br>';
+	}
+?>
+
+
+
 
 							</p>
 								<div class="featured">
@@ -127,24 +169,23 @@ include("check-company.php");
 								</div>
 
 								<p><b>คุณสมบัติพื้นฐาน</b> <br>
-<b>ประเภทของงาน</b> : งานประจำ <br>
-<b>จำนวน</b> : 1 อัตรา  <br>
-<b>เพศ</b> : ไม่ระบุ <br> 
-<b>เงินเดือน(บาท)</b> : 30,000 - 60,000 บาท/เดือน <br>
-<b>ประสบการณ์</b> : 2 - 10 ปี <br>
-<b>สถานที่</b>สถานที่ : กำแพงเพชร <br> 
-<b>การศึกษา</b>การศึกษา : ปริญญาโทหรือสูงกว่า  <br>
-<b>คณะ</b> : เกษตร <br>
-<b>สาขา</b> : การปรับปรุงพันธุ์พืช
+<b>ประเภทของงาน</b> : <?php echo $result[type_job]; ?> <br>
+<b>จำนวน</b> : <?php echo $result[num_job]; ?> อัตรา  <br>
+<b>เพศ</b> : <?php echo $result[sex_job]; ?> <br> 
+<b>เงินเดือน(บาท)</b> : <?php echo $result[budget_job]; ?> <br>
+<b>ประสบการณ์</b> : <?php echo $result[exp_job]; ?> ปี <br>
+<b>สถานที่</b>สถานที่ : <?php echo $result[place_job]; ?> <br> 
+<b>การศึกษา</b>การศึกษา : <?php echo $result[edu_job]; ?> 
 </p>
 							</div>
 
-<button class="btn btn-success">กดส่ง Resume ไปยังตำแหน่งงานนี้</button>
+
+
 						</article>
 
 							
 <hr>
-						<div class="sharing">
+						<!-- <div class="sharing">
 						<div class="title"><i class="ion-android-share-alt"></i> Sharing is caring</div>
 							<ul class="social">
 								<li>
@@ -177,49 +218,7 @@ include("check-company.php");
 									<div>Shares</div>
 								</li>
 							</ul>
-						</div>
-
-						<div class="line">
-							<div>สถานประกอบการ</div>
-						</div>
-
-						<div class="author">
-							<figure>
-								<img src="https://www.jobtopgun.com/content/filejobtopgun/logo_com_job/j21844.gif?v=22">
-							</figure>
-							<div class="details">
-								<div class="job">สถานประกอบการ</div>
-								<h3 class="name">บริษัท เจริญโภคภัณฑ์วิศวกรรม จำกัด</h3>
-								<p>พนักงานประจำ/นักศึกษาฝึกงาน/สหกิจศึกษา</p>
-								<ul class="social trp sm">
-									<li>
-										<a href="#" class="facebook">
-											<svg><rect/></svg>
-											<i class="ion-social-facebook"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="twitter">
-											<svg><rect/></svg>
-											<i class="ion-social-twitter"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="youtube">
-											<svg><rect/></svg>
-											<i class="ion-social-youtube"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="googleplus">
-											<svg><rect/></svg>
-											<i class="ion-social-googleplus"></i>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-
+						</div> -->
 
 					</div>
 				</div>

@@ -2,7 +2,41 @@
 <?php
 session_start();
 include("config.php");
+include("check_student.php");
 $eqc = $_GET[eqc];
+
+
+if ( $_GET[time] == 'all_time' ) {
+	$time = '';
+}else if ($_GET[time] == 'day') {
+	$time = "and date_job > current_date - interval '1 days'";
+}else if ($_GET[time] == 'week') {
+	$time = "and date_job > current_date - interval '7 days'";
+}else if ($_GET[time] == 'month') {
+	$time = "and date_job > current_date - interval '30 days'";
+}
+
+
+if ($_GET[type] == 'all_type') {
+	$type = '';
+}else if ($_GET[type] == 'full_time') {
+	$type = 'งานประจำ';
+}else if ($_GET[type] == 'daily_work') {
+	$type = 'งานรายวัน';
+}else if ($_GET[type] == 'apprentice') {
+	$type = 'ฝึกงาน';
+}else if ($_GET[type] == 'coop') {
+	$type = 'สหกิจศึกษา';
+}
+
+
+$sql_work = pg_query("SELECT * from job_company a
+											inner join company b on a.id_com = b.id_com
+											where name_job like '%$eqc%'
+											and type_job like  '%$type%'
+											$time
+
+											;  ");
 ?>
 <html>
 	<head>
@@ -50,42 +84,72 @@ $eqc = $_GET[eqc];
 						<aside>
 							<h2 class="aside-title">ค้นหางาน</h2>
 							<div class="aside-body">
-								<form class="checkbox-group" id="myForm" action="search.php">
-									<div class="group-title">ช่วงเวลา</div>
+<form class="checkbox-group" id="myForm" action="search.php"  autocomplete="on">
 									<div class="form-group">
-										<label><input type="radio" name="date" checked  onclick="myFunction()" > ทุกเวลา</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="date"  onclick="myFunction()" > วันนี้</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="date"  onclick="myFunction()" > สัปดาห์นี้</label>
-									</div>
-									<div class="form-group">
-										<label><input type="radio" name="date"  onclick="myFunction()" > เดือนนี้</label>
+										<div class="input-group">
+											<input type="text" name="eqc" class="form-control" 
+											placeholder="ค้นหา งาน / ผู้คน / สถานประกอบการ  ...." 
+											value="<?php echo $_GET[eqc]; ?>">
+											<div class="input-group-btn">
+												<button class="btn btn-primary" type="submit">
+													<i class="ion-search"></i>
+												</button>
+											</div>
+										</div>
 									</div>
 									<br>
-									<div class="group-title">ประเภท</div>
+							<!-- <h2 class="aside-title">พื้นที่ทำงาน</h2>
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<select class="form-control" name="area">
+													<option value="">- - เลือกทั้งหมด - -</option>
+													<?php 
+														$sql_province = pg_query("SELECT * from prov order by pv_tn asc");
+														while ( $arr_pro = pg_fetch_array($sql_province)) {
+													?>
+													<option value="<?php echo $arr_pro[pv_tn];?>" <?php if($_GET[area] == $arr_pro[pv_tn]){ echo 'selected'; } ?> >
+														<?php echo $arr_pro[pv_tn]; ?>
+													</option>
+												<?php } ?>
+
+												</select>
+											</div>
+										</div>
+									<br> -->
+								
+							<h2 class="aside-title">ช่วงเวลา</h2>
 									<div class="form-group">
-										<label><input type="checkbox" name="category" checked> ทุกประเภท</label>
+										<label><input type="radio" name="time" value="all_time" checked> ทุกเวลา</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> งานประจำ</label>
+										<label><input type="radio" name="time" value="day"  <?php if($_GET[time] =='day'){ echo 'checked';} ?> > วันนี้</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> งานรายวัน</label>
+										<label><input type="radio" name="time" value="week" <?php if($_GET[time] =='week'){ echo 'checked';} ?> > สัปดาห์นี้</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> ฝึกงาน</label>
+										<label><input type="radio" name="time" value="month" <?php if($_GET[time] =='month'){ echo 'checked';} ?>> เดือนนี้</label>
+									</div>
+									<br>
+
+							<h2 class="aside-title">ประเภทงาน</h2>
+									<div class="form-group">
+										<label><input type="radio" name="type" value="all_type" checked> ทุกประเภท</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> สหกิจศึกษา</label>
+										<label><input type="radio" name="type" value="full_time" <?php if($_GET[type] =='full_time'){ echo 'checked';} ?>> งานประจำ</label>
 									</div>
 									<div class="form-group">
-										<label><input type="checkbox" name="category"> อื่น ๆ</label>
+										<label><input type="radio" name="type" value="daily_work" <?php if($_GET[type] =='daily_work'){ echo 'checked';} ?>> งานรายวัน</label>
 									</div>
-									<button type="submit">xx</button>
-								</form>
+									<div class="form-group">
+										<label><input type="radio" name="type" value="apprentice" <?php if($_GET[type] =='apprentice'){ echo 'checked';} ?>> ฝึกงาน</label>
+									</div>
+									<div class="form-group">
+										<label><input type="radio" name="type" value="coop" <?php if($_GET[type] =='coop'){ echo 'checked';} ?>> สหกิจศึกษา</label>
+									</div>
+									<button type="submit" class="btn btn-primary btn-block">ค้นหา</button>
+</form>
 							</div>
 						</aside>
 					</div>
@@ -95,13 +159,7 @@ $eqc = $_GET[eqc];
 								<li class="active"><a data-toggle="tab"  href="#work">
 									
 									<?php
-										$sql_work = pg_query("SELECT * from job_company a
-											inner join company b on a.id_com = b.id_com
-											where name_job like '%$eqc%'
-											and type_job like  '%%'
-											and sex_job like  '%%'
-											and province_com  like  '%%'
-											;  ");
+
 										$count_work = pg_num_rows($sql_work);
 										echo $count_work;
 									?> ตำแหน่งงาน
@@ -109,7 +167,7 @@ $eqc = $_GET[eqc];
 								<li><a data-toggle="tab" href="#user">
 									<?php
 										$sql_user = pg_query("SELECT * from student
-										where s_name like '%$eqc%' ;  ");
+										where s_name like '%$eqc%' and status_user = 'ยืนยัน' ;  ");
 										$count_user = pg_num_rows($sql_user);
 										echo $count_user;
 									?>
@@ -155,16 +213,12 @@ $eqc = $_GET[eqc];
 																</div>
 																<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
 																<p>
-																	<?php echo $arr[detail_job]; ?> <br>
+																	<?php
+															echo mb_strimwidth($arr[detail_job], 0, 200, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														?> <br>
 																	<small> <i><b>การรับ  : </b>    <?php echo $arr[type_job]; ?></i> </small>
 																</p>
-																<footer>
-																	<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-																	<a class="btn btn-primary more" href="news.php?q=<?php echo $arr[id_job]; ?>">
-																		<div>More</div>
-																		<div><i class="ion-ios-arrow-thin-right"></i></div>
-																	</a>
-																</footer>
+																
 															</div>
 														</div>
 													</article>
@@ -228,23 +282,16 @@ $eqc = $_GET[eqc];
 													<article class="col-md-12 article-list">
 														<div class="inner">
 															<figure>
-																<a href="news.php?q=<?php echo $arr[id_job]; ?>">
+																<a href="company.php?com_id=<?php echo $arr[id_com]; ?>">
 																	<img src="images/img_job/<?php echo $arr[logo_img]; ?>" alt="Sample Article">
 																</a>
 															</figure>
 															<div class="details">
-																<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_com]; ?></a></h1>
+																<h1><a href="company.php?com_id=<?php echo $arr[id_com]; ?>"><?php echo $arr[name_com]; ?></a></h1>
 																<p>
 																	<i><b>ประเภทหน่วยงาน : <?php echo $arr[type_com]; ?> ที่อยู่  : </b>    <?php echo $arr[province_com]; ?></i> <br>
 																	
 																</p>
-																<footer>
-																	<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-																	<a class="btn btn-primary more" href="news.php?q=<?php echo $arr[id_job]; ?>">
-																		<div>More</div>
-																		<div><i class="ion-ios-arrow-thin-right"></i></div>
-																	</a>
-																</footer>
 															</div>
 														</div>
 													</article>
@@ -294,14 +341,17 @@ $eqc = $_GET[eqc];
 			$(document).ready(function() {
 			$('#example').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			$('#example2').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			$('#example3').DataTable({
 				"searching": false,
+					 "aaSorting" : [],
 				"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100, "All"]]
 			});
 			} );

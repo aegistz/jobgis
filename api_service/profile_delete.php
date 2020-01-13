@@ -7,9 +7,17 @@ if ($_GET[type] == 'delete_story') {
 	$sql_delete = pg_query("DELETE from story where id_story = '$id_story' and id_user = '$id'  ;");
 	
 	
-	header('location:profile.php#story');
+	header('location:profile.php');
 
 
+}
+
+
+
+if ($_GET[type] =='delete_img_post') {
+	$imgid = $_GET[imgid];
+	$sql_delete = pg_query("DELETE from photo_user where id_img = '$imgid' and id_user = '$id'  ;");
+	header('location:profile.php');
 }
 
 ?>

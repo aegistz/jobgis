@@ -88,6 +88,16 @@ if( $_POST[update_story] == 'false' )
 				
 				}
 }
+if ( isset($_POST[delete_story]) ) {
+
+	$stoid = $_POST[stoid];
+
+	$sql_delete = pg_query("DELETE from story where id_story = '$stoid' ;");
+	
+	
+	header('location:profile.php#story');
+}
+
 
 
 function get_file_extension( $file )  {
@@ -162,7 +172,7 @@ function get_file_extension( $file )  {
 											<hr>
 											<input type="hidden" name="stoid" value="<?php echo $result[id_story]; ?>">
 											<button type="submit" title="" name="update_story" value="true" class="btn btn-primary btn-block"><i class="fa fa-wrench" aria-hidden="true"></i> บันทึกเรื่องราว</button>
-											<button  type="submit"  class="btn btn-danger btn-block"><i class="fa fa-window-close" aria-hidden="true"></i>ลบเรื่องราว</button>
+											<button  type="submit" name="delete_story"  class="btn btn-danger btn-block"  onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')"><i class="fa fa-window-close" aria-hidden="true"></i>ลบเรื่องราว</button>
 											<a href="profile.php#story" class="btn  btn-sm btn-block" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i></i>กลับ</a>
 											
 										</div>

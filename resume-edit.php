@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <?php 
 	include 'config.php';
+include("check_student.php");
 
 	  	  $email = $user['email'];
-
-       $sql = "SELECT * FROM resume WHERE email = '$email'; ";
-	   $query = pg_query($sql);
-	   $resume = pg_fetch_array($query);
-
-	   if ( isset($_POST[personal]) ) {
-
-	   	  $title_name = $_POST['title_name'];
+	  	  $title_name = $_POST['title_name'];
 		  $s_name = $_POST['s_name'];
 		  $l_name = $_POST['l_name'];
 		  $nationality = $_POST['nationality'];
@@ -71,7 +65,11 @@
 		  $gpa = $_POST['gpa'];
 		  $edu_back = $_POST['edu_back'];
 
+       $sql = "SELECT * FROM resume WHERE email = '$email'; ";
+	   $query = pg_query($sql);
+	   $resume = pg_fetch_array($query);
 
+	   if ( isset($_POST[personal]) ) {
         $sql1 = "UPDATE resume set 
         		title_name = '$title_name', 
         		s_name = '$s_name', 
@@ -83,59 +81,90 @@
         		status = '$status' ,
         		address = '$address' ,
         		phone = '$phone' ,
-        		degree = '$degree' ,
-        		faculty = '$faculty' ,
-        		sector = '$sector' ,
-        		university = '$university' ,
-        		graduation = '$graduation' ,
-        		work_n = '$work_n' ,
-        		work_1 = '$work_1' ,
-        		work_2 = '$work_2' ,
-        		work_3 = '$work_3' ,
-        		area_1 = '$area_1' ,
-        		area_2 = '$area_2' ,
-        		salary = '$salary' ,
-        		th_s = '$th_s' ,
-        		th_r = '$th_r' ,
-        		th_w = '$th_w' ,
-        		en_s = '$en_s' ,
-        		en_r = '$en_r' ,
-        		en_w = '$en_w' ,
-        		cn_s = '$cn_s' ,
-        		cn_r = '$cn_r' ,
-        		cn_w = '$cn_w' ,
-        		word = '$word' ,
-        		excel = '$excel' ,
-        		ppt = '$ppt' ,
-        		ps = '$ps' ,
-        		ai = '$ai' ,
-        		pr = '$pr' ,
-        		lr = '$lr' ,
-        		arcgis = '$arcgis' ,
-        		erdas = '$erdas' ,
-        		envi = '$envi' ,
-        		qgis = '$qgis' ,
-        		company = '$company' ,
-        		address_com = '$address_com' ,
-        		date_start = '$date_start' ,
-        		date_end = '$date_end' ,
-        		role_com = '$role_com' ,
-        		salary_com = '$salary_com' ,
-        		department = '$department' ,
-        		course = '$course' ,
-        		course_time = '$course_time' ,
-        		profile = '$profile' ,
-        		rank_com = '$rank_com' ,
         		province = '$province' ,
         		amphoe = '$amphoe' ,
         		tambon = '$tambon' ,
         		zip_code = '$zip_code' ,
-        		religion = '$religion' ,
-        		gpa = '$gpa' ,
-        		edu_back = '$edu_back' 
+        		religion = '$religion'
         		where email = '$email';";       
            		$query1 = pg_query($sql1);
-}
+           		header('location:resume-edit.php#personal') ; 
+		}
+		if ( isset($_POST[edu]) ) {
+       	$sql2 = "UPDATE resume set  
+        		university = '$university' ,
+        		graduation = '$graduation' ,
+        		faculty = '$faculty' , 
+        		sector = '$sector' ,
+        		degree = '$degree' ,
+        		edu_back = '$edu_back' ,
+        		gpa = '$gpa'
+        		where email = '$email' ;";
+           		$query2 = pg_query($sql2);
+           		header('location:resume-edit.php#edu') ; 
+		}
+		if ( isset($_POST[work]) ) {
+       	$sql3 = "UPDATE resume set  
+       			company = '$company' ,
+       			date_start = '$date_start' ,
+       			date_end = '$date_end' ,
+       			address_com = '$address_com',
+       			rank_com = '$rank_com' ,
+       			salary_com = '$salary_com' ,
+       			role_com = '$role_com'
+        		where email = '$email' ;";
+           		$query3 = pg_query($sql3);
+           		header('location:resume-edit.php#work') ; 
+		}
+		if ( isset($_POST[Train]) ) {
+       	$sql4 = "UPDATE resume set  
+       			department = '$department' , 
+       			course = '$course' , 
+       			course_time = '$course_time'
+        		where email = '$email' ;";
+           		$query4 = pg_query($sql4);
+           		header('location:resume-edit.php#Train') ; 
+		}
+		if ( isset($_POST[objective]) ) {
+       	$sql5 = "UPDATE resume set  
+       			work_n = '$work_n' , 
+       			work_1 = '$work_1' ,
+       			work_2 = '$work_2' ,
+       			work_3 = '$work_3' ,
+       			area_1 = '$area_1' ,
+       			area_2 = '$area_2' ,
+       			salary = '$salary'
+        		where email = '$email' ;";
+           		$query5 = pg_query($sql5);
+           		header('location:resume-edit.php#objective') ; 
+		}
+		if ( isset($_POST[skills]) ) {
+       	$sql6 = "UPDATE resume set  
+       			th_s = 'th_s' ,
+       			th_r = '$th_r' ,
+       			th_w = '$th_w' ,
+       			en_s = '$en_s' ,
+       			en_r = '$en_r' ,
+       			en_w = '$en_w' ,
+       			cn_s = '$cn_s' ,
+       			cn_r = '$cn_r' ,
+       			cn_w = '$cn_w' ,
+       			word = '$word' ,
+       			excel = '$excel' ,
+       			ppt = '$ppt' ,
+       			ps = '$ps' ,
+       			ai = '$ai' ,
+       			pr = '$pr' ,
+       			lr = '$lr' ,
+       			arcgis = '$arcgis' ,
+       			erdas = '$erdas' ,
+       			envi = '$envi' ,
+       			qgis = '$qgis'
+        		where email = '$email' ;";
+           		$query6 = pg_query($sql6);
+           		header('location:resume-edit.php#skills') ; 
+		}
+
 
 ?>
 <html>
@@ -199,45 +228,42 @@
 	<body class="skin-blue">
 
 		<?php include 'header.php'; ?>
-
-
-		<section class="login first grey">
+	<section class="search">
 			<div class="container">
-				<div class="">				
-					<div class="">
-					<?php echo $message; ?>
-						<div class="box-body">
-					<h5>แก้ไขข้อมูล</h5>
-			<hr>
-	<div class="container mt-3">
-		<div class="col-md-2"><h6>
-			  <ul class="nav nav-tabs">
-			    <li class="nav-item">
-			      <a class="nav-link active" href="#personal">ข้อมูลส่วนตัว</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#edu">การศึกษา</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#work">การทำงาน/ฝึกงาน</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#Train">ประวัติการฝึกอบรม</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#objective">เป้าหมายในการทำงาน/ฝึกงาน</a>
-			    </li>
-			     <li class="nav-item">
-			      <a class="nav-link" href="#skills">ทักษะ</a>
-			    </li>
-			  </ul>
-			  </h6>
-			</div>
-		<div class="col-md-9">
-			<div class="form-group">
-				<div class="tab-content">
-				 	<div id="personal" class="container tab-pane active">
+				<div class="row">
+					<div class="col-md-3 sidebar" id="sidebar">
+						<aside>
+							<div class="aside-body">
+							<h2 class="aside-title">แก้ไขข้อมูล</h2>
+								<ul class="nav nav-stacked">
+								    <li class="active">
+								      <a data-toggle="tab" href="#personal">ข้อมูลส่วนตัว</a>
+								    </li>
+								    <li>
+								      <a data-toggle="tab" href="#edu">การศึกษา</a>
+								    </li>
+								    <li>
+								      <a data-toggle="tab" href="#work">การทำงาน/ฝึกงาน</a>
+								    </li>
+								    <li>
+								      <a data-toggle="tab" href="#Train">ประวัติการฝึกอบรม</a>
+								    </li>
+								    <li>
+								      <a data-toggle="tab" href="#objective">เป้าหมายในการทำงาน/ฝึกงาน</a>
+								    </li>
+								     <li>
+								      <a data-toggle="tab" href="#skills">ทักษะ</a>
+								    </li>
+								  </ul>
+							
+							</div>
+						</aside>
+					</div>
+					<div class="col-md-9 ">
+						<div class="tab-content">
+						  <div id="personal" class="tab-pane fade in active">
 <form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>ข้อมูลส่วนตัว</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -260,7 +286,7 @@
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>สัญชาติ</label>
-									<select name="nationality" class="form-control">
+									<select name="nationality" class="form-control" required>
 										<option value="ไทย"<?php if($resume[nationality]=='ไทย'){echo 'selected';} ?>>ไทย</option>
 										<option value="อื่น ๆ"<?php if($resume[nationality]=='อื่น ๆ'){echo 'selected';} ?>>อื่น ๆ</option>
 									</select> 
@@ -269,7 +295,7 @@
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>ศาสนา</label>
-									<select name="religion" class="form-control" >
+									<select name="religion" class="form-control" required>
 										<option value="พุทธ"<?php if($resume[religion]=='พุทธ'){echo 'selected';} ?>>พุทธ</option>
 										<option value="คลิสต์"<?php if($resume[religion]=='คลิสต์'){echo 'selected';} ?>>คลิสต์</option>
 										<option value="อิสลาม"<?php if($resume[religion]=='อิสลาม'){echo 'selected';} ?>>อิสลาม</option>
@@ -287,19 +313,19 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>จังหวัด</label>
-									<span id="province">
-		                            <select class="form-control m-bot15" class="form-control"  name="province">
+									<span id="province_edit">
+		                            <select class="form-control m-bot15" class="form-control"  name="province" required>
 		                                 <option value=''>เลือกจังหวัด</option>
 		                            </select>
-		                        </span>
+		                        	</span>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>อำเภอ</label>
-									<span id="amphoe">
-		                            <select class="form-control m-bot15" class="form-control"  name="amphoe">
-		                                 <option value=''>เลือกอำเภอ</option>
+									<span id="amphoe_edit">
+		                            <select class="form-control m-bot15" class="form-control"  name="amphoe"  required> 
+		                                 <option  value="<?php echo $resume[amphoe] ;?>"><?php echo $resume[amphoe] ;?></option>
 		                            </select>
 		                        </span>
 								</div>
@@ -307,16 +333,16 @@
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>ตำบล</label>
-									<span id="tambon">
-		                            <select class="form-control m-bot15" class="form-control"  name="tambon">
-		                                 <option value=''>เลือกตำบล</option>
+									<span id="tambon_edit">
+		                            <select class="form-control m-bot15" class="form-control"  name="tambon" required>
+		                                 <option value='<?php echo $resume[tambon] ;?>'><?php echo $resume[tambon] ;?></option>
 		                            </select>
-		                        </span>
+		                        	</span>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<label>รหัสไปรษณืย์</label>
+									<label>รหัสไปรษณีย์</label>
 									<input type="text" name="zip_code" class="form-control"  value="<?php echo $resume[zip_code] ;?>">
 								</div>
 							</div>
@@ -367,9 +393,10 @@
 							</div>
 						</div>
 </form>
-					</div>
-					<div id="edu" class="container tab-pane fade">
-<from class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						  </div>
+
+						  <div id="edu" class="tab-pane fade">
+<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -392,7 +419,14 @@
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>ระดับการศึกษา</label>
-									<input type="text" name="degree" class="form-control" required="" value="<?php echo $resume[degree] ;?>">
+									<select name="degree" class="form-control" required>
+										<option value="ปวช." <?php if($resume[degree]=='ปวช.'){echo 'selected';} ?>>ปวช.</option>
+										<option value="ปวส." <?php if($resume[degree]=='ปวส.'){echo 'selected';} ?>>ปวส.</option>
+										<option value="อนุปริญญา" <?php if($resume[degree]=='อนุปริญญา'){echo 'selected';} ?>>อนุปริญญา</option>
+										<option value="ปริญญาตรี" <?php if($resume[degree]=='ปริญญาตรี'){echo 'selected';} ?>>ปริญญาตรี</option>
+										<option value="ปริญญาโท" <?php if($resume[degree]=='ปริญญาโท'){echo 'selected';} ?>>ปริญญาโท</option>
+										<option value="ปริญญาเอก" <?php if($resume[degree]=='ปริญญาเอก'){echo 'selected';} ?>>ปริญญาเอก</option>
+									</select>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -403,6 +437,12 @@
 							</div>
 						</div>
 						<div class="col-md-12">
+							<div class="col-md-2">
+								<div class="form-group">
+									<label>ปีที่สำเร็จการศึกษา</label>
+									<input type="text" name="graduation" class="form-control" required="" value="<?php echo $resume[graduation] ;?>"> 
+								</div>
+							</div>
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>GPA</label>
@@ -417,10 +457,12 @@
 								</div>
 							</div>
 						</div>
-</from>
-					</div>
-					<div id="work" class="container tab-pane fade">
-<from class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+</form>
+						  </div>
+
+						  <div id="work" class="tab-pane fade aside-body">
+<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>การทำงาน/ฝึกงาน</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -467,12 +509,21 @@
 								</div>
 							</div>
 						</div>
-</from>
-					</div>
-					<div id="Train" class="container tab-pane fade">
-<from class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary" name="work">แก้ไขข้อมูล</button>
+								</div>
+							</div>
+						</div>
+</form>
+						  </div>
+
+						  <div id="Train" class="tab-pane fade aside-body">
+<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>ประวัติการฝึกอบรม</h5><hr>
 				    	<div class="col-md-12">
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label>ชื่อหน่วยงานที่ฝึกอบรม</label>
 									<input type="text" name="department" class="form-control" required="" value="<?php echo $resume[department] ;?>">
@@ -491,19 +542,28 @@
 								</div>
 							</div>
 						</div>
-</from>
-					</div>
-					<div id="objective" class="container tab-pane fade">
-<from class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary" name="Train">แก้ไขข้อมูล</button>
+								</div>
+							</div>
+						</div>
+</form>
+						  </div>
+
+						  <div id="objective" class="tab-pane fade aside-body">
+<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<h5>เป้าหมายในการทำงาน/ฝึกงาน</h5><hr>
 				    	<div class="col-md-12">
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>ลักษณะงาน</label>
-									<select name="work_n" class="form-control">
-										<option value="ประจำ" <?php if($resume[work_n]=='ประจำ'){echo 'selected';} ?>>ประจำ</option>
-										<option value="รายวัน" <?php if($resume[work_n]=='รายวัน'){echo 'selected';} ?>>รายวัน</option>
-										<option value="รายชั่วโมง" <?php if($resume[work_n]=='รายชั่วโมง'){echo 'selected';} ?>>รายชั่วโมง</option>
-										<option value="สหิจศึกษา/ฝึกงาน" <?php if($resume[work_n]=='สหิจศึกษา/ฝึกงาน'){echo 'selected';} ?>>สหกิจศึกษา/ฝึกงาน</option>
+									<select name="work_n" class="form-control" required>
+										<option value="งานประจำ" <?php if($resume[work_n]=='งานประจำ'){echo 'selected';} ?>>งานประจำ</option>
+										<option value="งานรายวัน" <?php if($resume[work_n]=='งานรายวัน'){echo 'selected';} ?>>งานรายวัน</option>
+										<option value="สหิจศึกษา" <?php if($resume[work_n]=='สหิจศึกษา'){echo 'selected';} ?>>สหิจศึกษา</option>
+										<option value="ฝึกงาน" <?php if($resume[work_n]=='ฝึกงาน'){echo 'selected';} ?>>ฝึกงาน</option>
 									</select>
 								</div>
 							</div>
@@ -513,7 +573,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>1</label>
-									<select name="work_1" class="form-control">
+									<select name="work_1" class="form-control" required>
 										<option value="ภูมิศาสตร์" <?php if($resume[work_1]=='ภูมิศาสตร์'){echo 'selected';} ?>>ภูมิศาสตร์</option>
 										<option value="ภูมิสารสนเทศ" <?php if($resume[work_1]=='ภูมิสารสนเทศ'){echo 'selected';} ?>>ภูมิสารสนเทศ</option>
 										<option value="ผังเมือง" <?php if($resume[work_1]=='ผังเมือง'){echo 'selected';} ?>>ผังเมือง</option>
@@ -526,7 +586,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>2</label>
-									<select name="work_2" class="form-control">
+									<select name="work_2" class="form-control" required>
 										<option value="ภูมิศาสตร์" <?php if($resume[work_2]=='ภูมิศาสตร์'){echo 'selected';} ?>>ภูมิศาสตร์</option>
 										<option value="ภูมิสารสนเทศ" <?php if($resume[work_2]=='ภูมิสารสนเทศ'){echo 'selected';} ?>>ภูมิสารสนเทศ</option>
 										<option value="ผังเมือง" <?php if($resume[work_2]=='ผังเมือง'){echo 'selected';} ?>>ผังเมือง</option>
@@ -539,7 +599,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>3</label>
-									<select name="work_3" class="form-control">
+									<select name="work_3" class="form-control" required>
 										<option value="ภูมิศาสตร์" <?php if($resume[work_3]=='ภูมิศาสตร์'){echo 'selected';} ?>>ภูมิศาสตร์</option>
 										<option value="ภูมิสารสนเทศ" <?php if($resume[work_3]=='ภูมิสารสนเทศ'){echo 'selected';} ?>>ภูมิสารสนเทศ</option>
 										<option value="ผังเมือง" <?php if($resume[work_3]=='ผังเมือง'){echo 'selected';} ?>>ผังเมือง</option>
@@ -555,33 +615,33 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>1</label>
-									<select class="form-control" name="area_1">
-										<option value="กรุงเทพและปริมณฑล" <?php if($resume[area_1]=='กรุงเทพและปริมณฑล'){echo 'selected';} ?>>กรุงเทพและปริมณฑล</option>
-										<option value="ภาคเหนือ" <?php if($resume[area_1]=='ภาคเหนือ'){echo 'selected';} ?>>ภาคเหนือ</option>
-										<option value="ภาคกลาง" <?php if($resume[area_1]=='ภาคกลาง'){echo 'selected';} ?>>ภาคกลาง</option>
-										<option value="ภาคอีสาน" <?php if($resume[area_1]=='ภาคอีสาน'){echo 'selected';} ?>>ภาคอีสาน</option>
-										<option value="ภาคตะวันออก" <?php if($resume[area_1]=='ภาคตะวันออก'){echo 'selected';} ?>>ภาคตะวันออก</option>
-										<option value="ภาคใต้" <?php if($resume[area_1]=='ภาคใต้'){echo 'selected';} ?>>ภาคใต้</option>
+									<select class="form-control" name="area_1" required>
+										<option value="">กรุณาเลือก</option>
+										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"<?php if($arr_prov[pv_tn]==$resume[area_1]){echo 'selected';} ?>><?php echo $arr_prov[pv_tn]; ?></option>
+										<?php } ?>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>2</label>
-									<select class="form-control" name="area_2">
-										<option value="กรุงเทพและปริมณฑล" <?php if($resume[area_2]=='กรุงเทพและปริมณฑล'){echo 'selected';} ?>>กรุงเทพและปริมณฑล</option>
-										<option value="ภาคเหนือ" <?php if($resume[area_2]=='ภาคเหนือ'){echo 'selected';} ?>>ภาคเหนือ</option>
-										<option value="ภาคกลาง" <?php if($resume[area_2]=='ภาคกลาง'){echo 'selected';} ?>>ภาคกลาง</option>
-										<option value="ภาคอีสาน" <?php if($resume[area_2]=='ภาคอีสาน'){echo 'selected';} ?>>ภาคอีสาน</option>
-										<option value="ภาคตะวันออก" <?php if($resume[area_2]=='ภาคตะวันออก'){echo 'selected';} ?>>ภาคตะวันออก</option>
-										<option value="ภาคใต้" <?php if($resume[area_2]=='ภาคใต้'){echo 'selected';} ?>>ภาคใต้</option>
+									<select class="form-control" name="area_2" required>
+										<option value="">กรุณาเลือก</option>
+										<?php $sql_prov = pg_query("select pv_tn from tambon group by pv_tn order by pv_tn asc"); 
+										while ($arr_prov = pg_fetch_array($sql_prov)) {
+										?>
+										<option value="<?php echo $arr_prov[pv_tn]; ?>"<?php if($arr_prov[pv_tn]==$resume[area_2]){echo 'selected';} ?>><?php echo $arr_prov[pv_tn]; ?></option>
+										<?php } ?>
 									</select>
 								</div>
 							</div>	
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>เงินเดือนที่ต้องการ</label>
-									<select name="salary" class="form-control">
+									<select name="salary" class="form-control" required>
 										<option value="5,000" <?php if($resume[salary]=='5,000'){echo 'selected';} ?>>5,000</option>
 										<option value="10,000" <?php if($resume[salary]=='10,000'){echo 'selected';} ?>>10,000</option>
 										<option value="15,000" <?php if($resume[salary]=='15,000'){echo 'selected';} ?>>15,000</option>
@@ -599,43 +659,54 @@
 								</div>
 							</div>
 						</div>
-</from>
-					</div>
-					<div id="skills" class="container tab-pane fade">
-<from class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary" name="objective">แก้ไขข้อมูล</button>
+								</div>
+							</div>
+						</div>
+</form>
+						  </div>
+
+						  <div id="skills" class="tab-pane fade aside-body">
+<form class="form-validate form-horizontal" id="feedback_form" method="post"  id="frmMyform" action="resume-edit.php" enctype="multipart/form-data">
 						<h6><p>ทักษะด้านภาษา</p></h6><hr>
 						<p><b>ภาษาไทย</b></p>
 				    	<div class="col-md-12">
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="th_s" class="form-control">
+									<select name="th_s" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[th_s]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[th_s]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[th_s]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[th_s]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="พูดไม่ได้" <?php if($resume[th_s]=='พูดไม่ได้'){echo 'selected';} ?>>พูดไม่ได้</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="th_r" class="form-control">
+									<select name="th_r" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[th_r]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[th_r]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[th_r]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[th_r]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="อ่านไม่ได้" <?php if($resume[th_r]=='อ่านไม่ได้'){echo 'selected';} ?>>อ่านไม่ได้</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="th_w" class="form-control">
+									<select name="th_w" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[th_w]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[th_w]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[th_w]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[th_w]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="เขียนไม่ได้" <?php if($resume[th_w]=='เขียนไม่ได้'){echo 'selected';} ?>>เขียนไม่ได้</option>
 									</select>
 								</div>
 							</div>			
@@ -645,33 +716,36 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="en_s" class="form-control">
+									<select name="en_s" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[en_s]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[en_s]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[en_s]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[en_s]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="พูดไม่ได้" <?php if($resume[en_s]=='พูดไม่ได้'){echo 'selected';} ?>>พูดไม่ได้</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="en_r" class="form-control">
+									<select name="en_r" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[en_r]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[en_r]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[en_r]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[en_r]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="อ่านไม่ได้" <?php if($resume[en_r]=='อ่านไม่ได้'){echo 'selected';} ?>>อ่านไม่ได้</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="en_w" class="form-control">
+									<select name="en_w" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[en_w]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[en_w]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[en_w]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[en_w]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="เขียนไม่ได้" <?php if($resume[en_w]=='เขียนไม่ได้'){echo 'selected';} ?>>เขียนไม่ได้</option>
 									</select>
 								</div>
 							</div>			
@@ -681,33 +755,36 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>พูด</label>
-									<select name="cn_s" class="form-control">
+									<select name="cn_s" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[cn_s]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[cn_s]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[cn_s]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[cn_s]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="พูดไม่ได้" <?php if($resume[cn_s]=='พูดไม่ได้'){echo 'selected';} ?>>พูดไม่ได้</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>อ่าน</label>
-									<select name="cn_r" class="form-control">
+									<select name="cn_r" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[cn_r]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[cn_r]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[cn_r]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[cn_r]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="อ่านไม่ได้" <?php if($resume[cn_r]=='อ่านไม่ได้'){echo 'selected';} ?>>อ่านไม่ได้</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>เขียน</label>
-									<select name="cn_w" class="form-control">
+									<select name="cn_w" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[cn_w]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[cn_w]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[cn_w]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[cn_w]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="เขียนไม่ได้" <?php if($resume[cn_w]=='เขียนไม่ได้'){echo 'selected';} ?>>เขียนไม่ได้</option>
 									</select>
 								</div>
 							</div>			
@@ -718,33 +795,36 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Word</label>
-									<select name="word" class="form-control">
+									<select name="word" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[word]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[word]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[word]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[word]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[word]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Excel</label>
-									<select name="excel" class="form-control">
+									<select name="excel" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[excel]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[excel]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[excel]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[excel]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[excel]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>powerpoint</label>
-									<select name="ppt" class="form-control">
+									<select name="ppt" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[ppt]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[ppt]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[ppt]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[ppt]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[ppt]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>			
@@ -754,44 +834,48 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>Photoshop</label>
-									<select name="ps" class="form-control">
+									<select name="ps" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[ps]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[ps]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[ps]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[ps]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[ps]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>Illustrator</label>
-									<select name="ai" class="form-control">
+									<select name="ai" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[ai]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[ai]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[ai]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[ai]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[ai]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>premiere pro</label>
-									<select name="pr" class="form-control">
+									<select name="pr" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[pr]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[pr]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[pr]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[pr]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[pr]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>	
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>lightroom</label>
-									<select name="lr" class="form-control">
+									<select name="lr" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[lr]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[lr]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[lr]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
 										<option value="พอใช้" <?php if($resume[lr]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[lr]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>		
@@ -801,51 +885,61 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>ArcGIS</label>
-									<select name="arcgis" class="form-control">
+									<select name="arcgis" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[arcgis]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[arcgis]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[arcgis]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+										<option value="พอใช้" <?php if($resume[arcgis]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[arcgis]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>ERDAS</label>
-									<select name="erdas" class="form-control">
+									<select name="erdas" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[erdas]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[erdas]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[erdas]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+										<option value="พอใช้" <?php if($resume[erdas]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[erdas]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>ENVI</label>
-									<select name="envi" class="form-control">
+									<select name="envi" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[envi]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[envi]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[envi]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+										<option value="พอใช้" <?php if($resume[envi]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[envi]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>	
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>QGIS</label>
-									<select name="qgis" class="form-control">
+									<select name="qgis" class="form-control" required>
 										<option value="ดีมาก" <?php if($resume[qgis]=='ดีมาก'){echo 'selected';} ?>>ดีมาก</option>
 										<option value="ดี" <?php if($resume[qgis]=='ดี'){echo 'selected';} ?>>ดี</option>
 										<option value="ปานกลาง" <?php if($resume[qgis]=='ปานกลาง'){echo 'selected';} ?>>ปานกลาง</option>
+										<option value="พอใช้" <?php if($resume[qgis]=='พอใช้'){echo 'selected';} ?>>พอใช้</option>
+										<option value="ยังไม่เคยใช้งาน" <?php if($resume[qgis]=='ยังไม่เคยใช้งาน'){echo 'selected';} ?>>ยังไม่เคยใช้งาน</option>
 									</select>
 								</div>
 							</div>		
 						</div>
-</from>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+						<div class="col-md-12">
+							<div class="col-md-3">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary" name="skills">แก้ไขข้อมูล</button>
+								</div>
+							</div>
+						</div>
+</form>
+						  </div>
 
 						</div>
 					</div>
@@ -898,12 +992,12 @@
                        } 
                   }
              };
-             req.open("GET", "location.php?data="+src+"&val="+val); 
+             req.open("GET", "location.php?data="+src+"&val="+val+"&province=<?php echo $resume[province]; ?>"); 
              req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8"); 
              req.send(null); 
         }
 
-        window.onLoad=dochange('province', -1);  
+        window.onLoad=dochange('province_edit', -1);  
     </script>
     <script>
 		$(document).ready(function(){
@@ -911,7 +1005,16 @@
 		    $(this).tab('show');
 		  });
 		});
+			$(function(){
+			var hash = window.location.hash;
+			hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+			$('.nav-tabs a').click(function (e) {
+			$(this).tab('show');
+			var scrollmem = $('body').scrollTop();
+			window.location.hash = this.hash;
+			$('html,body').scrollTop(scrollmem);
+			});
+			});
 	</script>
-	</body>
 	</body>
 </html>

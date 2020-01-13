@@ -90,7 +90,8 @@ if( $_POST[submit_form] == 'true' )
 					edu_job ,
 					date_job ,
 					tag_job ,
-					img
+					img,
+					status_job
 			)
 			values
 			(
@@ -106,7 +107,8 @@ if( $_POST[submit_form] == 'true' )
 				'$_POST[edu_job]' ,
 				'$date' ,
 				'$_POST[tag_job]' ,
-				'$rnd_name1'
+				'$rnd_name1',
+				'เปิดรับสมัครอยู่'
 
 			);";
 			$result = pg_query($sql2);

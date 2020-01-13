@@ -7,7 +7,7 @@ include("config.php");
 include("check_admin.php");
 
 
-$sql = pg_query("SELECT * from user_job where id_no = '$_GET[q]' ;");
+$sql = pg_query("SELECT * from user_job where id_student = '$_GET[q]' ;");
 $user_job = pg_fetch_array($sql);
 
 if ( isset($_POST[update]) ) {
@@ -29,7 +29,7 @@ if ( isset($_POST[update]) ) {
                   status_study='$_POST[status_study]',
                   place_now='$_POST[place_now]'
                   
-                   WHERE id_no = '$_POST[id]';";
+                   WHERE id_student = '$_POST[id]';";
 
                      $objQuery = pg_query($strSQL);
                                                       if($objQuery)
@@ -341,7 +341,7 @@ if ( isset($_POST[delete]) ) {
 						
 		</div>
 		<div class="col-md-10">
-			<input type="hidden" name="id" value="<?php echo $user_job[id_no]; ?>">
+			<input type="hidden" name="id" value="<?php echo $user_job[id_student]; ?>">
             <a href="add_data.php#data_view" class="btn btn-default" data-dismiss="modal">กลับ</a>
             <button type="submit" class="btn btn-success" name="update" >บันทึกข้อมูล</button>
 		</div>
