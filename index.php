@@ -186,25 +186,25 @@ include("check_student.php")
 											<article class="col-md-12 article-list">
 												<div class="inner">
 													<figure>
-														<a href="news.php?q=<?php echo $arr[id_job]; ?>">
-															<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+														<a href="news.php?q=<?php echo $arr['id_job']; ?>">
+															<img src="images/img_job/<?php echo $arr['img']; ?>" alt="Sample Article">
 														</a>
 													</figure>
 													<div class="details">
 														<div class="detail">
 															<div class="category">
-																<a href="#"><?php echo $arr[type_job]; ?></a>
+																<a href="#"><?php echo $arr['type_job']; ?></a>
 															</div>
-															<div class="time"><?php echo $arr[date_job]; ?></div>
+															<div class="time"><?php echo $arr['date_job']; ?></div>
 														</div>
-														<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
+														<h1><a href="news.php?q=<?php echo $arr['id_job']; ?>"><?php echo $arr['name_job']; ?></a></h1>
 														<p>
-															<?php echo $arr[detail_job]; ?> <br>
-															<small> <i><b>การรับ  : </b>    <?php echo $arr[type_job]; ?></i> </small>
+															<?php echo $arr['detail_job']; ?> <br>
+															<small> <i><b>การรับ  : </b>    <?php echo $arr['type_job']; ?></i> </small>
 														</p>
 														<footer>
 															<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-															<a class="btn btn-primary more" href="news.php?q=<?php echo $arr[id_job]; ?>">
+															<a class="btn btn-primary more" href="news.php?q=<?php echo $arr['id_job']; ?>">
 																<div>More</div>
 																<div><i class="ion-ios-arrow-thin-right"></i></div>
 															</a>
@@ -227,22 +227,22 @@ include("check_student.php")
 							<div class="aside-body">
 								<div class="featured-author">
 									<div class="featured-author-inner">
-										<?php if($user[bg_img] != ''){ ?>
-										<div class="featured-author-cover" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
+										<?php if($user['bg_img'] != ''){ ?>
+										<div class="featured-author-cover" style="background-image: url('images/student/<?php echo $user['bg_img']; ?>');">
 											<?php }else{ ?>
 											<div class="featured-author-cover" style="background-image: url('http://www3.cgistln.nu.ac.th/dronephoto/images/full_img/chanonk_photos_135cc7cfce7e4ce_1556598734_.jpg');">
 												<?php } ?>
 												<div class="featured-author-center divbutton">
 													<figure class="featured-author-picture">
-														<?php if($user[img] == ''){ ?>
+														<?php if($user['img'] == ''){ ?>
 														<img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
 														<?php } else { ?>
-														<img src="images/student/<?php echo $user[img]; ?>" alt="Sample Article">
+														<img src="images/student/<?php echo $user['img']; ?>" alt="Sample Article">
 														<?php } ?>
 													</figure>
 													<div class="featured-author-info">
-														<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>
-														<div class="desc"><?php echo $user[email]; ?> </div>
+														<h2 class="name"><?php echo $user['s_name'],' ', $user['l_name']; ?> </h2>
+														<div class="desc"><?php echo $user['email']; ?> </div>
 													</div>
 												</div>
 											</div>
@@ -282,15 +282,15 @@ include("check_student.php")
 													<div class="block-body">
 														<ul class="item-list-round" data-magnific="gallery">
 															<?php
-																$id = $user[id_no];
+																$id = $user['id_no'];
 																$query = pg_query("with ss as (
-															SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
+															SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = $id order by id_img desc
 															) SELECT * from ss where row between 1 and 6");
 																$num = pg_num_rows($query);
 																if( $num != 0 ) {
 																	while( $arr = pg_fetch_array($query)  ){
 															?>
-															<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
+															<li><a href="images/student/<?php echo $arr['name_img']; ?>" style="background-image: url('images/student/<?php echo $arr['name_img']; ?>');"></a></li>
 															<?php }
 																$sql2 = pg_query("with ss as (
 															SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
@@ -298,11 +298,11 @@ include("check_student.php")
 																$num2 = pg_num_rows($sql2);
 																$arr2 = pg_fetch_array($sql2);
 															?>
-															<li><a href="images/student/<?php echo $arr2[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr2[name_img]; ?>');"><div class="more"> +<?php echo $num2; ?> </div></a></li>
+															<li><a href="images/student/<?php echo $arr2['name_img']; ?>" style="background-image: url('images/student/<?php echo $arr2['name_img']; ?>');"><div class="more"> +<?php echo $num2; ?> </div></a></li>
 															<?php
 																while ( $arr3 = pg_fetch_array($sql2) ) {
 															?>
-															<li class="hidden"><a href="images/student/<?php echo $arr3[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr3[name_img]; ?>');"></a></li>
+															<li class="hidden"><a href="images/student/<?php echo $arr3['name_img']; ?>" style="background-image: url('images/student/<?php echo $arr3['name_img']; ?>');"></a></li>
 															<?php } }else{  ?>
 															<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
 															<?php } ?>
@@ -330,14 +330,14 @@ include("check_student.php")
 											<div class="inner">
 												<figure>
 													<a href="news.php">
-														<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+														<img src="images/img_job/<?php echo $arr['img']; ?>" alt="Sample Article">
 													</a>
 												</figure>
 												<div class="padding">
-													<p><button  class="btn btn-warning btn-sm btn-block" >สถานะ : <?php echo $arr[request]; ?></button></p>
-													<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
+													<p><button  class="btn btn-warning btn-sm btn-block" >สถานะ : <?php echo $arr['request']; ?></button></p>
+													<h1><a href="news.php"><?php echo $arr['name_job']; ?></a></h1>
 													<p>
-														โดย : <?php echo $arr[name_com]; ?>
+														โดย : <?php echo $arr['name_com']; ?>
 													</p>
 													
 												</div>
@@ -367,13 +367,13 @@ include("check_student.php")
 										<div class="inner">
 											<figure>
 												<a href="news.php">
-													<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+													<img src="images/img_job/<?php echo $arr['img']; ?>" alt="Sample Article">
 												</a>
 											</figure>
 											<div class="padding">
-												<h1><a href="news.php"><?php echo $arr[name_job]; ?></a></h1>
+												<h1><a href="news.php"><?php echo $arr['name_job']; ?></a></h1>
 												<p>
-													<?php echo $arr[detail_job]; ?>
+													<?php echo $arr['detail_job']; ?>
 												</p>
 											</div>
 										</div>
@@ -407,17 +407,17 @@ include("check_student.php")
 						<article class="article">
 							<div class="inner">
 								<figure>
-									<a  href="news.php?q=<?php echo $arr[id_job]; ?>">
-										<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+									<a  href="news.php?q=<?php echo $arr['id_job']; ?>">
+										<img src="images/img_job/<?php echo $arr['img']; ?>" alt="Sample Article">
 									</a>
 								</figure>
 								<div class="padding">
 									<div class="detail">
-										<div class="time"><?php echo $arr[date_job]; ?></div>
-										<div class="category"><a href=""><?php echo $arr[type_job]; ?></a></div>
+										<div class="time"><?php echo $arr['date_job']; ?></div>
+										<div class="category"><a href=""><?php echo $arr['type_job']; ?></a></div>
 									</div>
-									<h2><a href="news.php"><?php echo $arr[name_job]; ?></a></h2>
-									<p><?php echo $arr[detail_job]; ?></p>
+									<h2><a href="news.php"><?php echo $arr['name_job']; ?></a></h2>
+									<p><?php echo $arr['detail_job']; ?></p>
 								</div>
 							</div>
 						</article>

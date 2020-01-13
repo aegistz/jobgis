@@ -9,7 +9,7 @@
 
   $message = '';
 
-		if ( isset($_POST[title_name]) ) {
+		if ( isset($_POST['submit_resume']) ) {
 
 			
 
@@ -396,7 +396,7 @@
 			<div class="col-md-12">
 								<div class="form-group">
 									<label>E-mail</label>
-									<input type="email" name="email" class="form-control" value="<?php echo $user[email] ;?>" readonly="readonly">
+									<input type="email" name="email" class="form-control" value="<?php echo $user['email'] ;?>" readonly="readonly">
 								</div>
 			</div>
 	</div>
@@ -404,21 +404,21 @@
 		<div class="col-md-2">
 								<div class="form-group">
 									<label>คำนำหน้า</label>
-									<input type="text" name="title_name" class="form-control" value="<?php echo $user[title_name] ;?>" >
+									<input type="text" name="title_name" class="form-control" value="<?php echo $user['title_name'] ;?>" >
 								</div>
 			
 		</div>
 		<div class="col-md-3">
 								<div class="form-group">
 									<label>ชื่อ</label>
-									<input type="text" name="s_name" class="form-control"  value="<?php echo $user[s_name] ;?>">
+									<input type="text" name="s_name" class="form-control"  value="<?php echo $user['s_name'] ;?>">
 								</div>
 			
 		</div>
 		<div class="col-md-3">
 								<div class="form-group">
 									<label>นามสกุล</label>
-									<input type="text" name="l_name" class="form-control"  value="<?php echo $user[l_name] ;?>">
+									<input type="text" name="l_name" class="form-control"  value="<?php echo $user['l_name'] ;?>">
 								</div>
 			
 		</div>
@@ -450,20 +450,20 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>วันเกิด</label>
-									<input type="date" name="birthday" class="form-control" value="<?php echo $user[birthday] ;?>">
+									<input type="date" name="birthday" class="form-control" value="<?php echo $user['birthday'] ;?>">
 								</div>
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>น้ำหนัก</label>
-									<input type="number" name="weight" class="form-control" value="<?php echo $user[weight] ;?>">
+									<input type="number" name="weight" class="form-control" value="<?php echo $user['weight'] ;?>">
 								</div>
 				
 			</div>
 			<div class="col-md-2">
 								<div class="form-group">
 									<label>ส่วนสูง</label>
-									<input type="number" name="hight" class="form-control" value="<?php echo $user[hight] ;?>">
+									<input type="number" name="hight" class="form-control" value="<?php echo $user['hight'] ;?>">
 								</div>
 				
 			</div>
@@ -534,7 +534,7 @@
 			<div class="col-md-3">
 								<div class="form-group">
 									<label>เบอร์โทร</label>
-									<input type="number" name="phone" class="form-control" value="<?php echo $user[phone_number] ;?>">
+									<input type="number" name="phone" class="form-control" value="<?php echo $user['phone_number'] ;?>">
 								</div>
 				
 			</div>

@@ -28,7 +28,7 @@ if(isset($_COOKIE["type"]))
 }?>	
 								<div class="form-group">
 									<div class="input-group">
-										<input type="text" name="eqc" class="form-control" placeholder="ค้นหา งาน / ผู้คน / สถานประกอบการ  ...." value="<?php echo $_GET[eqc]; ?>">									
+										<input type="text" name="eqc" class="form-control" placeholder="ค้นหา งาน / ผู้คน / สถานประกอบการ  ...." value="<?php echo $_GET['eqc']; ?>">									
 										<div class="input-group-btn">
 											<button class="btn btn-primary"><i class="ion-search"></i></button>
 										</div>
@@ -63,7 +63,7 @@ if(isset($_COOKIE["type"]))
  ?>
 	<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
-								<li><a href="profile.php"><i class="ion-person"></i><div> <?php echo $user[s_name],' ', $user[l_name]; ?> </div></a></li>
+								<li><a href="profile.php"><i class="ion-person"></i><div> <?php echo $user['s_name'],' ', $user['l_name']; ?> </div></a></li>
 								<li><a href="logout.php"><i class="ion-log-out	"></i><div>Logout</div></a></li>
 							</ul>
 						</div>
