@@ -388,7 +388,7 @@ $num_request_list = pg_num_rows($sql_request_list);
 																while ( $arr3 = pg_fetch_array($sql2) ) {
 															?>
 															<li class="hidden"><a href="images/student/<?php echo $arr3['name_img']; ?>" style="background-image: url('images/student/<?php echo $arr3['name_img']; ?>');"></a></li>
-															<?php } }else{  ?>
+															<?php } else{  ?>
 															<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
 															<?php } ?>
 															
