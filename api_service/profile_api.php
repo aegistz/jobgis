@@ -4,7 +4,7 @@
 $error = '';
 $success = '';
  
-if( $_POST[upload_img] == 'true' ) 
+if( $_POST['upload_img'] == 'true' ) 
 {
   
     // get uploaded file name
@@ -86,7 +86,7 @@ if( $_POST[upload_img] == 'true' )
 
 
 
-if( $_POST[upload_story] == 'true' ) 
+if( $_POST['upload_story'] == 'true' ) 
 {  $error = 'File is empty, please select image to upload.';
     // get uploaded file name
     $image = $_FILES["file"]["name"];
@@ -153,8 +153,8 @@ if( $_POST[upload_story] == 'true' )
 			$showpic = "images/story/".$rnd_name1;
 
 			$date_now = date("Y/m/d");
-			$title_story = $_POST[title];
-			$detail_story = $_POST[detail];
+			$title_story = $_POST['title'];
+			$detail_story = $_POST['detail'];
 
 		
            $is_uploaded = pg_query( "  INSERT INTO story (title_story , detail_story ,  img_story, tag_story, date_story ,id_user) 
@@ -169,7 +169,7 @@ if( $_POST[upload_story] == 'true' )
     }
 }
 
-if( $_POST[upload_cv] == 'true' ) 
+if( $_POST['upload_cv'] == 'true' ) 
 {  $error = 'File is empty, please select image to upload.';
     // get uploaded file name
     $image = $_FILES["file"]["name"];
@@ -241,8 +241,8 @@ if( $_POST[upload_cv] == 'true' )
 
             $now_day = date("Y-m-d");
             $date_time = date("Y-m-d H:i:s");
-            $title_cv = $_POST[title_cv];
-            $detail_cv = $_POST[detail_cv];
+            $title_cv = $_POST['title_cv'];
+            $detail_cv = $_POST['detail_cv'];
 
         
            $is_uploaded = pg_query( "  INSERT INTO cv (title_cv , img_cv, detail_cv , tag_cv, date_cv ,id_user) 
@@ -257,7 +257,7 @@ if( $_POST[upload_cv] == 'true' )
     }
 }
 
-if( $_POST[upload_block] == 'true' ) 
+if( $_POST['upload_block'] == 'true' ) 
 {  $error = 'File is empty, please select image to upload.';
     // get uploaded file name
     $image = $_FILES["file"]["name"];
@@ -329,9 +329,9 @@ if( $_POST[upload_block] == 'true' )
 
             $now_day = date("Y-m-d");
             $date_time = date("Y-m-d H:i:s");
-            $title_block = $_POST[title_block];
-            $detail_block = $_POST[detail_block];
-            $tag_block = $_POST[tag_block];
+            $title_block = $_POST['title_block'];
+            $detail_block = $_POST['detail_block'];
+            $tag_block = $_POST['tag_block'];
 
         
            $is_uploaded = pg_query( "  INSERT INTO block (title_block ,img_block,  detail_block , tag_block, date_block ,id_user) 
@@ -348,7 +348,7 @@ if( $_POST[upload_block] == 'true' )
 
 
 
-if( $_POST[upload_img_bg_profile] == 'true' ) 
+if( $_POST['upload_img_bg_profile'] == 'true' ) 
 {
     // get uploaded file name
     $image = $_FILES["file"]["name"];
@@ -425,7 +425,7 @@ if( $_POST[upload_img_bg_profile] == 'true' )
 }
 
 
-if( $_POST[upload_img_profile] == 'true' ) 
+if( $_POST['upload_img_profile'] == 'true' ) 
 {
     // get uploaded file name
     $image = $_FILES["file"]["name"];

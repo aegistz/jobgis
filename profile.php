@@ -8,18 +8,18 @@ include("api_service/profile_api.php");
 
 
 
-if ($_GET[type] == 'delete_story') {
+if ($_GET['type'] == 'delete_story') {
 
-	$id_story = $_GET[id_story];
+	$id_story = $_GET['id_story'];
 
 	$sql_delete = pg_query("DELETE from story where id_story = '$id_story' and id_user = '$user[id_no]'  ;");
 	
 	
 	header('location:profile.php#story');
 }
-if ($_GET[type] == 'delete_cv') {
+if ($_GET['type'] == 'delete_cv') {
 
-	$id_cv = $_GET[id_cv];
+	$id_cv = $_GET['id_cv'];
 
 	$sql_delete = pg_query("DELETE from cv where id_cv = '$id_cv' and id_user = '$user[id_no]'  ;");
 	
@@ -27,9 +27,9 @@ if ($_GET[type] == 'delete_cv') {
 	header('location:profile.php#cv');
 }
 
-if ($_GET[type] == 'delete_block') {
+if ($_GET['type'] == 'delete_block') {
 
-	$id_block = $_GET[id_block];
+	$id_block = $_GET['id_block'];
 
 	$sql_delete = pg_query("DELETE from block where id_block = '$id_block' and id_user = '$user[id_no]'  ;");
 	
@@ -39,8 +39,8 @@ if ($_GET[type] == 'delete_block') {
 
 
 
-if ($_GET[type] =='delete_img_post') {
-	$imgid = $_GET[imgid];
+if ($_GET['type'] =='delete_img_post') {
+	$imgid = $_GET['imgid'];
 	$sqlsss = "DELETE from photo_user where id_img = '$imgid' and id_user = '$id'  ";
 	$sql_delete = pg_query("DELETE from photo_user where id_img = '$imgid' and id_user = '$user[id_no]'  ;");
 	header('location:profile.php');
@@ -48,8 +48,8 @@ if ($_GET[type] =='delete_img_post') {
 
 
 
-if (isset($_GET[eid])) {
-	$eid = $_GET[eid];
+if (isset($_GET['eid'])) {
+	$eid = $_GET['eid'];
 	$sql_profile = pg_query("SELECT * from student  where id_no = '$eid' and status_user = 'ยืนยัน';");
 	$arr_profile = pg_fetch_array($sql_profile);
 }
@@ -235,15 +235,15 @@ input:focus 		{ outline:none; }
 		<section class="home">
 			<div class="container">
 				<div class="row">
-					<?php  if ( !isset($eid) || $user[id_no] == $eid  ) { ?>
+					<?php  if ( !isset($eid) || $user['id_no'] == $eid  ) { ?>
 					<div class="col-md-12">
 						<div class="sidebar-title for-tablet">Sidebar</div>
 						<aside>
 							<div class="aside-body">
 								<div class="featured-author">
 									<div class="featured-author-inner">
-											<?php if($user[bg_img] != ''){ ?>
-											<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $user[bg_img]; ?>');">
+											<?php if($user['bg_img'] != ''){ ?>
+											<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $user['bg_img']; ?>');">
 											<?php }else{ ?>
 											<div class="featured-author-cover divbutton" style="background-image: url('images/student/bg_img.png');">
 											<?php } ?>
@@ -251,16 +251,16 @@ input:focus 		{ outline:none; }
 												<div class="featured-author-center">
 
 													<figure class="featured-author-picture">
-														<?php if($user[img] == ''){ ?>
+														<?php if($user['img'] == ''){ ?>
 														<img id="myImg" src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
 														<?php } else { ?>
-														<img id="myImg" src="images/student/<?php echo $user[img]; ?>" alt="Sample Article">
+														<img id="myImg" src="images/student/<?php echo $user['img']; ?>" alt="Sample Article">
 														<?php } ?>
 													</figure>
 													
 													<div class="featured-author-info">
-														<h2 class="name"><?php echo $user[s_name],' ', $user[l_name]; ?> </h2>
-														<div class="desc"><?php echo $user[email]; ?> </div>
+														<h2 class="name"><?php echo $user['s_name'],' ', $user['l_name']; ?> </h2>
+														<div class="desc"><?php echo $user['email']; ?> </div>
 													</div>
 												</div>
 												<div class="btn btn-group">
@@ -336,13 +336,13 @@ input:focus 		{ outline:none; }
 													<div class="block-body">
 														<ul class="item-list-round" data-magnific="gallery">
 															<?php
-																$id = $user[id_no];
+																$id = $user['id_no'];
 																$query = pg_query("SELECT * from photo_user where id_user = '$id' order by id_img desc limit 10 ;");
 																$num = pg_num_rows($query);
 																if( $num != 0 ) {
 																	while( $arr = pg_fetch_array($query)  ){
 															?>
-															<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a>
+															<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr['name_img']; ?>');"></a>
 
 																<div class="btn-group">
 																  <button type="button" class=" btn btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -351,7 +351,7 @@ input:focus 		{ outline:none; }
 																  <ul class="dropdown-menu" role="menu">
 																    <li>
 																    	<form action="" method="get" accept-charset="utf-8">
-																    		<input type="hidden" name="imgid" value="<?php echo $arr[id_img]; ?>">
+																    		<input type="hidden" name="imgid" value="<?php echo $arr['id_img']; ?>">
 																    	<button type="submit" name="type" value="delete_img_post" class="btn btn-block btn-sm btn-danger">x ลบ</button>
 																    	</form>
 																    </li>
@@ -459,29 +459,29 @@ input:focus 		{ outline:none; }
 													<article class="col-md-12 article-list">
 														<div class="inner">
 															<figure>
-																<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
-																	<img src="images/story/<?php echo $arr[img_story]; ?>">
+																<a href="story_detail.php?stoid=<?php echo $arr['id_story']; ?>">
+																	<img src="images/story/<?php echo $arr['img_story']; ?>">
 																</a>
 															</figure>
 															<div class="details">
 																<div class="detail">
 																	<div class="category">
-																		<a href=""><?php echo $arr[tag_story]; ?></a>
+																		<a href=""><?php echo $arr['tag_story']; ?></a>
 																	</div>
-																	<div class="time"><?php echo $arr[date_story]; ?></div>
+																	<div class="time"><?php echo $arr['date_story']; ?></div>
 																		<div class="btn-group">
 																			<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 																			<i class="fa fa-bars"></i> </button>
 																			<ul class="dropdown-menu" role="menu">
-																				<li><a href="story_edit.php?stoid=<?php echo $arr[id_story]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
-																				<li><a href="profile.php?type=delete_story&id_story=<?php echo $arr[id_story]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
+																				<li><a href="story_edit.php?stoid=<?php echo $arr['id_story']; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																				<li><a href="profile.php?type=delete_story&id_story=<?php echo $arr['id_story']; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
 																			</ul>
 																		</div>
 																</div>
-																<h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>"><?php echo $arr[title_story]; ?></a></h1>
+																<h1><a href="story_detail.php?stoid=<?php echo $arr['id_story']; ?>"><?php echo $arr['title_story']; ?></a></h1>
 																<p>
 																	<?php
-																	echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
+																	echo mb_strimwidth($arr['detail_story'], 0, 300, '....<a href="story_detail.php?stoid='.$arr['id_story'].'" title="">เพิ่มเติม</a>');
 																	?>
 																</p>
 																<footer>
@@ -558,29 +558,29 @@ input:focus 		{ outline:none; }
 													<article class="col-md-12 article-list">
 														<div class="inner">
 															<figure>
-																<a href="cv_detail.php?stoid=<?php echo $arr[id_cv]; ?>">
-																	<img src="images/story/<?php echo $arr[img_cv]; ?>">
+																<a href="cv_detail.php?stoid=<?php echo $arr['id_cv']; ?>">
+																	<img src="images/story/<?php echo $arr['img_cv']; ?>">
 																</a>
 															</figure>
 															<div class="details">
 																<div class="detail">
 																	<div class="category">
-																		<a href=""><?php echo $arr[tag_cv]; ?></a>
+																		<a href=""><?php echo $arr['tag_cv']; ?></a>
 																	</div>
-																	<div class="time"><?php echo $arr[date_cv]; ?></div>
+																	<div class="time"><?php echo $arr['date_cv']; ?></div>
 																		<div class="btn-group">
 																			<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 																			<i class="fa fa-bars"></i> </button>
 																			<ul class="dropdown-menu" role="menu">
-																				<li><a href="cv_edit.php?stoid=<?php echo $arr[id_cv]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
-																				<li><a href="profile.php?type=delete_cv&id_cv=<?php echo $arr[id_cv]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะไม่สามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
+																				<li><a href="cv_edit.php?stoid=<?php echo $arr['id_cv']; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																				<li><a href="profile.php?type=delete_cv&id_cv=<?php echo $arr['id_cv']; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะไม่สามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
 																			</ul>
 																		</div>
 																</div>
-																<h1><a href="cv_detail.php?stoid=<?php echo $arr[id_cv]; ?>"><?php echo $arr[title_cv]; ?></a></h1>
+																<h1><a href="cv_detail.php?stoid=<?php echo $arr['id_cv']; ?>"><?php echo $arr['title_cv']; ?></a></h1>
 																<p>
 																	<?php
-																	echo mb_strimwidth($arr[detail_cv], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_cv].'" title="">เพิ่มเติม</a>');
+																	echo mb_strimwidth($arr['detail_cv'], 0, 300, '....<a href="story_detail.php?stoid='.$arr['id_cv'].'" title="">เพิ่มเติม</a>');
 																	?>
 																</p>
 																<footer>
@@ -675,26 +675,26 @@ input:focus 		{ outline:none; }
 													<article class="col-md-12 article-list">
 														<div class="inner">
 															<figure>
-																<a href="blog_detail.php?stoid=<?php echo $arr[id_block]; ?>">
-																	<img src="images/story/<?php echo $arr[img_block]; ?>">
+																<a href="blog_detail.php?stoid=<?php echo $arr['id_block']; ?>">
+																	<img src="images/story/<?php echo $arr['img_block']; ?>">
 																</a>
 															</figure>
 															<div class="details">
 																<div class="detail">
 																	<div class="category">
-																		<a href=""><?php echo $arr[tag_block]; ?></a>
+																		<a href=""><?php echo $arr['tag_block']; ?></a>
 																	</div>
-																	<div class="time"><?php echo $arr[date_block]; ?></div>
+																	<div class="time"><?php echo $arr['date_block']; ?></div>
 																		<div class="btn-group">
 																			<button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 																			<i class="fa fa-bars"></i> </button>
 																			<ul class="dropdown-menu" role="menu">
-																				<li><a href="blog_edit.php?stoid=<?php echo $arr[id_block]; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
-																				<li><a href="profile.php?type=delete_block&id_block=<?php echo $arr[id_block]; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
+																				<li><a href="blog_edit.php?stoid=<?php echo $arr['id_block']; ?>"><i class="fa fa-wrench" aria-hidden="true"></i> แก้ไขเรื่องราว</a></li>
+																				<li><a href="profile.php?type=delete_block&id_block=<?php echo $arr['id_block']; ?>" onclick="return confirm('ยืนยันการลบเรื่องราวนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')" ><i class="fa fa-window-close" aria-hidden="true"></i> ลบเรื่องราว</a></li>
 																			</ul>
 																		</div>
 																</div>
-																<h1><a href="blog_detail.php?stoid=<?php echo $arr[id_block]; ?>"><?php echo $arr[title_block]; ?></a></h1>
+																<h1><a href="blog_detail.php?stoid=<?php echo $arr['id_block']; ?>"><?php echo $arr['title_block']; ?></a></h1>
 																<footer>
 																	<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
 																</footer>
@@ -747,41 +747,41 @@ input:focus 		{ outline:none; }
 										<article class="article-mini">
 											<div class="inner">
 												<figure>
-														<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+														<img src="images/img_job/<?php echo $arr['img']; ?>" alt="Sample Article">
 												</figure>
 
 												<div class="padding">
 													<p>
-<?php if ($arr[request] == 'รอการยืนยัน') { ?>
+<?php if ($arr['request'] == 'รอการยืนยัน') { ?>
 														<div class="btn-group">
 														  <button type="button" class="btn btn-sm btn-warning btn-block dropdown-toggle" data-toggle="dropdown">
-														    สถานะ : <?php echo $arr[request]; ?>
+														    สถานะ : <?php echo $arr['request']; ?>
 														  </button>
 														  <ul class="dropdown-menu" role="menu">
-														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr[id_no] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
+														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr['id_no'] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
 														  </ul>
 														</div>
-<?php } else if($arr[request] == 'ยืนยันการสมัครแล้ว'){ ?> 
+<?php } else if($arr['request'] == 'ยืนยันการสมัครแล้ว'){ ?> 
 														<div class="btn-group">
 														  <button type="button" class="btn btn-sm btn-info btn-block dropdown-toggle" data-toggle="dropdown">
-														    สถานะ : <?php echo $arr[request]; ?>
+														    สถานะ : <?php echo $arr['request']; ?>
 														  </button>
 														</div>
 
-<?php } else if($arr[request] == 'ไม่ผ่านการสมัคร'){  ?>
+<?php } else if($arr['request'] == 'ไม่ผ่านการสมัคร'){  ?>
 														<div class="btn-group">
 														  <button type="button" class="btn btn-sm btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
-														    สถานะ : <?php echo $arr[request]; ?>
+														    สถานะ : <?php echo $arr['request']; ?>
 														  </button>
 														  <ul class="dropdown-menu" role="menu">
-														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr[id_no] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
+														    <li><a  href="index.php?type=delete_request&req_id=<?php echo $arr['id_no'] ?>" onclick="return confirm('ยืนยันการลบการสมัครงานในครั้งนี้ ? ถ้าลบแล้วจะสามารถย้อนกลับได้')">x ลบการสมัคร</a></li>
 														  </ul>
 														</div>
 
-<?php } else if($arr[request] == 'ผ่านการสมัคร รอการติดต่อกลับ'){   ?>
+<?php } else if($arr['request'] == 'ผ่านการสมัคร รอการติดต่อกลับ'){   ?>
 														<div class="btn-group">
 														  <button type="button" class="btn btn-sm btn-success btn-block dropdown-toggle" data-toggle="dropdown">
-														    สถานะ : <?php echo $arr[request]; ?>
+														    สถานะ : <?php echo $arr['request']; ?>
 														  </button>
 														</div>
 
@@ -790,9 +790,9 @@ input:focus 		{ outline:none; }
 
 														
 													</p>
-													<h1><a href="news.php?q=<?php echo $arr[id_job];?>"><?php echo $arr[name_job]; ?></a></h1>
+													<h1><a href="news.php?q=<?php echo $arr['id_job'];?>"><?php echo $arr['name_job']; ?></a></h1>
 													<p>
-														โดย : <?php echo $arr[name_com]; ?>
+														โดย : <?php echo $arr['name_com']; ?>
 													</p>
 												
 													
@@ -825,15 +825,15 @@ input:focus 		{ outline:none; }
 											<article class="article-mini">
 												<div class="inner">
 													<figure>
-														<a href="news.php?q=<?php echo $arr[id_job]; ?>">
-															<img src="images/img_job/<?php echo $arr[img]; ?>" alt="Sample Article">
+														<a href="news.php?q=<?php echo $arr['id_job']; ?>">
+															<img src="images/img_job/<?php echo $arr['img']; ?>" alt="Sample Article">
 														</a>
 													</figure>
 													<div class="padding">
-														<h1><a href="news.php?q=<?php echo $arr[id_job]; ?>"><?php echo $arr[name_job]; ?></a></h1>
+														<h1><a href="news.php?q=<?php echo $arr['id_job']; ?>"><?php echo $arr['name_job']; ?></a></h1>
 														<p>
 															<?php
-														echo mb_strimwidth($arr[detail_job], 0, 100, '....<a href="news.php?q='.$arr[id_job].'" title="">เพิ่มเติม</a>');
+														echo mb_strimwidth($arr['detail_job'], 0, 100, '....<a href="news.php?q='.$arr['id_job'].'" title="">เพิ่มเติม</a>');
 														?>
 														</p>
 													</div>
@@ -853,22 +853,22 @@ else {    ?>
 								<div class="aside-body">
 									<div class="featured-author">
 										<div class="featured-author-inner">
-											<?php if($arr_profile[bg_img] != ''){ ?>
-											<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $arr_profile[bg_img]; ?>');">
+											<?php if($arr_profile['bg_img'] != ''){ ?>
+											<div class="featured-author-cover divbutton" style="background-image: url('images/student/<?php echo $arr_profile['bg_img']; ?>');">
 											<?php }else{ ?>
 											<div class="featured-author-cover divbutton" style="background-image: url('images/student/bg_img.png');">
 											<?php } ?>
 												<div class="featured-author-center">
 													<figure class="featured-author-picture">
-														<?php if($arr_profile[img] == ''){ ?>
+														<?php if($arr_profile['img'] == ''){ ?>
 														<img  id="myImg" src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="Sample Article">
 														<?php } else { ?>
-														<img  id="myImg" src="images/student/<?php echo $arr_profile[img]; ?>" alt="Sample Article">
+														<img  id="myImg" src="images/student/<?php echo $arr_profile['img']; ?>" alt="Sample Article">
 														<?php } ?>
 													</figure>
 													<div class="featured-author-info">
-														<h2 class="name"><?php echo $arr_profile[s_name],' ', $arr_profile[l_name]; ?> </h2>
-														<div class="desc"><?php echo $arr_profile[email]; ?> </div>
+														<h2 class="name"><?php echo $arr_profile['s_name'],' ', $arr_profile['l_name']; ?> </h2>
+														<div class="desc"><?php echo $arr_profile['email']; ?> </div>
 													</div>
 												</div>
 												
@@ -926,21 +926,21 @@ else {    ?>
 												<article class="col-md-12 article-list">
 													<div class="inner">
 														<figure>
-															<a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>">
-																<img src="images/story/<?php echo $arr[img_story]; ?>">
+															<a href="story_detail.php?stoid=<?php echo $arr['id_story']; ?>">
+																<img src="images/story/<?php echo $arr['img_story']; ?>">
 															</a>
 														</figure>
 														<div class="details">
 															<div class="detail">
 																<div class="category">
-																	<a href=""><?php echo $arr[tag_story]; ?></a>
+																	<a href=""><?php echo $arr['tag_story']; ?></a>
 																</div>
-																<div class="time"><?php echo $arr[date_story]; ?></div>
+																<div class="time"><?php echo $arr['date_story']; ?></div>
 															</div>
-															<h1><a href="story_detail.php?stoid=<?php echo $arr[id_story]; ?>"><?php echo $arr[title_story]; ?></a></h1>
+															<h1><a href="story_detail.php?stoid=<?php echo $arr['id_story']; ?>"><?php echo $arr['title_story']; ?></a></h1>
 															<p>
 																<?php
-																echo mb_strimwidth($arr[detail_story], 0, 300, '....<a href="story_detail.php?stoid='.$arr[id_story].'" title="">เพิ่มเติม</a>');
+																echo mb_strimwidth($arr['detail_story'], 0, 300, '....<a href="story_detail.php?stoid='.$arr['id_story'].'" title="">เพิ่มเติม</a>');
 																?>
 															</p>
 															<footer>
@@ -991,18 +991,18 @@ else {    ?>
 												<article class="col-md-12 article-list">
 													<div class="inner">
 														<figure>
-															<a href="story_detail.php?stoid=<?php echo $arr[id_block]; ?>">
-																<img src="images/story/<?php echo $arr[img_block]; ?>">
+															<a href="story_detail.php?stoid=<?php echo $arr['id_block']; ?>">
+																<img src="images/story/<?php echo $arr['img_block']; ?>">
 															</a>
 														</figure>
 														<div class="details">
 															<div class="detail">
 																<div class="category">
-																	<a href=""><?php echo $arr[tag_block]; ?></a>
+																	<a href=""><?php echo $arr['tag_block']; ?></a>
 																</div>
-																<div class="time"><?php echo $arr[date_block]; ?></div>
+																<div class="time"><?php echo $arr['date_block']; ?></div>
 															</div>
-															<h1><a href="story_detail.php?stoid=<?php echo $arr[id_block]; ?>"><?php echo $arr[title_block]; ?></a></h1>
+															<h1><a href="story_detail.php?stoid=<?php echo $arr['id_block']; ?>"><?php echo $arr['title_block']; ?></a></h1>
 															<footer>
 																<a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>12</div></a>
 															</footer>
@@ -1045,7 +1045,7 @@ else {    ?>
 												<div class="block-body">
 													<ul class="item-list-round" data-magnific="gallery">
 														<?php
-															$id = $_GET[eid];
+															$id = $_GET['eid'];
 															$query = pg_query("with ss as (
 														SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
 														) SELECT * from ss where row between 1 and 6");
@@ -1053,7 +1053,7 @@ else {    ?>
 															if( $num != 0 ) {
 																while( $arr = pg_fetch_array($query)  ){
 														?>
-														<li><a href="images/student/<?php echo $arr[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr[name_img]; ?>');"></a></li>
+														<li><a href="images/student/<?php echo $arr['name_img']; ?>" style="background-image: url('images/student/<?php echo $arr['name_img']; ?>');"></a></li>
 														<?php }
 															$sql2 = pg_query("with ss as (
 														SELECT ROW_NUMBER () OVER (ORDER BY id_img asc) as row,* from photo_user where id_user = '$id' order by id_img desc
@@ -1061,11 +1061,11 @@ else {    ?>
 															$num2 = pg_num_rows($sql2);
 															$arr2 = pg_fetch_array($sql2);
 														?>
-														<li><a href="images/student/<?php echo $arr2[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr2[name_img]; ?>');"><div class="more"> +<?php echo $num2; ?> </div></a></li>
+														<li><a href="images/student/<?php echo $arr2['name_img']; ?>" style="background-image: url('images/student/<?php echo $arr2['name_img']; ?>');"><div class="more"> +<?php echo $num2; ?> </div></a></li>
 														<?php
 															while ( $arr3 = pg_fetch_array($sql2) ) {
 														?>
-														<li class="hidden"><a href="images/student/<?php echo $arr3[name_img]; ?>" style="background-image: url('images/student/<?php echo $arr3[name_img]; ?>');"></a></li>
+														<li class="hidden"><a href="images/student/<?php echo $arr3['name_img']; ?>" style="background-image: url('images/student/<?php echo $arr3['name_img']; ?>');"></a></li>
 														<?php } }else{  ?>
 														<li><a href="https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ" style="background-image: url('https://h5p.org/sites/default/files/styles/small-logo/public/logos/flashcards-png-icon.png?itok=J0wStRhZ');"></a></li>
 														<?php } ?>
